@@ -1,0 +1,30 @@
+{
+  "name": "WayTab",
+  "description": "Change your new tab page to be more productive",
+  "version": "1.0",
+  "author": ["Andy Wang", "Andrew Ward"],
+  "permissions": ["activeTab", "storage"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "res/icon16.png",
+      "32": "res/icon32.png",
+      "64": "res/icon64.png",
+      "128": "res/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "res/icon16.png",
+    "32": "res/icon32.png",
+    "64": "res/icon64.png",
+    "128": "res/icon128.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "tab.html"
+  },
+  "manifest_version": 2
+}
