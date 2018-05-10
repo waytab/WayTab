@@ -24,7 +24,7 @@
     "128": "res/icon128.png"
   },
   "chrome_url_overrides": {
-    "newtab": "tab.html"
+    "newtab": "page/tab.html"
   },
   "manifest_version": 2
 }
