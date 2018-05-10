@@ -1,0 +1,18 @@
+body {
+  background-image: url("../img/school.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  text-shadow: 0 0 5px #000;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6, p, span {
+  color: white
+}
+
+.img-link img {
+  width: 100%;
+  height: auto;
+  vertical-align: middle
+}
