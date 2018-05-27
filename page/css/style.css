@@ -29,6 +29,59 @@ body {
   border-radius: 4px;
 }
 
+#addition-checkbox {
+  display: block;
+  position: relative;
+  margin: 5px;
+  padding-left: 7%;
+  cursor: pointer;
+  font-size: 22px;
+  user-select: none;
+}
+
+#addition-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+#addition-checkbox:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+#addition-checkbox input:checked ~ .checkmark {
+  background-color: #eaa615;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+#addition-checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+#addition-checkbox .checkmark:after {
+  left: 10px;
+  top: 6px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
 #add-tab-attributes input[type=text] {
   width: 100%;
   padding: 9px 15px;
