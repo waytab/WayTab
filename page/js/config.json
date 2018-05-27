@@ -1,0 +1,19 @@
+var conf = {
+  "saved_tabs": {
+    "Student Gmail": {
+      "id": "Student Gmail",
+      "actual_link": "https://accounts.google.com/signin/v2/identifier?continue=https%3A%2F%2Fmail.google.com%2Fmail%2F%3Frli%3Dbzbszbr14nt3%26rld%3D1&service=mail&sacu=1&flowName=GlifWebSignIn&flowEntry=AddSession",
+      "image_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Gmail_Icon.svg/2000px-Gmail_Icon.svg.png"
+    },
+    "It's Learning": {
+      "id": "It's Learning",
+      "actual_link": "https://wps.itslearning.com/index.aspx",
+      "image_link": "img/itslearning_logo.png"
+    },
+    "Naviance": {
+      "id": "Naviance",
+      "actual_link": "https://connection.naviance.com/family-connection/auth/login/?hsid=waylandhs",
+      "image_link": "img/naviance_logo.png"
+    }
+  }
+}
