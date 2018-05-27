@@ -16,3 +16,10 @@ body {
   height: auto;
   vertical-align: middle
 }
+
+#add-tab-container {
+  position: absolute;
+  border-radius: 4px;
+  right: 5;
+  bottom: 5;
+}
