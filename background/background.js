@@ -5,7 +5,7 @@ chrome.runtime.onInstalled.addListener(function() {
     console.log("Installed Tab Changer");
   });
 
-  chrome.storage.sync.set({savedtabs: tabs}, function() {
+  chrome.storage.sync.set({savedtabs: tabs.tabs}, function() {
     console.log(tabs);
   });
 });
