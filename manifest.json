@@ -5,11 +5,11 @@
   "author": ["Andy Wang", "Andrew Ward"],
   "permissions": ["activeTab", "storage"],
   "background": {
-    "scripts": ["background.js"],
+    "scripts": ["background/defaulttabs.json", "background/background.js"],
     "persistent": false
   },
   "browser_action": {
-    "default_popup": "popup.html",
+    "default_popup": "popup/popup.html",
     "default_icon": {
       "16": "res/icon16.png",
       "32": "res/icon32.png",

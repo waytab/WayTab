@@ -37,31 +37,37 @@ function detectAdditionSubmission() {
 }
 
 function createExistingLinks() {
-  var tabs = config["saved_tabs"];
-  var length = Object.keys(tabs).length;
+  chrome.storage.sync.get("savedtabs", function(obj) {
+    console.log(obj);
+    var tabs = obj["savedtabs"]["savedtabs"];
+    console.log(tabs);
 
-  var row = document.getElementById("tabtainer");
-  row.innerHTML += "<div class='col' id='start-col'></div>";
-  for(i = 0; i < length; i++) {
-    var key = Object.keys(tabs)[i];
-    var obj = tabs[key];
+    var length = tabs["tabs"].length;
+    console.log(length);
 
-    var newdiv = document.createElement("DIV");
-    newdiv.setAttribute("class", "col-1");
+    var row = document.getElementById("tabtainer");
+    row.innerHTML += "<div class='col' id='start-col'></div>";
+    for(i = 0; i < length; i++) {
+      var obj = tabs["tabs"][i];
+      console.log(obj);
 
-    var newlink = document.createElement("A");
-    newlink.setAttribute("class", "img-link");
-    newlink.setAttribute("href", obj.actual_link);
+      var newdiv = document.createElement("DIV");
+      newdiv.setAttribute("class", "col-1");
 
-    var newimg = document.createElement("IMG");
-    newimg.setAttribute("src", obj.image_link);
-    newimg.setAttribute("alt", obj.id);
+      var newlink = document.createElement("A");
+      newlink.setAttribute("class", "img-link");
+      newlink.setAttribute("href", obj.actual_link);
 
-    newlink.append(newimg);
-    newdiv.append(newlink);
-    row.append(newdiv);
-  }
-  row.innerHTML += "<div class='col' id='end-col'></div>";
+      var newimg = document.createElement("IMG");
+      newimg.setAttribute("src", obj.image_link);
+      newimg.setAttribute("alt", obj.id);
+
+      newlink.append(newimg);
+      newdiv.append(newlink);
+      row.append(newdiv);
+    }
+    row.innerHTML += "<div class='col' id='end-col'></div>";
+  });
 }
 
 function addTab(name, link, img) {
@@ -83,6 +89,18 @@ function addTab(name, link, img) {
   newdiv.append(newlink);
   parentdiv.append(newdiv);
   parentdiv.innerHTML += "<div class='col' id='end-col'></div>";
+
+  // Add it to background
+  chrome.storage.sync.get("savedtabs", function(obj) {
+    var object = obj;
+    object["savedtabs"].tabs.push({"id": name, "actual_link": link, "image_link": img});
+    console.log(object["savedtabs"].tabs);
+
+    chrome.storage.sync.set({savedtabs: object}, function() {
+      console.log(object);
+      console.log("Added new tab");
+    });
+  });
 }
 
 function removeTab() {
