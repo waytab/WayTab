@@ -9,14 +9,29 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
     <script src="js/config.json" type="text/javascript"></script>
+    <script src="js/bell.json" type="text/javascript"></script>
+    <script src="js/time.js" type="text/javascript"></script>
     <script src="js/tabs.js" type="text/javascript"></script>
 
     <link href="css/style.css" rel="stylesheet" />
   </head>
   <body>
     <h1 class="display-2 text-center">WayTab</h1>
+
     <div class="row" id ="tabtainer">
+    </div>
+
+    <div class="row">
+      <div id="time-container">
+      </div>
+    </div>
+
+    <div class="row">
+      <div id="time-bar-total">
+        <div id="time-bar-elapsed"></div>
+      </div>
     </div>
 
     <div class="action-box" id="remove-tab">

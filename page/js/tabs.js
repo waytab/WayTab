@@ -2,15 +2,12 @@ var config = conf;
 var buttonlength = 0;
 
 window.onload = function() {
-  chrome.storage.sync.get("savedtabs", function(obj) {
-    console.log(obj);
-  });
-
   // Load tabs
   createExistingLinks();
   detectAdditionCheckbox();
   detectRemovalCheckbox();
   detectAdditionSubmission();
+  displayTime();
 }
 
 function detectAdditionCheckbox() {
@@ -131,7 +128,6 @@ function removeTab(name) {
     console.log(arr);
     for(i = 0; i < arr.length; i++) {
       if(arr[i].id == name) {
-        console.log("hey");
         arr.splice(i, 1);
         console.log(arr);
         break;
