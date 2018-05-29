@@ -63,6 +63,7 @@ body {
   height: 33px;
   width: 33px;
   background-color: #eee;
+  border-radius: 2px;
 }
 
 .checkbox:hover input ~ .checkmark {
