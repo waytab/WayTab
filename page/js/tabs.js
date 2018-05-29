@@ -53,10 +53,18 @@ function detectRemovalCheckbox() {
 function detectAdditionSubmission() {
   var button = document.getElementById("submit-tab-info");
   button.onclick = function() {
-    var title = document.getElementById("tab-name").value;
-    var hlink = document.getElementById("tab-link").value;
-    var ilink = document.getElementById("img-upload").value;
-    addTab(title, hlink, ilink);
+    var title = document.getElementById("tab-name");
+    var hlink = document.getElementById("tab-link");
+    var ilink = document.getElementById("img-upload");
+
+    if(title.value.length == 0) {
+      title.setAttribute("style", "border-color: #dc3545;")
+    } else if(hlink.value.length <= 8) {
+      title.setAttribute("style", "border-color: #dc3545;")
+    } else if(ilink.value.length <= 8) {
+      title.setAttribute("style", "border-color: #dc3545;")
+    } else
+      addTab(title.value, hlink.value, ilink.value);
   };
 }
 
