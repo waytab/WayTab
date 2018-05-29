@@ -1,3 +1,7 @@
+html {
+  overflow-x: scroll;
+}
+
 body {
   background-image: url("../img/school.jpg");
   background-size: cover;

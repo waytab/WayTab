@@ -17,7 +17,7 @@ function displayTime() {
   h = getTwoDigits(h); m = getTwoDigits(m); s = getTwoDigits(s);
 
   document.getElementById("time-container").innerHTML = h + ":" + m + ":" + s + d;
-  var t = setTimeout(displayTime, 500);
+  var t = setTimeout(displayTime, 250);
 }
 
 function getTwoDigits(num) {
