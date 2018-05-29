@@ -134,4 +134,5 @@ body {
   font-size: 8px;
   margin: 2px;
   cursor: pointer;
+  border-radius: 50%;
 }

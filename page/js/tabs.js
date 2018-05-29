@@ -1,8 +1,8 @@
-var config = conf;
-var buttonlength = 0;
+let config = conf;
+let buttonlength = 0;
 
-window.onload = function() {
-  chrome.storage.sync.get("savedtabs", function(obj) {
+$(document).ready(() => {
+  chrome.storage.sync.get("savedtabs", (obj) => {
     console.log(obj);
   });
 
@@ -11,30 +11,30 @@ window.onload = function() {
   detectAdditionCheckbox();
   detectRemovalCheckbox();
   detectAdditionSubmission();
-}
+})
 
 function detectAdditionCheckbox() {
-  var checkbox = document.getElementById("confirm-add");
-  var div = document.getElementById("add-tab-attributes");
-  checkbox.onchange = function() {
+  $(document).on('change', '#confirm-add', function() {
     if(this.checked) {
-      div.style.display = "block";
-      div.style.backgroundColor = "#e2e2e2";
-      div.style.padding= "1%";
-      div.style.borderRadius = "4px";
-      div.style.width = "100%";
-    }else {
-      div.style.display = "none";
-      document.getElementById("tab-name").value = "";
-      document.getElementById("tab-link").value = "https://";
-      document.getElementById("img-upload").value = "https://";
+      $('#add-tab-attributes').css({
+        display: 'block',
+        backgroundColor: "#e2e2e2",
+        padding: "1%",
+        borderRadius: "4px",
+        width: "100%"
+      })
+    } else {
+      $('#add-tab-attributes').css('display', 'none')
+      $('#tab-name').val('')
+      $('#tab-link').val('https://')
+      $('#img-upload').val('https://')
     }
-  };
+  });
 }
 
 function detectRemovalCheckbox() {
-  var checkbox = document.getElementById("confirm-remove");
-  var delbuts = document.getElementsByClassName("tab-delete-button");
+  let checkbox = document.getElementById("confirm-remove");
+  let delbuts = document.getElementsByClassName("tab-delete-button");
   checkbox.onchange = function() {
     if(this.checked) {
       for(i = 0; i < delbuts.length; i++) {
@@ -42,7 +42,7 @@ function detectRemovalCheckbox() {
         delbuts[i].style.display = "inline-block";
       }
       detectTabDeleted();
-    }else {
+    } else {
       for(i = 0; i < delbuts.length; i++) {
         delbuts[i].style.display = "none";
       }
@@ -51,69 +51,70 @@ function detectRemovalCheckbox() {
 }
 
 function detectAdditionSubmission() {
-  var button = document.getElementById("submit-tab-info");
-  button.onclick = function() {
-    var title = document.getElementById("tab-name");
-    var hlink = document.getElementById("tab-link");
-    var ilink = document.getElementById("img-upload");
+  $(document).on('click', '#submit-tab-info', () => {
+    let title = $('#tab-name')
+    let hlink = $('#tab-link')
+    let ilink = $('#img-upload')
 
-    if(title.value.length == 0) {
-      title.setAttribute("style", "border-color: #dc3545;")
-    } else if(hlink.value.length <= 8) {
-      title.setAttribute("style", "border-color: #dc3545;")
-    } else if(ilink.value.length <= 8) {
-      title.setAttribute("style", "border-color: #dc3545;")
+    if(title.val().length == 0) {
+      title.css('border-color', '#dc3545')
+    } else if(hlink.val().length <= 8) {
+      hlink.css('border-color', '#dc3545')
+    } else if(ilink.val().length <= 8) {
+      ilink.css('border-color', '#dc3545')
     } else
-      addTab(title.value, hlink.value, ilink.value);
-  };
+      addTab(title.val(), hlink.val(), ilink.val());
+  })
 }
 
 function detectTabDeleted() {
-  var delbuts = document.getElementsByClassName("tab-delete-button");
-  for(i = 0; i < buttonlength + 1; i++) {
-    var button = delbuts[i];
+  let delbuts = document.getElementsByClassName("tab-delete-button");
+  $('.tab-delete-button').each(function() {
+    let button = $(this)[0]
+    console.log(button)
+
     console.log(button.id.substring(1));
-    button.onclick = function() {
+    $(document).on('click', button, () => {
       console.log(button.id.substring(1));
       removeTab(button.id.substring(1));
       buttonlength--;
 
-      document.getElementById("confirm-remove").checked = false;
+      $('#confirm-remove').checked = false;
       for(i = 0; i < buttonlength + 1; i++) {
-        delbuts[i].style.display = "none";
+        delbuts[i].style.display = 'none'
       }
-    }
-  }
+    })
+  })
 }
 
 function createExistingLinks() {
-  chrome.storage.sync.get("savedtabs", function(obj) {
-    var tabs = obj["savedtabs"];
-    var length = tabs.length;
+  chrome.storage.sync.get("savedtabs", (obj) => {
+    let tabs = obj["savedtabs"];
+    let length = tabs.length;
 
-    var row = document.getElementById("tabtainer");
-    row.innerHTML += "<div class='col' id='start-col'></div>";
+    let row = $('#tabtainer')
+    row.append("<div class='col' id='start-col'></div>")
     for(i = 0; i < length; i++) {
-      var obj = tabs[i];
-      var newdiv = createTabDiv(obj.id, obj.image_link, obj.actual_link);
+      let obj = tabs[i];
+      let newdiv = createTabDiv(obj.id, obj.image_link, obj.actual_link);
       row.append(newdiv);
     }
-    row.innerHTML += "<div class='col' id='end-col'></div>";
+    row.append("<div class='col' id='end-col'></div>")
   });
 }
 
 function addTab(name, link, img) {
   // Add it to HTML
-  var parentdiv = document.getElementById("tabtainer");
-  document.getElementById("end-col").remove();
-  var newdiv = createTabDiv(name, img, link);
+  let parentdiv = $('#tabtainer')
+  $('#end-col').remove();
+  let newdiv = createTabDiv(name, img, link);
 
   parentdiv.append(newdiv);
-  parentdiv.innerHTML += "<div class='col' id='end-col'></div>";
+  parentdiv.append('<div class="col" id="end-col"></div>')
 
   // Add it to background
   chrome.storage.sync.get("savedtabs", function(obj) {
-    var object = obj["savedtabs"];
+    let object = obj["savedtabs"];
     object.push({"id": name, "actual_link": link, "image_link": img});
 
     chrome.storage.sync.set({savedtabs: object}, function() {
@@ -124,10 +125,10 @@ function addTab(name, link, img) {
 }
 
 function removeTab(name) {
-  document.getElementById(name).remove();
+  $(`#${name}`).remove();
 
   chrome.storage.sync.get("savedtabs", function(obj) {
-    var arr = obj["savedtabs"];
+    let arr = obj["savedtabs"];
     console.log(arr);
     for(i = 0; i < arr.length; i++) {
       if(arr[i].id == name) {
@@ -145,22 +146,25 @@ function removeTab(name) {
 }
 
 function createTabDiv(name, img, link) {
-  var newdiv = document.createElement("DIV");
-  newdiv.setAttribute("class", "col-1");
-  newdiv.setAttribute("id", name);
+  let newdiv = $('<div></div>').attr({
+    class: 'col-1',
+    id: name
+  })
 
-  var newlink = document.createElement("A");
-  newlink.setAttribute("class", "img-link");
-  newlink.setAttribute("href", link);
+  let newlink = $('<a></a>').attr({
+    class: 'img-link',
+    href: link
+  })
 
-  var newimg = document.createElement("IMG");
-  newimg.setAttribute("src", img);
-  newimg.setAttribute("alt", name);
+  let newimg = $('<img />').attr({
+    src: img,
+    alt: name
+  })
 
-  var delbutton = document.createElement("BUTTON");
-  delbutton.setAttribute("class", "tab-delete-button");
-  delbutton.setAttribute("id", "b"+name);
-  delbutton.innerHTML += "X";
+  let delbutton = $('<button></button>').attr({
+    class: 'tab-delete-button',
+    id: `b${name}`
+  }).text('X')
 
   newlink.append(newimg);
   newdiv.append(newlink);
