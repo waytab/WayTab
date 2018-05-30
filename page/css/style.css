@@ -161,20 +161,15 @@ input.period-control:focus {
 
 #time-container {
   color: white;
-  font-size: 104px;
   margin: 0 auto;
 }
 
 #time-bar-total {
-  width: 50%;
-  height: 15px;
   background-color: #ddd;
-  border-radius: 4px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 #time-bar-elapsed {
-  width: 1%;
-  height: 15px;
-  background-color: #5194ff;
+  background-color: #007bff;
+  text-align: center;
 }

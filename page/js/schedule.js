@@ -10,7 +10,6 @@ $(document).ready(function() {
       for(let i = 0; i < result.schedule.length; i++) {
         for(let j = 0; j < letterDays.length; j++) {
           let sel = letterDays.substring(j, j+1) + (i + 1)
-          console.log(sel)
           $(`#${sel}`).val(result.schedule[i][j])
         }
       }
