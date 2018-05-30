@@ -1,6 +1,6 @@
 $(document).ready(function() {
   chrome.storage.sync.get(['schedule'], function(result) {
-    if(result.schedule.length === undefined || result.schedule.length == 0) {
+    if(Object.keys(result).length === 0 && result.constructor === Object) {
       $('#schedule-table').remove()
       $('#schedule').append($('<a href="#create-schedule" data-toggle="modal" class="btn btn-primary">Create</a>'))
       scheduleEditor()
@@ -20,7 +20,24 @@ $(document).ready(function() {
 })
 
 function loadSchedule(schedule) {
-  $('#schedule-body').html('')
+  $('#schedule-table').remove()
+  $('#schedule').append(`
+    <table class="table table-bordered" id="schedule-table">
+      <thead>
+        <tr>
+          <th scope="col">A</th>
+          <th scope="col">B</th>
+          <th scope="col">C</th>
+          <th scope="col">D</th>
+          <th scope="col">E</th>
+          <th scope="col">F</th>
+          <th scope="col">G</th>
+          <th scope="col">H</th>
+        </tr>
+      </thead>
+      <tbody id="schedule-body"></tbody>
+    </table>
+  `)
   for(let i = 0; i < schedule.length; i++) {
     $('#schedule-body').append(`<tr data-per="${i+1}"></tr>`)
     for(let j = 0; j < schedule[i].length; j++) {
