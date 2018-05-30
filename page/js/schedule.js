@@ -22,7 +22,7 @@ $(document).ready(function() {
 function loadSchedule(schedule) {
   $('#schedule-table').remove()
   $('#schedule').append(`
-    <table class="table table-bordered" id="schedule-table">
+    <table class="table table-bordered mb-0" id="schedule-table">
       <thead>
         <tr>
           <th scope="col">A</th>
