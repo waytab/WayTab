@@ -1,5 +1,3 @@
-
-
 function displayTime() {
   var time = new Date();
   var h = time.getHours();
@@ -17,8 +15,9 @@ function displayTime() {
   h = getTwoDigits(h); m = getTwoDigits(m); s = getTwoDigits(s);
 
   document.getElementById("time-container").innerHTML = h + ":" + m + ":" + s + d;
-  var t = setTimeout(displayTime, 250);
 }
+
+setInterval(displayTime, 250)
 
 function getTwoDigits(num) {
   return num < 10 ? "0"+num : num;
