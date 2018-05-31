@@ -9,6 +9,7 @@ $(document).ready(() => {
   detectRemovalCheckbox();
   detectAdditionSubmission();
   displayTime();
+  hoverTimeElapsed();
 })
 
 function detectAdditionCheckbox() {
@@ -68,18 +69,17 @@ function detectAdditionSubmission() {
 function detectTabDeleted() {
   let delbuts = document.getElementsByClassName("tab-delete-button");
   $('.tab-delete-button').each(function() {
-    let button = $(this)[0]
-    console.log(button)
+    let mButton = $(this);
+    let button = mButton[0];
 
-    console.log(button.id.substring(1));
-    $(document).on('click', button, () => {
+    mButton.on('click', () => {
       console.log(button.id.substring(1));
       removeTab(button.id.substring(1));
       buttonlength--;
 
-      $('#confirm-remove').checked = false;
+      document.getElementById("confirm-remove").checked = false;
       for(i = 0; i < buttonlength + 1; i++) {
-        delbuts[i].style.display = 'none'
+        delbuts[i].style.display = 'none';
       }
     })
   })
@@ -90,7 +90,7 @@ function createExistingLinks() {
     let tabs = obj["savedtabs"];
     let length = tabs.length;
 
-    let row = $('#tabtainer')
+    let row = $('#tabtainer');
     row.append("<div class='col' id='start-col'></div>")
     for(i = 0; i < length; i++) {
       let obj = tabs[i];
@@ -124,6 +124,7 @@ function addTab(name, link, img) {
 
 function removeTab(name) {
   $(`#${name}`).remove();
+  console.log(name);
 
   chrome.storage.sync.get("savedtabs", function(obj) {
     let arr = obj["savedtabs"];
@@ -146,22 +147,22 @@ function createTabDiv(name, img, link) {
   let newdiv = $('<div></div>').attr({
     class: 'col-1',
     id: name
-  })
+  });
 
   let newlink = $('<a></a>').attr({
     class: 'img-link',
     href: link
-  })
+  });
 
   let newimg = $('<img />').attr({
     src: img,
     alt: name
-  })
+  });
 
   let delbutton = $('<button></button>').attr({
     class: 'tab-delete-button',
     id: `b${name}`
-  }).text('X')
+  }).text('X');
 
   newlink.append(newimg);
   newdiv.append(newlink);

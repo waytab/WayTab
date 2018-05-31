@@ -16,5 +16,8 @@ var bell_sched = {
     {"name": "Block 4", "start": "10,20","end": "11,35", "length": "75"},
     {"name": "Block 5", "start": "11,40","end": "12,20", "length": "40"},
     {"name": "Block 6", "start": "12,25","end": "14,05", "length": "40"}
+  ],
+  "4": [
+    {"name": "Weekend", "start": "0,00", "end": "24,59"}
   ]
 }

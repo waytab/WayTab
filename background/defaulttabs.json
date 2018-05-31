@@ -6,7 +6,7 @@ var deftabs = {
       "image_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Gmail_Icon.svg/2000px-Gmail_Icon.svg.png"
     },
     {
-      "id": "Student Drive",
+      "id": "StudentDrive",
       "actual_link": "https://drive.google.com",
       "image_link": "http://www.iconarchive.com/download/i80454/uiconstock/socialmedia/Google-Drive.ico"
     },
@@ -21,7 +21,7 @@ var deftabs = {
       "image_link": "http://p2cdn4static.sharpschool.com/UserFiles/Servers/Server_1036540/Image/Images/waylandlogo_color.png"
     },
     {
-      "id": "It's Learning",
+      "id": "ItsLearning",
       "actual_link": "https://wps.itslearning.com/index.aspx",
       "image_link": "img/itslearning_logo.png"
     },

@@ -162,14 +162,33 @@ input.period-control:focus {
 #time-container {
   color: white;
   margin: 0 auto;
+  z-index: 1;
 }
 
 #time-bar-total {
   background-color: #ddd;
   width: 100%;
+  text-align: center;
+  height: 25px;
+  z-index: 1;
 }
 
 #time-bar-elapsed {
+  position: absolute;
+  top: 0;
   background-color: #007bff;
+  height: 25px;
+  z-index: -1;
   text-align: center;
+  float: left;
+}
+
+#percent-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: none;
+  color: #eee;
+  padding-right: 5px;
+  z-index: 2;
 }
