@@ -180,8 +180,9 @@ input.period-control:focus {
 }
 
 #time-display {
-  width: 100px;
-  text-align: right;
+  display: inline-block;
+  width: 71px;
+  text-align: left;
 }
 
 #newTask {
