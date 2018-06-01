@@ -29,22 +29,7 @@ body {
   width: 30%;
   min-width: 300px;
   border-radius: 4px;
-  position: fixed;
-  float: right;
-}
-
-#add-tab {
-  margin-right: 1rem;
-  margin-bottom: 4rem;
-  right: 0;
-  bottom: 0;
-}
-
-#remove-tab {
-  margin-right: 1rem;
-  margin-bottom: 1rem;
-  right: 0;
-  bottom: 0;
+  margin: 0 auto;
 }
 
 .checkbox {
