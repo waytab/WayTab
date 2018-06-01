@@ -59,7 +59,7 @@ function advanceBar(day) {
 
   bar.style.width = percent + "%";
   var time = document.getElementById("time-container").innerText;
-  document.getElementById("time-container").innerText = time + " | " + name;
+  document.getElementById("time-container").innerHTML = `<span id="text-display">${time}</span> | ${name}`
   document.getElementById("percent-container").innerHTML = parseInt(bar.style.width) + "%";
 }
 
