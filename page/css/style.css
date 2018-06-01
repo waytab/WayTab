@@ -191,7 +191,7 @@ input.period-control:focus {
 
 #time-display {
   display: inline-block;
-  width: 71px;
+  margin-right: 2px;
   text-align: left;
 }
 
