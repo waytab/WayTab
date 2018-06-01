@@ -24,17 +24,14 @@ body {
 }
 
 #settings-button {
-  position: absolute;
-  float: right;
   right: 0;
   top: 0;
-  margin-top: 3rem;
-  margin-right: 1rem;
   background-color: #eaa615;
+  border-color: #d69713;
 }
 
 #settings-button:hover {
-  background-color: #007bff;
+  background-color: #cc9012;
 }
 
 .action-box {
@@ -43,7 +40,6 @@ body {
   width: 30%;
   min-width: 300px;
   border-radius: 4px;
-  margin: 0 auto;
 }
 
 .checkbox {
