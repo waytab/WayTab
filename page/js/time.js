@@ -21,7 +21,7 @@ function displayTime() {
   advanceBar(day);
 }
 
-setInterval(displayTime, 250)
+setInterval(displayTime, 1000)
 
 function getTwoDigits(num) {
   return num < 10 ? "0"+num : num;
