@@ -19,10 +19,11 @@
         <span id="time-container"></span>
       </div>
     </div>
-
     <div id="percent-container"></div>
 
     <h1 class="display-2 text-center">WayTab</h1>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#settings-pane" id="settings-button"> Configure Settings </button>
+
     <div class="row mb-4 mt-4" id="tabtainer"></div>
     <div class="row">
       <div class="col-md-6">
@@ -49,30 +50,47 @@
       </div>
     </div>
 
-    <div class="action-box" id="add-tab">
-      <label class="checkbox" id="addition-checkbox"> Add a Tab
-        <input type="checkbox" id="confirm-add"></input>
-        <span class="checkmark"></span>
-      </label>
-      <div id="add-tab-attributes" style="display: none">
-        <label for="tab-name"> Title </label>
-        <input type="text" id="tab-name" placeholder="Name"></input>
+    <div class="modal fade" id="settings-pane" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="settings-title"> Settings </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true"> &times; </span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="action-box" id="add-tab">
+              <label class="checkbox" id="addition-checkbox"> Add a Tab
+                <input type="checkbox" id="confirm-add"></input>
+                <span class="checkmark"></span>
+              </label>
+              <div id="add-tab-attributes" style="display: none">
+                <label for="tab-name"> Title </label>
+                <input type="text" id="tab-name" placeholder="Name"></input>
 
-        <label for="tab-link"> Link </label>
-        <input type="text" id="tab-link" value="https://" placeHolder="https://www.example.com"></input>
+                <label for="tab-link"> Link </label>
+                <input type="text" id="tab-link" value="https://" placeHolder="https://www.example.com"></input>
 
-        <label for="img-upload"> Image </label>
-        <input type="text" id="img-upload" value="https://" placeHolder="https://www.example.com/image.png"></input>
+                <label for="img-upload"> Image </label>
+                <input type="text" id="img-upload" value="https://" placeHolder="https://www.example.com/image.png"></input>
 
-        <input type="button" id="submit-tab-info" value="Submit"></input>
+                <input type="button" id="submit-tab-info" value="Submit"></input>
+              </div>
+            </div>
+
+            <div class="action-box" id="remove-tab">
+              <label class ="checkbox" id="remove-checkbox"> Remove a Tab
+                <input type="checkbox" id="confirm-remove"></input>
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
       </div>
-    </div>
-
-    <div class="action-box" id="remove-tab">
-      <label class ="checkbox" id="remove-checkbox"> Remove a Tab
-        <input type="checkbox" id="confirm-remove"></input>
-        <span class="checkmark"></span>
-      </label>
     </div>
 
     <div class="modal fade" tabindex="-1" role="dialog" id="create-schedule">

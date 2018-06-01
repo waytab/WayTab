@@ -23,6 +23,20 @@ body {
   vertical-align: middle
 }
 
+#settings-button {
+  position: absolute;
+  float: right;
+  right: 0;
+  top: 0;
+  margin-top: 3rem;
+  margin-right: 1rem;
+  background-color: #eaa615;
+}
+
+#settings-button:hover {
+  background-color: #007bff;
+}
+
 .action-box {
   background-color: #eee;
   color: #000;
