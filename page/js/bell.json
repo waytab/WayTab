@@ -1,23 +1,27 @@
 var bell_sched = {
   "1": [
+    {"name": "Before School", "start": "0,00","end": "7,30"},
     {"name": "Block 1", "start": "7,30","end": "8,26", "length": "57"},
     {"name": "Block 2", "start": "8,31","end": "9,28", "length": "57"},
     {"name": "Block 3", "start": "9,38","end": "10,35", "length": "57"},
     {"name": "Block 4", "start": "10,40","end": "12,11", "length": "151"},
     {"name": "Block 5", "start": "12,16","end": "13,13", "length": "57"},
-    {"name": "Block 6", "start": "13,18","end": "14,15", "length": "57"}
+    {"name": "Block 6", "start": "13,18","end": "14,15", "length": "57"},
+    {"name": "After School", "start": "14,15","end": "23,59"}
   ],
   "2": [
   ],
   "3": [
+    {"name": "Before School", "start": "0,00","end": "7,30"},
     {"name": "Block 1", "start": "7,30","end": "8,10", "length": "40"},
     {"name": "Block 2", "start": "8,15","end": "8,55", "length": "40"},
     {"name": "Block 3", "start": "9,35","end": "10,15", "length": "40"},
     {"name": "Block 4", "start": "10,20","end": "11,35", "length": "75"},
     {"name": "Block 5", "start": "11,40","end": "12,20", "length": "40"},
-    {"name": "Block 6", "start": "12,25","end": "13,05", "length": "40"}
+    {"name": "Block 6", "start": "12,25","end": "13,05", "length": "40"},
+    {"name": "After School", "start": "13,05","end": "23,59"}
   ],
   "4": [
-    {"name": "Weekend", "start": "0,00", "end": "24,59"}
+    {"name": "Weekend", "start": "0,00", "end": "23,59"}
   ]
 }
