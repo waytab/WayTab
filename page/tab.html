@@ -33,7 +33,19 @@
         </div>
       </div>
       <div class="col-md-6">
-        <p>Something else here (maybe eschool?)</p>
+        <div class="card card-body" id="todo">
+          <h3 class="card-title mb-2">Todo</h3>
+          <input type="text" class="form-control" id="newTask" placeholder="New Task...">
+          <div class="input-group mb-3" id="newTaskSelectionGroup">
+            <select class="custom-select" id="addTaskClass">
+              <option selected>Class...</option>
+            </select>
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button" id="addTask">Add</button>
+            </div>
+          </div>
+          <div id="taskList"></div>
+        </div>
       </div>
     </div>
 
@@ -169,6 +181,7 @@
     <script src="js/tabs.js" type="text/javascript"></script>
     <script src="js/bell.json" type="text/javascript"></script>
     <script src="js/time.js" type="text/javascript"></script>
-    <script src="js/settings.js" type="text/javascript"></script>
+    <script src="js/tabs.js" type="text/javascript"></script>
+    <script src="js/todo.js" type="text/javascript"></script>
   </body>
 </html>

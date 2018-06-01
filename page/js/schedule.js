@@ -50,6 +50,7 @@ function scheduleEditor() {
   $(document).on('click', '#new-schedule-save', function() {
     let schedule = []
     chrome.storage.sync.set({schedule: []}, console.log('Schedule Cleared')) // make sure we start with a clean sync to prevent double schedules
+    chrome.storage.sync.set({classes: []}, console.log('Class list cleared'))
     $('#new-schedule-body').children('tr').each(function() {
       let row = $(this)
       let per = $(this)[0].id.substring(1, 2)
@@ -68,6 +69,11 @@ function scheduleEditor() {
         $('#new-schedule-save').toggleClass('btn-success').text('Save Schedule')
       }, 500)
       loadSchedule(schedule)
+      let classes = [...new Set(schedule[0].concat(schedule[1].concat(schedule[3].concat(schedule[4]))))] // filter for single occurances of classes in schedule
+      classes = classes.filter((v) => { return v != '' }).sort() // filter for frees
+      chrome.storage.sync.set({classes: classes}, function() {
+        console.log('Class list saved!')
+      })
     })
   })
 

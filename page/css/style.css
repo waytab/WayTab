@@ -193,3 +193,21 @@ input.period-control:focus {
   padding-right: 5px;
   z-index: 1;
 }
+
+#time-display {
+  width: 100px;
+  text-align: right;
+}
+
+#newTask {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: 0;
+}
+
+#newTaskSelectionGroup>:first-child {
+  border-top-left-radius: 0;
+}
+#newTaskSelectionGroup>:last-child>button {
+  border-top-right-radius: 0;
+}
