@@ -123,6 +123,11 @@ body {
   background-color: #eee;
 }
 
+#center-button {
+  display: flex;
+  justify-content: center;
+}
+
 .tab-delete-button {
   background-color: red;
   border: none;
