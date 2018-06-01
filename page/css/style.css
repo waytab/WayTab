@@ -1,5 +1,5 @@
 html {
-  overflow-x: scroll;
+  overflow-x: hidden;
 }
 
 body {
@@ -28,15 +28,16 @@ body {
   color: #000;
   width: 30%;
   min-width: 300px;
-  position: fixed;
   border-radius: 4px;
+  position: fixed;
+  float: right;
 }
 
 #add-tab {
-  margin-bottom: 4rem;
   margin-right: 1rem;
-  bottom: 0;
+  margin-bottom: 4rem;
   right: 0;
+  bottom: 0;
 }
 
 #remove-tab {
@@ -188,7 +189,7 @@ input.period-control:focus {
   top: 0;
   right: 0;
   display: none;
-  color: #eee;
+  color: #000;
   padding-right: 5px;
-  z-index: 2;
+  z-index: 1;
 }
