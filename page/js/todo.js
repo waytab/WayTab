@@ -49,13 +49,11 @@ function loadTasks() {
       $('#taskList').empty()
       for(let key in tasks) {
         if(tasks.hasOwnProperty(key)) {
-          $('#taskList').append($('<h5></h5>').text(key))
           if(tasks[key].length != 0) {
+            $('#taskList').append($('<h5></h5>').text(key))
             for(let i = 0; i < tasks[key].length; i++) {
               $('#taskList').append($('<div></div>').addClass('custom-control custom-checkbox mb-2').attr('id', `${key + i}`).append($('<input>').attr('type', 'checkbox').addClass('custom-control-input').attr('data-del', `${key + i}`).attr('data-class', `${key}`).attr('id', `check${key + i}`), $('<label></label>').addClass('custom-control-label').text(tasks[key][i]).attr('for', `check${key + i}`)))
             }
-          } else {
-            $('#taskList').append($('<p></p>').text('None'))
           }
         }
       }
