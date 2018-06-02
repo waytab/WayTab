@@ -106,21 +106,12 @@ body {
   box-sizing: border-box;
 }
 
-#add-tab-attributes input[type=button] {
+#add-tab-attributes button {
   background-color: #eaa615;
-  border: none;
-  color: #000;
-  border-radius: 4px;
-  padding: 5px 12px;
-  font-size: 12px;
-  border: 2px solid #008cba;
-  transition-duration: 0.4s;
-  display: block;
-  margin: 0 auto;
 }
 
-#add-tab-attributes input[type=button]:hover {
-  background-color: #eee;
+#add-tab-attributes button:hover {
+  background-color: #cc9012;
 }
 
 #center-button {
