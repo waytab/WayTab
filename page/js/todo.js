@@ -47,6 +47,7 @@ function loadTasks() {
       tasks = result.tasks
       console.log(tasks)
       $('#taskList').empty()
+      $('#addTaskClass').empty().append(`<option selected>Class...</option>`)
       for(let key in tasks) {
         if(tasks.hasOwnProperty(key)) {
           if(tasks[key].length != 0) {
