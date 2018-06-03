@@ -60,31 +60,52 @@
             </button>
           </div>
           <div class="modal-body">
-            <div class="action-box my-0 mx-auto" id="add-tab">
-              <label class="checkbox" id="addition-checkbox"> Add a Tab
-                <input type="checkbox" id="confirm-add"></input>
-                <span class="checkmark"></span>
-              </label>
-              <div id="add-tab-attributes" style="display: none">
-                <label for="tab-name"> Title </label>
-                <input type="text" id="tab-name" placeholder="Name"></input>
+            <div class="accordion" id="settings-accordion">
+              <div class="card">
+                <div class="card-header" id="add-tab-heading">
+                  <h5 class="mb-0" style="text-align: center">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#add-tab" aria-expanded="false" aria-controls="add-tab">
+                      Add a Tab
+                    </button>
+                  </h5>
+                </div>
+                <div id="add-tab" class="collapse" aria-labelledby="add-tab-heading" data-parent="#settings-accordion">
+                  <div class="card body" style="padding-left: 3px; padding-right: 3px; padding-bottom: 3px">
+                    <div id="add-tab-attributes">
+                      <label for="tab-name"> Title </label>
+                      <input type="text" id="tab-name" placeholder="Name"></input>
 
-                <label for="tab-link"> Link </label>
-                <input type="text" id="tab-link" value="https://" placeHolder="https://www.example.com"></input>
+                      <label for="tab-link"> Link </label>
+                      <input type="text" id="tab-link" value="https://" placeHolder="https://www.example.com"></input>
 
-                <label for="img-upload"> Image </label>
-                <input type="text" id="img-upload" value="https://" placeHolder="https://www.example.com/image.png"></input>
+                      <label for="img-upload"> Image </label>
+                      <input type="text" id="img-upload" value="https://" placeHolder="https://www.example.com/image.png"></input>
 
-                <button type="button" class="btn btn-block">Submit</button>
+                      <button type="button" class="btn btn-block">Submit</button>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <div class="action-box my-0 mx-auto" id="remove-tab">
-              <label class ="checkbox" id="remove-checkbox"> Remove a Tab
-                <input type="checkbox" id="confirm-remove"></input>
-                <span class="checkmark"></span>
-              </label>
-            </div>
+              <div class="card">
+                <div class="card-header" id="remove-tab-heading">
+                  <h5 class="mb-0" style="text-align: center">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#remove-tab-collapsible" aria-expanded="false" aria-controls="remove-tab-collapsible">
+                      Remove a Tab
+                    </button>
+                  </h5>
+                </div>
+                <div id="remove-tab-collapsible" class="collapse" aria-labelledby="remove-tab-heading" data-parent="#settings-accordion">
+                  <div class="card body" style="padding: 3px;">
+                    <div class="action-box my-0 mx-auto" id="remove-tab">
+                      <label class ="checkbox" id="remove-checkbox"> Display X's
+                        <input type="checkbox" id="confirm-remove"></input>
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
