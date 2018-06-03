@@ -5,7 +5,7 @@ $(document).ready(() => {
 
   // Load tabs
   createExistingLinks();
-  detectAdditionCheckbox();
+  //detectAdditionCheckbox();
   detectRemovalCheckbox();
   detectAdditionSubmission();
   displayTime();
@@ -51,6 +51,7 @@ function detectRemovalCheckbox() {
 
 function detectAdditionSubmission() {
   $(document).on('click', '#submit-tab-info', () => {
+    console.log("lmao");
     let title = $('#tab-name')
     let hlink = $('#tab-link')
     let ilink = $('#img-upload')
