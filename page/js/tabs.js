@@ -5,31 +5,11 @@ $(document).ready(() => {
 
   // Load tabs
   createExistingLinks();
-  //detectAdditionCheckbox();
   detectRemovalCheckbox();
   detectAdditionSubmission();
   displayTime();
   hoverTimeElapsed();
 })
-
-function detectAdditionCheckbox() {
-  $(document).on('change', '#confirm-add', function() {
-    if(this.checked) {
-      $('#add-tab-attributes').css({
-        display: 'block',
-        backgroundColor: "#e2e2e2",
-        padding: "1%",
-        borderRadius: "4px",
-        width: "100%"
-      })
-    } else {
-      $('#add-tab-attributes').css('display', 'none')
-      $('#tab-name').val('')
-      $('#tab-link').val('https://')
-      $('#img-upload').val('https://')
-    }
-  });
-}
 
 function detectRemovalCheckbox() {
   let checkbox = document.getElementById("confirm-remove");
