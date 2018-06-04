@@ -83,18 +83,19 @@ function getTimeFromId(time) {
 
 function getSoonestStart(bell_type) {
   let timelist = sched[bell_type];
-  let currentTime = new Date();
-  let h = currentTime.getHours();
-  let m = currentTime.getMinutes();
+  let time = new Date();
+  let h = time.getHours();
+  let m = time.getMinutes();
+  let s = time.getSeconds();
 
-  let min = 9001;
+  let min = 999999999;
   let index = 0;
   for(i = 0; i < timelist.length; i++) {
     let hands = timelist[i].start.split(",");
-    let hourHand = parseInt(60*hands[0]);
-    let minuteHand = parseInt(hands[1]);
+    let hourHand = parseInt(3600*hands[0]);
+    let minuteHand = parseInt(60*hands[1]);
     let total = hourHand + minuteHand;
-    let current = 60*h + m;
+    let current = 3600*h + 60*m + s;
     let difference = current-total;
 
     if(difference >= 0 && difference < min) {
@@ -103,5 +104,5 @@ function getSoonestStart(bell_type) {
     }
   }
 
-  return [min, timelist[index].length, timelist[index].name, timelist[index].end];
+  return [min, timelist[index].length * 60, timelist[index].name, timelist[index].end];
 }
