@@ -2,7 +2,6 @@ let config = conf;
 let buttonlength = 0;
 
 $(document).ready(() => {
-
   // Load tabs
   createExistingLinks();
   detectRemovalCheckbox();

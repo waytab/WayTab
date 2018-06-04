@@ -50,6 +50,7 @@ function advanceBar(day) {
   var difference = info[0];
   var length = parseInt(info[1]);
   var name = info[2];
+  var end = info[3];
   var percent = (difference/length) * 100;
 
   if(name == "Before School" || name == "After School") {
@@ -64,7 +65,20 @@ function advanceBar(day) {
   bar.style.width = percent + "%";
   var time = document.getElementById("time-container").innerText;
   document.getElementById("time-container").innerHTML = `<span id="time-display">${time.substring(0, time.length-2)}</span>${time.substring(time.length-2)} | ${name}`
-  document.getElementById("percent-container").innerHTML = parseInt(bar.style.width) + "%";
+  document.getElementById("percent-container").innerHTML = "Ends at " + getTimeFromId(end) + " | " + parseInt(bar.style.width) + "% elapsed";
+}
+
+function getTimeFromId(time) {
+  let nums = time.split(",");
+  let hours = nums[0];
+  let minutes = nums[1];
+  let hem = "am";
+  if(hours >= 12) {
+    hem = "pm";
+  }
+
+  hours = getTwoDigits(hours); minutes = getTwoDigits(minutes);
+  return hours + ":" + minutes + hem;
 }
 
 function getSoonestStart(bell_type) {
@@ -89,5 +103,5 @@ function getSoonestStart(bell_type) {
     }
   }
 
-  return [min, timelist[index].length, timelist[index].name];
+  return [min, timelist[index].length, timelist[index].name, timelist[index].end];
 }

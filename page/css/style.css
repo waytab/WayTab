@@ -152,7 +152,7 @@ input.period-control:focus {
 }
 
 #time-container {
-  color: white;
+  color: black;
   margin: 0 auto;
   z-index: 1;
 }
