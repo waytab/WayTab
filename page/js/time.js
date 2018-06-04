@@ -1,7 +1,7 @@
 var sched = bell_sched;
-var time = new Date();
 
 function displayTime() {
+  let time = new Date();
   let h = time.getHours();
   let m = time.getMinutes();
   let s = time.getSeconds();
