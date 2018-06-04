@@ -28,7 +28,7 @@ function getTwoDigits(num) {
 }
 
 function hoverTimeElapsed() {
-  var bar = document.getElementById("time-bar-total");
+  let bar = document.getElementById("time-bar-total");
   bar.onmouseover = function() {
     document.getElementById("percent-container").style.display = "block";
   }
@@ -38,8 +38,8 @@ function hoverTimeElapsed() {
 }
 
 function advanceBar(day) {
-  var bar = document.getElementById("time-bar-elapsed");
-  var info;
+  let bar = document.getElementById("time-bar-elapsed");
+  let info;
   if(day == 0 || day == 6) {
     info = getSoonestStart(4);
   }else if(day == 3) {
@@ -47,11 +47,11 @@ function advanceBar(day) {
   }else {
     info = getSoonestStart(1);
   }
-  var difference = info[0];
-  var length = parseInt(info[1]);
-  var name = info[2];
-  var end = info[3];
-  var percent = (difference/length) * 100;
+  let difference = info[0];
+  let length = parseInt(info[1]);
+  let name = info[2];
+  let end = info[3];
+  let percent = (difference/length) * 100;
 
   if(name == "Before School" || name == "After School") {
     percent = 100;
@@ -63,7 +63,7 @@ function advanceBar(day) {
   }
 
   bar.style.width = percent + "%";
-  var time = document.getElementById("time-container").innerText;
+  let time = document.getElementById("time-container").innerText;
   document.getElementById("time-container").innerHTML = `<span id="time-display">${time.substring(0, time.length-2)}</span>${time.substring(time.length-2)} | ${name}`
   document.getElementById("percent-container").innerHTML = "Ends at " + getTimeFromId(end) + " | " + parseInt(bar.style.width) + "% elapsed";
 }
@@ -82,20 +82,20 @@ function getTimeFromId(time) {
 }
 
 function getSoonestStart(bell_type) {
-  var timelist = sched[bell_type];
-  var currentTime = new Date();
-  var h = currentTime.getHours();
-  var m = currentTime.getMinutes();
+  let timelist = sched[bell_type];
+  let currentTime = new Date();
+  let h = currentTime.getHours();
+  let m = currentTime.getMinutes();
 
-  var min = 9001;
-  var index = 0;
+  let min = 9001;
+  let index = 0;
   for(i = 0; i < timelist.length; i++) {
-    var hands = timelist[i].start.split(",");
-    var hourHand = parseInt(60*hands[0]);
-    var minuteHand = parseInt(hands[1]);
-    var total = hourHand + minuteHand;
-    var current = 60*h + m;
-    var difference = current-total;
+    let hands = timelist[i].start.split(",");
+    let hourHand = parseInt(60*hands[0]);
+    let minuteHand = parseInt(hands[1]);
+    let total = hourHand + minuteHand;
+    let current = 60*h + m;
+    let difference = current-total;
 
     if(difference >= 0 && difference < min) {
       min = difference;
