@@ -42,8 +42,12 @@ function detectAdditionSubmission() {
       hlink.css('border-color', '#dc3545')
     } else if(ilink.val().length <= 8) {
       ilink.css('border-color', '#dc3545')
-    } else
+    } else {
       addTab(title.val(), hlink.val(), ilink.val());
+      title.val("");
+      hlink.val("");
+      ilink.val("");
+    }
   })
 }
 
