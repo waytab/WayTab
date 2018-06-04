@@ -52,10 +52,6 @@ function advanceBar(day) {
   let end = info[3];
   let percent = (difference/length) * 100;
 
-  if(name == "Before School" || name == "After School") {
-    percent = 100;
-  }
-
   if(percent > 100) {
     percent = 100;
     name = "Passing Time";
