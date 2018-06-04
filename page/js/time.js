@@ -1,23 +1,23 @@
 var sched = bell_sched;
+var time = new Date();
 
 function displayTime() {
-  var time = new Date();
-  var h = time.getHours();
-  var m = time.getMinutes();
-  var s = time.getSeconds();
-  var day = time.getDay();
-  var d = "am";
+  let h = time.getHours();
+  let m = time.getMinutes();
+  let s = time.getSeconds();
+  let day = time.getDay();
+  let hem = "am";
 
   if(h >= 12) {
     h -= 12;
-    d = "pm";
+    hem = "pm";
   }
   if(h == 0) {
-    h = 12;
+    hem = 12;
   }
   h = getTwoDigits(h); m = getTwoDigits(m); s = getTwoDigits(s);
 
-  document.getElementById("time-container").innerHTML= h + ":" + m + ":" + s + d;
+  document.getElementById("time-container").innerHTML= h + ":" + m + ":" + s + hem;
   advanceBar(day);
 }
 
