@@ -8,9 +8,11 @@ function displayTime() {
   let day = time.getDay();
   let hem = "am";
 
+  if(h >= 12) {
+    hem = "pm";
+  }
   if(h >= 13) {
     h -= 12;
-    hem = "pm";
   }
   h = getTwoDigits(h); m = getTwoDigits(m); s = getTwoDigits(s);
 
