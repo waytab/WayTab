@@ -34,83 +34,12 @@ body {
   background-color: #cc9012;
 }
 
-.action-box {
-  background-color: #eee;
-  color: #000;
-  width: 30%;
-  min-width: 300px;
-  border-radius: 4px;
-}
-
-.checkbox {
-  display: block;
-  position: relative;
-  margin: 5px;
-  padding-left: 40px;
-  cursor: pointer;
-  font-size: 22px;
-  user-select: none;
-}
-
-.checkbox input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 33px;
-  width: 33px;
-  background-color: #eee;
-  border-radius: 2px;
-}
-
-.checkbox:hover input ~ .checkmark {
-  background-color: #ccc;
-}
-
-.checkbox input:checked ~ .checkmark {
+#submit-tab-info {
+  margin-top: 5px;
   background-color: #eaa615;
 }
 
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-.checkbox input:checked ~ .checkmark:after {
-  display: block;
-}
-
-.checkbox .checkmark:after {
-  left: 12px;
-  top: 4px;
-  width: 10px;
-  height: 20px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  transform: rotate(45deg);
-}
-
-#add-tab-attributes input[type=text] {
-  width: 100%;
-  padding: 9px 15px;
-  margin: 6px 0px;
-  display: inline-block;
-  border: 1px solid #e2e2e2;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-#add-tab-attributes button {
-  background-color: #eaa615;
-}
-
-#add-tab-attributes button:hover {
+#submit-tab-info:hover {
   background-color: #cc9012;
 }
 

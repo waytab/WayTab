@@ -73,13 +73,13 @@
                   <div class="card body" style="padding-left: 3px; padding-right: 3px; padding-bottom: 3px">
                     <div id="add-tab-attributes">
                       <label for="tab-name"> Title </label>
-                      <input type="text" id="tab-name" placeholder="Name"></input>
+                      <input class="form-control" type="text" id="tab-name" placeholder="Name"></input>
 
                       <label for="tab-link"> Link </label>
-                      <input type="text" id="tab-link" value="https://" placeHolder="https://www.example.com"></input>
+                      <input class="form-control" type="text" id="tab-link" placeHolder="https://www.example.com"></input>
 
                       <label for="img-upload"> Image </label>
-                      <input type="text" id="img-upload" value="https://" placeHolder="https://www.example.com/image.png"></input>
+                      <input class="form-control" type="text" id="img-upload" placeHolder="https://www.example.com/image.png"></input>
 
                       <button type="button" class="btn btn-block" id="submit-tab-info">Submit</button>
                     </div>
@@ -97,10 +97,10 @@
                 </div>
                 <div id="remove-tab-collapsible" class="collapse" aria-labelledby="remove-tab-heading" data-parent="#settings-accordion">
                   <div class="card body" style="padding: 3px;">
-                    <div class="action-box my-0 mx-auto" id="remove-tab">
-                      <label class ="checkbox" id="remove-checkbox"> Display X's
-                        <input type="checkbox" id="confirm-remove"></input>
-                        <span class="checkmark"></span>
+                    <div class="my-0 mx-auto" id="remove-tab">
+                      <input class="form-check-input" type="checkbox" id="confirm-remove"></input>
+                      <label class="form-check-label checkbox" for="confirm-remove">
+                        Display X's
                       </label>
                     </div>
                   </div>
