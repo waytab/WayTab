@@ -60,11 +60,6 @@ function detectTabDeleted() {
       console.log(button.id.substring(1));
       removeTab(button.id.substring(1));
       buttonlength--;
-
-      document.getElementById("confirm-remove").checked = false;
-      for(i = 0; i < buttonlength + 1; i++) {
-        delbuts[i].style.display = 'none';
-      }
     })
   })
 }
