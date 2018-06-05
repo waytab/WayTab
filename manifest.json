@@ -3,7 +3,7 @@
   "description": "Change your new tab page to be more productive",
   "version": "1.0",
   "author": ["Andy Wang", "Andrew Ward"],
-  "permissions": ["activeTab", "storage"],
+  "permissions": ["activeTab", "storage", "tabs"],
   "background": {
     "scripts": ["background/defaulttabs.json", "background/background.js"],
     "persistent": false

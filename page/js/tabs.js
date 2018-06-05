@@ -73,6 +73,7 @@ function createExistingLinks() {
     row.append("<div class='col' id='start-col'></div>")
     for(i = 0; i < length; i++) {
       let obj = tabs[i];
+      console.log(obj.id + " " + obj.image_link + " " + obj.actual_link);
       let newdiv = createTabDiv(obj.id, obj.image_link, obj.actual_link);
       row.append(newdiv);
     }
@@ -102,8 +103,8 @@ function addTab(name, link, img) {
 }
 
 function removeTab(name) {
-  $(`#${name}`).remove();
   console.log(name);
+  document.getElementById(name).remove();
 
   chrome.storage.sync.get("savedtabs", function(obj) {
     let arr = obj["savedtabs"];
