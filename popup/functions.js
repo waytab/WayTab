@@ -14,7 +14,6 @@ function addCurrentTab() {
     });
 
     $(this).text("Saved!").toggleClass('btn-success');
-    added = true
   });
 }
 
