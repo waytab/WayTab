@@ -30,17 +30,18 @@ function detectRemovalCheckbox() {
 
 function detectAdditionSubmission() {
   $(document).on('click', '#submit-tab-info', () => {
-    console.log("lmao");
     let title = $('#tab-name')
     let hlink = $('#tab-link')
     let ilink = $('#img-upload')
+
+    if(ilink.val().length <= 8) {
+      ilink.val("img/default.png");
+    }
 
     if(title.val().length == 0) {
       title.css('border-color', '#dc3545')
     } else if(hlink.val().length <= 8) {
       hlink.css('border-color', '#dc3545')
-    } else if(ilink.val().length <= 8) {
-      ilink.css('border-color', '#dc3545')
     } else {
       addTab(title.val(), hlink.val(), ilink.val());
       title.val("");
