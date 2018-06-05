@@ -12,6 +12,9 @@ function addCurrentTab() {
       console.log(url + " " + name + " " + image_url);
       addTab(name, url, image_url);
     });
+
+    $(this).text("Saved!").toggleClass('btn-success');
+    added = true
   });
 }
 
