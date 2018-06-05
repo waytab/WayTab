@@ -1,34 +1,34 @@
-var conf = {
-  "saved_tabs": {
-    "Student Gmail": {
+{
+  "saved_tabs": [
+    {
       "id": "Student Gmail",
       "actual_link": "https://mail.google.com",
       "image_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Gmail_Icon.svg/2000px-Gmail_Icon.svg.png"
     },
-    "Student Drive": {
+    {
       "id": "Student Drive",
       "actual_link": "https://drive.google.com",
       "image_link": "http://www.iconarchive.com/download/i80454/uiconstock/socialmedia/Google-Drive.ico"
     },
-    "ESchool": {
+    {
       "id": "ESchool",
       "actual_link": "https://hac40.eschoolplus.powerschool.com/HAC4_001/Account/LogOn?ReturnUrl=%2fHAC4_001%3fSiteCode%3dwyllive&SiteCode=wyllive",
       "image_link": "img/eschool.png"
     },
-    "School": {
+    {
       "id": "School",
       "actual_link": "http://whs.wayland.k12.ma.us",
       "image_link": "http://p2cdn4static.sharpschool.com/UserFiles/Servers/Server_1036540/Image/Images/waylandlogo_color.png"
     },
-    "It's Learning": {
+    {
       "id": "It's Learning",
       "actual_link": "https://wps.itslearning.com/index.aspx",
       "image_link": "img/itslearning_logo.png"
     },
-    "Naviance": {
+    {
       "id": "Naviance",
       "actual_link": "https://connection.naviance.com/family-connection/auth/login/?hsid=waylandhs",
       "image_link": "img/naviance_logo.png"
     }
-  }
+  ]
 }
