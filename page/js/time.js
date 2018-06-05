@@ -1,4 +1,5 @@
-var sched = bell_sched;
+let sched
+$.getJSON('js/bell.json', (data) => { sched = data })
 
 function displayTime() {
   let time = new Date();
