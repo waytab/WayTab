@@ -8,7 +8,7 @@ function addCurrentTab() {
     chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
       let url = tabs[0].url;
       let name = tabs[0].title;
-      let image_url = "https://plus.google.com/_/favicon?domain_url="+url;
+      let image_url = "img/default.png"
       console.log(url + " " + name + " " + image_url);
       addTab(name, url, image_url);
     });
