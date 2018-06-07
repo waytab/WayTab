@@ -30,11 +30,20 @@ function getTwoDigits(num) {
 
 function hoverTimeElapsed() {
   let bar = document.getElementById("time-bar-total");
+  let percentContainer = document.getElementById('percent-container')
   bar.onmouseover = function() {
-    document.getElementById("percent-container").style.display = "block";
+    percentContainer.style.display = "block";
   }
   bar.onmouseout = function() {
-    document.getElementById("percent-container").style.display = "none";
+    percentContainer.style.display = "none";
+  }
+
+
+  percentContainer.onmouseover = function() {
+    percentContainer.style.display = "block";
+  }
+  percentContainer.onmouseout = function() {
+    percentContainer.style.display = "none";
   }
 }
 
