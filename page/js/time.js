@@ -1,6 +1,6 @@
-var sched = bellsched;
 let sched
 $.getJSON('js/json/bell.json', (data) => { sched = data })
+hoverTimeElapsed()
 
 function displayTime() {
   let time = new Date();
