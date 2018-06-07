@@ -117,7 +117,8 @@ input.period-control:focus {
 #time-display {
   display: inline-block;
   margin-right: 2px;
-  text-align: left;
+  text-align: right;
+  width: 70px;
 }
 
 #newTask {
