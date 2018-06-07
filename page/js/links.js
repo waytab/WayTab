@@ -1,16 +1,15 @@
 export class Links {
   constructor() {
     let linksFunc = this.loadLinks
-    chrome.storage.sync.get(['savedtabs'], function(obj) {
-      let result = obj.savedtabs;
-      if(result.length == 0) {
+    chrome.storage.sync.get(['links'], function(result) {
+      if(Object.keys(result).length === 0 && result.constructor === Object) {
         $.getJSON('js/json/config.json', (data) => {
           chrome.storage.sync.set({links: data.saved_tabs}, () => {
             linksFunc(data.saved_tabs)
           })
         })
       } else {
-        linksFunc(result);
+        linksFunc(result.links);
       }
     })
   }
