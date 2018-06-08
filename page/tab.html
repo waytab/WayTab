@@ -24,7 +24,7 @@
     <div id="percent-container"></div>
 
     <h1 class="display-2 text-center" id="title-container"></h1>
-    <button type="button" class="btn btn-primary position-absolute float-right mt-5 mr-3" data-toggle="modal" data-target="#settings-pane" id="settings-button"> Configure Settings </button>
+    <button type="button" class="btn btn-primary position-absolute float-right mt-5 mr-3" data-toggle="modal" data-target="#settings-pane" id="activate-settings"> Configure Settings </button>
 
     <div class="row mb-4 mt-4" id="link-container"></div>
     <div class="row">
@@ -73,18 +73,16 @@
                 </div>
                 <div id="add-tab" class="collapse" aria-labelledby="add-tab-heading" data-parent="#settings-accordion">
                   <div class="card body" style="padding-left: 3px; padding-right: 3px; padding-bottom: 3px;">
-                    <div id="add-tab-attributes">
-                      <label for="tab-name"> Title </label>
-                      <input class="form-control" type="text" id="tab-name" placeholder="Name"></input>
+                    <label for="tab-name"> Title </label>
+                    <input class="form-control" type="text" id="tab-name" placeholder="Name"></input>
 
-                      <label for="tab-link"> Link </label>
-                      <input class="form-control" type="text" id="tab-link" placeHolder="https://www.example.com"></input>
+                    <label for="tab-link"> Link </label>
+                    <input class="form-control" type="text" id="tab-link" placeHolder="https://www.example.com"></input>
 
-                      <label for="img-upload"> Image </label>
-                      <input class="form-control" type="text" id="img-upload" placeHolder="https://www.example.com/image.png"></input>
+                    <label for="img-upload"> Image </label>
+                    <input class="form-control" type="text" id="img-upload" placeHolder="https://www.example.com/image.png"></input>
 
-                      <button type="button" class="btn btn-block" id="submit-tab-info">Submit</button>
-                    </div>
+                    <button type="button" class="btn btn-block" id="submit-tab-info">Submit</button>
                   </div>
                 </div>
               </div>
@@ -114,10 +112,8 @@
                 </div>
                 <div id="change-title-collapsible" class="collapse" aria-labelledby="change-title-heading" data-parent="#settings-accordion">
                   <div class="card body" style="padding: 3px;">
-                    <div class="my-0 mx-auto" id="change-title">
-                      <input class="form-control" type="text" id="title-input" placeholder="Example"></input>
-                      <button type="button" class="btn btn-block" id="submit-new-title">Change</button>
-                    </div>
+                    <input class="form-control" type="text" id="title-input" placeholder="Example"></input>
+                    <button type="button" class="btn btn-block" id="submit-new-title">Change</button>
                  </div>
               </div>
             </div>
@@ -132,16 +128,12 @@
               </div>
               <div id="change-background-collapsible" class="collapse" aria-labelledby="change-background-heading" data-parent="#settings-accordion">
                 <div class="card body" style="padding: 3px;">
-                  <div class="my-0 mx-auto" id="change-background">
-                    <input class="form-control" type="text" id="web-background" placeholder="https://www.example.com/image.png"></input>
-                    <br> <h6 style="color: black;">OR</h6>
-                    <select multiple class="form-control" id="select-background">
-                      <option> School </option>
-                      <option> Commons </option>
-                      <option> Logo </option>
-                    </select>
-                    <button type="button" class="btn btn-block" id="submit-new-background">Change</button>
-                  </div>
+                  <span class="my-0 mx-auto"><select multiple class="form-control" id="select-background"></span>
+                    <option> School </option>
+                    <option> Commons </option>
+                    <option> Logo </option>
+                  </select>
+                  <button type="button" class="btn btn-block" id="submit-new-background">Change</button>
                 </div>
               </div>
             </div>
