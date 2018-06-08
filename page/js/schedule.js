@@ -4,7 +4,7 @@ export class Schedule {
       if(Object.keys(result).length === 0 && result.constructor === Object) {
         $('#schedule-table').remove()
         $('#schedule').append($('<a href="#create-schedule" data-toggle="modal" class="btn btn-primary">Create</a>'))
-        this.scheduleEditor(this.loadSchedule)
+        this.scheduleEditor()
       } else {
         this.loadSchedule(result.schedule)
         let letterDays = 'ABCDEFGH'
@@ -15,7 +15,7 @@ export class Schedule {
           }
         }
         $('#schedule .card-title').append('<a href="#create-schedule" data-toggle="modal" class="btn btn-primary btn-sm float-right">Edit</a>')
-        this.scheduleEditor(this.loadSchedule)
+        this.scheduleEditor()
       }
     })
   }
@@ -47,7 +47,8 @@ export class Schedule {
     }
   }
 
-  scheduleEditor(loadFunc) {
+  scheduleEditor() {
+    let loadFunc = this.loadSchedule;
     $(document).on('click', '#new-schedule-save', function() {
       let schedule = []
       chrome.storage.sync.set({schedule: []}, console.log('Schedule Cleared')) // make sure we start with a clean sync to prevent double schedules
