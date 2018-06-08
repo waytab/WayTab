@@ -4,7 +4,7 @@ export class Schedule {
       if(Object.keys(result).length === 0 && result.constructor === Object) {
         $('#schedule-table').remove()
         $('#schedule').append($('<a href="#create-schedule" data-toggle="modal" class="btn btn-primary">Create</a>'))
-        this.scheduleEditor()
+        this.scheduleEditor(this.loadSchedule)
       } else {
         this.loadSchedule(result.schedule)
         let letterDays = 'ABCDEFGH'
@@ -15,7 +15,7 @@ export class Schedule {
           }
         }
         $('#schedule .card-title').append('<a href="#create-schedule" data-toggle="modal" class="btn btn-primary btn-sm float-right">Edit</a>')
-        this.scheduleEditor()
+        this.scheduleEditor(this.loadSchedule)
       }
     })
   }
@@ -47,7 +47,7 @@ export class Schedule {
     }
   }
 
-  scheduleEditor() {
+  scheduleEditor(loadFunc) {
     $(document).on('click', '#new-schedule-save', function() {
       let schedule = []
       chrome.storage.sync.set({schedule: []}, console.log('Schedule Cleared')) // make sure we start with a clean sync to prevent double schedules
@@ -69,7 +69,7 @@ export class Schedule {
           $('#create-schedule').modal('hide')
           $('#new-schedule-save').toggleClass('btn-success').text('Save Schedule')
         }, 500)
-        loadSchedule(schedule)
+        loadFunc(schedule)
         let classes = [...new Set(schedule[0].concat(schedule[1].concat(schedule[3].concat(schedule[4]))))] // filter for single occurances of classes in schedule
         classes = classes.filter((v) => { return v != '' }).sort() // filter for frees
         chrome.storage.sync.set({classes: classes}, function() {
