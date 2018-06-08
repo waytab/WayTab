@@ -23,29 +23,24 @@ body {
   vertical-align: middle
 }
 
-#settings-button {
+#activate-settings {
   right: 0;
   top: 0;
   background-color: #eaa615;
   border-color: #d69713;
 }
 
-#settings-button:hover {
+#activate-settings:hover {
   background-color: #cc9012;
 }
 
-#submit-tab-info {
+#settings-pane .btn-block {
   margin-top: 5px;
   background-color: #eaa615;
 }
 
-#submit-tab-info:hover {
+#settings-pane .btn-block:hover {
   background-color: #cc9012;
-}
-
-#center-button {
-  display: flex;
-  justify-content: center;
 }
 
 .tab-delete-button {
