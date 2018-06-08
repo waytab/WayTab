@@ -61,6 +61,7 @@ body {
   font-size: 8px;
   margin: 2px;
   cursor: pointer;
+  padding: 0 5px 0 5px;
   border-radius: 50%;
 }
 
