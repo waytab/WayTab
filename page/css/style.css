@@ -34,14 +34,14 @@ body {
   background-color: #cc9012;
 }
 
-#settings-pane .btn-block {
+/* #settings-pane .btn-block {
   margin-top: 5px;
   background-color: #eaa615;
 }
 
 #settings-pane .btn-block:hover {
   background-color: #cc9012;
-}
+} */
 
 .tab-delete-button {
   background-color: red;

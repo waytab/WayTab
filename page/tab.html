@@ -10,144 +10,133 @@
     <script src="js/libraries/jquery-3.3.1.min.js"></script>
 
     <link href="css/style.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
   </head>
   <body>
     <button type="button" class="btn btn-primary position-absolute mt-5 ml-3" id="hide-content"><span id="content-status">Hide Content</span></button>
     <div id="content">
-    <div class="row">
-      <div id="time-bar-total">
-        <div id="time-bar-elapsed">
-        </div>
-        <span id="time-container"></span>
-      </div>
-    </div>
-    <div id="percent-container"></div>
-
-    <h1 class="display-2 text-center" id="title-container"></h1>
-    <button type="button" class="btn btn-primary position-absolute float-right mt-5 mr-3" data-toggle="modal" data-target="#settings-pane" id="activate-settings"> Configure Settings </button>
-
-    <div class="row mb-4 mt-4" id="link-container"></div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="card" id="schedule">
-          <div class="card-body">
-            <h3 class="card-title mb-0">Schedule</h3>
+      <div class="row">
+        <div id="time-bar-total">
+          <div id="time-bar-elapsed">
           </div>
+          <span id="time-container"></span>
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="card card-body" id="todo" style="margin-right: 1rem; margin-bottom: 1rem">
-          <h3 class="card-title mb-2">To Do</h3>
-          <input type="text" class="form-control" id="newTask" placeholder="New Task...">
-          <div class="input-group mb-3" id="newTaskSelectionGroup">
-            <select class="custom-select" id="addTaskClass">
-              <option selected>Class...</option>
-            </select>
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button" id="addTask">Add</button>
+      <div id="percent-container"></div>
+
+      <h1 class="display-2 text-center" id="title-container"></h1>
+      <button type="button" class="btn btn-primary position-absolute float-right mt-5 mr-3" data-toggle="modal" data-target="#settings-pane" id="activate-settings"> Configure Settings </button>
+
+      <div class="row mb-4 mt-4" id="link-container"></div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card" id="schedule">
+            <div class="card-body">
+              <h3 class="card-title mb-0">Schedule</h3>
             </div>
           </div>
-          <div id="taskList"></div>
+        </div>
+        <div class="col-md-6">
+          <div class="card card-body" id="todo" style="margin-right: 1rem; margin-bottom: 1rem">
+            <h3 class="card-title mb-2">To Do</h3>
+            <input type="text" class="form-control" id="newTask" placeholder="New Task...">
+            <div class="input-group mb-3" id="newTaskSelectionGroup">
+              <select class="custom-select" id="addTaskClass">
+                <option selected>Class...</option>
+              </select>
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="addTask">Add</button>
+              </div>
+            </div>
+            <div id="taskList"></div>
+          </div>
         </div>
       </div>
     </div>
-
     <div class="modal fade" id="settings-pane" tabindex="-1" role="dialog">
-      <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="settings-title"> Settings </h5>
+          <div class="modal-header pb-0" style="border: none;">
+            <h5 class="modal-title" id="settings-title">Settings</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true"> &times; </span>
-            </button>
+            </button><br />
+          </div>
+          <div class="modal-header pb-0 px-0" style="border: none;">
+            <ul class="nav nav-tabs w-100 px-3" id="settingsTabs" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="personal-settings" data-toggle="tab" href="#personal-set" role="tab" aria-controls="home" aria-selected="true">Personalize</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="links-settings" data-toggle="tab" href="#links-set" role="tab" aria-controls="profile" aria-selected="false">Links</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="hideing-settings" data-toggle="tab" href="#hide-set" role="tab" aria-controls="contact" aria-selected="false">Auto Hide</a>
+              </li>
+            </ul>
           </div>
           <div class="modal-body">
-            <div class="accordion" id="settings-accordion">
-              <div class="card">
-                <div class="card-header" id="add-tab-heading">
-                  <h5 class="mb-0" style="text-align: center;">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#add-tab" aria-expanded="false" aria-controls="add-tab">
-                      Add a Tab
-                    </button>
-                  </h5>
-                </div>
-                <div id="add-tab" class="collapse" aria-labelledby="add-tab-heading" data-parent="#settings-accordion">
-                  <div class="card body" style="padding-left: 3px; padding-right: 3px; padding-bottom: 3px;">
-                    <label for="tab-name"> Title </label>
-                    <input class="form-control" type="text" id="tab-name" placeholder="Name"></input>
-
-                    <label for="tab-link"> Link </label>
-                    <input class="form-control" type="text" id="tab-link" placeHolder="https://www.example.com"></input>
-
-                    <label for="img-upload"> Image </label>
-                    <input class="form-control" type="text" id="img-upload" placeHolder="https://www.example.com/image.png"></input>
-
-                    <button type="button" class="btn btn-block" id="submit-tab-info">Submit</button>
+            <div class="tab-content" id="settingsTabsContent">
+              <div class="tab-pane fade show active" id="personal-set" role="tabpanel" aria-labelledby="home-tab">
+                <div class="card-body" style="padding: 3px;">
+                  <div class="row mb-3">
+                    <label class="col">Title</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text" id="title-input" placeholder="Example"></input>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label class="col">Background</label>
+                    <div class="col-sm-10">
+                      <select class="form-control" id="select-background">
+                        <option>School</option>
+                        <option>Commons</option>
+                        <option>Logo</option>
+                        <option>Classroom</option>
+                        <option>Library</option>
+                        <option>Patio</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
               </div>
-
-              <div class="card">
-                <div class="card-header" id="remove-tab-heading">
-                  <h5 class="mb-0" style="text-align: center;">
-                    <button class="btn btn-link collapsed" id="remove-button" type="button" data-toggle="collapse" data-target="#remove-tab-collapsible" aria-expanded="false" aria-controls="remove-tab-collapsible">
-                      Remove a Tab
-                    </button>
-                  </h5>
+              <div class="tab-pane fade" id="links-set" role="tabpanel" aria-labelledby="profile-tab">
+                <h5 class="display-5">Add a Link</h5>
+                <div class="row mb-1">
+                  <label class="col">Title</label>
+                  <input class="form-control col-10" type="text" id="tab-name" placeholder="Name"></input>
                 </div>
-                <div id="remove-tab-collapsible" class="collapse" aria-labelledby="remove-tab-heading" data-parent="#settings-accordion">
-                  <div class="card body" style="padding: 3px; text-align: center;">
-                    <span> X's are displayed </span>
-                  </div>
+                <div class="row mb-1">
+                  <label class="col">Link</label>
+                  <input class="form-control col-10" type="text" id="tab-link" placeholder="https://www.example.com"></input>
                 </div>
-              </div>
-
-              <div class="card">
-                <div class="card-header" id="change-title-heading">
-                  <h5 class="mb-0" style="text-align: center;">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#change-title-collapsible" aria-expanded="false" aria-controls="change-title-collapsible">
-                      Change Title
-                    </button>
-                  </h5>
+                <div class="row mb-1">
+                  <label class="col">Image</label>
+                  <input class="form-control col-10" type="text" id="img-upload" placeholder="https://www.example.com/image.png"></input>
                 </div>
-                <div id="change-title-collapsible" class="collapse" aria-labelledby="change-title-heading" data-parent="#settings-accordion">
-                  <div class="card body" style="padding: 3px;">
-                    <input class="form-control" type="text" id="title-input" placeholder="Example"></input>
-                    <button type="button" class="btn btn-block" id="submit-new-title">Change</button>
-                 </div>
-              </div>
-            </div>
+                <div class="row mb-1">
+                  <div class="col"></div>
+                  <button type="button" class="btn btn-primary btn-block mb-3 col-10" id="submit-tab-info">Add</button>
+                </div>
 
-            <div class="card">
-              <div class="card-header" id="change-background-heading">
-                <h5 class="mb-0" style="text-align: center;">
-                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#change-background-collapsible" aria-expanded="false" aria-controls="change-background-collapsible">
-                    Change Background
-                  </button>
-                </h5>
+                <h5 class="display-5">Remove a Link</h5>
+                <ul class="list-group" id="remove-links"></ul>
               </div>
-              <div id="change-background-collapsible" class="collapse" aria-labelledby="change-background-heading" data-parent="#settings-accordion">
-                <div class="card body" style="padding: 3px;">
-                  <span class="my-0 mx-auto"><select multiple class="form-control" id="select-background"></span>
-                    <option> School </option>
-                    <option> Commons </option>
-                    <option> Logo </option>
-                    <option> Classroom </option>
-                    <option> Library </option>
-                    <option> Patio </option>
-                  </select>
-                  <button type="button" class="btn btn-block" id="submit-new-background">Change</button>
+              <div class="tab-pane fade" id="hide-set" role="tabpanel" aria-labelledby="contact-tab">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="enableHide">
+                  <label class="custom-control-label" for="enableHide">Automatically hide content after 60 seconds</label>
                 </div>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="settings-close">Save</button>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
     <div class="modal fade" tabindex="-1" role="dialog" id="create-schedule">
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -247,12 +236,12 @@
         </div>
       </div>
     </div>
-    </div>
+  </div>
 
-    <script src="js/libraries/bootstrap.min.js"></script>
-    <script src="js/time.js" type="text/javascript"></script>
-    <script src="js/title.js" type="text/javascript"></script>
-    <script src="js/hide.js" type="text/javascript"></script>
-    <script src="js/main.js" type="module"></script>
+  <script src="js/libraries/bootstrap.min.js"></script>
+  <script src="js/time.js" type="text/javascript"></script>
+  <script src="js/title.js" type="text/javascript"></script>
+  <script src="js/hide.js" type="text/javascript"></script>
+  <script src="js/main.js" type="module"></script>
   </body>
 </html>
