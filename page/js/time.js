@@ -101,7 +101,7 @@ function advanceBar(day) {
   }
 
   let letterDay = ''
-  if(name == 'Weedend') {
+  if(name != 'Weekend') {
     letterDay = ` | ${letter} Day`
   }
 
