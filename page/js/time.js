@@ -18,11 +18,11 @@ $.ajax({
         found = true
       }
     })
-    setInterval(displayTime, 1000)
     scheduleHighlightor()
     setInterval(scheduleHighlightor, 60000)
   }
 })
+setInterval(displayTime, 1000)
 
 function displayTime() {
   let time = new Date();
@@ -101,7 +101,7 @@ function advanceBar(day) {
   }
 
   let letterDay = ''
-  if(name != 'Weekend') {
+  if(name != 'Weekend' && letter != 'undefined') {
     letterDay = ` | ${letter} Day`
   }
 
