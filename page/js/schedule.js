@@ -73,6 +73,9 @@ export class Schedule {
         loadFunc(schedule)
         let classes = [...new Set(schedule[0].concat(schedule[1].concat(schedule[3].concat(schedule[4]))))] // filter for single occurances of classes in schedule
         classes = classes.filter((v) => { return v != '' }).sort() // filter for frees
+        for(let i = 0; i < classes.length; i++) {
+          classes[i] = classes[i].replace(/[|&;$%@"<>()+,]/g, '')
+        }
         chrome.storage.sync.set({classes: classes}, function() {
           console.log('Class list saved!')
         })
