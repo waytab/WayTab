@@ -129,3 +129,7 @@ input.period-control:focus {
 #newTaskSelectionGroup>:last-child>button {
   border-top-right-radius: 0;
 }
+
+td.now {
+  background-color: rgba(0,123,255,0.2)
+}

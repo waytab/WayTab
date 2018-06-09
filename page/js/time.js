@@ -19,6 +19,8 @@ $.ajax({
       }
     })
     setInterval(displayTime, 1000)
+    scheduleHighlightor()
+    setInterval(scheduleHighlightor, 60000)
   }
 })
 
@@ -44,6 +46,18 @@ function displayTime() {
 
 function getTwoDigits(num) {
   return num < 10 ? "0"+num : num;
+}
+
+function scheduleHighlightor() {
+  $('td.now').removeClass('now')
+  let day = new Date().getDay()
+  if(day > 0 && day < 6) {
+    let currentBlock = getSoonestStart(day)[2]
+    if(currentBlock.indexOf('Block') != -1) {
+      currentBlock = currentBlock.substring(6)
+      $(`#schedule-body > tr:nth-child(${currentBlock}) > td:nth-child(${dayFromLetter(letter)})`).addClass('now')
+    }
+  }
 }
 
 function hoverTimeElapsed() {
@@ -134,4 +148,33 @@ function getSoonestStart(bell_type) {
   }
 
   return [min, timelist[index].length * 60, timelist[index].name, timelist[index].end];
+}
+
+function dayFromLetter(letter) {
+  switch(letter) {
+    case 'A':
+      return 1
+      break
+    case 'B':
+      return 2
+      break
+    case 'C':
+      return 3
+      break
+    case 'D':
+      return 4
+      break
+    case 'E':
+      return 5
+      break
+    case 'F':
+      return 6
+      break
+    case 'G':
+      return 7
+      break
+    case 'H':
+      return 8
+      break
+  }
 }
