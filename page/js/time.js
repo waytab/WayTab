@@ -2,6 +2,26 @@ let sched
 $.getJSON('js/json/bell.json', (data) => { sched = data })
 hoverTimeElapsed()
 
+let letter
+let rss = 'http://whs.wayland.k12.ma.us/syndication/rss.aspx?serverid=1036540&userid=5&feed=portalcalendarevents&key=iK2zFQsYzm4ADbSvh7fdNqHamW%2fpZI4kygKhPXzaCr6fqlj%2bj%2b3iTsOsu6TbqYdT2MVtQmb1n0GvVK5PPvJZuw%3d%3d&portal_id=1036623&page_id=1036639&calendar_context_id=1062636&portlet_instance_id=76331&calendar_id=1062637&v=2.0'
+let cors = 'https://cors-anywhere.herokuapp.com/'
+$.ajax({
+  type: 'GET',
+  url: cors + rss,
+  dataType: 'xml',
+  success: function(data) {
+    let feed = $(data).find('channel')
+    let found = false
+    feed.find('item').each(function() {
+      if($(this).find('title').text().length == 1 && found == false) {
+        letter = $(this).find('title').text()
+        found = true
+      }
+    })
+    setInterval(displayTime, 1000)
+  }
+})
+
 function displayTime() {
   let time = new Date();
   let h = time.getHours();
@@ -21,8 +41,6 @@ function displayTime() {
   document.getElementById("time-container").innerHTML= h + ":" + m + ":" + s + hem;
   advanceBar(day);
 }
-
-setInterval(displayTime, 1000)
 
 function getTwoDigits(num) {
   return num < 10 ? "0"+num : num;
@@ -68,9 +86,14 @@ function advanceBar(day) {
     name = "Passing Time";
   }
 
+  let letterDay = ''
+  if(name == 'Weedend') {
+    letterDay = ` | ${letter} Day`
+  }
+
   bar.style.width = percent + "%";
   let time = document.getElementById("time-container").innerText;
-  document.getElementById("time-container").innerHTML = `<span id="time-display">${time.substring(0, time.length-2)}</span>${time.substring(time.length-2)} | ${name}`
+  document.getElementById("time-container").innerHTML = `<span id="time-display">${time.substring(0, time.length-2)}</span>${time.substring(time.length-2)}${letterDay} | ${name}`
   document.getElementById("percent-container").innerHTML = "Ends at " + getTimeFromId(end) + " | " + parseInt(bar.style.width) + "% elapsed";
 }
 
