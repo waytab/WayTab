@@ -7,3 +7,8 @@ let background = new Background()
 let links = new Links()
 let schedule = new Schedule()
 let title = new Title()
+
+// enable tooltips and popovers
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})

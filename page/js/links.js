@@ -20,7 +20,12 @@ export class Links {
     $('#link-container').empty()
     $('#remove-links').empty()
     for(let i = 0; i < obj.length; i++) {
-      $('#link-container').append($('<div></div>').addClass('col-1').attr('id', `link${i}`))
+      $('#link-container').append($('<div></div>').addClass('col-1').attr({
+                                                                            'id': `link${i}`,
+                                                                            'data-toggle': 'tooltip',
+                                                                            'data-placement': 'bottom',
+                                                                            'title': obj[i].name
+                                                                          }))
       $(`#link${i}`).append($('<a></a>').addClass('img-link').attr('href', obj[i].actual_link).append($('<img />').attr({ src: obj[i].image_link, alt: obj[i].name })))
       $(`#link${i}`).append($('<div>X</div>').addClass('tab-delete-button').attr('id', `delete${i}`))
 
