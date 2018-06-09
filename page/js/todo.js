@@ -66,17 +66,17 @@ function loadTasks() {
               $('#taskList')
                 .append($('<div></div>')
                   .addClass('custom-control custom-checkbox mb-2')
-                  .attr('id', `${key + i}`)
+                  .attr('id', `${key.replace(' ', '_') + i}`)
                   .append($('<input>')
                     .attr('type', 'checkbox')
                     .addClass('custom-control-input')
-                    .attr('data-del', `${key + i}`)
-                    .attr('data-class', `${key}`)
-                    .attr('id', `check${key + i}`),
+                    .attr('data-del', `${key.replace(' ', '_') + i}`)
+                    .attr('data-class', `${key.replace(' ', '_')}`)
+                    .attr('id', `check${key.replace(' ', '_') + i}`),
                      $('<label></label>')
                     .addClass('custom-control-label')
                     .text(tasks[key][i])
-                    .attr('for', `check${key + i}`)
+                    .attr('for', `check${key.replace(' ', '_') + i}`)
                   )
                 )
             }
@@ -87,10 +87,10 @@ function loadTasks() {
       $('[data-del]').on('change paste keyup', function() {
         let button = $(this)
         let target = button.data('del')
-        let index = tasks[button.data('class')].indexOf($(`#${target} label`).text())
+        let index = tasks[button.data('class').replace('_', ' ')].indexOf($(`#${target} label`).text())
         if(index > -1) {
-          lastTask = [button.data('class'), tasks[button.data('class')][index]]
-          tasks[button.data('class')].splice(index, 1)
+          lastTask = [button.data('class').replace('_', ' '), tasks[button.data('class').replace('_', ' ')][index]]
+          tasks[button.data('class').replace('_', ' ')].splice(index, 1)
           chrome.storage.sync.set({tasks: tasks}, function() {
             console.log($('#schedule .card-title'))
             $('#todo .card-title').append(`<a href="" data-toggle="modal" class="btn btn-primary btn-sm float-right" id="undo-task-delete" data-task="${lastTask}">Undo</a>`)
