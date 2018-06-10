@@ -1,5 +1,5 @@
 let sched
-$.getJSON('js/json/bell.json', (data) => { sched = data })
+$.getJSON('js/json/bell.json', (data) => { sched = data, displayTime() })
 hoverTimeElapsed()
 
 let letter
