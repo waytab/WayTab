@@ -5,7 +5,8 @@ $(document).ready(() => {
 
 function addCurrentTab() {
   $(document).on('click', '#add-current-tab', function() {
-    chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+    chrome.tabs.query({active: true}, function (tabs) {
+      console.log(tabs)
       let url = tabs[0].url;
       let name = tabs[0].title;
       let image_url = "img/default.png"
@@ -18,12 +19,11 @@ function addCurrentTab() {
 }
 
 function addTab(name, link, img) {
-  chrome.storage.sync.get("savedtabs", function(obj) {
-    let object = obj["savedtabs"];
-    object.push({"id": name, "actual_link": link, "image_link": img});
+  chrome.storage.sync.get(["links"], function(obj) {
+    obj.links.push({"name": name, "actual_link": link, "image_link": img});
 
-    chrome.storage.sync.set({savedtabs: object}, function() {
-      console.log(object["savedtabs"]);
+    chrome.storage.sync.set({links: obj.links}, function() {
+      console.log(obj.links);
       console.log("Added new tab");
     });
   });
