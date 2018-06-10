@@ -1,5 +1,10 @@
 # NewTab
+A new New Tab page for Chrome. For students, by students.
 
-Allows you to customize the links in your New Tab page instead of having the automatically generated Google links. Comes with default options like the WHS Homepage and the Home Access Center. It also allows you to input your schedule and keep track of tasks.
-
-# Only available to those with an @student.wayland.k12.ma.us address since we are unwilling to pay the $5 developers fee.
+## Headline Features
+* Automatic period progress bar
+* Displays current letter day
+* User-definable schedule
+* Current period highlighted on schedule
+* Keep track of your tasks and assignments
+* Easily add bookmarks from any tab via the toolbar
