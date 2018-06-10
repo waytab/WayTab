@@ -34,14 +34,17 @@ export class Links {
         .append($('<li></li>')
           .addClass('list-group-item d-inline-flex')
           .append(
-            $('<button></button>')
-              .addClass('mr-3 delete-link')
-              .attr('data-num', i)
-              .css({
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer'
+            $('<a></a>')
+              .attr({
+                role: 'button',
+                title: 'Confirm',
+                'data-toggle': 'popover',
+                'data-trigger': 'focus',
+                'data-html': true,
+                'data-content': `<button class="btn btn-danger delete-link" data-num="${i}">Delete</button>`,
+                tabindex: 0
               })
+              .css({ 'margin-left': 6, 'margin-right': 22, color: 'black', 'text-decoration': 'none', cursor: 'pointer' })
               .html('&times;'),
             $('<div></div>')
               .addClass('link-edit w-100')
@@ -60,6 +63,7 @@ export class Links {
         .html('<span class="font-weight-bold"><span style="margin-left: 6px; margin-right: 22px;">&plus;</span>Add Link...</span>')
     )
     $('#link-container').prepend($('<div></div>').addClass('col')).append($('<div></div>').addClass('col'))
+    $('[data-toggle="popover"]').popover()
   }
 
   addLink() {
