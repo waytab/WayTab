@@ -15,6 +15,7 @@ export class Schedule {
           }
         }
         $('#schedule .card-title').append('<a href="#create-schedule" data-toggle="modal" class="btn btn-primary btn-sm float-right">Edit</a>')
+        $('#create-schedule .modal-title').text('Edit Schedule')
         this.scheduleEditor()
       }
     })
