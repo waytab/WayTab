@@ -19,7 +19,7 @@ export class Links {
 
   loadLinks(obj) {
     $('#link-container').empty()
-    $('#remove-links').empty()
+    $('#edit-links').empty()
     for(let i = 0; i < obj.length; i++) {
       $('#link-container').append($('<div></div>').addClass('col-1').attr({
                                                                             'id': `link${i}`,
@@ -30,7 +30,7 @@ export class Links {
       $(`#link${i}`).append($('<a></a>').addClass('img-link').attr('href', obj[i].actual_link).append($('<img />').attr({ src: obj[i].image_link, alt: obj[i].name })))
       $(`#link${i}`).append($('<div>X</div>').addClass('tab-delete-button').attr('id', `delete${i}`))
 
-      $('#remove-links')
+      $('#edit-links')
         .append($('<li></li>')
           .addClass('list-group-item d-inline-flex')
           .append(
@@ -44,17 +44,68 @@ export class Links {
               })
               .html('&times;'),
             $('<div></div>')
-              .addClass('link-edit')
+              .addClass('link-edit w-100')
               .css('cursor', 'pointer')
               .data('edit', i)
               .text(obj[i].name)
           )
         )
     }
+
+    $('#edit-links')
+      .append($('<li></li>')
+        .addClass('list-group-item')
+        .css('cursor', 'pointer')
+        .attr('id', 'addLink')
+        .html('<span class="font-weight-bold"><span style="margin-left: 6px; margin-right: 22px;">&plus;</span>Add Link...</span>')
+    )
     $('#link-container').prepend($('<div></div>').addClass('col')).append($('<div></div>').addClass('col'))
   }
 
   addLink() {
+    let isOpen = false
+    $(document).on('click', '#addLink', function() {
+      if(!isOpen) {
+        $(this).html('')
+        $(this).append(
+          $('<div></div>')
+            .addClass('row mb-1')
+            .append(
+              $('<label></label>').addClass('col').text('Name'),
+              $('<input>')
+                .addClass('form-control col-10')
+                .attr({ type: 'text', id: 'tab-name', placeholder: 'Name' })
+            ),
+          $('<div></div>')
+            .addClass('row mb-1')
+            .append(
+              $('<label></label>').addClass('col').text('Link'),
+              $('<input>')
+                .addClass('form-control col-10')
+                .attr({ type: 'text', id: 'tab-link', placeholder: 'https://www.example.com' })
+            ),
+          $('<div></div>')
+            .addClass('row mb-1')
+            .append(
+              $('<label></label>').addClass('col').text('Title'),
+              $('<input>')
+                .addClass('form-control col-10')
+                .attr({ type: 'text', id: 'img-upload', placeholder: 'https://www.example.com/image.png' })
+            ),
+          $('<div></div>')
+            .addClass('row mb-1')
+            .append(
+              $('<div></div>').addClass('col'),
+              $('<button></button>')
+                .addClass('btn btn-primary btn-block mb-3 col-10')
+                .attr({ type: 'button', id: 'submit-tab-info' })
+                .text('Add')
+            )
+        )
+        isOpen = true
+      }
+    })
+
     $(document).on('click', '#submit-tab-info', () => {
       let name = $('#tab-name').val();
       let link = $('#tab-link').val();
@@ -66,6 +117,7 @@ export class Links {
       let linksLoad = this.loadLinks
       let obj = {"name": name, "actual_link": link, "image_link": img};
       chrome.storage.sync.get(['links'], function(result) {
+        isOpen = false
         result.links.push(obj);
         chrome.storage.sync.set({links: result.links}, () => { linksLoad(result.links) });
       });
@@ -86,7 +138,6 @@ export class Links {
   editLink() {
     $(document).on('click', '.link-edit', (e) => {
       $(e.target)
-        .addClass('w-100')
         .text('')
         .append(
           $('<input>')
