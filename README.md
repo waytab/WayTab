@@ -1,4 +1,4 @@
-# NewTab
+# WayTab
 A new New Tab page for Chrome. For students, by students.
 
 ## Headline Features
