@@ -27,5 +27,5 @@ $(document).ready(function() { // we need to wait for the full document to be lo
 })
 
 $(document).on('click', '#settings-close', function() { // we need to save the new font style when the modal is closed
-  chrome.storage.sync.set({font: $('#announcementsPositionSel').val()}, function() { console.log('New font set') })
+  chrome.storage.sync.set({font: $('#announcementsPositionSel').val()}, function() { location.reload() })
 })

@@ -91,7 +91,7 @@ export class Links {
           $('<div></div>')
             .addClass('row mb-1')
             .append(
-              $('<label></label>').addClass('col').text('Title'),
+              $('<label></label>').addClass('col').text('Image URL'),
               $('<input>')
                 .addClass('form-control col-10')
                 .attr({ type: 'text', id: 'img-upload', placeholder: 'https://www.example.com/image.png' })
