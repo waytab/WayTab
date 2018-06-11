@@ -145,9 +145,11 @@ td.now {
 .link-edit input:first-child {
   border-top-left-radius: .25rem;
   border-top-right-radius: .25rem;
+  border-bottom: none;
 }
 
 .link-edit input:last-child {
   border-bottom-left-radius: .25rem;
   border-bottom-right-radius: .25rem;
+  border-top: none;
 }
