@@ -130,6 +130,10 @@ input.period-control:focus {
   border-top-right-radius: 0;
 }
 
+table {
+  font-size: .8rem;
+}
+
 td.now {
   background-color: rgba(0,123,255,0.2)
 }
