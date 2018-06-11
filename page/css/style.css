@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700');
+
 html {
   overflow-x: hidden;
 }
@@ -10,6 +16,30 @@ body {
   min-height: 100vh;
   width: 100vw;
   overflow-x: hidden;
+}
+
+.font-sans-serif {
+  font-family: sans-serif;
+}
+
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
+}
+
+.font-raleway {
+  font-family: 'Raleway', sans-serif;
+}
+
+.font-roboto {
+  font-family: 'Roboto', sans-serif;
+}
+
+.font-roboto-slab {
+  font-family: 'Roboto Slab', sans-serif;
+}
+
+.font-ubuntu {
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .h1, .h2, .h4, h1, h2, h4 {
@@ -68,6 +98,10 @@ body {
 .card .card-body {
   color: black !important;
   text-shadow: none !important;
+}
+
+.card-title > :not(a) {
+  font-family: 'Roboto Slab';
 }
 
 input.period-control,
