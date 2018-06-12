@@ -2,6 +2,10 @@ export class Background {
   constructor() {
     chrome.storage.sync.get(['background'], function(response) {
       $(document.body).css('background-image', 'url(\"'+response.background+'\")')
+      let sel = response.background.split('/')
+      let name = sel[2].substring(0, sel[2].length-4)
+      name = name.substring(0,1).toUpperCase() + name.substring(1)
+      $('#select-background').val(name)
     })
 
     $(document).on('change', '#select-background', () => {
