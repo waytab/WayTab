@@ -1,5 +1,5 @@
 let sched
-$.getJSON('js/json/bell.json', (data) => { sched = data })
+$.getJSON('js/json/bell.json', (data) => { sched = data, displayTime() })
 hoverTimeElapsed()
 
 let letter
@@ -22,7 +22,7 @@ $.ajax({
     setInterval(scheduleHighlightor, 60000)
   }
 })
-//setInterval(displayTime, 1000)
+setInterval(displayTime, 1000)
 
 function displayTime() {
   let time = new Date();
@@ -58,7 +58,7 @@ function scheduleHighlightor() {
   }else {
     currentBlock = getSoonestStart(1)[2];
   }
-  console.log(currentBlock)
+
   if(currentBlock.indexOf('Block') != -1) {
     currentBlock = currentBlock.substring(6)
     $(`#schedule-body > tr:nth-child(${currentBlock}) > td:nth-child(${dayFromLetter(letter)})`).addClass('now')
@@ -151,9 +151,7 @@ function getSoonestStart(bell_type) {
       index = i;
     }
   }
-  console.log(index)
-  console.log(timelist)
-  console.log(timelist[index])
+  
   return [min, timelist[index].length * 60, timelist[index].name, timelist[index].end];
 }
 
