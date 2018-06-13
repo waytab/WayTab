@@ -106,7 +106,7 @@ function advanceBar(day) {
   }
 
   let letterDay = ''
-  if(name != 'Weekend' && letter != 'undefined') {
+  if(name != 'Weekend' && letter != undefined) {
     letterDay = ` | ${letter} Day`
   }
 
@@ -151,7 +151,7 @@ function getSoonestStart(bell_type) {
       index = i;
     }
   }
-  
+
   return [min, timelist[index].length * 60, timelist[index].name, timelist[index].end];
 }
 
