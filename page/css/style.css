@@ -186,3 +186,7 @@ td.now {
   border-bottom-right-radius: .25rem;
   border-top: none;
 }
+
+a.text-dark {
+  text-decoration: none;
+}
