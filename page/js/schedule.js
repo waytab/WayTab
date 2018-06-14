@@ -81,6 +81,7 @@ export class Schedule {
           console.log('Class list saved!')
         })
       })
+      location.reload();
     })
 
     $(document).on('change paste keyup', '.period-control', function() {
