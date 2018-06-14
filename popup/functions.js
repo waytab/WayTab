@@ -9,8 +9,8 @@ function addCurrentTab() {
       console.log(tabs)
       let url = tabs[0].url;
       let name = tabs[0].title;
-      let image_url = "img/default.png"
-      console.log(url + " " + name + " " + image_url);
+      let domain = url.split('/')[2];
+      let image_url = "https://"+domain+"/favicon.ico"
       addTab(name, url, image_url);
     });
 
