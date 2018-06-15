@@ -57,6 +57,7 @@ function loadTasks() {
       tasks = result.tasks
       console.log(tasks)
       $('#taskList').empty()
+      $('#newTask').val('')
       $('#addTaskClass').empty().append(`<option selected>Class...</option>`)
       for(let key in tasks) {
         if(tasks.hasOwnProperty(key)) {
@@ -115,6 +116,10 @@ function loadTasks() {
           tasks[classes[i]] = []
         }
       }
+    }
+    $('#addTaskClass').append($('<option></option>').attr('value', 'Miscellaneous').html('Miscellaneous'))
+    if(tasks['Miscellaneous'] == undefined) {
+      tasks['Miscellaneous'] = []
     }
   })
 }

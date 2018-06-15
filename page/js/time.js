@@ -51,17 +51,11 @@ function getTwoDigits(num) {
 function scheduleHighlightor() {
   $('td.now').removeClass('now')
   let day = new Date().getDay()
-  if(day == 0 || day == 6) {
-    currentBlock = getSoonestStart(4)[2];
-  }else if(day == 3) {
-    currentBlock = getSoonestStart(3)[2];
-  }else {
-    currentBlock = getSoonestStart(1)[2];
-  }
+  currentBlock = getSoonestStart(getSchedFromDay(day))[2];
 
   if(currentBlock.indexOf('Block') != -1) {
     currentBlock = currentBlock.substring(6)
-    $(`#schedule-body > tr:nth-child(${currentBlock}) > td:nth-child(${dayFromLetter(letter)})`).addClass('now')
+    $(`#schedule-body > tr:nth-child(${currentBlock}) > td:nth-child(${getDayFromLetter(letter)})`).addClass('now')
   }
 }
 
@@ -86,14 +80,7 @@ function hoverTimeElapsed() {
 
 function advanceBar(day) {
   let bar = document.getElementById("time-bar-elapsed");
-  let info;
-  if(day == 0 || day == 6) {
-    info = getSoonestStart(4);
-  }else if(day == 3) {
-    info = getSoonestStart(3);
-  }else {
-    info = getSoonestStart(1);
-  }
+  let info = getSoonestStart(getSchedFromDay(day));
   let difference = info[0];
   let length = parseInt(info[1]);
   let name = info[2];
@@ -114,6 +101,16 @@ function advanceBar(day) {
   let time = document.getElementById("time-container").innerText;
   document.getElementById("time-container").innerHTML = `<span id="time-display">${time.substring(0, time.length-2)}</span>${time.substring(time.length-2)}${letterDay} | ${name}`
   document.getElementById("percent-container").innerHTML = "Ends at " + getTimeFromId(end) + " | " + parseInt(bar.style.width) + "% elapsed";
+}
+
+function getSchedFromDay(day) {
+  if(day == 0 || day == 6) {
+    return 4;
+  }else if(day == 3) {
+    return 3;
+  }else {
+    return 1;
+  }
 }
 
 function getTimeFromId(time) {
@@ -155,7 +152,7 @@ function getSoonestStart(bell_type) {
   return [min, timelist[index].length * 60, timelist[index].name, timelist[index].end];
 }
 
-function dayFromLetter(letter) {
+function getDayFromLetter(letter) {
   switch(letter) {
     case 'A':
       return 1
