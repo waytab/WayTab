@@ -190,3 +190,16 @@ td.now {
 a.text-dark {
   text-decoration: none;
 }
+
+.badge-outline-secondary {
+  color: #6c757d;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid #6c757d;
+}
+
+.active > .badge-outline-secondary {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
