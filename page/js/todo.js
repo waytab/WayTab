@@ -16,15 +16,6 @@ $(document).ready(() => {
         task.toggleClass('is-invalid')
         button.text('Add')
       }, 1000)
-    } else if(date.val() == '') {
-      button.toggleClass('btn-danger').toggleClass('btn-outline-secondary')
-      date.toggleClass('is-invalid')
-      button.text('No date!')
-      setTimeout(() => {
-        button.toggleClass('btn-danger').toggleClass('btn-outline-secondary')
-        date.toggleClass('is-invalid')
-        button.text('Add')
-      }, 1000)
     } else if(classSelector.val() == 'Class...') {
       button.toggleClass('btn-danger').toggleClass('btn-outline-secondary')
       classSelector.toggleClass('is-invalid')
@@ -69,7 +60,6 @@ function loadTasks() {
           if(tasks[key].length != 0) {
             $('#taskList').append($('<h5></h5>').text(key))
             for(let i = 0; i < tasks[key].length; i++) {
-              let due = tasks[key][i][1].split('-')
               $('#taskList')
                 .append($('<div></div>')
                   .addClass('custom-control custom-checkbox mb-2')
@@ -83,13 +73,19 @@ function loadTasks() {
                      $('<label></label>')
                     .addClass('custom-control-label')
                     .attr('id', `label${key.replace(' ', '_') + i}`)
-                    .text(tasks[key][i][0] + " | Due: " + due[1] + "/" + due[2] + "/" + due[0])
                     .attr('for', `check${key.replace(' ', '_') + i}`)
                   )
                 )
-              let curr = new Date();
-              if(parseInt(due[0]) == curr.getFullYear() && parseInt(due[1]) == curr.getMonth()+1 && parseInt(due[2]) == curr.getDate()) {
-                $(`#label${key.replace(' ', '_') + i}`).css('background-color', '#ffff00')
+              let due;
+              if(tasks[key][i][1] == '') {
+                $(`#label${key.replace(' ', '_') + i}`).text(tasks[key][i][0])
+              }else {
+                due = tasks[key][i][1].split('-')
+                $(`#label${key.replace(' ', '_') + i}`).text(tasks[key][i][0] + " | Due: " + due[1] + "/" + due[2] + "/" + due[0])
+                let curr = new Date();
+                if(parseInt(due[0]) == curr.getFullYear() && parseInt(due[1]) == curr.getMonth()+1 && parseInt(due[2]) == curr.getDate()) {
+                  $(`#label${key.replace(' ', '_') + i}`).css('background-color', '#ffff00')
+                }
               }
             }
           }
@@ -99,10 +95,15 @@ function loadTasks() {
       $('[data-del]').on('change paste keyup', function() {
         let button = $(this)
         let target = button.data('del')
-        let labelSections = $(`#${target} label`).text().split(' | Due: ')
-        let dateSections = labelSections[1].split('/')
-        let dateFormatted = dateSections[2] + "-" + dateSections[0] + "-" + dateSections[1]
-        let index = getIndexOf(tasks[button.data('class').replace('_', ' ')], [labelSections[0], dateFormatted])
+        let index;
+        if(!$(`#${target} label`).text().includes(' | Due: ')) {
+          index = getIndexOfArray(tasks[button.data('class').replace('_', ' ')], [$(`#${target} label`).text(), ''])
+        } else {
+          let labelSections = $(`#${target} label`).text().split(' | Due: ')
+          let dateSections = labelSections[1].split('/')
+          let dateFormatted = dateSections[2] + "-" + dateSections[0] + "-" + dateSections[1]
+          index = getIndexOfArray(tasks[button.data('class').replace('_', ' ')], [labelSections[0], dateFormatted])
+        }
         if(index > -1) {
           lastTask = [button.data('class').replace('_', ' '), tasks[button.data('class').replace('_', ' ')][index]]
           tasks[button.data('class').replace('_', ' ')].splice(index, 1)
@@ -138,7 +139,7 @@ function loadTasks() {
   })
 }
 
-function getIndexOf(origArr, newArr) {
+function getIndexOfArray(origArr, newArr) {
   newArr[1].replace('/', '-')
   console.log(origArr)
   console.log(newArr)
