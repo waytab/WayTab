@@ -156,6 +156,12 @@ input.period-control:focus {
   border-bottom: 0;
 }
 
+#taskDue {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: 0;
+}
+
 #newTaskSelectionGroup>:first-child {
   border-top-left-radius: 0;
 }
