@@ -38,7 +38,14 @@
       <div class="col-md-6">
         <div class="card card-body" id="todo" style="margin-right: 1rem; margin-bottom: 1rem">
           <h3 class="card-title mb-2"><span>To Do</span></h3>
-          <input type="text" class="form-control" id="newTask" placeholder="New Task...">
+          <div class="form-row">
+            <div class="input-group col-md-8">
+              <input type="text" class="form-control" id="newTask" placeholder="New Task...">
+            </div>
+            <Div class="input-group col-md-4">
+              <input type="date" class="form-control" id="taskDue">
+            </div>
+          </div>
           <div class="input-group mb-3" id="newTaskSelectionGroup">
             <select class="custom-select" id="addTaskClass">
               <option selected>Class...</option>
