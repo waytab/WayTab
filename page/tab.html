@@ -24,9 +24,20 @@
     <div id="percent-container"></div>
 
     <h1 class="display-2 text-center" id="title-container"></h1>
-    <button type="button" class="btn btn-primary position-absolute float-right mt-5 mr-3" data-toggle="modal" data-target="#settings-pane" id="activate-settings">Settings</button>
+    <button type="button" class="btn btn-primary position-absolute float-right mt-5 mr-3 action-button" data-toggle="modal" data-target="#settings-pane" id="activate-settings">Settings</button>
 
+    <!-- WSPN -->
+    <button type="button" class="btn btn-primary position-absolute float-left mt-5 ml-3 action-button" id="show-wspn">WSPN</button>
+    <div id="wspn-container">
+      <a href="javascript:void(0)" id="close-wspn">&times;</a>
+      <div id="rss-feed"></div>
+    </div>
+
+
+    <!-- LINKS -->
     <div class="row mb-4 mt-4" id="link-container"></div>
+
+    <!-- SCHEDULE AND TO-DO LIST -->
     <div class="row">
       <div class="col-md-6">
         <div class="card" id="schedule">
@@ -51,92 +62,8 @@
         </div>
       </div>
     </div>
-    <div class="modal fade" id="settings-pane" tabindex="-1" role="dialog">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header pb-0" style="border: none; background-color: rgba(100,100,100,0.05);">
-            <h5 class="modal-title" id="settings-title">Settings</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true"> &times; </span>
-            </button><br />
-          </div>
-          <div class="modal-header pb-0 px-0" style="border: none; background-color: rgba(100,100,100,0.05);">
-            <ul class="nav nav-tabs w-100 px-3" id="settingsTabs" role="tablist">
-              <li class="nav-item">
-                <a class="nav-link active" id="personal-settings" data-toggle="tab" href="#personal-set" role="tab" aria-selected="true">Personalize</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" id="links-settings" data-toggle="tab" href="#links-set" role="tab" aria-selected="false">Links</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" id="about-settings" data-toggle="tab" href="#about-set" role="tab" aria-selected="false">About<span class="badge badge-outline-secondary badge-pill ml-2">1.0.1</span></a>
-              </li>
-            </ul>
-          </div>
-          <div class="modal-body">
-            <div class="tab-content" id="settingsTabsContent">
-              <div class="tab-pane fade show active" id="personal-set" role="tabpanel">
-                <div class="row mb-3">
-                  <label class="col">Title</label>
-                  <div class="col-sm-10">
-                    <input class="form-control" type="text" id="title-input" placeholder="Example"></input>
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <label class="col">Background</label>
-                  <div class="col-sm-10">
-                    <select class="form-control" id="select-background">
-                      <option>School</option>
-                      <option>Commons</option>
-                      <option>Logo</option>
-                      <option>Classroom</option>
-                      <option>Library</option>
-                      <option>Patio</option>
-                    </select>
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col">Font</div>
-                  <div class="col-10">
-                    <select class="form-control" id="announcementsPositionSel">
-                      <option class="font-sans-serif" value="default">Default (Sans-serif)</option>
-                      <option class="font-poppins" value="poppins">Poppins</option>
-                      <option class="font-raleway" value="raleway">Raleway</option>
-                      <option class="font-roboto" value="roboto">Roboto</option>
-                      <option class="font-ubuntu" value="ubuntu">Ubuntu</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="tab-pane fade" id="links-set" role="tabpanel">
-                <h5 class="display-5">Add, Edit, or Remove a Link</h5>
-                <span class="text-muted mb-2 d-block">Click on a link's name to edit it.</span>
-                <ul class="list-group" id="edit-links"></ul>
-              </div>
-              <div class="tab-pane fade text-center" id="about-set" role="tabpanel">
-                <div class="mx-auto">
-                  <img src="../res/icon128.png" />
-                </div>
-                <h3 class="display-4"><a class="text-dark" href="https://waytab.org">WayTab</a><a class="text-muted h3 ml-2" href="https://github.com/waytab/WayTab/releases/tag/v1.0.1">1.0.1</a></h3>
-                <br />
-                <h5 class="display-5"><i class="fas fa-code"></i> with <i class="fas fa-heart"></i> by Andrew Ward and Andy Wang</h5>
-                <h6 class="display-6 mb-4">and <a href="https://github.com/waytab/WayTab/graphs/contributors">these</a> awesome contributors</h6>
-                <h6 class="display-6"><i class="fab fa-github"></i> <a href="https://github.com/waytab">GitHub Org</a></h6>
-                <h6 class="display-6"><i class="fab fa-github"></i> <a href="https://github.com/waytab/WayTab" data-toggle="tooltip" data-placement="bottom" title="Browse the code and contribute">GitHub Code Repository</a></h6>
-                <h6 class="display-6 mb-3"><i class="fas fa-exclamation"></i> <a href="https://github.com/andrewward2001/WayTab/issues">Browse issues</a></h6>
-                <h6>Don't have a GitHub account?</h6>
-                <h6><i class="fas fa-edit"></i> <a href="https://goo.gl/forms/cuEftjPGOl5G3chk2">Use the Google Form.</a></h6>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="settings-close">Save</button>
-          </div>
-        </div>
-      </div>
-    </div>
 
+    <!-- SCHEDULE CREATOR/EDITOR -->
     <div class="modal fade" tabindex="-1" role="dialog" id="create-schedule">
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -236,10 +163,98 @@
         </div>
       </div>
     </div>
+
+    <!-- SETTINGS -->
+    <div class="modal fade" id="settings-pane" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header pb-0" style="border: none; background-color: rgba(100,100,100,0.05);">
+            <h5 class="modal-title" id="settings-title">Settings</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true"> &times; </span>
+            </button><br />
+          </div>
+          <div class="modal-header pb-0 px-0" style="border: none; background-color: rgba(100,100,100,0.05);">
+            <ul class="nav nav-tabs w-100 px-3" id="settingsTabs" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="personal-settings" data-toggle="tab" href="#personal-set" role="tab" aria-selected="true">Personalize</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="links-settings" data-toggle="tab" href="#links-set" role="tab" aria-selected="false">Links</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="about-settings" data-toggle="tab" href="#about-set" role="tab" aria-selected="false">About<span class="badge badge-outline-secondary badge-pill ml-2">1.0.1</span></a>
+              </li>
+            </ul>
+          </div>
+          <div class="modal-body">
+            <div class="tab-content" id="settingsTabsContent">
+              <div class="tab-pane fade show active" id="personal-set" role="tabpanel">
+                <div class="row mb-3">
+                  <label class="col">Title</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="text" id="title-input" placeholder="Example"></input>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col">Background</label>
+                  <div class="col-sm-10">
+                    <select class="form-control" id="select-background">
+                      <option>School</option>
+                      <option>Commons</option>
+                      <option>Logo</option>
+                      <option>Classroom</option>
+                      <option>Library</option>
+                      <option>Patio</option>
+                    </select>
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col">Font</div>
+                  <div class="col-10">
+                    <select class="form-control" id="announcementsPositionSel">
+                      <option class="font-sans-serif" value="default">Default (Sans-serif)</option>
+                      <option class="font-poppins" value="poppins">Poppins</option>
+                      <option class="font-raleway" value="raleway">Raleway</option>
+                      <option class="font-roboto" value="roboto">Roboto</option>
+                      <option class="font-ubuntu" value="ubuntu">Ubuntu</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="links-set" role="tabpanel">
+                <h5 class="display-5">Add, Edit, or Remove a Link</h5>
+                <span class="text-muted mb-2 d-block">Click on a link's name to edit it.</span>
+                <ul class="list-group" id="edit-links"></ul>
+              </div>
+              <div class="tab-pane fade text-center" id="about-set" role="tabpanel">
+                <div class="mx-auto">
+                  <img src="../res/icon128.png" />
+                </div>
+                <h3 class="display-4"><a class="text-dark" href="https://waytab.org">WayTab</a><a class="text-muted h3 ml-2" href="https://github.com/waytab/WayTab/releases/tag/v1.0.1">1.0.1</a></h3>
+                <br />
+                <h5 class="display-5"><i class="fas fa-code"></i> with <i class="fas fa-heart"></i> by Andrew Ward and Andy Wang</h5>
+                <h6 class="display-6 mb-4">and <a href="https://github.com/waytab/WayTab/graphs/contributors">these</a> awesome contributors</h6>
+                <h6 class="display-6"><i class="fab fa-github"></i> <a href="https://github.com/waytab">GitHub Org</a></h6>
+                <h6 class="display-6"><i class="fab fa-github"></i> <a href="https://github.com/waytab/WayTab" data-toggle="tooltip" data-placement="bottom" title="Browse the code and contribute">GitHub Code Repository</a></h6>
+                <h6 class="display-6 mb-3"><i class="fas fa-exclamation"></i> <a href="https://github.com/andrewward2001/WayTab/issues">Browse issues</a></h6>
+                <h6>Don't have a GitHub account?</h6>
+                <h6><i class="fas fa-edit"></i> <a href="https://goo.gl/forms/cuEftjPGOl5G3chk2">Use the Google Form.</a></h6>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="settings-close">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="js/libraries/popper.min.js"></script>
   <script src="js/libraries/bootstrap.min.js"></script>
+  <script src="js/wspn.js" type="text/javascript"></script>
   <script src="js/main.js" type="module"></script>
   <script src="js/time.js" type="text/javascript"></script>
   <script src="js/todo.js" type="text/javascript"></script>

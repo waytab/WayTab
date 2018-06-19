@@ -52,25 +52,19 @@ body {
   vertical-align: middle
 }
 
-#activate-settings {
-  right: 0;
-  top: 0;
+.action-button {
   background-color: #eaa615;
   border-color: #d69713;
 }
 
-#activate-settings:hover {
+.action-button:hover {
   background-color: #cc9012;
 }
 
-/* #settings-pane .btn-block {
-  margin-top: 5px;
-  background-color: #eaa615;
+#activate-settings {
+  right: 0;
+  top: 0;
 }
-
-#settings-pane .btn-block:hover {
-  background-color: #cc9012;
-} */
 
 .tab-delete-button {
   background-color: red;
@@ -202,4 +196,47 @@ a.text-dark {
   color: #fff;
   background-color: #6c757d;
   border-color: #6c757d;
+}
+
+#show-wspn {
+  top: 0;
+  left: 0;
+}
+
+#wspn-container {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  overflow-x: hidden;
+  transition: 1s;
+  padding-top: 60px;
+}
+
+#wspn-container #close-wspn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 60px;
+  color: #000;
+}
+
+#wspn-container #close-wspn:hover {
+  color: #ff0000;
+}
+
+.wspn-article {
+  padding: 1rem;
+  width: 300px;
+  color: #000;
+}
+
+.wspn-article img:hover {
+  opacity: .5;
+  transition: .5s;
+  border: 1px solid black;
 }
