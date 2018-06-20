@@ -230,9 +230,8 @@ a.text-dark {
 }
 
 .wspn-article {
-  padding: 1rem;
   width: 300px;
-  color: #000;
+  color: #fff;
 }
 
 .wspn-article img:hover {

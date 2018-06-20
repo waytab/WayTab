@@ -12,8 +12,13 @@ $.ajax({
       if(index < lim) {
         let title = $(this).find('title').text()
         let link = $(this).find('link').text()
-        let bod = $(this).find('description').text()
+        let bod = $('<div></div>').append($(this).find('description').text())
+        let desc = $(this).find($('p')).first().text()
+        console.log(desc)
         let img = $(bod).find('img').attr('src')
+        if(img == undefined) {
+          img = 'https://cdn3.iconfinder.com/data/icons/web-development-and-programming-2/64/development_Not_Found-512.png'
+        }
         articles.push([title, link, img]);
       }
     })
@@ -32,7 +37,7 @@ function controlFlow() {
   })
 
   $(document).on('click', '#close-wspn', () => {
-    $('#wspn-container').css('width', 0);
+    $('#wspn-container').css('width', '0px');
   })
 }
 
@@ -48,9 +53,9 @@ function displayArticles() {
 
 function createNewsDiv(title, link, img) {
   let newsdiv = $('<div></div>')
-    .attr('class', 'wspn-article')
+    .attr('class', 'wspn-article mb-5')
     .attr('id', `article${i+1}`)
-    .append($('<h6></h6>').text(title).css('padding-left', '5px'))
+    .css('padding-left', '1rem')
     .append($('<a></a>')
       .attr('href', link)
       .attr('id', `article-link${i+1}`)
@@ -61,6 +66,7 @@ function createNewsDiv(title, link, img) {
         .attr('width', '300px')
         .attr('height', '200px')
       )
+      .append($('<h6></h6>').text(title).css('padding-left', '5px').css('color', '#000'))
     )
   return newsdiv;
 }
