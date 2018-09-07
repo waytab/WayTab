@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700');
 @import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,700');
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500,700');
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+@import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500,700');
 @import url('https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700');
 
 html {
@@ -21,6 +23,10 @@ body {
   font-family: sans-serif;
 }
 
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
+
 .font-poppins {
   font-family: 'Poppins', sans-serif;
 }
@@ -35,6 +41,10 @@ body {
 
 .font-roboto-slab {
   font-family: 'Roboto Slab', sans-serif;
+}
+
+.font-rubik {
+  font-family: 'Rubik', sans-serif;
 }
 
 .font-ubuntu {
