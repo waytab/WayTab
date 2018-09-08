@@ -3,13 +3,17 @@ $.getJSON('js/json/config.json', (data) => { sched = data.bell_schedule, display
 hoverTimeElapsed()
 
 let letter
-let rss = 'http://whs.wayland.k12.ma.us/syndication/rss.aspx?serverid=1036540&userid=5&feed=portalcalendarevents&key=iK2zFQsYzm4ADbSvh7fdNqHamW%2fpZI4kygKhPXzaCr6fqlj%2bj%2b3iTsOsu6TbqYdT2MVtQmb1n0GvVK5PPvJZuw%3d%3d&portal_id=1036623&page_id=1036639&calendar_context_id=1062636&portlet_instance_id=76331&calendar_id=1062637&v=2.0'
+let rss = 'http://calendar.google.com/calendar/embed?showTz=0&mode=AGENDA&src=wayland.k12.ma.us_vhri0sqonn3vcmis02v9bct64o%40group.calendar.google.com&color=%2342104A&src=wayland.k12.ma.us_hdhmk89bcnj0te0g7ptofr8ulo%40group.calendar.google.com&color=%23865A5A&ctz=America%2FNew_York'
 let cors = 'https://cors-anywhere.herokuapp.com/'
+let now = new Date();
+let nowString = now.getFullYear() + '' + (now.getMonth()+1+'').padStart(2,'0') + '' + (now.getDate()+'').padStart(2,'0')
+console.log(nowString)
 $.ajax({
   type: 'GET',
   url: cors + rss,
   dataType: 'xml',
-  success: function(data) {
+  success(data) {
+    console.log(data)
     let feed = $(data).find('channel')
     let found = false
     feed.find('item').each(function() {
