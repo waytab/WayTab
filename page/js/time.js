@@ -19,7 +19,7 @@ $.ajax({
       }
     })
     scheduleHighlightor()
-    setInterval(scheduleHighlightor, 60000)
+    setInterval(scheduleHighlightor, 10000)
   }
 })
 setInterval(displayTime, 1000)
