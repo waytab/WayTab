@@ -1,4 +1,4 @@
-export class Title {
+export default class Title {
   constructor() {
     chrome.storage.sync.get("title", function(response) {
       $('#title-container').text(response.title)

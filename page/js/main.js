@@ -1,8 +1,8 @@
 // these should be alphabetical...
-import { Background } from './background.js'
-import { Links } from './links.js'
-import { Schedule } from './schedule.js'
-import { Title } from './title.js'
+import Background from './background.js'
+import Links from './links.js'
+import Schedule from './schedule.js'
+import Title from './title.js'
 
 // ...and so should these
 let background = new Background()

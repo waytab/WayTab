@@ -1,4 +1,4 @@
-export class Schedule {
+export default class Schedule {
   constructor() {
     chrome.storage.sync.get(['schedule'], (result) => {
       if(Object.keys(result).length === 0 && result.constructor === Object) {

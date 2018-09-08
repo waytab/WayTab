@@ -1,4 +1,4 @@
-export class Links {
+export default class Links {
   constructor() {
     let linksFunc = this.loadLinks
     chrome.storage.sync.get(['links'], function(result) {
