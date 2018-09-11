@@ -269,6 +269,10 @@ a.text-dark {
   display: none;
 }
 
+.tooltip.warning .tooltip-inner {
+  background-color: #dc3545;
+}
+
 @keyframes fadein {
   from {
     opacity: 0;
