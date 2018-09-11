@@ -8,7 +8,7 @@ var deftabs = {
     {
       "name": "Drive",
       "actual_link": "https://drive.google.com",
-      "image_link": "http://www.iconarchive.com/download/i80454/uiconstock/socialmedia/Google-Drive.ico"
+      "image_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Google_Drive_Logo.svg/2000px-Google_Drive_Logo.svg.png"
     },
     {
       "name": "ESchool",

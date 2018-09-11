@@ -6,9 +6,8 @@ $(document).ready(() => {
     let button = $(this)
     let task = $('#newTask')
     let classSelector = $('#addTaskClass')
-    console.log(button)
+    let date = $('#taskDue')
     if(task.val() == '') {
-      console.log(task)
       button.toggleClass('btn-danger').toggleClass('btn-outline-secondary')
       task.toggleClass('is-invalid')
       button.text('No task!')
@@ -18,7 +17,6 @@ $(document).ready(() => {
         button.text('Add')
       }, 1000)
     } else if(classSelector.val() == 'Class...') {
-      console.log(classSelector)
       button.toggleClass('btn-danger').toggleClass('btn-outline-secondary')
       classSelector.toggleClass('is-invalid')
       button.text('No class selected!')
@@ -28,9 +26,7 @@ $(document).ready(() => {
         button.text('Add')
       }, 1000)
     } else {
-      console.log(classSelector.val())
-      tasks[classSelector.val()].push(task.val())
-      console.log(Object.keys(tasks).length)
+      tasks[classSelector.val()].push([task.val(), date.val()])
       chrome.storage.sync.set({tasks: tasks}, function() {
         console.log('new tasks saved!')
         loadTasks()
@@ -41,7 +37,7 @@ $(document).ready(() => {
   $(document).on('click', '#undo-task-delete', function() {
     let taskArray = $(this).data('task').split(',')
     console.log(taskArray)
-    tasks[taskArray[0]].push(taskArray[1])
+    tasks[taskArray[0]].push([taskArray[1], taskArray[2]])
     chrome.storage.sync.set({tasks: tasks}, function() {
       loadTasks()
     })
@@ -76,10 +72,21 @@ function loadTasks() {
                     .attr('id', `check${key.replace(' ', '_') + i}`),
                      $('<label></label>')
                     .addClass('custom-control-label')
-                    .text(tasks[key][i])
+                    .attr('id', `label${key.replace(' ', '_') + i}`)
                     .attr('for', `check${key.replace(' ', '_') + i}`)
                   )
                 )
+              let due;
+              if(tasks[key][i][1] == '') {
+                $(`#label${key.replace(' ', '_') + i}`).text(tasks[key][i][0])
+              }else {
+                due = tasks[key][i][1].split('-')
+                $(`#label${key.replace(' ', '_') + i}`).text(tasks[key][i][0] + " | Due: " + due[1] + "/" + due[2] + "/" + due[0])
+                let curr = new Date();
+                if(parseInt(due[0]) == curr.getFullYear() && parseInt(due[1]) == curr.getMonth()+1 && parseInt(due[2]) == curr.getDate()) {
+                  $(`#label${key.replace(' ', '_') + i}`).css('background-color', '#ffff00')
+                }
+              }
             }
           }
         }
@@ -88,7 +95,15 @@ function loadTasks() {
       $('[data-del]').on('change paste keyup', function() {
         let button = $(this)
         let target = button.data('del')
-        let index = tasks[button.data('class').replace('_', ' ')].indexOf($(`#${target} label`).text())
+        let index;
+        if(!$(`#${target} label`).text().includes(' | Due: ')) {
+          index = getIndexOfArray(tasks[button.data('class').replace('_', ' ')], [$(`#${target} label`).text(), ''])
+        } else {
+          let labelSections = $(`#${target} label`).text().split(' | Due: ')
+          let dateSections = labelSections[1].split('/')
+          let dateFormatted = dateSections[2] + "-" + dateSections[0] + "-" + dateSections[1]
+          index = getIndexOfArray(tasks[button.data('class').replace('_', ' ')], [labelSections[0], dateFormatted])
+        }
         if(index > -1) {
           lastTask = [button.data('class').replace('_', ' '), tasks[button.data('class').replace('_', ' ')][index]]
           tasks[button.data('class').replace('_', ' ')].splice(index, 1)
@@ -122,4 +137,17 @@ function loadTasks() {
       tasks['Miscellaneous'] = []
     }
   })
+}
+
+function getIndexOfArray(origArr, newArr) {
+  newArr[1].replace('/', '-')
+  console.log(origArr)
+  console.log(newArr)
+  for(i = 0; i < origArr.length; i++) {
+    if(origArr[i][0] == newArr[0]) {
+      if(origArr[i][1] == newArr[1]) {
+        return i
+      }
+    }
+  }
 }

@@ -1,4 +1,4 @@
-export class Background {
+export default class Background {
   constructor() {
     chrome.storage.sync.get(['background'], function(response) {
       $(document.body).css('background-image', 'url(\"'+response.background+'\")')
