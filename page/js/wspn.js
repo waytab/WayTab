@@ -40,6 +40,7 @@ function controlFlow() {
 }
 
 function displayArticles() {
+  $('#wspn-loader').remove()
   articles.forEach(e => {
     $('#rss-feed').append(createNewsDiv(...e)) // this is a spread operator (...), which acts similar to a forEach loop, but inline.
     // so instead of passing items of an array (arr[0], arr[1], etc), we pass the spread of the array (...arr). it works the same way.
