@@ -36,6 +36,7 @@ export default class Background {
       if(sel != 'Custom...') {
         let href = './img/' + sel.toLowerCase()+'.jpg'
         $(document.body).css('background-image', `url("${href}")`)
+        $('#custom-background').css('display', 'none')
       } else {
         $('#custom-background').css('display', 'flex')
       }
