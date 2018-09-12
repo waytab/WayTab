@@ -86,10 +86,16 @@ function loadTasks() {
                     title: 'Due tomorrow',
                     placement: 'right'
                   })
-                } else if(dueDeltaDay >= 2) { // due 2+ days from now
+                } else if(dueDeltaDay >= 2 && dueDeltaDay <= 14) { // due within 2 weeks after tomorrow
                   $(`#label${key.replace(' ', '_') + i}`).html(tasks[key][i][0] + `<i class="far fa-clock ml-1" id="tooltip${key.replace(' ', '_') + i}"></i>`).attr({ 'data-has-date': 'true', 'data-due-on': dueDate })
                   $(`#tooltip${key.replace(' ', '_') + i}`).tooltip({
                     title: `Due in ${dueDeltaDay} days`,
+                    placement: 'right'
+                  })
+                } else if (dueDeltaDay > 14) { // due beyond 2 weeks from now
+                  $(`#label${key.replace(' ', '_') + i}`).html(tasks[key][i][0] + `<i class="far fa-clock ml-1" id="tooltip${key.replace(' ', '_') + i}"></i>`).attr({ 'data-has-date': 'true', 'data-due-on': dueDate })
+                  $(`#tooltip${key.replace(' ', '_') + i}`).tooltip({
+                    title: `Due on ${dueDate.getMonth()+1}/${dueDate.getDate()}/${dueDate.getFullYear()}`,
                     placement: 'right'
                   })
                 } else if (dueDeltaDay == -1) { // due yesterday
