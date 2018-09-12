@@ -5,11 +5,11 @@ $.ajax({
   type: 'GET',
   url: 'https://cors-anywhere.herokuapp.com/' + wspnrss,
   dataType: 'xml',
-  success: function(xml) {
+  success: function (xml) {
     let lim = 5
 
     $(xml).find('item').each(function (index) {
-      if(index < lim) {
+      if (index < lim) {
         let title = $(this).find('title').text()
         let link = $(this).find('link').text()
         let bod = $('<div></div>').append($(this).find('description').text())
@@ -40,14 +40,10 @@ function controlFlow() {
 }
 
 function displayArticles() {
-  for(i = 0; i < articles.length; i++) {
-    let title = articles[i][0];
-    let link = articles[i][1];
-    let img = articles[i][2];
-    let auth = articles[i][3]
-    console.log(title + " | " + link + " | " + img)
-    $('#rss-feed').append(createNewsDiv(title, link, img, auth));
-  }
+  articles.forEach(e => {
+    $('#rss-feed').append(createNewsDiv(...e)) // this is a spread operator (...), which acts similar to a forEach loop, but inline.
+    // so instead of passing items of an array (arr[0], arr[1], etc), we pass the spread of the array (...arr). it works the same way.
+  })
 }
 
 function createNewsDiv(title, link, img, auth) {
@@ -56,7 +52,7 @@ function createNewsDiv(title, link, img, auth) {
     .attr('class', 'card mb-3 mx-3')
     .attr('id', `article${i + 1}`)
 
-  if(img != undefined) {
+  if (img != undefined) {
     newsdiv.append(`<div class="card-img-top" style="background-image: url(${img}); height: 10rem;"></div>`)
   }
 
@@ -76,6 +72,6 @@ function createNewsDiv(title, link, img, auth) {
       .text('Read on WSPN')
     )
   )
-  
+
   return newsdiv;
 }
