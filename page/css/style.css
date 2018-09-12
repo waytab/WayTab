@@ -300,3 +300,6 @@ div.card-img-top {
   100% { transform: rotate(360deg); }
 }
 
+a.input-group-text:hover {
+  text-decoration: none;
+}
