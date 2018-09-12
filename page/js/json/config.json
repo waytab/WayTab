@@ -1,4 +1,4 @@
-var conf = {
+{
   "saved_tabs": [
     {
       "id": "Student Gmail",
@@ -30,5 +30,44 @@ var conf = {
       "actual_link": "https://connection.naviance.com/family-connection/auth/login/?hsid=waylandhs",
       "image_link": "img/naviance_logo.png"
     }
-  ]
+  ],
+  "bell_schedule": {
+    "1": [
+      {"name": "Before School", "start": "0,00","end": "7,30", "length": "450"},
+      {"name": "Block 1", "start": "7,30","end": "8,26", "length": "57"},
+      {"name": "Passing Time", "start": "8,26", "end": "9,31", "length": "5"},
+      {"name": "Block 2", "start": "8,31","end": "9,28", "length": "57"},
+      {"name": "Break", "start": "9,28", "end": "9,38", "length": "10"},
+      {"name": "Block 3", "start": "9,38","end": "10,35", "length": "57"},
+      {"name": "Passing Time", "start": "10,35", "end": "10,40", "length": "5"},
+      {"name": "Block 4", "start": "10,40","end": "12,11", "length": "151"},
+      {"name": "Passing Time", "start": "12,11", "end": "12,16", "length": "5"},
+      {"name": "Block 5", "start": "12,16","end": "13,13", "length": "57"},
+      {"name": "Passing Time", "start": "13,13", "end": "13,18", "length": "5"},
+      {"name": "Block 6", "start": "13,18","end": "14,15", "length": "57"},
+      {"name": "After School", "start": "14,15","end": "23,59", "length": "584"}
+    ],
+    "2": [
+    ],
+    "3": [
+      {"name": "Before School", "start": "0,00","end": "7,30", "length": "450"},
+      {"name": "Block 1", "start": "7,30","end": "8,10", "length": "40"},
+      {"name": "Passing Time", "start": "8,10", "end": "8,15", "length": "5"},
+      {"name": "Block 2", "start": "8,15","end": "8,55", "length": "40"},
+      {"name": "Passing Time", "start": "8,55", "end": "9,00", "length": "5"},
+      {"name": "Advisory", "start": "9,00", "end": "9,30", "length": "5"},
+      {"name": "Passing Time", "start": "9,30", "end": "9,35", "length": "5"},
+      {"name": "Block 3", "start": "9,35","end": "10,15", "length": "40"},
+      {"name": "Passing Time", "start": "10,15", "end": "10,20", "length": "5"},
+      {"name": "Block 4", "start": "10,20","end": "11,35", "length": "75"},
+      {"name": "Passing Time", "start": "11,35", "end": "11,40", "length": "5"},
+      {"name": "Block 5", "start": "11,40","end": "12,20", "length": "40"},
+      {"name": "Passing Time", "start": "12,20", "end": "12,25", "length": "5"},
+      {"name": "Block 6", "start": "12,25","end": "13,05", "length": "40"},
+      {"name": "After School", "start": "13,05","end": "23,59", "length": "654"}
+    ],
+    "4": [
+      {"name": "Weekend", "start": "0,00", "end": "23,59", "length": "1439"}
+    ]
+  }
 }
