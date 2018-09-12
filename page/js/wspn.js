@@ -34,7 +34,8 @@ function controlFlow() {
     $('#wspn-container').css('width', '332px');
   })
 
-  $(document).on('click', '#close-wspn', () => {
+  $(document).on('click', '#close-wspn', (e) => {
+    e.preventDefault()
     $('#wspn-container').css('width', '0px');
   })
 }
