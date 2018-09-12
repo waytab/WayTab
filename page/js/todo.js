@@ -86,20 +86,20 @@ function loadTasks() {
                 $(`#label${key.replace(' ', '_') + i}`).text(tasks[key][i][0])
               } else {
                 if (dueDeltaDay == 0) {
-                  $(`#label${key.replace(' ', '_') + i}`).html(tasks[key][i][0] + ` <i class="far fa-clock ml-1 text-danger" id="tooltip${key.replace(' ', '_') + i}"></i>`)
+                  $(`#label${key.replace(' ', '_') + i}`).html(tasks[key][i][0] + `<i class="far fa-clock ml-1 text-danger" id="tooltip${key.replace(' ', '_') + i}"></i>`).attr({ 'data-has-date': 'true', 'data-due-on': dueDate })
                   $(`#tooltip${key.replace(' ', '_') + i}`).tooltip({
                     title: 'Due today',
                     placement: 'right',
                     template: '<div class="tooltip warning" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
                   })
                 } else if (dueDeltaDay == 1) {
-                  $(`#label${key.replace(' ', '_') + i}`).html(tasks[key][i][0] + ` <i class="far fa-clock ml-1" id="tooltip${key.replace(' ', '_') + i}"></i>`)
+                  $(`#label${key.replace(' ', '_') + i}`).html(tasks[key][i][0] + `<i class="far fa-clock ml-1" id="tooltip${key.replace(' ', '_') + i}"></i>`).attr({ 'data-has-date': 'true', 'data-due-on': dueDate })
                   $(`#tooltip${key.replace(' ', '_') + i}`).tooltip({
                     title: 'Due tomorrow',
                     placement: 'right'
                   })
                 } else {
-                  $(`#label${key.replace(' ', '_') + i}`).html(tasks[key][i][0] + ` <i class="far fa-clock ml-1" id="tooltip${key.replace(' ', '_') + i}"></i>`)
+                  $(`#label${key.replace(' ', '_') + i}`).html(tasks[key][i][0] + `<i class="far fa-clock ml-1" id="tooltip${key.replace(' ', '_') + i}"></i>`).attr({ 'data-has-date': 'true', 'data-due-on': dueDate })
                   $(`#tooltip${key.replace(' ', '_') + i}`).tooltip({
                     title: `Due in ${dueDeltaDay} days`,
                     placement: 'right'
@@ -115,13 +115,12 @@ function loadTasks() {
         let button = $(this)
         let target = button.data('del')
         let index;
-        if(!$(`#${target} label`).text().includes(' | Due: ')) {
+        if (!(typeof $(`#${target} label`).attr('data-has-date') !== typeof undefined && $(`#${target} label`).attr('data-has-date') !== false)) {
           index = getIndexOfArray(tasks[button.data('class').replace('_', ' ')], [$(`#${target} label`).text(), ''])
         } else {
-          let labelSections = $(`#${target} label`).text().split(' | Due: ')
-          let dateSections = labelSections[1].split('/')
-          let dateFormatted = dateSections[2] + "-" + dateSections[0] + "-" + dateSections[1]
-          index = getIndexOfArray(tasks[button.data('class').replace('_', ' ')], [labelSections[0], dateFormatted])
+          let dateFormatted = new Date($(`#${target} label`).attr('data-due-on'))
+          dateFormatted = dateFormatted.getFullYear() + '-' + (dateFormatted.getMonth() + 1).toString().padStart(2, "0") + '-' + dateFormatted.getDate()
+          index = getIndexOfArray(tasks[button.data('class').replace('_', ' ')], [$(`#${target} label`).text(), dateFormatted])
         }
         if(index > -1) {
           lastTask = [button.data('class').replace('_', ' '), tasks[button.data('class').replace('_', ' ')][index]]
