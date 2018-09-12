@@ -68,9 +68,8 @@ function loadTasks() {
                     .attr('for', `check${key.replace(' ', '_') + i}`)
                   )
                 )
-              let due;
               let dueDate = new Date(tasks[key][i][1] + 'T00:00:00')
-              let dueDeltaDay = Math.round((dueDate - new Date)/(1000*60*60*24))
+              let dueDeltaDay = Math.floor((dueDate - new Date)/(1000*60*60*24)+1)
               if(tasks[key][i][1] == '') {
                 $(`#label${key.replace(' ', '_') + i}`).text(tasks[key][i][0])
               } else {
