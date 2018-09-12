@@ -29,7 +29,20 @@
   <button type="button" class="btn btn-primary position-absolute float-left mt-5 ml-3 action-button" id="show-wspn">WSPN</button>
   <div class="bg-dark" id="wspn-container">
     <div class="overflow-box">
-      <span class="d-block wspn-title text-light font-roboto-slab">WSPN Feed<a href="" id="close-wspn" class="d-inline-block ml-auto"><i class="fas fa-times"></i></a></span>
+      <span class="d-block wspn-title text-light font-roboto-slab">
+        WSPN Feed
+        <a href="" id="close-wspn" class="d-inline-block ml-auto">
+          <svg viewbox="0 0 10 10">
+            <g fill="none" fill-rule="evenodd">
+              <g stroke="currentColor" stroke-linecap="square">
+                <path d="M0.5,0.5 L9,9" />
+                <path d="M0.5,0.5 L9,9" transform="matrix(-1 0 0 1 9.5 0)" />
+              </g>
+              <polygon points="0 0 10 0 10 10 0 10" />
+            </g>
+          </svg>
+        </a>
+      </span>
       <div id="rss-feed"><div class="loader mx-auto" id="wspn-loader"></div></div>
     </div>
   </div>

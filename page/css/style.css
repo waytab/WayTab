@@ -236,9 +236,17 @@ a.text-dark {
   margin: 1rem;
 }
 
+#wspn-container #close-wspn,
+#wspn-container #close-wspn svg {
+  width: 24px;
+  height: 24px;
+}
+
 #wspn-container #close-wspn {
   color: #fff;
   float: right;
+  margin-right: 3px;
+  margin-top: -3px;
 }
 
 #wspn-container #close-wspn:hover {
