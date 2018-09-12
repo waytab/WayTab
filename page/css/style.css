@@ -246,18 +246,8 @@ a.text-dark {
   color: #ff0000;
 }
 
-.wspn-article {
-  padding: 1rem;
-}
-
-.wspn-article img {
-  max-width: 100%;
-}
-
-.wspn-article img:hover {
-  opacity: .5;
-  transition: .5s;
-  border: 1px solid black;
+#rss-feed .card .card-title {
+  font-family: 'Roboto Slab'
 }
 
 .tooltip .tooltip-inner {
