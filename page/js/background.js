@@ -8,25 +8,25 @@ export default class Background {
     this.hexRegEx = new RegExp(/#[\da-f]/i) // hex regex
 
     chrome.storage.sync.get(['background'], (response) => {
-      console.log(this.rgbaRegEx.test(response.background));
-      if(response.background.match(this.urlRegEx)) {
-        $(document.body).css('background-image', 'url(\"'+response.background+'\")')
-        if(!response.background.indexOf('./img/')) {
-          let sel = response.background.split('/')
+      let bg = response.background
+      if(bg.match(this.urlRegEx)) {
+        $(document.body).css('background-image', 'url(\"'+bg+'\")')
+        if(!bg.indexOf('./img/')) {
+          let sel = bg.split('/')
           let name = sel[2].substring(0, sel[2].length-4)
           name = name.substring(0,1).toUpperCase() + name.substring(1)
           $('#select-background').val(name)
         } else { // it's a custom url
           $('#select-background').val('Custom...')
           $('#custom-background').css('display', 'flex')
-          $('#custom-background-input').val(response.background)
+          $('#custom-background-input').val(bg)
         }
       } else { // we know it's a custom, non-image, bg
         $('#select-background').val('Custom...')
         $('#custom-background').css('display', 'flex')
-        $('#custom-background-input').val(response.background)
-        if (this.rgbRegEx.test(response.background) || this.rgbaRegEx.test(response.background) || this.hexRegEx.test(response.background)) {
-          $(document.body).css('background-color', response.background)
+        $('#custom-background-input').val(bg)
+        if (this.rgbRegEx.test(bg) || this.rgbaRegEx.test(bg) || this.hexRegEx.test(bg)) {
+          $(document.body).css('background-color', bg)
         }
       }
     })
@@ -48,12 +48,8 @@ export default class Background {
       let val = $('#custom-background-input').val()
       if(val.match(this.urlRegEx)) {
         $(document.body).css('background-image', `url("${val}")`)
-      } else if (val.match(this.rgbRegEx)) {
-        $(document.body).css('background-color', val)
-      } else if (val.match(this.rgbaRegEx)) {
-        $(document.body).css('background-color', val)
-      } else if (val.match(this.hexRegEx)) {
-        $(document.body).css('background-color', val)
+      } else if (this.rgbRegEx.test(val) || this.rgbaRegEx.test(val) || this.hexRegEx.test(val)) {
+        $(document.body).attr('style', `background-color: ${val}`)
       } else {
         console.log('not a valid color');
       }
