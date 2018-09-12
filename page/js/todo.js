@@ -79,7 +79,8 @@ function loadTasks() {
                 )
               let due;
               let dueDate = new Date(tasks[key][i][1] + 'T00:00:00')
-              let dueDeltaDay = dueDate.getDate() - new Date().getDate()
+              let dueDeltaDay = Math.round((dueDate - new Date)/(1000*60*60*24))
+              console.log(dueDeltaDay)
               //let label = tasks[key][i][0] + " | Due: " + due[1] + "/" + due[2] + "/" + due[0]
               if(tasks[key][i][1] == '') {
                 $(`#label${key.replace(' ', '_') + i}`).text(tasks[key][i][0])
