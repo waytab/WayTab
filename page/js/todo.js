@@ -16,17 +16,8 @@ $(document).ready(() => {
         task.toggleClass('is-invalid')
         button.text('Add')
       }, 1000)
-    } else if(classSelector.val() == 'Class...') {
-      button.toggleClass('btn-danger').toggleClass('btn-outline-secondary')
-      classSelector.toggleClass('is-invalid')
-      button.text('No class selected!')
-      setTimeout(() => {
-        button.toggleClass('btn-danger').toggleClass('btn-outline-secondary')
-        classSelector.toggleClass('is-invalid')
-        button.text('Add')
-      }, 1000)
     } else {
-      tasks[classSelector.val()].push([task.val(), date.val()])
+      tasks[classSelector.val() == 'Class...' ? 'Miscellaneous' : classSelector.val()].push([task.val(), date.val()])
       chrome.storage.sync.set({tasks: tasks}, function() {
         console.log('new tasks saved!')
         loadTasks()
@@ -80,8 +71,6 @@ function loadTasks() {
               let due;
               let dueDate = new Date(tasks[key][i][1] + 'T00:00:00')
               let dueDeltaDay = Math.round((dueDate - new Date)/(1000*60*60*24))
-              console.log(dueDeltaDay)
-              //let label = tasks[key][i][0] + " | Due: " + due[1] + "/" + due[2] + "/" + due[0]
               if(tasks[key][i][1] == '') {
                 $(`#label${key.replace(' ', '_') + i}`).text(tasks[key][i][0])
               } else {
