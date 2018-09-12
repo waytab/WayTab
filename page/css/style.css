@@ -51,7 +51,7 @@ body {
   font-family: 'Ubuntu', sans-serif;
 }
 
-.h1, .h2, .h4, h1, h2, h4 {
+#title-container {
   color: white;
   text-shadow: 0 0 5px #000;
 }
@@ -96,12 +96,6 @@ body {
 
 .row {
   padding: 0 15px;
-}
-
-.card .card-title,
-.card .card-body {
-  color: black !important;
-  text-shadow: none !important;
 }
 
 .card-title > :not(a) {
@@ -239,15 +233,19 @@ a.text-dark {
   right: 25px;
   font-size: 36px;
   margin-left: 60px;
-  color: #000;
+  color: #fff;
 }
 
 #wspn-container #close-wspn:hover {
-  color: #ff0000;
+  color: #dc3545;
 }
 
 #rss-feed .card .card-title {
   font-family: 'Roboto Slab'
+}
+
+#rss-feed .card a {
+  color: #eaa615;
 }
 
 .tooltip .tooltip-inner {

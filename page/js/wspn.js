@@ -49,8 +49,7 @@ function displayArticles() {
 function createNewsDiv(title, link, img, auth) {
   console.log(auth)
   let newsdiv = $('<div></div>')
-    .attr('class', 'card mb-3 mx-3')
-    .attr('id', `article${i + 1}`)
+    .attr('class', 'card mb-3 mx-3 bg-dark')
 
   if (img != undefined) {
     newsdiv.append(`<div class="card-img-top" style="background-image: url(${img}); height: 10rem;"></div>`)
@@ -59,7 +58,7 @@ function createNewsDiv(title, link, img, auth) {
   newsdiv.append($('<div></div>')
     .toggleClass('card-body')
     .append($('<h5></h5>')
-      .toggleClass('card-title')
+      .toggleClass('card-title text-light')
       .text(title)
     )
     .append($('<h6></h6>')
