@@ -225,6 +225,12 @@ a.text-dark {
   transition: 350ms ease-out;
 }
 
+#wspn-container .overflow-box {
+  width: 332px;
+  height: 100vh;
+  overflow-y: auto;
+}
+
 #wspn-container .wspn-title {
   font-size: 36px;
   margin: 1rem;
@@ -232,8 +238,7 @@ a.text-dark {
 
 #wspn-container #close-wspn {
   color: #fff;
-  position: absolute;
-  right: 1rem;
+  float: right;
 }
 
 #wspn-container #close-wspn:hover {
