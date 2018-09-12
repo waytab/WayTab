@@ -229,7 +229,7 @@ a.text-dark {
   left: 0;
   background-color: #fff;
   overflow-x: hidden;
-  transition: 1s;
+  transition: 350ms ease-out;
   padding-top: 60px;
 }
 
@@ -247,8 +247,11 @@ a.text-dark {
 }
 
 .wspn-article {
-  width: 300px;
-  color: #fff;
+  padding: 1rem;
+}
+
+.wspn-article img {
+  max-width: 100%;
 }
 
 .wspn-article img:hover {
@@ -282,5 +285,12 @@ a.text-dark {
     opacity: 1;
     transform: scale(1);
   }
+}
+
+div.card-img-top {
+  width: 100%;
+  height: 20rem;
+  background-size: cover;
+  background-position: center;
 }
 

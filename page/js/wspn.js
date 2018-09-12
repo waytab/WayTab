@@ -16,10 +16,8 @@ $.ajax({
         let desc = $(this).find($('p')).first().text()
         console.log(desc)
         let img = $(bod).find('img').attr('src')
-        if(img == undefined) {
-          img = 'https://cdn3.iconfinder.com/data/icons/web-development-and-programming-2/64/development_Not_Found-512.png'
-        }
-        articles.push([title, link, img]);
+        let auth = $($(this)[0].getElementsByTagNameNS('http://purl.org/dc/elements/1.1/', 'creator')[0]).text()
+        articles.push([title, link, img, auth]);
       }
     })
 
@@ -46,27 +44,38 @@ function displayArticles() {
     let title = articles[i][0];
     let link = articles[i][1];
     let img = articles[i][2];
+    let auth = articles[i][3]
     console.log(title + " | " + link + " | " + img)
-    $('#rss-feed').append(createNewsDiv(title, link, img));
+    $('#rss-feed').append(createNewsDiv(title, link, img, auth));
   }
 }
 
-function createNewsDiv(title, link, img) {
+function createNewsDiv(title, link, img, auth) {
+  console.log(auth)
   let newsdiv = $('<div></div>')
-    .attr('class', 'wspn-article mb-5')
-    .attr('id', `article${i+1}`)
-    .css('padding-left', '1rem')
-    .append($('<a></a>')
-      .attr('href', link)
-      .attr('id', `article-link${i+1}`)
-      .append($('<img></img>')
-        .attr('src', img)
-        .attr('alt', title)
-        .attr('id', `article-image${i+1}`)
-        .attr('width', '300px')
-        .attr('height', '200px')
-      )
-      .append($('<h6></h6>').text(title).css('padding-left', '5px').css('color', '#000'))
+    .attr('class', 'card mb-3 mx-3')
+    .attr('id', `article${i + 1}`)
+
+  if(img != undefined) {
+    newsdiv.append(`<div class="card-img-top" style="background-image: url(${img}); height: 10rem;"></div>`)
+  }
+
+  newsdiv.append($('<div></div>')
+    .toggleClass('card-body')
+    .append($('<h5></h5>')
+      .toggleClass('card-title')
+      .text(title)
     )
+    .append($('<h6></h6>')
+      .toggleClass('card-subtitle text-muted mb-2')
+      .text(auth)
+    )
+    .append($('<a></a>')
+      .toggleClass('card-link')
+      .attr('href', link)
+      .text('Read on WSPN')
+    )
+  )
+  
   return newsdiv;
 }
