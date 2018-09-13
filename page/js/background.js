@@ -11,6 +11,7 @@ export default class Background {
       let bg = response.background
       if(bg.match(this.urlRegEx)) {
         $(document.body).css('background-image', 'url(\"'+bg+'\")')
+        $('#time-bar-total').css('opacity', .8)
         if(!bg.indexOf('./img/')) {
           let sel = bg.split('/')
           let name = sel[2].substring(0, sel[2].length-4)
