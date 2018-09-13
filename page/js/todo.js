@@ -30,6 +30,7 @@ $(document).ready(() => {
     console.log(taskArray)
     tasks[taskArray[0]].push([taskArray[1], taskArray[2]])
     chrome.storage.sync.set({tasks: tasks}, function() {
+      $('#undo-task-delete').remove()
       loadTasks()
     })
   })
