@@ -40,7 +40,7 @@
       {"name": "Break", "start": "9,28", "end": "9,38", "length": "10"},
       {"name": "Block 3", "start": "9,38","end": "10,35", "length": "57"},
       {"name": "Passing Time", "start": "10,35", "end": "10,40", "length": "5"},
-      {"name": "Block 4", "start": "10,40","end": "12,11", "length": "151"},
+      {"name": "Block 4", "start": "10,40","end": "12,11", "length": "91"},
       {"name": "Passing Time", "start": "12,11", "end": "12,16", "length": "5"},
       {"name": "Block 5", "start": "12,16","end": "13,13", "length": "57"},
       {"name": "Passing Time", "start": "13,13", "end": "13,18", "length": "5"},
