@@ -102,6 +102,11 @@ function advanceBar(day) {
   }
 
   bar.style.width = percent + "%";
+  if(percent > 50) {
+    console.log(percent)
+    document.getElementById("time-container").style.color = 'white'
+  }
+  
   let time = document.getElementById("time-container").innerText;
   document.getElementById("time-container").innerHTML = `<span id="time-display">${time.substring(0, time.length-2)}</span>${time.substring(time.length-2)}${letterDay} | ${name}`
   document.getElementById("percent-container").innerHTML = "Ends at " + getTimeFromId(end) + " | " + parseInt(bar.style.width) + "% elapsed";
