@@ -33,21 +33,21 @@ function barController() {
 }
 
 function hoverController() {
-  let bar = document.getElementById("time-bar-total");
+  let bar = document.getElementById('time-bar-total');
   let percentContainer = document.getElementById('percent-container')
   bar.onmouseover = function() {
-    percentContainer.style.display = "block";
+    percentContainer.style.display = 'block';
   }
   bar.onmouseout = function() {
-    percentContainer.style.display = "none";
+    percentContainer.style.display = 'none';
   }
 
 
   percentContainer.onmouseover = function() {
-    percentContainer.style.display = "block";
+    percentContainer.style.display = 'block';
   }
   percentContainer.onmouseout = function() {
-    percentContainer.style.display = "none";
+    percentContainer.style.display = 'none';
   }
 }
 
