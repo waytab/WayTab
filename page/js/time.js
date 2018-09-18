@@ -19,6 +19,8 @@ function displayTime() {
   let currentTime = moment().format('h:mm:ss a')
   $('#time-container').text(block.name + ' | ' + currentTime)
 
+  console.log(getTodaySchedule())
+
   if(moment().diff(moment(block.end, 'hmm')) <= 0) {
     block = getCurrentBlock()
   }
@@ -78,7 +80,7 @@ function getSoonestIndex() {
   let ret = 0
   for(i = 0; i < bell.length; i++) {
     let diff = moment().diff(moment(bell[i].start, 'hmm'))
-    if(diff <= currentMin) {
+    if(diff > 0 && diff <= currentMin) {
       ret = i
       currentMin = diff
     }
