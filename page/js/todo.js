@@ -47,7 +47,7 @@ function loadTasks() {
       $('#taskList').empty()
       $('#newTask').val('')
       $('#taskDue').val('')
-      $('#addTaskClass').empty().append(`<option selected>Class...</option>`)
+      $('#addTaskClass').empty().append(`<option selected>Class...(default to misc)</option>`)
       for(let key in tasks) {
         if(tasks.hasOwnProperty(key)) {
           if(tasks[key].length != 0) {
