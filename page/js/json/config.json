@@ -33,41 +33,41 @@
   ],
   "bell_schedule": {
     "1": [
-      {"name": "Before School", "start": "0,00","end": "7,30", "length": "450"},
-      {"name": "Block 1", "start": "7,30","end": "8,26", "length": "57"},
-      {"name": "Passing Time", "start": "8,26", "end": "9,31", "length": "5"},
-      {"name": "Block 2", "start": "8,31","end": "9,28", "length": "57"},
-      {"name": "Break", "start": "9,28", "end": "9,38", "length": "10"},
-      {"name": "Block 3", "start": "9,38","end": "10,35", "length": "57"},
-      {"name": "Passing Time", "start": "10,35", "end": "10,40", "length": "5"},
-      {"name": "Block 4", "start": "10,40","end": "12,11", "length": "91"},
-      {"name": "Passing Time", "start": "12,11", "end": "12,16", "length": "5"},
-      {"name": "Block 5", "start": "12,16","end": "13,13", "length": "57"},
-      {"name": "Passing Time", "start": "13,13", "end": "13,18", "length": "5"},
-      {"name": "Block 6", "start": "13,18","end": "14,15", "length": "57"},
-      {"name": "After School", "start": "14,15","end": "23,59", "length": "584"}
+      {"name": "Before School", "start": "000","end": "730", "length": "450"},
+      {"name": "Block 1", "start": "730","end": "826", "length": "57"},
+      {"name": "Passing Time", "start": "826", "end": "931", "length": "5"},
+      {"name": "Block 2", "start": "831","end": "928", "length": "57"},
+      {"name": "Break", "start": "928", "end": "938", "length": "10"},
+      {"name": "Block 3", "start": "938","end": "1035", "length": "57"},
+      {"name": "Passing Time", "start": "1035", "end": "1040", "length": "5"},
+      {"name": "Block 4", "start": "1040","end": "1211", "length": "91"},
+      {"name": "Passing Time", "start": "1211", "end": "1216", "length": "5"},
+      {"name": "Block 5", "start": "1216","end": "1313", "length": "57"},
+      {"name": "Passing Time", "start": "1313", "end": "1318", "length": "5"},
+      {"name": "Block 6", "start": "1318","end": "1415", "length": "57"},
+      {"name": "After School", "start": "1415","end": "2359", "length": "584"}
     ],
     "2": [
     ],
     "3": [
-      {"name": "Before School", "start": "0,00","end": "7,30", "length": "450"},
-      {"name": "Block 1", "start": "7,30","end": "8,10", "length": "40"},
-      {"name": "Passing Time", "start": "8,10", "end": "8,15", "length": "5"},
-      {"name": "Block 2", "start": "8,15","end": "8,55", "length": "40"},
-      {"name": "Passing Time", "start": "8,55", "end": "9,00", "length": "5"},
-      {"name": "Advisory", "start": "9,00", "end": "9,30", "length": "5"},
-      {"name": "Passing Time", "start": "9,30", "end": "9,35", "length": "5"},
-      {"name": "Block 3", "start": "9,35","end": "10,15", "length": "40"},
-      {"name": "Passing Time", "start": "10,15", "end": "10,20", "length": "5"},
-      {"name": "Block 4", "start": "10,20","end": "11,35", "length": "75"},
-      {"name": "Passing Time", "start": "11,35", "end": "11,40", "length": "5"},
-      {"name": "Block 5", "start": "11,40","end": "12,20", "length": "40"},
-      {"name": "Passing Time", "start": "12,20", "end": "12,25", "length": "5"},
-      {"name": "Block 6", "start": "12,25","end": "13,05", "length": "40"},
-      {"name": "After School", "start": "13,05","end": "23,59", "length": "654"}
+      {"name": "Before School", "start": "000","end": "730", "length": "450"},
+      {"name": "Block 1", "start": "730","end": "810", "length": "40"},
+      {"name": "Passing Time", "start": "810", "end": "815", "length": "5"},
+      {"name": "Block 2", "start": "815","end": "855", "length": "40"},
+      {"name": "Passing Time", "start": "855", "end": "900", "length": "5"},
+      {"name": "Advisory", "start": "900", "end": "930", "length": "5"},
+      {"name": "Passing Time", "start": "930", "end": "935", "length": "5"},
+      {"name": "Block 3", "start": "935","end": "1015", "length": "40"},
+      {"name": "Passing Time", "start": "1015", "end": "1020", "length": "5"},
+      {"name": "Block 4", "start": "1020","end": "1135", "length": "75"},
+      {"name": "Passing Time", "start": "1135", "end": "1140", "length": "5"},
+      {"name": "Block 5", "start": "1140","end": "1220", "length": "40"},
+      {"name": "Passing Time", "start": "1220", "end": "1225", "length": "5"},
+      {"name": "Block 6", "start": "1225","end": "1305", "length": "40"},
+      {"name": "After School", "start": "1305","end": "2359", "length": "654"}
     ],
     "4": [
-      {"name": "Weekend", "start": "0,00", "end": "23,59", "length": "1439"}
+      {"name": "Weekend", "start": "000", "end": "2359", "length": "1439"}
     ]
   }
 }
