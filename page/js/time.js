@@ -17,12 +17,13 @@ function timeController() {
 
 function displayTime() {
   let currentTime = moment().format('h:mm:ss a')
-  $('#time-container').text(block.name + ' | ' + currentTime)
 
-  console.log(getTodaySchedule())
-
-  if(moment().diff(moment(block.end, 'hmm')) <= 0) {
-    block = getCurrentBlock()
+  try {
+    $('#time-container').text(block.name + ' | ' + currentTime)
+    if(moment().diff(moment(block.end, 'hmm')) <= 0) {
+      block = getCurrentBlock()
+    }
+  } catch(e) {
   }
 }
 
