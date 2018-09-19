@@ -32,7 +32,7 @@ function displayTime() {
     $('#time-container').text(block.name + ' | ' + currentTime)
     if(moment().diff(moment(block.end, 'hmm')) <= 0) {
       if(bell2) {
-        block = sched['3'][getSoonestIndex('3')]
+        block = sched['2'][getSoonestIndex('2')]
       }else {
         block = getCurrentBlock()
       }
@@ -55,13 +55,11 @@ function bellTwoController() {
     if(this.checked) {
       bell2 = true
       chrome.storage.sync.set( {'bell2': true}, function() {
-        console.log('bell 2 enabled')
       })
-      block = sched['3'][getSoonestIndex('3')]
+      block = sched['2'][getSoonestIndex('2')]
     }else {
       bell2 = false
       chrome.storage.sync.set( {'bell2': false}, function() {
-        console.log('bell 2 disabled')
       })
       block = getCurrentBlock()
     }
