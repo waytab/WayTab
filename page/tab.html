@@ -23,15 +23,15 @@
     </div>
   </div>
   <div id="percent-container"></div>
-  
+
   <h1 class="display-2 text-center" id="title-container"></h1>
   <button type="button" class="btn btn-primary position-absolute float-right mt-5 mr-3 action-button" data-toggle="modal" data-target="#settings-pane" id="activate-settings">Settings</button>
-  
+
   <button type="button" class="btn btn-primary position-absolute float-left mt-5 ml-3 action-button" id="show-wspn">WSPN</button>
   <div class="bg-dark" id="wspn-container">
     <div class="overflow-box">
       <span class="d-block wspn-title text-light font-roboto-slab">
-        WSPN Feed
+        <a href="https://waylandstudentpress.com/" style="text-decoration: none; color: #fff;">WSPN Feed</a>
         <a href="" id="close-wspn" class="d-inline-block ml-auto">
           <svg viewbox="0 0 10 10">
             <g fill="none" fill-rule="evenodd">
@@ -47,10 +47,10 @@
       <div id="rss-feed"><div class="loader mx-auto" id="wspn-loader"></div></div>
     </div>
   </div>
-  
+
   <!-- LINKS -->
   <div class="row mb-4 mt-4" id="link-container"></div>
-  
+
   <!-- SCHEDULE AND TO-DO LIST -->
   <div class="row">
     <div class="col-md-6">
@@ -178,7 +178,7 @@
       </div>
     </div>
   </div>
-  
+
   <!-- SCHEDULE CREATOR/EDITOR -->
   <div class="modal fade" tabindex="-1" role="dialog" id="create-schedule">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -279,7 +279,7 @@
       </div>
     </div>
   </div>
-  
+
   <!-- SETTINGS -->
   <div class="modal fade" id="settings-pane" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
