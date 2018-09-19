@@ -26,10 +26,9 @@ function timeController() {
 }
 
 function displayTime() {
-  let currentTime = moment().format('h:mm:ss a')
 
   try {
-    $('#time-container').text(block.name + ' | ' + currentTime)
+    $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${block.name}`)
     if(moment().diff(moment(block.end, 'hmm')) <= 0) {
       if(bell2) {
         block = sched['2'][getSoonestIndex('2')]
