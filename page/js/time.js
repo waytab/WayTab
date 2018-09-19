@@ -45,7 +45,7 @@ function barController() {
   let percentElapsed = 100 - (-1 * elapsed / block.length) * 100
 
   $('#time-bar-elapsed').css('width', percentElapsed + '%')
-  $('#percent-container').text('Ends at ' + moment(block.end, 'hmm').format('HH:mm') + ' | ' + parseInt(percentElapsed) + '% elapsed')
+  $('#percent-container').text('Ends at ' + moment(block.end, 'hmm').format('h:mm a') + ' | ' + parseInt(percentElapsed) + '% elapsed')
   $('#time-container').css('color', percentElapsed <= 50 ? 'black' : 'white')
 }
 
