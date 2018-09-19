@@ -17,7 +17,7 @@ $(document).ready(() => {
         button.text('Add')
       }, 1000)
     } else {
-      tasks[classSelector.val() == 'Class...' ? 'Miscellaneous' : classSelector.val()].push([task.val(), date.val()])
+      tasks[classSelector.val() == 'Class...(default to misc)' ? 'Miscellaneous' : classSelector.val()].push([task.val(), date.val()])
       chrome.storage.sync.set({tasks: tasks}, function() {
         console.log('new tasks saved!')
         loadTasks()
