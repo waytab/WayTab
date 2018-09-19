@@ -1,8 +1,18 @@
 let sched
 let block
+let bell2
+chrome.storage.sync.get( ['bell2'], function(res) {
+  bell2 = res.bell2
+  if(res.bell2) {
+    $('#bell-2-check').prop('checked', true)
+  }else {
+    $('#bell-2-check').prop('checked', false)
+  }
+})
 $.getJSON('js/json/config.json', (data) => { sched = data.bell_schedule, displayTime() })
 
 hoverController()
+bellTwoController()
 
 $(document).ready( () => {
   block = getCurrentBlock()
@@ -21,7 +31,11 @@ function displayTime() {
   try {
     $('#time-container').text(block.name + ' | ' + currentTime)
     if(moment().diff(moment(block.end, 'hmm')) <= 0) {
-      block = getCurrentBlock()
+      if(bell2) {
+        block = sched['3'][getSoonestIndex('3')]
+      }else {
+        block = getCurrentBlock()
+      }
     }
   } catch(e) {
   }
@@ -34,6 +48,24 @@ function barController() {
   $('#time-bar-elapsed').css('width', percentElapsed + '%')
   $('#percent-container').text('Ends at ' + moment(block.end, 'hmm').format('HH:mm') + ' | ' + parseInt(percentElapsed) + '% elapsed')
   $('#time-container').css('color', percentElapsed <= 50 ? 'black' : 'white')
+}
+
+function bellTwoController() {
+  $('#bell-2-check').change( function() {
+    if(this.checked) {
+      bell2 = true
+      chrome.storage.sync.set( {'bell2': true}, function() {
+        console.log('bell 2 enabled')
+      })
+      block = sched['3'][getSoonestIndex('3')]
+    }else {
+      bell2 = false
+      chrome.storage.sync.set( {'bell2': false}, function() {
+        console.log('bell 2 disabled')
+      })
+      block = getCurrentBlock()
+    }
+  })
 }
 
 function hoverController() {
@@ -56,7 +88,7 @@ function hoverController() {
 }
 
 function getCurrentBlock() {
-  return sched[getTodaySchedule()][getSoonestIndex()]
+  return sched[getTodaySchedule()][getSoonestIndex(getTodaySchedule())]
 }
 
 function getTodaySchedule() {
@@ -76,8 +108,8 @@ function getTodaySchedule() {
   }
 }
 
-function getSoonestIndex() {
-  let bell = sched[getTodaySchedule()]
+function getSoonestIndex(todaySchedule) {
+  let bell = sched[todaySchedule]
   let currentMin = Number.MAX_SAFE_INTEGER
   let ret = 0
   for(i = 0; i < bell.length; i++) {
