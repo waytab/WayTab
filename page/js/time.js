@@ -33,6 +33,7 @@ function barController() {
 
   $('#time-bar-elapsed').css('width', percentElapsed + '%')
   $('#percent-container').text('Ends at ' + moment(block.end, 'hmm').format('HH:mm') + ' | ' + parseInt(percentElapsed) + '% elapsed')
+  $('#time-container').css('color', percentElapsed <= 50 ? 'black' : 'white')
 }
 
 function hoverController() {
