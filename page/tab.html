@@ -79,6 +79,8 @@
       </div>
     </div>
   </div>
+
+  <!-- SETTINGS -->
   <div class="modal fade" id="settings-pane" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
@@ -91,7 +93,10 @@
         <div class="modal-header pb-0 px-0" style="border: none; background-color: rgba(100,100,100,0.05);">
           <ul class="nav nav-tabs w-100 px-3" id="settingsTabs" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="personal-settings" data-toggle="tab" href="#personal-set" role="tab" aria-selected="true">Personalize</a>
+              <a class="nav-link active" id="general-settings" data-toggle="tab" href="#general-set" role="tab" aria-selected="true">General</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="personal-settings" data-toggle="tab" href="#personal-set" role="tab" aria-selected="true">Personalize</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="links-settings" data-toggle="tab" href="#links-set" role="tab" aria-selected="false">Links</a>
@@ -103,7 +108,36 @@
         </div>
         <div class="modal-body">
           <div class="tab-content" id="settingsTabsContent">
-            <div class="tab-pane fade show active" id="personal-set" role="tabpanel">
+            <div class="tab-pane fade show active" id="general-set" role="tabpanel">
+              <div class="row">
+                <div class="col">Bell 2</div>
+                <div class="col-10">
+                  <div class="input-group">
+                    <input type="checkbox" class="form-check-input" id="bell-2-check">
+                    <label for="bell-2-check"> It is a Bell 2 Today </label>
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <div class="row" style="border-radius: 4px;">
+                <div class="col">
+                  <span class="text-danger">Danger Zone</span>
+                  <div class="input-group ml-3">
+                    <input type="checkbox" class="form-check-input" id="reveal-danger">
+                    <label for="reveal-danger"> Proceed </label>
+                  </div>
+                </div>
+                <div class="col-10" id="danger-zone" style="display: none;">
+                  <div class="input-group mb-2">
+                    <a role="button" title="Are you sure?" data-toggle="popover" data-trigger="focus" data-html="true" data-content="<button class=&quot;btn btn-danger delete-link&quot; id=&quot;force-reset-tasks&quot;>Confirm</button>"> <button class="btn btn-outline-danger mr-2"> Force Reset Tasks </button> </a>
+                  </div>
+                  <div class="input-group">
+                    <a role="button" title="Are you sure?" data-toggle="popover" data-trigger="focus" data-html="true" data-content="<button class=&quot;btn btn-danger delete-link&quot; id=&quot;force-reset-schedule&quot;>Confirm</button>"> <button class="btn btn-outline-danger mr-2"> Force Reset Schedule </button> </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="personal-set" role="tabpanel">
               <div class="row mb-3">
                 <label class="col">Title</label>
                 <div class="col-sm-10">
@@ -148,16 +182,6 @@
                     <option class="font-rubik" value="rubik">Rubik</option>
                     <option class="font-ubuntu" value="ubuntu">Ubuntu</option>
                   </select>
-                </div>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="col">Bell 2</div>
-                <div class="col-10">
-                  <div class="input-group">
-                    <input type="checkbox" class="form-check-input" id="bell-2-check">
-                    <label for="bell-2-check"> It is a Bell 2 Today </label>
-                  </div>
                 </div>
               </div>
             </div>
@@ -376,16 +400,16 @@
       </div>
     </div>
   </div>
-</div>
 
-<!-- Bootstrap JS -->
-<script src="js/libraries/popper.min.js"></script>
-<script src="js/libraries/bootstrap.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="js/libraries/popper.min.js"></script>
+  <script src="js/libraries/bootstrap.min.js"></script>
 
-<!-- Our JS -->
-<script src="js/main.js" type="module"></script>
-<script src="js/time.js" type="text/javascript"></script>
-<script src="js/todo.js" type="text/javascript"></script>
-<script src="js/wspn.js" tyle="text/javascript"></script>
+  <!-- Our JS -->
+  <script src="js/main.js" type="module"></script>
+  <script src="js/time.js" type="text/javascript"></script>
+  <script src="js/todo.js" type="text/javascript"></script>
+  <script src="js/wspn.js" type="text/javascript"></script>
+  <script src="js/settings.js" type="text/javascript"></script>
 </body>
 </html>
