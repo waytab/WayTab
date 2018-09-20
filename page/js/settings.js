@@ -4,7 +4,7 @@ resetController()
 function resetController() {
   hardResetTasks()
   hardResetSchedule()
-  revealDangerZone()
+  hardResetWaytab()
 }
 
 function hardResetTasks() {
@@ -32,5 +32,13 @@ function hardResetSchedule() {
     chrome.storage.sync.set({schedule: {}}, function() {
     })
     $('#schedule-table').remove()
+  })
+}
+
+function hardResetWaytab() {
+  $(document).on('click', '#force-reset-waytab', function() {
+    chrome.storage.sync.clear(() => {
+      location.reload()
+    })
   })
 }

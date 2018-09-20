@@ -9,7 +9,9 @@ export default class Background {
 
     chrome.storage.sync.get(['background'], (response) => {
       let bg = response.background
-      if(bg.match(this.urlRegEx)) {
+      if(bg == undefined) {
+        $(document.body).css('background-image', 'url("./img/school.jpg")')
+      } else if(bg.match(this.urlRegEx)) {
         $(document.body).css('background-image', 'url(\"'+bg+'\")')
         $('#time-bar-total').css('opacity', .8)
         if(!bg.indexOf('./img/')) {
