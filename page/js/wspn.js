@@ -1,6 +1,16 @@
 let wspnrss = 'http://waylandstudentpress.com/feed/'
 let articles = []
 
+chrome.storage.sync.get( ['enableWspn'], function(res) {
+  if(res.enableWspn) {
+    $('#wspn-check').prop('checked', true)
+    $('#show-wspn').show()
+  }else {
+    $('#wspn-check').prop('checked', false)
+    $('#show-wspn').hide()
+  }
+})
+
 $.ajax({
   type: 'GET',
   url: 'https://cors-anywhere.herokuapp.com/' + wspnrss,
@@ -27,6 +37,18 @@ $.ajax({
 
 $(document).ready(() => {
   controlFlow();
+
+  $('#wspn-check').change( function() {
+    if(this.checked) {
+      chrome.storage.sync.set( {'enableWspn': true}, function() {
+        $('#show-wspn').show()
+      })
+    } else {
+      chrome.storage.sync.set( {'enableWspn': false}, function() {
+        $('#show-wspn').hide()
+      })
+    }
+  })
 })
 
 function controlFlow() {
