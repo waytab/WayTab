@@ -7,16 +7,6 @@ function resetController() {
   revealDangerZone()
 }
 
-function revealDangerZone() {
-  $('#reveal-danger').change( function() {
-    if(this.checked) {
-      $('#danger-zone').fadeIn(2000)
-    }else {
-      $('#danger-zone').fadeOut()
-    }
-  })
-}
-
 function hardResetTasks() {
   $(document).on('click', '#force-reset-tasks', function() {
     chrome.storage.sync.get('tasks', function(res) {

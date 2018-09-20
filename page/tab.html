@@ -110,7 +110,7 @@
           <div class="tab-content" id="settingsTabsContent">
             <div class="tab-pane fade show active" id="general-set" role="tabpanel">
               <div class="row">
-                <div class="col"></div>
+                <div class="col">Schedule Rotation</div>
                 <div class="col-10">
                   <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="bell-2-check">
@@ -122,12 +122,8 @@
               <div class="row" style="border-radius: 4px;">
                 <div class="col">
                   <span class="text-danger">Danger Zone</span>
-                  <div class="input-group ml-3">
-                    <input type="checkbox" class="form-check-input" id="reveal-danger">
-                    <label for="reveal-danger"> Proceed </label>
-                  </div>
                 </div>
-                <div class="col-10" id="danger-zone" style="display: none;">
+                <div class="col-10" id="danger-zone">
                   <div class="input-group mb-2">
                     <a role="button" title="Are you sure?" data-toggle="popover" data-trigger="focus" data-html="true" data-content="<button class=&quot;btn btn-danger delete-link&quot; id=&quot;force-reset-tasks&quot;>Confirm</button>"> <button class="btn btn-outline-danger mr-2" data-toggle="tooltip" data-placement="top" title="Your tasks will be printed in the chrome console"> Force Reset Tasks </button> </a>
                   </div>
@@ -141,7 +137,7 @@
               <div class="row mb-3">
                 <label class="col">Title</label>
                 <div class="col-sm-10">
-                  <input class="form-control" type="text" id="title-input" placeholder="Example"></input>
+                  <input class="form-control" type="text" id="title-input" placeholder="Example" />
                 </div>
               </div>
               <div class="row mb-3">
