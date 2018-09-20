@@ -16,17 +16,8 @@ $(document).ready(() => {
         task.toggleClass('is-invalid')
         button.text('Add')
       }, 1000)
-    } else if(classSelector.val() == 'Class...') {
-      button.toggleClass('btn-danger').toggleClass('btn-outline-secondary')
-      classSelector.toggleClass('is-invalid')
-      button.text('No class selected!')
-      setTimeout(() => {
-        button.toggleClass('btn-danger').toggleClass('btn-outline-secondary')
-        classSelector.toggleClass('is-invalid')
-        button.text('Add')
-      }, 1000)
     } else {
-      tasks[classSelector.val()].push([task.val(), date.val()])
+      tasks[classSelector.val() == 'Class...(default to misc)' ? 'Miscellaneous' : classSelector.val()].push([task.val(), date.val()])
       chrome.storage.sync.set({tasks: tasks}, function() {
         console.log('new tasks saved!')
         loadTasks()
@@ -39,6 +30,7 @@ $(document).ready(() => {
     console.log(taskArray)
     tasks[taskArray[0]].push([taskArray[1], taskArray[2]])
     chrome.storage.sync.set({tasks: tasks}, function() {
+      $('#undo-task-delete').remove()
       loadTasks()
     })
   })
@@ -54,7 +46,8 @@ function loadTasks() {
       console.log(tasks)
       $('#taskList').empty()
       $('#newTask').val('')
-      $('#addTaskClass').empty().append(`<option selected>Class...</option>`)
+      $('#taskDue').val('')
+      $('#addTaskClass').empty().append(`<option selected>Class...(default to misc)</option>`)
       for(let key in tasks) {
         if(tasks.hasOwnProperty(key)) {
           if(tasks[key].length != 0) {
@@ -76,15 +69,50 @@ function loadTasks() {
                     .attr('for', `check${key.replace(' ', '_') + i}`)
                   )
                 )
-              let due;
+              let dueDate = new Date(tasks[key][i][1] + 'T00:00:00')
+              let dueDeltaDay = Math.floor((dueDate - new Date)/(1000*60*60*24)+1)
               if(tasks[key][i][1] == '') {
                 $(`#label${key.replace(' ', '_') + i}`).text(tasks[key][i][0])
-              }else {
-                due = tasks[key][i][1].split('-')
-                $(`#label${key.replace(' ', '_') + i}`).text(tasks[key][i][0] + " | Due: " + due[1] + "/" + due[2] + "/" + due[0])
-                let curr = new Date();
-                if(parseInt(due[0]) == curr.getFullYear() && parseInt(due[1]) == curr.getMonth()+1 && parseInt(due[2]) == curr.getDate()) {
-                  $(`#label${key.replace(' ', '_') + i}`).css('background-color', '#ffff00')
+              } else {
+                if (dueDeltaDay == 0) { // due today
+                  $(`#label${key.replace(' ', '_') + i}`).html(tasks[key][i][0] + `<i class="far fa-clock ml-1 text-danger" id="tooltip${key.replace(' ', '_') + i}"></i>`).attr({ 'data-has-date': 'true', 'data-due-on': dueDate })
+                  $(`#tooltip${key.replace(' ', '_') + i}`).tooltip({
+                    title: 'Due today',
+                    placement: 'right',
+                    template: '<div class="tooltip warning" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
+                  })
+                } else if (dueDeltaDay == 1) { // due tomorrow
+                  $(`#label${key.replace(' ', '_') + i}`).html(tasks[key][i][0] + `<i class="far fa-clock ml-1" id="tooltip${key.replace(' ', '_') + i}"></i>`).attr({ 'data-has-date': 'true', 'data-due-on': dueDate })
+                  $(`#tooltip${key.replace(' ', '_') + i}`).tooltip({
+                    title: 'Due tomorrow',
+                    placement: 'right'
+                  })
+                } else if(dueDeltaDay >= 2 && dueDeltaDay <= 14) { // due within 2 weeks after tomorrow
+                  $(`#label${key.replace(' ', '_') + i}`).html(tasks[key][i][0] + `<i class="far fa-clock ml-1" id="tooltip${key.replace(' ', '_') + i}"></i>`).attr({ 'data-has-date': 'true', 'data-due-on': dueDate })
+                  $(`#tooltip${key.replace(' ', '_') + i}`).tooltip({
+                    title: `Due in ${dueDeltaDay} days`,
+                    placement: 'right'
+                  })
+                } else if (dueDeltaDay > 14) { // due beyond 2 weeks from now
+                  $(`#label${key.replace(' ', '_') + i}`).html(tasks[key][i][0] + `<i class="far fa-clock ml-1" id="tooltip${key.replace(' ', '_') + i}"></i>`).attr({ 'data-has-date': 'true', 'data-due-on': dueDate })
+                  $(`#tooltip${key.replace(' ', '_') + i}`).tooltip({
+                    title: `Due on ${dueDate.getMonth()+1}/${dueDate.getDate()}/${dueDate.getFullYear()}`,
+                    placement: 'right'
+                  })
+                } else if (dueDeltaDay == -1) { // due yesterday
+                  $(`#label${key.replace(' ', '_') + i}`).html(tasks[key][i][0] + `<i class="far fa-clock ml-1 text-danger" id="tooltip${key.replace(' ', '_') + i}"></i>`).attr({ 'data-has-date': 'true', 'data-due-on': dueDate })
+                  $(`#tooltip${key.replace(' ', '_') + i}`).tooltip({
+                    title: `Was due yesterday`,
+                    placement: 'right',
+                    template: '<div class="tooltip warning" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
+                  })
+                } else { // due before yesterday
+                  $(`#label${key.replace(' ', '_') + i}`).html(tasks[key][i][0] + `<i class="far fa-clock ml-1 text-danger" id="tooltip${key.replace(' ', '_') + i}"></i>`).attr({ 'data-has-date': 'true', 'data-due-on': dueDate })
+                  $(`#tooltip${key.replace(' ', '_') + i}`).tooltip({
+                    title: `Was due ${Math.abs(dueDeltaDay)} days ago`,
+                    placement: 'right',
+                    template: '<div class="tooltip warning" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
+                  })
                 }
               }
             }
@@ -96,13 +124,12 @@ function loadTasks() {
         let button = $(this)
         let target = button.data('del')
         let index;
-        if(!$(`#${target} label`).text().includes(' | Due: ')) {
+        if (!(typeof $(`#${target} label`).attr('data-has-date') !== typeof undefined && $(`#${target} label`).attr('data-has-date') !== false)) {
           index = getIndexOfArray(tasks[button.data('class').replace('_', ' ')], [$(`#${target} label`).text(), ''])
         } else {
-          let labelSections = $(`#${target} label`).text().split(' | Due: ')
-          let dateSections = labelSections[1].split('/')
-          let dateFormatted = dateSections[2] + "-" + dateSections[0] + "-" + dateSections[1]
-          index = getIndexOfArray(tasks[button.data('class').replace('_', ' ')], [labelSections[0], dateFormatted])
+          let dateFormatted = new Date($(`#${target} label`).attr('data-due-on'))
+          dateFormatted = dateFormatted.getFullYear() + '-' + (dateFormatted.getMonth() + 1).toString().padStart(2, "0") + '-' + (dateFormatted.getDate()).toString().padStart(2, "0")
+          index = getIndexOfArray(tasks[button.data('class').replace('_', ' ')], [$(`#${target} label`).text(), dateFormatted])
         }
         if(index > -1) {
           lastTask = [button.data('class').replace('_', ' '), tasks[button.data('class').replace('_', ' ')][index]]
