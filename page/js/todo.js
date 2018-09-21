@@ -43,11 +43,11 @@ function loadTasks() {
       console.log('No tasks found')
     } else {
       tasks = result.tasks
-      console.log(tasks)
       $('#taskList').empty()
       $('#newTask').val('')
       $('#taskDue').val('')
       $('#addTaskClass').empty().append(`<option selected>Class...(default to misc)</option>`)
+      $('#newTaskSelectionGroup').toggleClass('mb-3')
       for(let key in tasks) {
         if(tasks.hasOwnProperty(key)) {
           if(tasks[key].length != 0) {
