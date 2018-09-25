@@ -74,46 +74,15 @@ function loadTasks() {
               if(tasks[key][i][1] == '') {
                 $(`#label${key.replace(' ', '_') + i}`).text(tasks[key][i][0])
               } else {
-                if (dueDeltaDay == 0) { // due today
-                  $(`#label${key.replace(' ', '_') + i}`).html(tasks[key][i][0] + `<i class="far fa-clock ml-1 text-danger" id="tooltip${key.replace(' ', '_') + i}"></i>`).attr({ 'data-has-date': 'true', 'data-due-on': dueDate })
-                  $(`#tooltip${key.replace(' ', '_') + i}`).tooltip({
-                    title: 'Due today',
-                    placement: 'right',
-                    template: '<div class="tooltip warning" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
-                  })
-                } else if (dueDeltaDay == 1) { // due tomorrow
-                  $(`#label${key.replace(' ', '_') + i}`).html(tasks[key][i][0] + `<i class="far fa-clock ml-1" id="tooltip${key.replace(' ', '_') + i}"></i>`).attr({ 'data-has-date': 'true', 'data-due-on': dueDate })
-                  $(`#tooltip${key.replace(' ', '_') + i}`).tooltip({
-                    title: 'Due tomorrow',
-                    placement: 'right'
-                  })
-                } else if(dueDeltaDay >= 2 && dueDeltaDay <= 14) { // due within 2 weeks after tomorrow
-                  $(`#label${key.replace(' ', '_') + i}`).html(tasks[key][i][0] + `<i class="far fa-clock ml-1" id="tooltip${key.replace(' ', '_') + i}"></i>`).attr({ 'data-has-date': 'true', 'data-due-on': dueDate })
-                  $(`#tooltip${key.replace(' ', '_') + i}`).tooltip({
-                    title: `Due in ${dueDeltaDay} days`,
-                    placement: 'right'
-                  })
-                } else if (dueDeltaDay > 14) { // due beyond 2 weeks from now
-                  $(`#label${key.replace(' ', '_') + i}`).html(tasks[key][i][0] + `<i class="far fa-clock ml-1" id="tooltip${key.replace(' ', '_') + i}"></i>`).attr({ 'data-has-date': 'true', 'data-due-on': dueDate })
-                  $(`#tooltip${key.replace(' ', '_') + i}`).tooltip({
-                    title: `Due on ${dueDate.getMonth()+1}/${dueDate.getDate()}/${dueDate.getFullYear()}`,
-                    placement: 'right'
-                  })
-                } else if (dueDeltaDay == -1) { // due yesterday
-                  $(`#label${key.replace(' ', '_') + i}`).html(tasks[key][i][0] + `<i class="far fa-clock ml-1 text-danger" id="tooltip${key.replace(' ', '_') + i}"></i>`).attr({ 'data-has-date': 'true', 'data-due-on': dueDate })
-                  $(`#tooltip${key.replace(' ', '_') + i}`).tooltip({
-                    title: `Was due yesterday`,
-                    placement: 'right',
-                    template: '<div class="tooltip warning" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
-                  })
-                } else { // due before yesterday
-                  $(`#label${key.replace(' ', '_') + i}`).html(tasks[key][i][0] + `<i class="far fa-clock ml-1 text-danger" id="tooltip${key.replace(' ', '_') + i}"></i>`).attr({ 'data-has-date': 'true', 'data-due-on': dueDate })
-                  $(`#tooltip${key.replace(' ', '_') + i}`).tooltip({
-                    title: `Was due ${Math.abs(dueDeltaDay)} days ago`,
-                    placement: 'right',
-                    template: '<div class="tooltip warning" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
-                  })
-                }
+                // ddd <= 0
+                // ddd < -1
+                // ddd == -1
+                // ddd == 0
+                // ddd == 1
+                // 2 <= ddd <= 14
+                // ddd > 14
+                $(`#label${key.replace(' ', '_') + i}`).html(tasks[key][i][0] + `<i class="far fa-clock ml-1 ${dueDeltaDay <= 0 ? 'text-danger' : ''}" id="tooltip${key.replace(' ', '_') + i}"></i>`).attr({ 'data-has-date': 'true', 'data-due-on': dueDate })
+                $(`#tooltip${key.replace(' ', '_') + i}`).tooltip(tooltipBuilder(dueDate, dueDeltaDay))
               }
             }
           }
@@ -168,13 +137,39 @@ function loadTasks() {
 
 function getIndexOfArray(origArr, newArr) {
   newArr[1].replace('/', '-')
-  console.log(origArr)
-  console.log(newArr)
   for(i = 0; i < origArr.length; i++) {
     if(origArr[i][0] == newArr[0]) {
       if(origArr[i][1] == newArr[1]) {
         return i
       }
     }
+  }
+}
+// ddd < -1
+// ddd == -1
+// ddd == 0
+// ddd == 1
+// 2 <= ddd <= 14
+// ddd > 14
+function tooltipBuilder(date, delta) {
+  let dueString
+  if(delta < -1) {
+    dueString = `Was due ${Math.abs(delta)} days ago`
+  } else if(delta == -1) {
+    dueString = `Was yesterday`
+  } else if (delta == 0) {
+    dueString = `Due today`
+  } else if (delta == 1) {
+    dueString = `Due tomorrow`
+  } else if (delta >= 2 && delta <= 14) {
+    dueString = `Due in ${delta} days`
+  } else if (delta > 14) {
+    dueString = `Due on ${date.getMonth() + 1}/${date.getDate()}/${dategetFullYear()}`
+  }
+
+  return {
+    title: dueString,
+    placement: 'right',
+    template: `<div class="tooltip ${delta <= 0 ? 'warning' : ''}" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>`
   }
 }
