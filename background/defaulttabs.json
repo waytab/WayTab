@@ -11,6 +11,11 @@ var deftabs = {
       "image_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Google_Drive_Logo.svg/2000px-Google_Drive_Logo.svg.png"
     },
     {
+      "name": "Classroom",
+      "actual_link": "https://classroom.google.com",
+      "image_link": "https://upload.wikimedia.org/wikipedia/commons/5/59/Google_Classroom_Logo.png"
+    },
+    {
       "name": "ESchool",
       "actual_link": "https://hac40.eschoolplus.powerschool.com/HAC4_001/Account/LogOn?ReturnUrl=%2fHAC4_001%3fSiteCode%3dwyllive&SiteCode=wyllive",
       "image_link": "img/eschool.png"
