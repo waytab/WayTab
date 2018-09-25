@@ -15,7 +15,8 @@ hoverController()
 bellTwoController()
 
 $(document).ready( () => {
-  block = getCurrentBlock()
+  block = getCurrentBlock();
+  $("#taskDue").val(formatDate(new Date()));
 })
 
 setInterval(timeController, 1000)
