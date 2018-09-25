@@ -11,6 +11,11 @@
       "image_link": "http://www.iconarchive.com/download/i80454/uiconstock/socialmedia/Google-Drive.ico"
     },
     {
+      "id": "Student Classroom",
+      "actual_link": "https://classroom.google.com",
+      "image_link": "https://upload.wikimedia.org/wikipedia/commons/5/59/Google_Classroom_Logo.png"
+    },
+    {
       "id": "ESchool",
       "actual_link": "https://hac40.eschoolplus.powerschool.com/HAC4_001/Account/LogOn?ReturnUrl=%2fHAC4_001%3fSiteCode%3dwyllive&SiteCode=wyllive",
       "image_link": "img/eschool.png"
