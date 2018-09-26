@@ -14,28 +14,25 @@ $.getJSON('js/json/config.json', (data) => { sched = data.bell_schedule, display
 hoverController()
 bellTwoController()
 
-$(document).ready( () => {
-  block = getCurrentBlock()
+$(document).ready( function() {
+  updateBlock()
 })
 
 setInterval(timeController, 1000)
+setInterval(updateBlock, 60000)
 
 function timeController() {
   displayTime()
   barController()
 }
 
-function displayTime() {
+function updateBlock() {
+  block = getCurrentBlock()
+}
 
+function displayTime() {
   try {
     $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${block.name}`)
-    if(moment().diff(moment(block.end, 'hmm')) <= 0) {
-      if(bell2) {
-        block = sched['2'][getSoonestIndex('2')]
-      }else {
-        block = getCurrentBlock()
-      }
-    }
   } catch(e) {
   }
 }
