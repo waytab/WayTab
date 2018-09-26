@@ -90,13 +90,13 @@ function getCurrentBlock() {
 
 function getTodaySchedule() {
   switch(moment().format('e')) {
-    case 0:
+    case '0':
       return 4
       break
-    case 3:
+    case '3':
       return 3
       break
-    case 6:
+    case '6':
       return 4
       break
     default:
