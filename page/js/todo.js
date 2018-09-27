@@ -45,7 +45,7 @@ function loadTasks() {
       tasks = result.tasks
       $('#taskList').empty()
       $('#newTask').val('')
-      $('#taskDue').val('')
+      $('#taskDue').val(formatDate(new Date()))
       $('#addTaskClass').empty().append(`<option selected>Class...(default to misc)</option>`)
       $('#newTaskSelectionGroup').toggleClass('mb-3')
       for(let key in tasks) {
@@ -166,10 +166,21 @@ function tooltipBuilder(date, delta) {
   } else if (delta > 14) {
     dueString = `Due on ${date.getMonth() + 1}/${date.getDate()}/${dategetFullYear()}`
   }
-
-  return {
+  
+    return {
     title: dueString,
     placement: 'right',
     template: `<div class="tooltip ${delta <= 0 ? 'warning' : ''}" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>`
   }
 }
+
+function formatDate() {
+  let date = new Date()
+  date.setTime(date.getTime() + (24 * 60 * 60 * 1000))
+  let month = (date.getMonth() + 1).toString().padStart(2, '0')
+  let year = date.getFullYear()
+  let day = (date.getDate()).toString().padStart(2, '0')
+
+  return year + '-' + month + '-' + day
+}
+
