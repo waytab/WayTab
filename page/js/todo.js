@@ -43,10 +43,9 @@ function loadTasks() {
       console.log('No tasks found')
     } else {
       tasks = result.tasks
-      console.log(tasks)
       $('#taskList').empty()
       $('#newTask').val('')
-      $('#taskDue').val('')
+      $('#taskDue').val(formatDate(new Date()))
       $('#addTaskClass').empty().append(`<option selected>Class...(default to misc)</option>`)
       for(let key in tasks) {
         if(tasks.hasOwnProperty(key)) {
@@ -177,4 +176,14 @@ function getIndexOfArray(origArr, newArr) {
       }
     }
   }
+}
+
+function formatDate() {
+  let date = new Date()
+  date.setTime(date.getTime() + (24 * 60 * 60 * 1000))
+  let month = (date.getMonth() + 1).toString().padStart(2, '0')
+  let year = date.getFullYear()
+  let day = (date.getDate()).toString().padStart(2, '0')
+
+  return year + '-' + month + '-' + day
 }
