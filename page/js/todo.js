@@ -47,12 +47,12 @@ function loadTasks() {
       $('#newTask').val('')
       $('#taskDue').val(formatDate(new Date()))
       $('#addTaskClass').empty().append(`<option selected>Class...(default to misc)</option>`)
-      $('#newTaskSelectionGroup').toggleClass('mb-3')
-      for(let key in tasks) {
+      for (let key in tasks) {
         if(tasks.hasOwnProperty(key)) {
           if(tasks[key].length != 0) {
             $('#taskList').append($('<h5></h5>').text(key))
-            for(let i = 0; i < tasks[key].length; i++) {
+            for (let i = 0; i < tasks[key].length; i++) {
+              $('#newTaskSelectionGroup').addClass('mb-3')
               $('#taskList')
                 .append($('<div></div>')
                   .addClass('custom-control custom-checkbox mb-2')
