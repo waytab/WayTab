@@ -1,14 +1,19 @@
 {
   "saved_tabs": [
     {
-      "id": "Student Gmail",
+      "id": "Gmail",
       "actual_link": "https://mail.google.com",
       "image_link": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Gmail_Icon.svg/2000px-Gmail_Icon.svg.png"
     },
     {
-      "id": "Student Drive",
+      "id": "Drive",
       "actual_link": "https://drive.google.com",
       "image_link": "http://www.iconarchive.com/download/i80454/uiconstock/socialmedia/Google-Drive.ico"
+    },
+    {
+      "id": "Classroom",
+      "actual_link": "https://classroom.google.com",
+      "image_link": "https://upload.wikimedia.org/wikipedia/commons/5/59/Google_Classroom_Logo.png"
     },
     {
       "id": "ESchool",

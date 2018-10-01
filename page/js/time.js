@@ -5,7 +5,7 @@ chrome.storage.sync.get( ['bell2'], function(res) {
   bell2 = res.bell2
   if(res.bell2) {
     $('#bell-2-check').prop('checked', true)
-  }else {
+  } else {
     $('#bell-2-check').prop('checked', false)
   }
 })
@@ -53,7 +53,7 @@ function bellTwoController() {
       chrome.storage.sync.set( {'bell2': true}, function() {
       })
       block = sched['2'][getSoonestIndex('2')]
-    }else {
+    } else {
       bell2 = false
       chrome.storage.sync.set( {'bell2': false}, function() {
       })
@@ -87,13 +87,13 @@ function getCurrentBlock() {
 
 function getTodaySchedule() {
   switch(moment().format('e')) {
-    case 0:
+    case '0':
       return 4
       break
-    case 3:
+    case '3':
       return 3
       break
-    case 6:
+    case '6':
       return 4
       break
     default:

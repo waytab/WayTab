@@ -38,7 +38,13 @@ function hardResetSchedule() {
 function hardResetWaytab() {
   $(document).on('click', '#force-reset-waytab', function() {
     chrome.storage.sync.clear(() => {
-      location.reload()
+      chrome.storage.sync.set({
+        title: 'WayTab',
+        font: 'default',
+        enableWspn: true
+      }, () => {
+        location.reload()
+      })
     })
   })
 }
