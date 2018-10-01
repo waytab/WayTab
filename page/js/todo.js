@@ -164,7 +164,7 @@ function tooltipBuilder(date, delta) {
   } else if (delta >= 2 && delta <= 14) {
     dueString = `Due in ${delta} days`
   } else if (delta > 14) {
-    dueString = `Due on ${date.getMonth() + 1}/${date.getDate()}/${dategetFullYear()}`
+    dueString = `Due on ${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
   }
   
     return {
