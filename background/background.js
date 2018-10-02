@@ -12,7 +12,7 @@ chrome.runtime.onInstalled.addListener(function(deets) {
         "actual_link": "https://classroom.google.com",
         "image_link": "https://upload.wikimedia.org/wikipedia/commons/5/59/Google_Classroom_Logo.png"
       })
-      chrome.storage.set({links: l})
+      chrome.storage.sync.set({links: l})
     })
   }
 });
