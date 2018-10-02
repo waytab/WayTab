@@ -185,7 +185,6 @@ function tooltipBuilder(date, delta) {
   } else if (delta > 14) {
     dueString = `Due on ${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
   }
-
     return {
     title: dueString,
     placement: 'right',
