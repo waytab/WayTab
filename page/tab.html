@@ -118,13 +118,16 @@
               <li class="nav-item">
                 <a class="nav-link" id="about-settings" data-toggle="tab" href="#about-set" role="tab" aria-selected="false">About<span class="badge badge-outline-secondary badge-pill ml-2">1.1.2</span></a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link text-danger" id="danger-settings" data-toggle="tab" href="#danger-set" role="tab" aria-selected="false">Danger Zone</a>
+              </li>
             </ul>
           </div>
 
           <div class="modal-body">
-
-            <!-- General Settings -->
             <div class="tab-content" id="settingsTabsContent">
+
+              <!-- General Settings -->
               <div class="tab-pane fade show active" id="general-set" role="tabpanel">
                 <div class="row">
                   <div class="col">Schedule Rotation</div>
@@ -132,23 +135,6 @@
                     <div class="custom-control custom-checkbox">
                       <input type="checkbox" class="custom-control-input" id="bell-2-check">
                       <label class="custom-control-label" for="bell-2-check">Bell 2</label>
-                    </div>
-                  </div>
-                </div>
-                <hr />
-                <div class="row" style="border-radius: 4px;">
-                  <div class="col">
-                    <span class="text-danger">Danger Zone</span>
-                  </div>
-                  <div class="col-10" id="danger-zone">
-                    <div class="input-group mb-2">
-                      <a role="button" title="Are you sure?" data-toggle="popover" data-trigger="focus" data-html="true" data-content="<button class='btn btn-danger' id='force-reset-tasks'>Confirm</button>"> <button class="btn btn-outline-danger mr-2" data-toggle="tooltip" data-placement="top" title="Your tasks will be printed in the chrome console"> Force Reset Tasks </button> </a>
-                    </div>
-                    <div class="input-group">
-                      <button role="button" title="Are you sure?" data-toggle="popover" data-trigger="focus" data-html="true" data-content="<button class='btn btn-danger' id='force-reset-schedule'>Confirm</button>" class="btn btn-outline-danger mr-2 mb-2">Force Reset Schedule</button>
-                    </div>
-                    <div class="input-group">
-                      <button role="button" title="Are you sure?" data-toggle="popover" data-html="true" data-content="<button class='btn btn-danger' id='force-reset-waytab'>Confirm</button>" class="btn btn-outline-danger mr-2">Force Reset WayTab</button>
                     </div>
                   </div>
                 </div>
@@ -236,8 +222,28 @@
                 <h6>Don't have a GitHub account?</h6>
                 <h6><i class="fas fa-edit"></i> <a href="https://goo.gl/forms/cuEftjPGOl5G3chk2">Use the Google Form.</a></h6>
               </div>
-            </div>
 
+              <!-- Danger Zone -->
+              <div class="tab-pane fade" id="danger-set" role="tabpanel">
+                <div class="row" style="border-radius: 4px;">
+                  <div class="col">
+                    <span class="text-danger">Proceed with Caution</span>
+                  </div>
+                  <div class="col-10" id="danger-zone">
+                    <div class="input-group mb-2">
+                      <a role="button" title="Are you sure?" data-toggle="popover" data-trigger="focus" data-html="true" data-content="<button class='btn btn-danger' id='force-reset-tasks'>Confirm</button>"> <button class="btn btn-outline-danger mr-2" data-toggle="tooltip" data-placement="top" title="Your tasks will be printed in the chrome console"> Force Reset Tasks </button> </a>
+                    </div>
+                    <div class="input-group">
+                      <button role="button" title="Are you sure?" data-toggle="popover" data-trigger="focus" data-html="true" data-content="<button class='btn btn-danger' id='force-reset-schedule'>Confirm</button>" class="btn btn-outline-danger mr-2 mb-2">Force Reset Schedule</button>
+                    </div>
+                    <div class="input-group">
+                      <button role="button" title="Are you sure?" data-toggle="popover" data-html="true" data-content="<button class='btn btn-danger' id='force-reset-waytab'>Confirm</button>" class="btn btn-outline-danger mr-2">Force Reset WayTab</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
 
           <!-- Save+Quit Modal -->
