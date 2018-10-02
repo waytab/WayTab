@@ -1,6 +1,25 @@
 let tasks = {}
+let todoDefault
+chrome.storage.sync.get(['todoDate'], function(res) {
+  todoDefault = res.todoDate
+  if(todoDefault === 'Tomorrow') {
+    $('#todo-tomorrow').prop('selected', true)
+    $('#todo-today').prop('selected', false)
+    $('#todo-week').prop('selected', false)
+  } else if(todoDefault === 'Today') {
+    $('#todo-tomorrow').prop('selected', false)
+    $('#todo-today').prop('selected', true)
+    $('#todo-week').prop('selected', false)
+  } else if(todoDefault === 'Week') {
+    $('#todo-tomorrow').prop('selected', false)
+    $('#todo-today').prop('selected', false)
+    $('#todo-week').prop('selected', true)
+  }
+})
+
 $(document).ready(() => {
   loadTasks()
+  defaultController()
 
   $(document).on('click', '#addTask', function() {
     let button = $(this)
@@ -166,7 +185,7 @@ function tooltipBuilder(date, delta) {
   } else if (delta > 14) {
     dueString = `Due on ${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
   }
-  
+
     return {
     title: dueString,
     placement: 'right',
@@ -174,13 +193,22 @@ function tooltipBuilder(date, delta) {
   }
 }
 
+function defaultController() {
+  $('#settings-close').click( function() {
+    chrome.storage.sync.set({'todoDate': $('#todo-default').val()})
+  })
+}
+
 function formatDate() {
   let date = new Date()
-  date.setTime(date.getTime() + (24 * 60 * 60 * 1000))
+  if(todoDefault === 'Tomorrow') {
+    date.setTime(date.getTime() + (24 * 60 * 60 * 1000))
+  }else if(todoDefault === 'Week') {
+    date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000))
+  }
   let month = (date.getMonth() + 1).toString().padStart(2, '0')
   let year = date.getFullYear()
   let day = (date.getDate()).toString().padStart(2, '0')
 
   return year + '-' + month + '-' + day
 }
-
