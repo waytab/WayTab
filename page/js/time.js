@@ -28,6 +28,7 @@ function timeController() {
 
 function updateBlock() {
   block = getCurrentBlock()
+  highlightBlock()
 }
 
 function displayTime() {
@@ -83,6 +84,20 @@ function hoverController() {
 
 function getCurrentBlock() {
   return sched[getTodaySchedule()][getSoonestIndex(getTodaySchedule())]
+}
+
+function highlightBlock() {
+  let blockNum = sched[getTodaySchedule()].indexOf(block)
+  if(blockNum % 2 == 0) {
+    let actualBlock = (blockNum + 1) / 2
+    if(actualBlock <= 6) {
+      $('#schedule-body').children().each( function() {
+        if($(this).attr('data-per') == actualBlock) {
+          $(this).children().css('background-color', '#6ba3ff')
+        }
+      })
+    }
+  }
 }
 
 function getTodaySchedule() {
