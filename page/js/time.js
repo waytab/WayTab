@@ -93,7 +93,7 @@ function highlightBlock() {
     if(actualBlock <= 6) {
       $('#schedule-body').children().each( function() {
         if($(this).attr('data-per') == actualBlock) {
-          $(this).children().css('background-color', '#6ba3ff')
+          $(this).children().addClass('now')
         }
       })
     }
