@@ -87,9 +87,8 @@ function getCurrentBlock() {
 }
 
 function highlightBlock() {
-  let blockNum = sched[getTodaySchedule()].indexOf(block)
-  if(blockNum % 2 == 1) {
-    let actualBlock = (blockNum + 1) / 2
+  if(block.name.includes('Block')) {
+    let actualBlock = parseInt(block.name.substring(block.name.length - 1))
     if(actualBlock <= 6) {
       $('#schedule-body').children().each( function() {
         if($(this).attr('data-per') == actualBlock) {
