@@ -46,8 +46,10 @@ $(document).ready(() => {
 
   $(document).on('click', '#undo-task-delete', function() {
     let taskArray = $(this).data('task').split(',')
-    console.log(taskArray)
-    tasks[taskArray[0]].push([taskArray[1], taskArray[2]])
+    let taskArray1 = [...taskArray] // to make sure we get a copy of the contents, not just a reference
+    taskArray1.splice(0,1)
+    taskArray1.splice(taskArray1.length-1, 1)
+    tasks[taskArray[0]].push([taskArray1.join(), taskArray[taskArray.length-1]])
     chrome.storage.sync.set({tasks: tasks}, function() {
       $('#undo-task-delete').remove()
       loadTasks()
@@ -123,7 +125,6 @@ function loadTasks() {
           lastTask = [button.data('class').replace('_', ' '), tasks[button.data('class').replace('_', ' ')][index]]
           tasks[button.data('class').replace('_', ' ')].splice(index, 1)
           chrome.storage.sync.set({tasks: tasks}, function() {
-            console.log($('#schedule .card-title'))
             $('#undo-task-delete').remove()
             $('#todo .card-title').append(`<a href="" data-toggle="modal" class="btn btn-primary btn-sm float-right" id="undo-task-delete" data-task="${lastTask}">Undo</a>`)
             loadTasks()
