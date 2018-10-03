@@ -1,4 +1,3 @@
-
 resetController()
 
 function resetController() {
