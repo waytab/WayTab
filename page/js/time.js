@@ -18,13 +18,11 @@ $(document).ready( function() {
   updateBlock()
 })
 
-setInterval(timeController, 1000)
-setInterval(updateBlock, 60000)
-
-function timeController() {
+setInterval( () => {
   displayTime()
   barController()
-}
+  updateBlock()
+}, 1000)
 
 function updateBlock() {
   block = getCurrentBlock()
