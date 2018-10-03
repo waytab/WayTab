@@ -176,7 +176,7 @@ function tooltipBuilder(date, delta) {
   if(delta < -1) {
     dueString = `Was due ${Math.abs(delta)} days ago`
   } else if(delta == -1) {
-    dueString = `Was yesterday`
+    dueString = `Was due yesterday`
   } else if (delta == 0) {
     dueString = `Due today`
   } else if (delta == 1) {
