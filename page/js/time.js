@@ -88,7 +88,7 @@ function getCurrentBlock() {
 
 function highlightBlock() {
   let blockNum = sched[getTodaySchedule()].indexOf(block)
-  if(blockNum % 2 == 0) {
+  if(blockNum % 2 == 1) {
     let actualBlock = (blockNum + 1) / 2
     if(actualBlock <= 6) {
       $('#schedule-body').children().each( function() {
