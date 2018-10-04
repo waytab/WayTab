@@ -88,6 +88,7 @@ function highlightBlock() {
   if(block.name.includes('Block')) {
     let actualBlock = parseInt(block.name.substring(block.name.length - 1))
     if(actualBlock <= 6) {
+      $('.now').removeClass('now')
       $('#schedule-body').children().each( function() {
         if($(this).attr('data-per') == actualBlock) {
           $(this).children().addClass('now')
