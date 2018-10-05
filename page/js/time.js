@@ -18,16 +18,15 @@ $(document).ready( function() {
   updateBlock()
 })
 
-setInterval(timeController, 1000)
-setInterval(updateBlock, 60000)
-
-function timeController() {
+setInterval( () => {
   displayTime()
   barController()
-}
+  updateBlock()
+}, 1000)
 
 function updateBlock() {
   block = getCurrentBlock()
+  highlightBlock()
 }
 
 function displayTime() {
@@ -83,6 +82,20 @@ function hoverController() {
 
 function getCurrentBlock() {
   return sched[getTodaySchedule()][getSoonestIndex(getTodaySchedule())]
+}
+
+function highlightBlock() {
+  if(block.name.includes('Block')) {
+    let actualBlock = parseInt(block.name.substring(block.name.length - 1))
+    if(actualBlock <= 6) {
+      $('.now').removeClass('now')
+      $('#schedule-body').children().each( function() {
+        if($(this).attr('data-per') == actualBlock) {
+          $(this).children().addClass('now')
+        }
+      })
+    }
+  }
 }
 
 function getTodaySchedule() {

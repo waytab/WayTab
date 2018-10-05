@@ -75,7 +75,7 @@
       {"name": "Passing Time", "start": "810", "end": "815", "length": "5"},
       {"name": "Block 2", "start": "815","end": "855", "length": "40"},
       {"name": "Passing Time", "start": "855", "end": "900", "length": "5"},
-      {"name": "Advisory", "start": "900", "end": "930", "length": "5"},
+      {"name": "Advisory", "start": "900", "end": "930", "length": "30"},
       {"name": "Passing Time", "start": "930", "end": "935", "length": "5"},
       {"name": "Block 3", "start": "935","end": "1015", "length": "40"},
       {"name": "Passing Time", "start": "1015", "end": "1020", "length": "5"},
