@@ -79,6 +79,8 @@ function createNewsDiv(title, link, img, auth) {
     newsdiv.append(`<div class="card-img-top" style="background-image: url(${img}); height: 10rem;"></div>`)
   }
 
+  let splitAuth = auth.split(' ')
+
   newsdiv.append($('<div></div>')
     .toggleClass('card-body')
     .append($('<h5></h5>')
@@ -86,8 +88,11 @@ function createNewsDiv(title, link, img, auth) {
       .text(title)
     )
     .append($('<h6></h6>')
-      .toggleClass('card-subtitle text-muted mb-2')
-      .text(auth)
+      .append($('<a></a>')
+        .toggleClass('card-link card-subtitle text-muted mb-2')
+        .attr('href', 'https://waylandstudentpress.com/staff/?writer=' + splitAuth[0] + '%20' + splitAuth[1])
+        .text(auth)
+      )
     )
     .append($('<a></a>')
       .toggleClass('card-link')
