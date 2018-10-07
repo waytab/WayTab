@@ -7,4 +7,4 @@ chrome.runtime.onInstalled.addListener(function(deets) {
   } else if (deets.reason == 'update') {
     chrome.storage.sync.set({todoDate: 'Tomorrow'})
   }
-});
+})
