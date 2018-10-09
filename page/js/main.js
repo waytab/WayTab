@@ -18,10 +18,10 @@ $(function () {
 
 // this part is commented to display a general flow of how settings are loaded.
 $(document).ready(function() { // we need to wait for the full document to be loaded before we start working on it
-  chrome.storage.sync.get(['font'], function(result) { // grabs the 'font' variable from chrome's storage, then passes it to an anonymous function (async)
-    if(result.font != 'default') { // we only need to do stuff if the font isn't the default one
-      $('body').addClass(`font-${result.font}`) // we set the body to use the saved font family
-      $('#announcementsPositionSel').val(result.font) // we set the settings drop-down to the selected style. not required but a nice touch
+  chrome.storage.sync.get(['font'], function({font}) { // grabs the 'font' variable from chrome's storage, then passes it to an anonymous function (async)
+    if(font != 'default') { // we only need to do stuff if the font isn't the default one
+      $('body').addClass(`font-${font}`) // we set the body to use the saved font family
+      $('#announcementsPositionSel').val(font) // we set the settings drop-down to the selected style. not required but a nice touch
     }
   })
 })
