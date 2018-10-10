@@ -113,12 +113,12 @@ function loadTasks() {
       $('[data-del]').on('change paste keyup', function() {
         let button = $(this)
         let target = button.data('del')
-        let index;
+        let index
         if (!(typeof $(`#${target} label`).attr('data-has-date') !== typeof undefined && $(`#${target} label`).attr('data-has-date') !== false)) {
           index = getIndexOfArray(tasks[button.data('class').replace('_', ' ')], [$(`#${target} label`).text(), ''])
         } else {
           let dateFormatted = new Date($(`#${target} label`).attr('data-due-on'))
-          dateFormatted = dateFormatted.getFullYear() + '-' + (dateFormatted.getMonth() + 1).toString().padStart(2, "0") + '-' + (dateFormatted.getDate()).toString().padStart(2, "0")
+          dateFormatted = dateFormatted.getFullYear() + '-' + (dateFormatted.getMonth() + 1).toString().padStart(2, '0') + '-' + (dateFormatted.getDate()).toString().padStart(2, "0")
           index = getIndexOfArray(tasks[button.data('class').replace('_', ' ')], [$(`#${target} label`).text(), dateFormatted])
         }
         if(index > -1) {
