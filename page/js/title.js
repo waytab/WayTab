@@ -1,6 +1,6 @@
 export default class Title {
   constructor() {
-    chrome.storage.sync.get("title", function(response) {
+    chrome.storage.sync.get('title', function(response) {
       $('#title-container').text(response.title)
       $('#title-input').val(response.title)
     })
@@ -9,7 +9,6 @@ export default class Title {
       let newtitle = $('#title-input').val()
       chrome.storage.sync.set({title: newtitle}, function() {
         $('#title-container').text(newtitle)
-        console.log("New Title Set")
       })
     })
   }
