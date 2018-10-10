@@ -2,7 +2,7 @@ export default class Background {
 
   constructor() {
     // we want to make these regex's accessible anywhere in the class
-    this.urlRegEx = new RegExp(/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi); // will match for URLs
+    this.urlRegEx = new RegExp(/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi) // will match for URLs
     this.rgbRegEx = new RegExp(/rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/) // rgb regex
     this.rgbaRegEx = new RegExp(/rgba\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3}),\s*(\d*(?:\.\d+)?)\)$/) // rgba regex
     this.hexRegEx = new RegExp(/#[\da-f]/i) // hex regex
@@ -12,7 +12,7 @@ export default class Background {
       if(bg == undefined) {
         $(document.body).css('background-image', 'url("./img/school.jpg")')
       } else if(bg.match(this.urlRegEx)) {
-        $(document.body).css('background-image', 'url(\"'+bg+'\")')
+        $(document.body).css('background-image', 'url("'+bg+'")')
         $('#time-bar-total').css('opacity', .8)
         if(!bg.indexOf('./img/')) {
           let sel = bg.split('/')
@@ -54,13 +54,13 @@ export default class Background {
       } else if (this.rgbRegEx.test(val) || this.rgbaRegEx.test(val) || this.hexRegEx.test(val)) {
         $(document.body).attr('style', `background-color: ${val}`)
       } else {
-        console.log('not a valid color');
+        console.log('not a valid color')
       }
     })
 
     $(document).on('click', '#settings-close', () => {
       let sel = $('#select-background').val()
-      let bgVal;
+      let bgVal
       if (sel != 'Custom...') {
         bgVal = './img/' + sel.toLowerCase()+'.jpg'
       } else {
