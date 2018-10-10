@@ -111,28 +111,28 @@ export default class Links {
     })
 
     $(document).on('click', '#submit-tab-info', () => {
-      let name = $('#tab-name').val();
-      let link = $('#tab-link').val();
-      let img = $('#img-upload').val();
+      let name = $('#tab-name').val()
+      let link = $('#tab-link').val()
+      let img = $('#img-upload').val()
       if(img.length <= 8) {
         img = './img/default.png'
       }
 
       if(link.substring(0,4) == 'http' || link.substring(0,5) == 'https' || img.substring(0,4) == 'http' || img.substring(0,5) == 'https') {
         let linksLoad = this.loadLinks
-        let obj = {"name": name, "actual_link": link, "image_link": img};
+        let obj = {'name': name, 'actual_link': link, 'image_link': img}
         chrome.storage.sync.get(['links'], function(result) {
           isOpen = false
-          result.links.push(obj);
-          chrome.storage.sync.set({links: result.links}, () => { linksLoad(result.links) });
-        });
+          result.links.push(obj)
+          chrome.storage.sync.set({links: result.links}, () => { linksLoad(result.links) })
+        })
       } else {
         $('#submit-tab-info').addClass('btn-danger')
         $('#submit-tab-info').text('URLs must start with HTTP:// or HTTPS://')
       }
 
 
-    });
+    })
   }
 
   removeLinks() {
@@ -175,7 +175,7 @@ export default class Links {
           }
         })
         chrome.storage.sync.set({links: links})
-      });
+      })
     })
   }
 }
