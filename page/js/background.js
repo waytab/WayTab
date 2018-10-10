@@ -7,29 +7,28 @@ export default class Background {
     this.rgbaRegEx = new RegExp(/rgba\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3}),\s*(\d*(?:\.\d+)?)\)$/) // rgba regex
     this.hexRegEx = new RegExp(/#[\da-f]/i) // hex regex
 
-    chrome.storage.sync.get(['background'], (response) => {
-      let bg = response.background
-      if(bg == undefined) {
+    chrome.storage.sync.get(['background'], ({background}) => {
+      if(background == undefined) {
         $(document.body).css('background-image', 'url("./img/school.jpg")')
-      } else if(bg.match(this.urlRegEx)) {
-        $(document.body).css('background-image', 'url(\"'+bg+'\")')
+      } else if(background.match(this.urlRegEx)) {
+        $(document.body).css('background-image', 'url(\"'+background+'\")')
         $('#time-bar-total').css('opacity', .8)
-        if(!bg.indexOf('./img/')) {
-          let sel = bg.split('/')
+        if(!background.indexOf('./img/')) {
+          let sel = background.split('/')
           let name = sel[2].substring(0, sel[2].length-4)
           name = name.substring(0,1).toUpperCase() + name.substring(1)
           $('#select-background').val(name)
         } else { // it's a custom url
           $('#select-background').val('Custom...')
           $('#custom-background').css('display', 'flex')
-          $('#custom-background-input').val(bg)
+          $('#custom-background-input').val(background)
         }
-      } else { // we know it's a custom, non-image, bg
+      } else { // we know it's a custom, non-image, background
         $('#select-background').val('Custom...')
         $('#custom-background').css('display', 'flex')
-        $('#custom-background-input').val(bg)
-        if (this.rgbRegEx.test(bg) || this.rgbaRegEx.test(bg) || this.hexRegEx.test(bg)) {
-          $(document.body).css('background-color', bg)
+        $('#custom-background-input').val(background)
+        if (this.rgbRegEx.test(background) || this.rgbaRegEx.test(background) || this.hexRegEx.test(background)) {
+          $(document.body).css('background-color', background)
         }
       }
     })
