@@ -24,6 +24,12 @@ $(document).ready(function() { // we need to wait for the full document to be lo
       $('#announcementsPositionSel').val(result.font) // we set the settings drop-down to the selected style. not required but a nice touch
     }
   })
+
+  chrome.storage.sync.get(['setup'], ({setup}) => {
+    if(!setup) {
+      document.location.pathname = '/page/setup/setup.html'
+    }
+  })
 })
 
 $(document).on('click', '#settings-close', function() { // we need to save the new font style when the modal is closed
