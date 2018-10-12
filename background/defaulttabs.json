@@ -32,7 +32,7 @@ var deftabs = {
     },
     {
       "name": "Naviance",
-      "actual_link": "https://connection.naviance.com/family-connection/auth/login/?hsname=waylandhs",
+      "actual_link": "https://student.naviance.com/waylandhs",
       "image_link": "img/naviance_logo.png"
     }
   ]

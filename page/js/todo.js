@@ -104,6 +104,9 @@ function loadTasks() {
                 // ddd > 14
                 $(`#label${key.replace(' ', '_') + i}`).html(tasks[key][i][0] + `<i class="far fa-clock ml-1 ${dueDeltaDay <= 0 ? 'text-danger' : ''}" id="tooltip${key.replace(' ', '_') + i}"></i>`).attr({ 'data-has-date': 'true', 'data-due-on': dueDate })
                 $(`#tooltip${key.replace(' ', '_') + i}`).tooltip(tooltipBuilder(dueDate, dueDeltaDay))
+                $(document).on('click', `#tooltip${key.replace(' ', '_') + i}`, (e) => {
+                  e.preventDefault()
+                })
               }
             }
           }
