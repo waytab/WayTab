@@ -1,5 +1,5 @@
 let currentTab = 0
-let tabList = ['about', 'personalize', 'links', 'schedule']
+let tabList = ['welcome', 'personalize', 'links', 'schedule']
 
 $(document).ready(() => {
   $('#setupModal').modal({
@@ -33,4 +33,7 @@ $(document).on('click', '#back', () => {
 
 $(document).on('click', '[data-toggle="tab"]', function () {
   currentTab = tabList.indexOf($(this).attr('href').substring(1))
+  if(currentTab == 0) {
+    $('#back').addClass('d-none')
+  }
 })
