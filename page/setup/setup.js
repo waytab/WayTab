@@ -13,6 +13,22 @@ $(document).on('click', '#next', () => {
   let nextTab = $(`#${tabList[currentTab]}-tab`)
   nextTab.removeClass('disabled')
   nextTab.tab('show')
+
+  if(currentTab > 0) {
+    $('#back').removeClass('d-none')
+  }
+})
+
+$(document).on('click', '#back', () => {
+  if(currentTab > 0) {
+    currentTab--
+    let nextTab = $(`#${tabList[currentTab]}-tab`)
+    nextTab.tab('show')
+  }
+
+  if(currentTab == 0) {
+    $('#back').addClass('d-none')
+  }
 })
 
 $(document).on('click', '[data-toggle="tab"]', function () {
