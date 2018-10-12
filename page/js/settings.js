@@ -40,7 +40,8 @@ function hardResetWaytab() {
       chrome.storage.sync.set({
         title: 'WayTab',
         font: 'default',
-        enableWspn: true
+        enableWspn: true,
+        setup: false
       }, () => {
         location.reload()
       })

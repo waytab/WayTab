@@ -37,3 +37,10 @@ $(document).on('click', '[data-toggle="tab"]', function () {
     $('#back').addClass('d-none')
   }
 })
+
+$(document).on('click', '#skip', (e) => {
+  e.preventDefault()
+  chrome.storage.sync.set({setup: true}, () => {
+    document.location.pathname = '/page/tab.html'
+  })
+})
