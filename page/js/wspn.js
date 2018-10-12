@@ -71,7 +71,6 @@ function displayArticles() {
 }
 
 function createNewsDiv(title, link, img, auth) {
-  console.log(auth)
   let newsdiv = $('<div></div>')
     .attr('class', 'card mb-3 mx-3 bg-dark')
 
@@ -86,8 +85,11 @@ function createNewsDiv(title, link, img, auth) {
       .text(title)
     )
     .append($('<h6></h6>')
-      .toggleClass('card-subtitle text-muted mb-2')
-      .text(auth)
+      .append($('<a></a>')
+        .toggleClass('card-link card-subtitle text-muted mb-2')
+        .attr('href', 'https://waylandstudentpress.com/staff/?writer=' + auth)
+        .text(auth)
+      )
     )
     .append($('<a></a>')
       .toggleClass('card-link')
