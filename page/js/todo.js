@@ -206,6 +206,9 @@ function formatDate() {
   let date = new Date()
   if(todoDefault === 'Tomorrow') {
     date.setTime(date.getTime() + (24 * 60 * 60 * 1000))
+    if(date.getDay() - 1 === 5) {
+      date.setTime(date.getTime() + (2 * 24 * 60 * 60 * 1000))
+    }
   }else if(todoDefault === 'Week') {
     date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000))
   }
