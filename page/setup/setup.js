@@ -79,3 +79,103 @@ $(document).on('click', '#skip', (e) => {
   //#endregion
 
 //#endregion
+//#region links
+$(function () {
+  console.log('wow');
+  chrome.storage.sync.get(['links'], ({links}) => {
+    $('#edit-links').empty()
+    for (let i = 0; i < links.length; i++) {
+      console.log(links[i]);
+      $('#edit-links')
+        .append($('<li></li>')
+          .addClass('list-group-item d-inline-flex')
+          .append(
+            $('<a></a>')
+              .attr({
+                role: 'button',
+                title: 'Confirm',
+                'data-toggle': 'popover',
+                'data-trigger': 'focus',
+                'data-html': true,
+                'data-content': `<button class="btn btn-danger delete-link" data-num="${i}">Delete</button>`,
+                tabindex: 0
+              })
+              .css({ 'margin-left': 6, 'margin-right': 22, color: 'black', 'text-decoration': 'none', cursor: 'pointer' })
+              .html('&times;'),
+            $('<div></div>')
+              .addClass('link-edit w-100')
+              .css('cursor', 'pointer')
+              .attr('data-edit', i)
+              .text(links[i].id)
+          )
+        )
+    }
+
+    $('#edit-links')
+      .append($('<li></li>')
+        .addClass('list-group-item')
+        .css('cursor', 'pointer')
+        .attr('id', 'addLink')
+        .html('<span class="font-weight-bold"><span style="margin-left: 6px; margin-right: 22px;">&plus;</span>Add Link...</span>')
+      )
+
+    $(document).on('click', '.link-edit', (e) => {
+      let index = $(e.target).attr('data-edit')
+      $(e.target)
+        .text('')
+        .append(
+          $('<input>')
+            .addClass('form-control')
+            .attr('placeholder', 'Name')
+            .val(links[index].id),
+          $('<input>')
+            .addClass('form-control')
+            .attr('placeholder', 'URL')
+            .val(links[index].actual_link),
+          $('<input>')
+            .addClass('form-control')
+            .attr('placeholder', 'Image URL')
+            .val(links[index].image_link)
+        )
+    })
+
+    $(document).on('click', '#addLink', function () {
+      $(this).html('')
+      $(this).attr({id: '', style: ''}).addClass('new-link')
+      $(this).append(
+        $('<div></div>')
+          .addClass('row mb-1')
+          .append(
+            $('<label></label>').addClass('col').text('Name'),
+            $('<input>')
+              .addClass('form-control col-10')
+              .attr({ type: 'text', id: 'tab-name', placeholder: 'Name' })
+          ),
+        $('<div></div>')
+          .addClass('row mb-1')
+          .append(
+            $('<label></label>').addClass('col').text('Link'),
+            $('<input>')
+              .addClass('form-control col-10')
+              .attr({ type: 'text', id: 'tab-link', placeholder: 'https://www.example.com' })
+          ),
+        $('<div></div>')
+          .addClass('row mb-1')
+          .append(
+            $('<label></label>').addClass('col').text('Image URL'),
+            $('<input>')
+              .addClass('form-control col-10')
+              .attr({ type: 'text', id: 'img-upload', placeholder: 'https://www.example.com/image.png' })
+          ),
+        )
+      $('#edit-links')
+        .append($('<li></li>')
+          .addClass('list-group-item')
+          .css('cursor', 'pointer')
+          .attr('id', 'addLink')
+          .html('<span class="font-weight-bold"><span style="margin-left: 6px; margin-right: 22px;">&plus;</span>Add Link...</span>')
+        )
+    })
+  })
+})
+//#endregion
