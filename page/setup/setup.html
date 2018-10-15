@@ -45,13 +45,70 @@
                 <div class="text-center">
                   <h3 class="display-3">Welcome to WayTab.</h3>
                   <h4 class="display-4">Let's get started.</h4>
-                  <p class="lead">We'll help you get started in just a few steps. All settings are optional.</p>
-                  <p class="mb-0 mr-4 text-muted float-left"><a href="" id="skip">Click here to skip</a> <em>(accept all defaults)</em></p>
+                  <p class="lead mb-4">We'll help you get up and running in just a few steps. All settings are optional.</p>
+                  <p class="mb-0 text-muted float-left"><a href="" id="skip">Click here to skip</a> <em>(accept all defaults)</em></p>
                   <p class="mb-0 mr-4 text-muted float-right">Click Next &nbsp;<i class="fas fa-arrow-down"></i></p>
                 </div>
               </div>
               <div class="tab-pane fade" id="personalize" role="tabpanel" aria-labelledby="home-tab">
-                ...
+                <h4 class="display-4">Personalize</h4><hr>
+                <div class="row mb-3">
+                  <label class="col">Title</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="text" id="title-input" placeholder="WayTab" />
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col">Background</label>
+                  <div class="col-sm-10">
+                    <select class="form-control" id="select-background">
+                      <option value="School">Select...</option>
+                      <option>School</option>
+                      <option>Commons</option>
+                      <option>Logo</option>
+                      <option>Classroom</option>
+                      <option>Library</option>
+                      <option>Patio</option>
+                      <option>Custom...</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3" id="custom-background" style="display: none">
+                  <label class="col">Custom Background</label>
+                  <div class="col-sm-10">
+                    <div class="input-group">
+                      <input type="text" placeholder="Image URL, RGB, RGBA, or color hex" class="form-control" id="custom-background-input">
+                      <div class="input-group-append">
+                        <a href="https://waytab.org/color-help.html" class="input-group-text" target="_blank"><i class="far fa-question-circle"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col">Font</div>
+                  <div class="col-10">
+                    <select class="form-control" id="fontSelect">
+                      <option class="font-sans-serif" value="default">Default (Sans-serif)</option>
+                      <option class="font-montserrat" value="montserrat">Montserrat</option>
+                      <option class="font-poppins" value="poppins">Poppins</option>
+                      <option class="font-raleway" value="raleway">Raleway</option>
+                      <option class="font-roboto" value="roboto">Roboto</option>
+                      <option class="font-rubik" value="rubik">Rubik</option>
+                      <option class="font-ubuntu" value="ubuntu">Ubuntu</option>
+                    </select>
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col"></div>
+                  <div class="col-10">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="wspn-check">
+                      <label class="custom-control-label" for="wspn-check">Show WSPN Button</label>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

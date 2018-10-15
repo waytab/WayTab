@@ -8,6 +8,7 @@ $(document).ready(() => {
   })
 })
 
+//#region window functions
 $(document).on('click', '#next', () => {
   currentTab++
   let nextTab = $(`#${tabList[currentTab]}-tab`)
@@ -37,6 +38,7 @@ $(document).on('click', '[data-toggle="tab"]', function () {
     $('#back').addClass('d-none')
   }
 })
+//#endregion
 
 $(document).on('click', '#skip', (e) => {
   e.preventDefault()
@@ -44,3 +46,36 @@ $(document).on('click', '#skip', (e) => {
     document.location.pathname = '/page/tab.html'
   })
 })
+
+//#region personalization
+  //#region background
+  $(document).on('change', '#select-background', () => {
+    let sel = $('#select-background').val()
+    if (sel != 'Custom...') {
+      let href = '../img/' + sel.toLowerCase() + '.jpg'
+      $(document.body).css('background-image', `url("${href}")`)
+      $('#custom-background').css('display', 'none')
+    } else {
+      $('#custom-background').css('display', 'flex')
+    }
+  })
+
+  $(document).on('change paste keyup', '#custom-background-input', () => {
+    let val = $('#custom-background-input').val()
+    if (val.match(this.urlRegEx)) {
+      $(document.body).css('background-image', `url("${val}")`)
+    } else if (this.rgbRegEx.test(val) || this.rgbaRegEx.test(val) || this.hexRegEx.test(val)) {
+      $(document.body).attr('style', `background-color: ${val}`)
+    } else {
+      console.log('not a valid color');
+    }
+  })
+  //#endregion
+  //#region fonts
+  $(document).on('change', '#fontSelect', (e) => {
+    $('body').attr('class', '')
+    $('body').addClass(`font-${e.currentTarget.value}`)
+  })
+  //#endregion
+
+//#endregion
