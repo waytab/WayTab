@@ -243,16 +243,16 @@ function loadClasses() {
           )
         )
     }
-    $('[data-toggle="popover"]').popover()
-
-    $('#edit-classes')
-      .append($('<li></li>')
-        .addClass('list-group-item')
-        .css('cursor', 'pointer')
-        .attr('id', 'addClass')
-        .html('<span class="font-weight-bold"><span style="margin-left: 6px; margin-right: 22px;">&plus;</span>Add Custom Class...</span>')
-    )
   })
+
+  $('#edit-classes')
+    .append($('<li></li>')
+      .addClass('list-group-item')
+      .css('cursor', 'pointer')
+      .attr('id', 'addClass')
+      .html('<span class="font-weight-bold"><span style="margin-left: 6px; margin-right: 22px;">&plus;</span>Add Custom Class...</span>')
+  )
+  $('[data-toggle="popover"]').popover()
 }
 
 function removeClasses() {
