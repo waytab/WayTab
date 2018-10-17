@@ -81,11 +81,10 @@ $(document).on('click', '#skip', (e) => {
 //#endregion
 //#region links
 $(function () {
-  console.log('wow');
   chrome.storage.sync.get(['links'], ({links}) => {
     $('#edit-links').empty()
+    console.log(links)
     for (let i = 0; i < links.length; i++) {
-      console.log(links[i]);
       $('#edit-links')
         .append($('<li></li>')
           .addClass('list-group-item d-inline-flex')
@@ -106,7 +105,7 @@ $(function () {
               .addClass('link-edit w-100')
               .css('cursor', 'pointer')
               .attr('data-edit', i)
-              .text(links[i].id)
+              .text(links[i].name)
           )
         )
     }
@@ -127,7 +126,7 @@ $(function () {
           $('<input>')
             .addClass('form-control')
             .attr('placeholder', 'Name')
-            .val(links[index].id),
+            .val(links[index].name),
           $('<input>')
             .addClass('form-control')
             .attr('placeholder', 'URL')
