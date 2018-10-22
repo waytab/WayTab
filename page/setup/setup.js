@@ -178,3 +178,30 @@ $(function () {
   })
 })
 //#endregion
+//#region schedule
+$(document).on('change paste keyup', '.period-control', function() {
+  if($('#customCheck1').is(':checked')) {
+    let input = $(this)
+    let period = input.data('period')
+    $(`[data-period=${period}]`).each(function() {
+      $(this).val(input.val())
+    })
+  }
+})
+$(document).on('focus', '.form-control', function() {
+  if($('#customCheck1').is(':checked')) {
+    let period = $(this).data('period')
+    $(`[data-period=${period}]`).each(function() {
+      $(this).addClass('now')
+    })
+  }
+})
+$(document).on('focusout', '.form-control', function() {
+  if($('#customCheck1').is(':checked')) {
+    let period = $(this).data('period')
+    $(`[data-period=${period}]`).each(function() {
+      $(this).removeClass('now')
+    })
+  }
+})
+//#endregion
