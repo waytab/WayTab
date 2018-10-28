@@ -1,5 +1,6 @@
 let tasks = {}
 let todoDefault
+
 chrome.storage.sync.get(['todoDate'], function(res) {
   todoDefault = res.todoDate
   if(todoDefault === 'Tomorrow') {
@@ -20,6 +21,10 @@ chrome.storage.sync.get(['todoDate'], function(res) {
 $(document).ready(() => {
   loadTasks()
   defaultController()
+
+  loadClasses()
+  removeClasses()
+  addClass()
 
   $(document).on('click', '#addTask', function() {
     let button = $(this)
@@ -116,12 +121,12 @@ function loadTasks() {
       $('[data-del]').on('change paste keyup', function() {
         let button = $(this)
         let target = button.data('del')
-        let index;
+        let index
         if (!(typeof $(`#${target} label`).attr('data-has-date') !== typeof undefined && $(`#${target} label`).attr('data-has-date') !== false)) {
           index = getIndexOfArray(tasks[button.data('class').replace('_', ' ')], [$(`#${target} label`).text(), ''])
         } else {
           let dateFormatted = new Date($(`#${target} label`).attr('data-due-on'))
-          dateFormatted = dateFormatted.getFullYear() + '-' + (dateFormatted.getMonth() + 1).toString().padStart(2, "0") + '-' + (dateFormatted.getDate()).toString().padStart(2, "0")
+          dateFormatted = dateFormatted.getFullYear() + '-' + (dateFormatted.getMonth() + 1).toString().padStart(2, '0') + '-' + (dateFormatted.getDate()).toString().padStart(2, "0")
           index = getIndexOfArray(tasks[button.data('class').replace('_', ' ')], [$(`#${target} label`).text(), dateFormatted])
         }
         if(index > -1) {
@@ -142,7 +147,6 @@ function loadTasks() {
       console.log('Classes not found')
     } else {
       console.log('Class list found')
-      console.log(result.classes)
       let classes = result.classes
       for(let i = 0; i < classes.length; i++) {
         $('#addTaskClass').append($('<option></option>').attr('value', classes[i]).html(classes[i]))
@@ -219,4 +223,98 @@ function formatDate() {
   let day = (date.getDate()).toString().padStart(2, '0')
 
   return year + '-' + month + '-' + day
+}
+
+function loadClasses() {
+  $('#edit-classes').empty()
+  chrome.storage.sync.get(['classes'], function(res) {
+    let tasks = res.classes
+    for(let i = 0; i < tasks.length; i++) {
+      let obj = tasks[i]
+      $('#edit-classes')
+        .append($('<li></li>')
+          .addClass('list-group-item d-inline-flex')
+          .append(
+            $('<a></a>')
+              .attr({
+                role: 'button',
+                title: 'Confirm',
+                'data-toggle': 'popover',
+                'data-trigger': 'focus',
+                'data-html': true,
+                'data-content': `<button class="btn btn-danger delete-class" data-num="${i}">Delete</button>`,
+                tabindex: 0
+              })
+              .css({ 'margin-left': 6, 'margin-right': 22, color: 'black', 'text-decoration': 'none', cursor: 'pointer' })
+              .html('&times;'),
+            $('<div></div>').text(obj)
+          )
+        )
+    }
+  })
+
+  $('#edit-classes')
+    .append($('<li></li>')
+      .addClass('list-group-item')
+      .css('cursor', 'pointer')
+      .attr('id', 'addClass')
+      .html('<span class="font-weight-bold"><span style="margin-left: 6px; margin-right: 22px;">&plus;</span>Add Custom Class...</span>')
+  )
+  $('[data-toggle="popover"]').popover()
+}
+
+function removeClasses() {
+  $(document).on('click', '.delete-class', (e) => {
+    let target = $(e.target)
+    let targetLink = target.data('num')
+    chrome.storage.sync.get(['classes'], (result) => {
+      result.classes.splice(targetLink, 1)
+      chrome.storage.sync.set({'classes': result.classes}, () => { this.loadClasses(result.classes) })
+    })
+  })
+}
+
+function addClass() {
+  let isOpen = false
+  $(document).on('click', '#addClass', function() {
+    if(!isOpen) {
+      $(this).html('')
+      $(this).append(
+        $('<div></div>')
+          .addClass('row mb-1')
+          .append(
+            $('<label></label>').addClass('col').text('Class Name'),
+            $('<input>')
+              .addClass('form-control col-10')
+              .attr({ type: 'text', id: 'class-name', placeholder: 'Name' })
+          ),
+          $('<div></div>')
+            .addClass('row mb-1')
+            .append(
+              $('<div></div>').addClass('col'),
+              $('<button></button>')
+                .addClass('btn btn-primary btn-block mb-3 col-10')
+                .attr({ type: 'button', id: 'submit-class-info' })
+                .text('Add')
+            )
+        )
+      isOpen = true
+    }
+  })
+
+  $(document).on('click', '#submit-class-info', () => {
+    let name = $('#class-name').val()
+
+    if(name.length > 0) {
+      let classesLoad = this.loadClasses
+      chrome.storage.sync.get(['classes'], function(result) {
+        isOpen = false
+        result.classes.push(name)
+        chrome.storage.sync.set({classes: result.classes}, () => { classesLoad(result.classes) })
+      })
+    } else {
+      $('#submit-class-info').addClass('btn-danger')
+      $('#submit-class-info').text('Class name cannot be empty')
+    }
+  })
 }

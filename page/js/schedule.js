@@ -49,7 +49,7 @@ export default class Schedule {
   }
 
   scheduleEditor() {
-    let loadFunc = this.loadSchedule;
+    let loadFunc = this.loadSchedule
     $(document).on('click', '#new-schedule-save', function() {
       let schedule = []
       chrome.storage.sync.set({schedule: []}, console.log('Schedule Cleared')) // make sure we start with a clean sync to prevent double schedules
@@ -81,7 +81,7 @@ export default class Schedule {
           console.log('Class list saved!')
         })
       })
-      location.reload();
+      location.reload()
     })
 
     $(document).on('change paste keyup', '.period-control', function() {
