@@ -109,6 +109,9 @@ function loadTasks() {
                 // ddd > 14
                 $(`#label${key.replace(' ', '_') + i}`).html(tasks[key][i][0] + `<i class="far fa-clock ml-1 ${dueDeltaDay <= 0 ? 'text-danger' : ''}" id="tooltip${key.replace(' ', '_') + i}"></i>`).attr({ 'data-has-date': 'true', 'data-due-on': dueDate })
                 $(`#tooltip${key.replace(' ', '_') + i}`).tooltip(tooltipBuilder(dueDate, dueDeltaDay))
+                $(document).on('click', `#tooltip${key.replace(' ', '_') + i}`, (e) => {
+                  e.preventDefault()
+                })
               }
             }
           }
@@ -207,6 +210,11 @@ function formatDate() {
   let date = new Date()
   if(todoDefault === 'Tomorrow') {
     date.setTime(date.getTime() + (24 * 60 * 60 * 1000))
+    if(date.getDay() === 5) {
+      date.setTime(date.getTime() + (3 * 24 * 60 * 60 * 1000))
+    }else if(date.getDay() === 6) {
+      date.setTime(date.getTime() + (2 * 24 * 60 * 60 * 1000))
+    }
   }else if(todoDefault === 'Week') {
     date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000))
   }

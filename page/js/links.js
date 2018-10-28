@@ -2,6 +2,7 @@ export default class Links {
   constructor() {
     let linksFunc = this.loadLinks
     chrome.storage.sync.get(['links'], function(result) {
+      console.log(result);
       if(Object.keys(result).length === 0 && result.constructor === Object) {
         $.getJSON('js/json/config.json', (data) => {
           chrome.storage.sync.set({links: data.saved_tabs}, () => {
@@ -18,15 +19,17 @@ export default class Links {
   }
 
   loadLinks(obj) {
+    console.log(obj)
     $('#link-container').empty()
     $('#edit-links').empty()
     for(let i = 0; i < obj.length; i++) {
-      $('#link-container').append($('<div></div>').addClass('col-1').attr({
-                                                                            'id': `link${i}`,
-                                                                            'data-toggle': 'tooltip',
-                                                                            'data-placement': 'bottom',
-                                                                            'title': obj[i].name
-                                                                          }))
+      console.log(obj[i].name)
+      $('#link-container').append($('<div></div>').addClass('col-1').attr('id', `link${i}`).tooltip({
+                                                                                              'id': `link${i}`,
+                                                                                              'data-toggle': 'tooltip',
+                                                                                              'data-placement': 'bottom',
+                                                                                              'title': obj[i].name
+                                                                                            }))
       $(`#link${i}`).append($('<a></a>').addClass('img-link').attr('href', obj[i].actual_link).append($('<img />').attr({ src: obj[i].image_link, alt: obj[i].name })))
       $(`#link${i}`).append($('<div>X</div>').addClass('tab-delete-button').attr('id', `delete${i}`))
 

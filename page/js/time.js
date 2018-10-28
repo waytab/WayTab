@@ -1,9 +1,8 @@
 let sched
 let block
 let bell2
-chrome.storage.sync.get( ['bell2'], function(res) {
-  bell2 = res.bell2
-  if(res.bell2) {
+chrome.storage.sync.get( ['bell2'], function({bell2}) {
+  if(bell2) {
     $('#bell-2-check').prop('checked', true)
   } else {
     $('#bell-2-check').prop('checked', false)

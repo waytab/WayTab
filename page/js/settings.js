@@ -8,9 +8,9 @@ function resetController() {
 
 function hardResetTasks() {
   $(document).on('click', '#force-reset-tasks', function() {
-    chrome.storage.sync.get('tasks', function(res) {
-      if(res.tasks !== null) {
-        Object.keys(res.tasks).forEach( function(obj) {
+    chrome.storage.sync.get('tasks', function({tasks}) {
+      if(tasks !== null) {
+        Object.keys(tasks).forEach( function(obj) {
           // I console log all of the task NAMES so that they can re-enter assignments after the reset
           console.log(obj + ':')
           for(i = 0; i < this.length; i++) {
