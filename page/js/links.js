@@ -25,9 +25,7 @@ export default class Links {
     for(let i = 0; i < obj.length; i++) {
       console.log(obj[i].name)
       $('#link-container').append($('<div></div>').addClass('col-1').attr('id', `link${i}`).tooltip({
-                                                                                              'id': `link${i}`,
-                                                                                              'data-toggle': 'tooltip',
-                                                                                              'data-placement': 'bottom',
+                                                                                              'placement': 'bottom',
                                                                                               'title': obj[i].name
                                                                                             }))
       $(`#link${i}`).append($('<a></a>').addClass('img-link').attr('href', obj[i].actual_link).append($('<img />').attr({ src: obj[i].image_link, alt: obj[i].name })))
