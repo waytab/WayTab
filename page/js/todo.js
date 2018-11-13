@@ -309,7 +309,7 @@ function addClass() {
       chrome.storage.sync.get(['classes'], function({classes}) {
         isOpen = false
         if(typeof classes != 'undefined') {
-          classasArray.push(...classes)
+          classesArray.push(...classes)
         }
         classesArray.push(name)
         chrome.storage.sync.set({classes: classesArray}, () => { classesLoad(classes) })
