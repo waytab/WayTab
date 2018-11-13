@@ -48,6 +48,11 @@ function hardResetWaytab() {
   })
 }
 
+$('#feedback').tooltip({
+  placement: 'top',
+  title: 'Feedback'
+})
+
 $(document).on('click', '#feedback', () => {
   $('#feedback-settings').tab('show')
 })
