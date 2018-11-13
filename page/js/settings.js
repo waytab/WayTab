@@ -47,3 +47,7 @@ function hardResetWaytab() {
     })
   })
 }
+
+$(document).on('click', '#feedback', () => {
+  $('#feedback-settings').tab('show')
+})

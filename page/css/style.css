@@ -98,23 +98,35 @@ body {
   background-color: #cc9012;
 }
 
-#activate-settings {
+.fab-area {
+  position: fixed;
   right: 0;
   bottom: 0;
   margin: 2rem;
-  border-radius: 23px;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  line-height: 2;
+}
+
+.fab-button {
   border: none;
+  border-radius: 23px;
+  height: 46px;
   -webkit-box-shadow: 0px 0px 20px 0px rgba(56,56,56,0.75);
   -moz-box-shadow: 0px 0px 20px 0px rgba(56,56,56,0.75);
   box-shadow: 0px 0px 20px 0px rgba(56,56,56,0.75);
+  margin-left: 1rem;
+}
+
+.fab-button .fas {
+  font-size: 1.25rem;
+  margin-top: 7px;
+}
+
+#activate-settings {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  line-height: 2;
 }
 
 #activate-settings .fas {
-  font-size: 1.25rem;
-  margin-top: 7px;
   margin-left: 2px;
 }
 
