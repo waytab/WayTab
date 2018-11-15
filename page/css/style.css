@@ -5,6 +5,11 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
 @import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500,700');
 @import url('https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Chakra+Petch');
+@import url('https://fonts.googleapis.com/css?family=Bai+Jamjuree');
+@import url('https://fonts.googleapis.com/css?family=Fahkwang');
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
+@import url('https://fonts.googleapis.com/css?family=Text+Me+One');
 
 html {
   overflow-x: hidden;
@@ -52,6 +57,26 @@ body {
   font-family: 'Ubuntu', sans-serif;
 }
 
+.font-chakra-petch {
+  font-family: 'Chakra Petch', sans-serif;
+}
+
+.font-bai-jamjuree {
+  font-family: 'Bai Jamjuree', sans-serif;
+}
+
+.font-fahkwang {
+  font-family: 'Fahkwang', sans-serif;
+}
+
+.font-pacifico {
+  font-family: 'Pacifico', cursive;
+}
+
+.font-text-me-one {
+  font-family: 'Text Me One', sans-serif;
+}
+
 #title-container {
   color: white;
   text-shadow: 0 0 5px #000;
@@ -73,9 +98,46 @@ body {
   background-color: #cc9012;
 }
 
-#activate-settings {
+.fab-area {
+  position: fixed;
   right: 0;
-  top: 0;
+  bottom: 0;
+  margin: 2rem;
+}
+
+.fab-button {
+  border: none;
+  border-radius: 23px;
+  height: 46px;
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(56,56,56,0.75);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(56,56,56,0.75);
+  box-shadow: 0px 0px 20px 0px rgba(56,56,56,0.75);
+  margin-left: 1rem;
+}
+
+.fab-button .fas {
+  font-size: 1.25rem;
+  margin-top: 7px;
+}
+
+#activate-settings {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 2;
+}
+
+#activate-settings .fas {
+  margin-left: 2px;
+}
+
+#activate-settings span {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  #activate-settings span {
+    display: inline;
+  }
 }
 
 .tab-delete-button {
