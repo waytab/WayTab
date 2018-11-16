@@ -57,3 +57,44 @@ $('#feedback').tooltip({
 $(document).on('click', '#feedback', () => {
   $('#feedback-settings').tab('show')
 })
+
+// settings button / action menu
+let opened = false
+let startWidth
+setTimeout(() => { startWidth = $('.fab-action').outerWidth() }, 100) // we need the font to load before we grab the button's width
+$(document).on('click', '#activate-settings', (e) => {
+  //animate
+  $('.fab-action').toggleClass('shown')
+
+  $({ deg: 0 }).animate({ deg: 180 }, {
+    duration: 250,
+    step(deg) {
+      $('#activate-settings i').css('transform', `rotate(${deg}deg)`)
+    }
+  })
+  setTimeout(() => { $('#activate-settings i').toggleClass('fa-times') }, 125)
+
+  $('#feedback').toggleClass('hide')
+
+  if(!opened) {
+    $('.fab-action').animate({
+      width: 200
+    }, 250)
+
+    $('#feedback').animate({ opacity: 0 }, 250)
+
+    $('#activate-settings span').text('Close')
+
+    opened = true
+  } else {
+    $('.fab-action').animate({
+      width: startWidth
+    }, 250)
+
+    $('#feedback').animate({ opacity: 1 }, 250)
+
+    $('#activate-settings span').text('Settings')
+
+    opened = false
+  }
+})
