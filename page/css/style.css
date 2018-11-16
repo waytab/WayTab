@@ -103,6 +103,7 @@ body {
   right: 0;
   bottom: 0;
   margin: 2rem;
+  z-index: 3;
 }
 
 .fab-button {
