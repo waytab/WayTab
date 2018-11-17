@@ -75,6 +75,10 @@ function loadTasks() {
         if(tasks.hasOwnProperty(key)) {
           if(tasks[key].length != 0) {
             $('#taskList').append($('<h5></h5>').text(key))
+            console.log(tasks[key])
+            tasks[key].sort( function(a, b) {
+              return -1 * (new Date(b[1]) - new Date(a[1]))
+            })
             for (let i = 0; i < tasks[key].length; i++) {
               $('#newTaskSelectionGroup').addClass('mb-3')
               $('#taskList')
