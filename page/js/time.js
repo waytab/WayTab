@@ -123,7 +123,7 @@ function daySelectController() {
 function getTodaySchedule() {
   switch(moment().format('e')) {
     case '0':
-      return 1
+      return 4
       break
     case '3':
       return 3
