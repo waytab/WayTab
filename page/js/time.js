@@ -115,8 +115,8 @@ function highlightBlock() {
 
 function daySelectController() {
   $(document).on('click', '.daySelect', function() {
-    chrome.storage.sync.set( {'day': $(this).attr('data-day')}, function() {
-    })
+    chrome.storage.sync.set( {'day': $(this).attr('data-day')})
+    day = $(this).attr('data-day')
   })
 }
 
