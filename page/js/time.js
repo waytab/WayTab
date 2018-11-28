@@ -1,7 +1,7 @@
 let sched
 let block
 let bell2
-let day
+let letter
 chrome.storage.sync.get( ['bell2'], function({bell2}) {
   if(bell2) {
     $('#bell-2-check').prop('checked', true)
@@ -18,7 +18,17 @@ $(document).ready( function() {
   updateBlock()
   daySelectController()
   chrome.storage.sync.get('day', function(res) {
-    day = res.day
+    let data = res.day // parse response
+    let dateComp = moment().format('L').split('/') // create date array
+    let currDate = dateComp[2] + '-' + dateComp[0] + '-' + dateComp[1] // build moment-compatible string
+    let dayDiff = moment(currDate).diff(moment(data[1]), 'days') // calculate difference in days
+    let currCol = letterToCol(data[0]) // get 'current' col number
+    let correctCol = currCol + dayDiff
+    if(correctCol > 7) {
+      correctCol = correctCol % 7 - 1
+    }
+    let correctLetter = colToLetter(correctCol) // get 'correct' (shifted) letter
+    letter = correctLetter
   })
 })
 
@@ -35,8 +45,8 @@ function updateBlock() {
 
 function displayTime() {
   try {
-    if(getTodaySchedule() != 4 && day !== undefined) {
-      $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${day} Day | ${block.name}`)
+    if(getTodaySchedule() != 4 && letter !== undefined) {
+      $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${letter} Day | ${block.name}`)
     }else {
       $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${block.name}`)
     }
@@ -97,9 +107,9 @@ function highlightBlock() {
     let actualBlock = parseInt(block.name.substring(block.name.length - 1))
     if(actualBlock <= 6) {
       $('.now').removeClass('now')
-      if(day !== undefined) {
+      if(letter !== undefined) {
         let table = $('#schedule-body')[0]
-        let cell = table.rows[actualBlock-1].cells[letterToCol()]
+        let cell = table.rows[actualBlock-1].cells[letterToCol(letter)]
         let child = $(cell)
         $(child).addClass('now')
       }else {
@@ -115,8 +125,11 @@ function highlightBlock() {
 
 function daySelectController() {
   $(document).on('click', '.daySelect', function() {
-    chrome.storage.sync.set( {'day': $(this).attr('data-day')})
-    day = $(this).attr('data-day')
+    let dateComp = moment().format('L').split('/')
+    let formattedDate = dateComp[2] + '-' + dateComp[0] + '-' + dateComp[1]
+    console.log(formattedDate)
+    chrome.storage.sync.set( {'day': [$(this).attr('data-day'), formattedDate]} )
+    letter = $(this).attr('data-day')
   })
 }
 
@@ -137,7 +150,7 @@ function getTodaySchedule() {
   }
 }
 
-function letterToCol() {
+function letterToCol(day) {
   switch(day) {
     case 'A':
       return 0
@@ -165,6 +178,38 @@ function letterToCol() {
       break
     default:
       return -1
+      break
+  }
+}
+
+function colToLetter(col) {
+  switch(col) {
+    case 0:
+      return 'A'
+      break
+    case 1:
+      return 'B'
+      break
+    case 2:
+      return 'C'
+      break
+    case 3:
+      return 'D'
+      break
+    case 4:
+      return 'E'
+      break
+    case 5:
+      return 'F'
+      break
+    case 6:
+      return 'G'
+      break
+    case 7:
+      return 'H'
+      break
+    default:
+      return 'Z'
       break
   }
 }
