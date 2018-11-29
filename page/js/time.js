@@ -17,8 +17,8 @@ bellTwoController()
 $(document).ready( function() {
   updateBlock()
   daySelectController()
-  chrome.storage.sync.get('day', function(res) {
-    let data = res.day // parse response
+  chrome.storage.sync.get('day', function({day}) {
+    let data = day // parse response
     let dateComp = moment().format('L').split('/') // create date array
     let currDate = dateComp[2] + '-' + dateComp[0] + '-' + dateComp[1] // build moment-compatible string
     let dayDiff = moment(currDate).diff(moment(data[1]), 'days') // calculate difference in days
