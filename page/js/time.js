@@ -17,19 +17,21 @@ bellTwoController()
 $(document).ready( function() {
   updateBlock()
   daySelectController()
-  chrome.storage.sync.get('day', function({day}) {
-    let data = day // parse response
-    let dateComp = moment().format('L').split('/') // create date array
-    let currDate = dateComp[2] + '-' + dateComp[0] + '-' + dateComp[1] // build moment-compatible string
-    let dayDiff = moment(currDate).diff(moment(data[1]), 'days') // calculate difference in days
-    let currCol = letterToCol(data[0]) // get 'current' col number
-    let correctCol = currCol + dayDiff
-    if(correctCol > 7) {
-      correctCol = correctCol % 7 - 1
-    }
-    let correctLetter = colToLetter(correctCol) // get 'correct' (shifted) letter
-    letter = correctLetter
-  })
+  if(getTodaySchedule() != 4) {
+    chrome.storage.sync.get('day', function({day}) {
+      let data = day // parse response
+      let dateComp = moment().format('L').split('/') // create date array
+      let currDate = dateComp[2] + '-' + dateComp[0] + '-' + dateComp[1] // build moment-compatible string
+      let dayDiff = moment(currDate).diff(moment(data[1]), 'days') // calculate difference in days
+      let currCol = letterToCol(data[0]) // get 'current' col number
+      let correctCol = currCol + dayDiff
+      if(correctCol > 7) {
+        correctCol = correctCol % 7 - 1
+      }
+      let correctLetter = colToLetter(correctCol) // get 'correct' (shifted) letter
+      letter = correctLetter
+    })
+  }
 })
 
 setInterval( () => {
