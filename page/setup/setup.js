@@ -18,6 +18,10 @@ $(document).on('click', '#next', () => {
   if(currentTab > 0) {
     $('#back').removeClass('d-none')
   }
+  
+  if(currentTab + 1 == tabList.length) {
+    $('#next span').text('Finish')
+  }
 })
 
 $(document).on('click', '#back', () => {
@@ -30,12 +34,22 @@ $(document).on('click', '#back', () => {
   if(currentTab == 0) {
     $('#back').addClass('d-none')
   }
+
+  if (currentTab + 1 != tabList.length) {
+    $('#next span').text('Next')
+  }
 })
 
 $(document).on('click', '[data-toggle="tab"]', function () {
   currentTab = tabList.indexOf($(this).attr('href').substring(1))
   if(currentTab == 0) {
     $('#back').addClass('d-none')
+  }
+
+  if (currentTab + 1 == tabList.length) {
+    $('#next span').text('Finish')
+  } else if (currentTab + 1 != tabList.length) {
+    $('#next span').text('Next')
   }
 })
 //#endregion
