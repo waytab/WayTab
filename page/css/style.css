@@ -104,7 +104,6 @@ body {
   bottom: 0;
   margin: 2rem;
   z-index: 3;
-  min-height: 46px;
 }
 
 .fab-button {
