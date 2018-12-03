@@ -104,6 +104,7 @@ body {
   bottom: 0;
   margin: 2rem;
   z-index: 3;
+  min-height: 46px;
 }
 
 .fab-button {
@@ -263,20 +264,6 @@ body {
 @media (min-width: 768px) {
   #activate-settings span {
     display: inline;
-  }
-}
-
-#feedback.hide {
-  animation: feedback-transform;
-  animation-duration: 250ms;
-}
-
-@keyframes feedback-transform {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(0);
   }
 }
 

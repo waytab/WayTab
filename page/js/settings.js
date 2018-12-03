@@ -49,15 +49,6 @@ function hardResetWaytab() {
   })
 }
 
-$('#feedback').tooltip({
-  placement: 'top',
-  title: 'Feedback'
-})
-
-$(document).on('click', '#feedback', () => {
-  $('#feedback-settings').tab('show')
-})
-
 // settings button / action menu
 let opened = false
 let startWidth
@@ -75,14 +66,10 @@ $(document).on('click', '#activate-settings', (e) => {
   })
   setTimeout(() => { $('#activate-settings i').toggleClass('fa-times') }, 125)
 
-  $('#feedback').toggleClass('hide')
-
   if(!opened) {
     $('.fab-action').animate({
       width: 200
     }, 250)
-
-    $('#feedback').animate({ opacity: 0 }, 250)
 
     $('#activate-settings span').text('Close')
 
@@ -91,8 +78,6 @@ $(document).on('click', '#activate-settings', (e) => {
     $('.fab-action').animate({
       width: startWidth
     }, 250)
-
-    $('#feedback').animate({ opacity: 1 }, 250)
 
     $('#activate-settings span').text('Settings')
 
