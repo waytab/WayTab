@@ -56,7 +56,7 @@ $(document).on('click', '#back', () => {
   }
 })
 
-$(document).on('click', '[data-toggle="tab"]', function () {
+$(document).on('click', '[data-toggle="tab"]:not(.disabled)', function () {
   currentTab = tabList.indexOf($(this).attr('href').substring(1))
   if(currentTab == 0) {
     $('#back').addClass('d-none')
