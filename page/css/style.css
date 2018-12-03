@@ -267,7 +267,6 @@ body {
 }
 
 #feedback.hide {
-  transform: translateX(67px);
   animation: feedback-transform;
   animation-duration: 250ms;
 }

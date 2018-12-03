@@ -61,8 +61,9 @@ $(document).on('click', '#feedback', () => {
 // settings button / action menu
 let opened = false
 let startWidth
-setTimeout(() => { startWidth = $('.fab-action').outerWidth() }, 100) // we need the font to load before we grab the button's width
+setTimeout(() => { startWidth = $('.fab-action').outerWidth(), $('.fab-action').css('width', startWidth + 'px') }, 100) // we need the font to load before we grab the button's width
 $(document).on('click', '#activate-settings', (e) => {
+  console.log(startWidth)
   //animate
   $('.fab-action').toggleClass('shown')
 
