@@ -24,14 +24,16 @@ $(document).on('click', '#next', () => {
   }
 
   if(currentTab + 1 > tabList.length) { // we've hit the end of the setup...
-    $('#setup-content').animate({
+    $('#setup-content, .modal-footer').animate({
       opacity: 0
     }, 250, () => {
       $('#setupModal .modal-dialog .modal-content').animate({
-        height: 400,
+        height: 332,
+        'padding-bottom': 0
       }, 500, () => {
-        $('#setup-content').toggleClass('d-none')
-        $('#setup-complete').toggleClass('d-none')
+        $('.modal-footer').remove()
+        $('#setup-content').remove()
+        $('#setup-complete').removeClass('d-none')
         savePrefs()
       })
     })
