@@ -52,6 +52,13 @@ body {
   -webkit-box-shadow: 0px 0px 50px 15px rgba(0, 0, 0, .15);
   -moz-box-shadow: 0px 0px 50px 15px rgba(0, 0, 0, .15);
   box-shadow: 0px 0px 50px 15px rgba(0, 0, 0, .15);
+  padding-bottom: 71px;
+}
+
+.modal-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 input.period-control,
@@ -62,4 +69,19 @@ input.period-control:focus {
 
 .now {
   background-color: rgba(0,123,255,0.2)
+}
+
+.loader {
+  border: 5px solid transparent;
+  border-top: 5px solid #007bff;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin: 3rem 0rem;
+  animation: loader_spin 1s linear infinite;
+}
+
+@keyframes loader_spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

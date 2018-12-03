@@ -22,6 +22,20 @@ $(document).on('click', '#next', () => {
   if(currentTab + 1 == tabList.length) {
     $('#next span').text('Finish')
   }
+
+  if(currentTab + 1 > tabList.length) { // we've hit the end of the setup...
+    $('#setup-content').animate({
+      opacity: 0
+    }, 250, () => {
+      $('#setupModal .modal-dialog .modal-content').animate({
+        height: 400,
+      }, 500, () => {
+        $('#setup-content').toggleClass('d-none')
+        $('#setup-complete').toggleClass('d-none')
+        savePrefs()
+      })
+    })
+  }
 })
 
 $(document).on('click', '#back', () => {
@@ -219,3 +233,7 @@ $(document).on('focusout', '.form-control', function() {
   }
 })
 //#endregion
+
+function savePrefs() {
+
+}
