@@ -1,11 +1,15 @@
 let currentTab = 0
 let tabList = ['welcome', 'personalize', 'links', 'schedule']
 
+let startingLinks = 
+
 $(document).ready(() => {
   $('#setupModal').modal({
     backdrop: false,
     keyboard: false
   })
+
+  $('[data-toggle="popover"]').popover()
 })
 
 //#region window functions
@@ -18,7 +22,7 @@ $(document).on('click', '#next', () => {
   if(currentTab > 0) {
     $('#back').removeClass('d-none')
   }
-  
+
   if(currentTab + 1 == tabList.length) {
     $('#next span').text('Finish')
   }
@@ -34,9 +38,9 @@ $(document).on('click', '#next', () => {
         $('.modal-footer').remove()
         $('#setup-content').remove()
         $('#setup-complete').removeClass('d-none')
-        savePrefs()
       })
     })
+    savePrefs()
   }
 })
 
@@ -112,8 +116,8 @@ $(document).on('click', '#skip', (e) => {
 //#region links
 $(function () {
   chrome.storage.sync.get(['links'], ({links}) => {
+    startingLinks = links
     $('#edit-links').empty()
-    console.log(links)
     for (let i = 0; i < links.length; i++) {
       $('#edit-links')
         .append($('<li></li>')
@@ -123,14 +127,15 @@ $(function () {
               .attr({
                 role: 'button',
                 title: 'Confirm',
-                'data-toggle': 'popover',
-                'data-trigger': 'focus',
-                'data-html': true,
-                'data-content': `<button class="btn btn-danger delete-link" data-num="${i}">Delete</button>`,
                 tabindex: 0
               })
               .css({ 'margin-left': 6, 'margin-right': 22, color: 'black', 'text-decoration': 'none', cursor: 'pointer' })
-              .html('&times;'),
+              .html('&times;')
+              .popover({
+                trigger: 'focus',
+                html: true,
+                content: `<button class="btn btn-danger delete-link" data-num="${i}">Delete</button>`
+              }),
             $('<div></div>')
               .addClass('link-edit w-100')
               .css('cursor', 'pointer')
@@ -149,6 +154,7 @@ $(function () {
       )
 
     $(document).on('click', '.link-edit', (e) => {
+      $(e.target).removeClass('link-edit').addClass('link-editing')
       let index = $(e.target).attr('data-edit')
       $(e.target)
         .text('')
@@ -205,6 +211,14 @@ $(function () {
           .html('<span class="font-weight-bold"><span style="margin-left: 6px; margin-right: 22px;">&plus;</span>Add Link...</span>')
         )
     })
+    
+    $(document).on('click', '.delete-link', (e) => {
+      let target = $(e.target)
+      console.log(target.data('num'));
+      startingLinks[target.data('num')] = {}
+      console.log(startingLinks);
+      $(`#edit-links li:nth-child(${target.data('num') +1})`).remove()
+    })
   })
 })
 //#endregion
@@ -237,5 +251,80 @@ $(document).on('focusout', '.form-control', function() {
 //#endregion
 
 function savePrefs() {
+  // first, let's collect all the shizz we need
+  let title = $('#title-input').val().length > 0 ? $('#title-input').val() : 'WayTab'
+  let background = $('#select-background').val()
+  let customBackground = $('#custom-background-input').val()
+  let font = $('#fontSelect').val()
+  let enableWspn = $('#wspn-check').prop('checked')
 
+  let links = getLinksAsArray()
+
+  let schedule = getScheduleAsArray()
+  let classes = getClassesArray(schedule)
+
+  // assemble into an array
+  let saveArray = {
+    setup: true, //since setup has been completed
+    title,
+    background: background == "Custom..." ? customBackground : `./img/${background}.jpg`,
+    font,
+    enableWspn,
+    links,
+    schedule,
+    classes
+  }
+
+  console.log(saveArray);
+  chrome.storage.sync.set(saveArray, () => {
+    document.location.pathname = '/page/tab.html'
+  })
+}
+
+function getLinksAsArray() {
+  let newLinks = [...startingLinks] // spread ensures (without a doubt) that we get a *copy* of the `startingLinks` array
+  $('.new-link').each((i, e) => { // for each new link div thingy
+    let newLink = {
+      name: $(e).find('#tab-name').val(),
+      actual_link: $(e).find('#tab-link').val(),
+      image_link: $(e).find('#img-upload').val()
+    }
+
+    newLinks.push(newLink) // we push the new link object to our copied array
+  })
+
+  $('.link-editing').each((i, e) => {
+    let index = $(e).data('edit')
+    
+    newLinks[index].name = $(e).find('input.form-control:nth-child(1)').val()
+    newLinks[index].actual_link = $(e).find('input.form-control:nth-child(2)').val()
+    newLinks[index].image_link = $(e).find('input.form-control:nth-child(3)').val()
+  })
+
+  return newLinks // return the modified copied array back to `savePrefs()`
+}
+
+function getScheduleAsArray() {
+  let schedule = []
+  $('#new-schedule-body').children('tr').each(function () {
+    let row = $(this)
+    let rowArr = []
+    row.children('td').each(function () {
+      let col = $(this).children()[0]
+      rowArr.push(col.value.length > 0 ? col.value : '')
+    })
+    schedule.push(rowArr)
+  })
+  
+  return schedule
+}
+
+function getClassesArray(schedule) {
+  let classes = [...new Set(schedule[0].concat(schedule[1].concat(schedule[3].concat(schedule[4]))))] // filter for single occurances of classes in schedule
+  classes = classes.filter((v) => { return v != '' }).sort() // filter for frees
+  for (let i = 0; i < classes.length; i++) {
+    classes[i] = classes[i].replace(/[|&;$%@"<>()+,]/g, '')
+  }
+  
+  return classes
 }
