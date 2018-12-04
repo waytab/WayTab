@@ -36,11 +36,11 @@ $(document).on('click', '#next', () => {
         'padding-bottom': 0
       }, 500, () => {
         $('.modal-footer').remove()
-        $('#setup-content').remove()
+        $('#setup-content').addClass('d-none')
         $('#setup-complete').removeClass('d-none')
+        savePrefs()
       })
     })
-    savePrefs()
   }
 })
 
