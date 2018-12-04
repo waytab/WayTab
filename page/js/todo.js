@@ -58,6 +58,12 @@ $(document).ready(() => {
       loadTasks()
     })
   })
+
+  $(document).on('keyup', '#newTask', (e) => {
+    if(e.keyCode == 13) {
+      $('#addTask').trigger('click')
+    }
+  })
 })
 
 function loadTasks() {
