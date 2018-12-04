@@ -297,6 +297,10 @@ input.period-control:focus {
   color: #007bff;
 }
 
+.now {
+  background-color: rgba(0,123,255,0.2)
+}
+
 #time-container {
   color: black;
   margin: 0 auto;

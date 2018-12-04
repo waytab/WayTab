@@ -93,5 +93,21 @@ export default class Schedule {
         })
       }
     })
+    $(document).on('focus', '.form-control[data-period]', function () {
+      if ($('#customCheck1').is(':checked')) {
+        let period = $(this).data('period')
+        $(`[data-period=${period}]`).each(function () {
+          $(this).addClass('now')
+        })
+      }
+    })
+    $(document).on('focusout', '.form-control[data-period]', function () {
+      if ($('#customCheck1').is(':checked')) {
+        let period = $(this).data('period')
+        $(`[data-period=${period}]`).each(function () {
+          $(this).removeClass('now')
+        })
+      }
+    })
   }
 }
