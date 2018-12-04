@@ -11,7 +11,7 @@ chrome.runtime.onInstalled.addListener(function(deets) {
           e.actual_link = 'https://student.naviance.com/waylandhs'
         }
       })
-      chrome.storage.sync.set({links: links}, function() {})
+      chrome.storage.sync.set({links: links, setup:true}, function() {})
     })
   }
 })
