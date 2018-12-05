@@ -19,11 +19,9 @@ export default class Links {
   }
 
   loadLinks(obj) {
-    console.log(obj)
     $('#link-container').empty()
     $('#edit-links').empty()
     for(let i = 0; i < obj.length; i++) {
-      console.log(obj[i].name)
       $('#link-container').append($('<div></div>').addClass('col-1').attr('id', `link${i}`).tooltip({
                                                                                               'id': `link${i}`,
                                                                                               'data-toggle': 'tooltip',
@@ -49,6 +47,11 @@ export default class Links {
               })
               .css({ 'margin-left': 6, 'margin-right': 22, color: 'black', 'text-decoration': 'none', cursor: 'pointer' })
               .html('&times;'),
+            $('<img />')
+              .attr({
+                src: obj[i].image_link,
+                class: 'link-edit-icon'
+              }),
             $('<div></div>')
               .addClass('link-edit w-100')
               .css('cursor', 'pointer')

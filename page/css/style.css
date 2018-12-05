@@ -509,3 +509,11 @@ div.card-img-top {
 a.input-group-text:hover {
   text-decoration: none;
 }
+
+.link-edit-icon {
+  max-width: 1rem;
+  max-height: 1rem;
+  display: inline-block;
+  margin-right: 1rem;
+  margin-top: .28rem;
+}
