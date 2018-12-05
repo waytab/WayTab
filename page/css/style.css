@@ -511,8 +511,8 @@ a.input-group-text:hover {
 }
 
 .link-edit-icon {
-  max-width: 1rem;
-  max-height: 1rem;
+  width: auto;
+  height: 1rem;
   display: inline-block;
   margin-right: 1rem;
   margin-top: .28rem;
