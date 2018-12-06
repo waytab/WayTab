@@ -286,6 +286,9 @@ a.text-dark {
   left: 0;
   overflow-x: hidden;
   transition: 350ms ease-out;
+  -webkit-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.75);
 }
 
 #wspn-container .overflow-box {
