@@ -2,6 +2,7 @@ let tasks = {}
 let todoDefault
 
 chrome.storage.sync.get(['todoDate'], function({todoDate}) {
+  todoDefault = todoDate
   if (todoDate === 'Tomorrow') {
     $('#todo-tomorrow').prop('selected', true)
     $('#todo-today').prop('selected', false)
@@ -75,7 +76,7 @@ function loadTasks() {
       tasks = result.tasks
       $('#taskList').empty()
       $('#newTask').val('')
-      $('#taskDue').val(formatDate(new Date()))
+      $('#taskDue').val(formatDate())
       $('#addTaskClass').empty().append(`<option selected>Class...(default to misc)</option>`)
       for (let key in tasks) {
         if(tasks.hasOwnProperty(key)) {
@@ -212,22 +213,20 @@ function defaultController() {
 }
 
 function formatDate() {
-  let date = new Date()
+  let date = moment()
   if(todoDefault === 'Tomorrow') {
-    date.setTime(date.getTime() + (24 * 60 * 60 * 1000))
-    if(date.getDay() === 5) {
-      date.setTime(date.getTime() + (3 * 24 * 60 * 60 * 1000))
-    }else if(date.getDay() === 6) {
-      date.setTime(date.getTime() + (2 * 24 * 60 * 60 * 1000))
+    if(date.day() === 6) {
+      date.add(2, 'days')
+    }else if(date.day() === 5) {
+      date.add(3, 'days')
+    }else {
+      date.add(1, 'days')
     }
   }else if(todoDefault === 'Week') {
-    date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000))
+    date.add(7, 'days')
   }
-  let month = (date.getMonth() + 1).toString().padStart(2, '0')
-  let year = date.getFullYear()
-  let day = (date.getDate()).toString().padStart(2, '0')
-
-  return year + '-' + month + '-' + day
+  let dateComps = date.format('L').split('/')
+  return dateComps[2] + '-' + dateComps[0] + '-' + dateComps[1]
 }
 
 function loadClasses() {
