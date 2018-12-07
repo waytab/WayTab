@@ -1,4 +1,4 @@
-let sched
+var sched
 let block
 let bell2
 let letter
@@ -9,7 +9,24 @@ chrome.storage.sync.get( ['bell2'], function({bell2}) {
     $('#bell-2-check').prop('checked', false)
   }
 })
-$.getJSON('js/json/config.json', (data) => { sched = data.bell_schedule, displayTime() })
+
+$.ajax({
+  async: false,
+  url: `https://cors-anywhere.herokuapp.com/http://manage.waytab.org/modules/schedule/?timestamp=${moment().unix()}`,
+  success: function (data) {
+    if(Math.abs(moment(data.date).diff(moment(), 'days')) < 1) {
+      sched = data.schedule
+      displayTime()
+    }else {
+      $.getJSON('js/json/config.json', (data) => {
+        sched = data.bell_schedule
+        displayTime()
+      }).fail( (err) => {
+        console.log(err)
+      })
+    }
+  }
+})
 
 hoverController()
 bellTwoController()
