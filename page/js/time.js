@@ -13,9 +13,9 @@ chrome.storage.sync.get( ['bell2'], function({bell2}) {
 
 $.ajax({
   async: false,
-  url: `https://cors-anywhere.herokuapp.com/http://manage.waytab.org/modules/schedule/?timestamp=${moment().unix()}`,
+  url: `https://cors-anywhere.herokuapp.com/http://manage.waytab.org/modules/schedule/?timestamp=${moment().subtract(1, 'days').unix()}`,
   success: function (data) {
-    if(Math.abs(moment(data.date).diff(moment(), 'days')) < 1) {
+    if(Math.abs(moment(data.date).diff(moment(), 'd')) < 1) {
       sched = data.schedule
       isSpecial = true
       displayTime()
@@ -35,6 +35,7 @@ hoverController()
 bellTwoController()
 
 $(document).ready( function() {
+  console.log(sched)
   updateBlock()
   daySelectController()
   if(getTodaySchedule() != 4) {
