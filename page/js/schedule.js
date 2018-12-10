@@ -27,14 +27,14 @@ export default class Schedule {
       <table class="table table-bordered mb-0" id="schedule-table">
         <thead>
           <tr>
-            <th scope="col">A</th>
-            <th scope="col">B</th>
-            <th scope="col">C</th>
-            <th scope="col">D</th>
-            <th scope="col">E</th>
-            <th scope="col">F</th>
-            <th scope="col">G</th>
-            <th scope="col">H</th>
+            <th scope="col" class="daySelect" data-day="A">A</th>
+            <th scope="col" class="daySelect" data-day="B">B</th>
+            <th scope="col" class="daySelect" data-day="C">C</th>
+            <th scope="col" class="daySelect" data-day="D">D</th>
+            <th scope="col" class="daySelect" data-day="E">E</th>
+            <th scope="col" class="daySelect" data-day="F">F</th>
+            <th scope="col" class="daySelect" data-day="G">G</th>
+            <th scope="col" class="daySelect" data-day="H">H</th>
           </tr>
         </thead>
         <tbody id="schedule-body"></tbody>
@@ -49,7 +49,7 @@ export default class Schedule {
   }
 
   scheduleEditor() {
-    let loadFunc = this.loadSchedule
+    let loadFunc = this.loadSchedule;
     $(document).on('click', '#new-schedule-save', function() {
       let schedule = []
       chrome.storage.sync.set({schedule: []}, console.log('Schedule Cleared')) // make sure we start with a clean sync to prevent double schedules
@@ -81,7 +81,7 @@ export default class Schedule {
           console.log('Class list saved!')
         })
       })
-      location.reload()
+      location.reload();
     })
 
     $(document).on('change paste keyup', '.period-control', function() {

@@ -2,6 +2,7 @@ let tasks = {}
 let todoDefault
 
 chrome.storage.sync.get(['todoDate'], function({todoDate}) {
+  todoDefault = todoDate
   if (todoDate === 'Tomorrow') {
     $('#todo-tomorrow').prop('selected', true)
     $('#todo-today').prop('selected', false)
@@ -20,10 +21,6 @@ chrome.storage.sync.get(['todoDate'], function({todoDate}) {
 $(document).ready(() => {
   loadTasks()
   defaultController()
-
-  loadClasses()
-  removeClasses()
-  addClass()
 
   $(document).on('click', '#addTask', function() {
     let button = $(this)
@@ -58,6 +55,12 @@ $(document).ready(() => {
       loadTasks()
     })
   })
+
+  $(document).on('keyup', '#newTask', (e) => {
+    if(e.keyCode == 13) {
+      $('#addTask').trigger('click')
+    }
+  })
 })
 
 function loadTasks() {
@@ -69,12 +72,13 @@ function loadTasks() {
       tasks = result.tasks
       $('#taskList').empty()
       $('#newTask').val('')
-      $('#taskDue').val(formatDate(new Date()))
+      $('#taskDue').val(formatDate())
       $('#addTaskClass').empty().append(`<option selected>Class...(default to misc)</option>`)
       for (let key in tasks) {
         if(tasks.hasOwnProperty(key)) {
           if(tasks[key].length != 0) {
             $('#taskList').append($('<h5></h5>').text(key))
+            tasks[key].sort((a, b) => -1 * (new Date(b[1]) - new Date(a[1])))
             for (let i = 0; i < tasks[key].length; i++) {
               $('#newTaskSelectionGroup').addClass('mb-3')
               $('#taskList')
@@ -119,12 +123,12 @@ function loadTasks() {
       $('[data-del]').on('change paste keyup', function() {
         let button = $(this)
         let target = button.data('del')
-        let index
+        let index;
         if (!(typeof $(`#${target} label`).attr('data-has-date') !== typeof undefined && $(`#${target} label`).attr('data-has-date') !== false)) {
           index = getIndexOfArray(tasks[button.data('class').replace('_', ' ')], [$(`#${target} label`).text(), ''])
         } else {
           let dateFormatted = new Date($(`#${target} label`).attr('data-due-on'))
-          dateFormatted = dateFormatted.getFullYear() + '-' + (dateFormatted.getMonth() + 1).toString().padStart(2, '0') + '-' + (dateFormatted.getDate()).toString().padStart(2, "0")
+          dateFormatted = dateFormatted.getFullYear() + '-' + (dateFormatted.getMonth() + 1).toString().padStart(2, "0") + '-' + (dateFormatted.getDate()).toString().padStart(2, "0")
           index = getIndexOfArray(tasks[button.data('class').replace('_', ' ')], [$(`#${target} label`).text(), dateFormatted])
         }
         if(index > -1) {
@@ -145,6 +149,7 @@ function loadTasks() {
       console.log('Classes not found')
     } else {
       console.log('Class list found')
+      console.log(result.classes)
       let classes = result.classes
       for(let i = 0; i < classes.length; i++) {
         $('#addTaskClass').append($('<option></option>').attr('value', classes[i]).html(classes[i]))
@@ -205,22 +210,20 @@ function defaultController() {
 }
 
 function formatDate() {
-  let date = new Date()
+  let date = moment()
   if(todoDefault === 'Tomorrow') {
-    date.setTime(date.getTime() + (24 * 60 * 60 * 1000))
-    if(date.getDay() === 5) {
-      date.setTime(date.getTime() + (3 * 24 * 60 * 60 * 1000))
-    }else if(date.getDay() === 6) {
-      date.setTime(date.getTime() + (2 * 24 * 60 * 60 * 1000))
+    if(date.day() === 6) {
+      date.add(2, 'days')
+    }else if(date.day() === 5) {
+      date.add(3, 'days')
+    }else {
+      date.add(1, 'days')
     }
   }else if(todoDefault === 'Week') {
-    date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000))
+    date.add(7, 'days')
   }
-  let month = (date.getMonth() + 1).toString().padStart(2, '0')
-  let year = date.getFullYear()
-  let day = (date.getDate()).toString().padStart(2, '0')
-
-  return year + '-' + month + '-' + day
+  let dateComps = date.format('L').split('/')
+  return dateComps[2] + '-' + dateComps[0] + '-' + dateComps[1]
 }
 
 function loadClasses() {
