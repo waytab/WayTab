@@ -16,7 +16,7 @@ $.ajax({
   url: `https://cors-anywhere.herokuapp.com/http://manage.waytab.org/modules/schedule/?timestamp=${moment().subtract(1, 'days').unix()}`,
   success: function (data) {
     console.log(data)
-    if(Math.abs(moment(data.date).diff(moment(), 'd')) < 1) {
+    if(data.name !== undefined && Math.abs(moment(data.date).diff(moment(), 'd')) < 1) {
       sched = data.schedule
       isSpecial = true
       displayTime()
@@ -245,7 +245,7 @@ function colToLetter(col) {
 
 function getSoonestIndex(todaySchedule) {
   let bell
-  if(isSpecial) {
+  if(!isSpecial) {
     bell = sched[todaySchedule]
   }else {
     bell = sched
