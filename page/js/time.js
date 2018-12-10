@@ -1,4 +1,5 @@
 var sched
+var isSpecial = false
 let block
 let bell2
 let letter
@@ -16,10 +17,12 @@ $.ajax({
   success: function (data) {
     if(Math.abs(moment(data.date).diff(moment(), 'days')) < 1) {
       sched = data.schedule
+      isSpecial = true
       displayTime()
     }else {
       $.getJSON('js/json/config.json', (data) => {
         sched = data.bell_schedule
+        isSpecial = false
         displayTime()
       }).fail( (err) => {
         console.log(err)
@@ -118,7 +121,11 @@ function hoverController() {
 }
 
 function getCurrentBlock() {
-  return sched[getTodaySchedule()][getSoonestIndex(getTodaySchedule())]
+  if(!isSpecial) {
+    return sched[getTodaySchedule()][getSoonestIndex(getTodaySchedule())]
+  }else {
+    return sched[getSoonestIndex(null)]
+  }
 }
 
 function highlightBlock() {
@@ -234,7 +241,12 @@ function colToLetter(col) {
 }
 
 function getSoonestIndex(todaySchedule) {
-  let bell = sched[todaySchedule]
+  let bell
+  if(isSpecial) {
+    bell = sched[todaySchedule]
+  }else {
+    bell = sched
+  }
   let currentMin = Number.MAX_SAFE_INTEGER
   let ret = 0
   for(let i = 0; i < bell.length; i++) {
