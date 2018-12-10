@@ -15,6 +15,7 @@ $.ajax({
   async: false,
   url: `https://cors-anywhere.herokuapp.com/http://manage.waytab.org/modules/schedule/?timestamp=${moment().subtract(1, 'days').unix()}`,
   success: function (data) {
+    console.log(data)
     if(Math.abs(moment(data.date).diff(moment(), 'd')) < 1) {
       sched = data.schedule
       isSpecial = true
@@ -78,8 +79,9 @@ function displayTime() {
 }
 
 function barController() {
+  let periodLength = moment(block.end,'hmm').diff(moment(block.start,'hmm'), 'minutes')
   let elapsed = moment().diff(moment(block.end, 'hmm')) / 1000 / 60
-  let percentElapsed = 100 - (-1 * elapsed / block.length) * 100
+  let percentElapsed = 100 - (-1 * elapsed / periodLength) * 100
 
   $('#time-bar-elapsed').css('width', percentElapsed + '%')
   $('#percent-container').text('Ends at ' + moment(block.end, 'hmm').format('h:mm a') + ' | ' + parseInt(percentElapsed) + '% elapsed')
