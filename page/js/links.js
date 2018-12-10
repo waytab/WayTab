@@ -25,9 +25,7 @@ export default class Links {
     for(let i = 0; i < obj.length; i++) {
       console.log(obj[i].name)
       $('#link-container').append($('<div></div>').addClass('col-1').attr('id', `link${i}`).tooltip({
-                                                                                              'id': `link${i}`,
-                                                                                              'data-toggle': 'tooltip',
-                                                                                              'data-placement': 'bottom',
+                                                                                              'placement': 'bottom',
                                                                                               'title': obj[i].name
                                                                                             }))
       $(`#link${i}`).append($('<a></a>').addClass('img-link').attr('href', obj[i].actual_link).append($('<img />').attr({ src: obj[i].image_link, alt: obj[i].name })))
@@ -114,28 +112,28 @@ export default class Links {
     })
 
     $(document).on('click', '#submit-tab-info', () => {
-      let name = $('#tab-name').val()
-      let link = $('#tab-link').val()
-      let img = $('#img-upload').val()
+      let name = $('#tab-name').val();
+      let link = $('#tab-link').val();
+      let img = $('#img-upload').val();
       if(img.length <= 8) {
         img = './img/default.png'
       }
 
       if(link.substring(0,4) == 'http' || link.substring(0,5) == 'https' || img.substring(0,4) == 'http' || img.substring(0,5) == 'https') {
         let linksLoad = this.loadLinks
-        let obj = {'name': name, 'actual_link': link, 'image_link': img}
+        let obj = {"name": name, "actual_link": link, "image_link": img};
         chrome.storage.sync.get(['links'], function(result) {
           isOpen = false
-          result.links.push(obj)
-          chrome.storage.sync.set({links: result.links}, () => { linksLoad(result.links) })
-        })
+          result.links.push(obj);
+          chrome.storage.sync.set({links: result.links}, () => { linksLoad(result.links) });
+        });
       } else {
         $('#submit-tab-info').addClass('btn-danger')
         $('#submit-tab-info').text('URLs must start with HTTP:// or HTTPS://')
       }
 
 
-    })
+    });
   }
 
   removeLinks() {
@@ -178,7 +176,7 @@ export default class Links {
           }
         })
         chrome.storage.sync.set({links: links})
-      })
+      });
     })
   }
 }

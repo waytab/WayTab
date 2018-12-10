@@ -12,7 +12,7 @@ function hardResetTasks() {
       if(tasks !== null) {
         Object.keys(tasks).forEach( function(obj) {
           // I console log all of the task NAMES so that they can re-enter assignments after the reset
-          console.log(obj + ':')
+          console.log(obj + ":")
           for(i = 0; i < this.length; i++) {
             console.log(this[i][0])
           }
