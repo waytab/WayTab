@@ -29,7 +29,7 @@
     <h1 class="display-2 text-center" id="title-container"></h1>
 
     <!-- WSPN Feed -->
-    <button type="button" class="btn btn-primary position-absolute float-left mt-5 ml-3 action-button" id="show-wspn">WSPN</button>
+    <button type="button" class="btn btn-primary position-absolute float-left mt-5 ml-3 action-button fab-button" id="show-wspn"><i class="far fa-newspaper mr-2"></i>WSPN</button>
     <div class="bg-dark" id="wspn-container">
       <div class="overflow-box">
         <span class="d-block wspn-title text-light font-roboto-slab">
@@ -59,7 +59,7 @@
       <div class="col-md-6">
         <div class="card" id="schedule">
           <div class="card-body">
-            <h3 class="card-title mb-0"><span>Schedule</span></h3>
+            <h3 class="card-title mb-0"><span data-toggle="tooltip" title="Click on a letter to change the letter day" data-placement="right">Schedule</span></h3>
           </div>
         </div>
       </div>
@@ -87,7 +87,10 @@
     </div>
 
     <!-- Toggle Settings -->
-    <button type="button" class="btn btn-primary position-absolute float-right mt-5 mr-3 action-button" data-toggle="modal" data-target="#settings-pane" id="activate-settings">Settings</button>
+    <div class="fab-area">
+      <button type="button" class="btn btn-primary action-button fab-button d-none d-md-inline-block" id="feedback" data-toggle="modal" data-target="#settings-pane"><i class="fas fa-bullhorn"></i></button>
+      <button type="button" class="btn btn-primary action-button fab-button" data-toggle="modal" data-target="#settings-pane" id="activate-settings"><i class="fas fa-cog mr-md-2"></i><span>Settings</span></button>
+    </div>
 
     <!-- Settings Modal -->
     <div class="modal fade" id="settings-pane" tabindex="-1" role="dialog">
@@ -115,7 +118,13 @@
                 <a class="nav-link" id="links-settings" data-toggle="tab" href="#links-set" role="tab" aria-selected="false">Links</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="about-settings" data-toggle="tab" href="#about-set" role="tab" aria-selected="false">About<span class="badge badge-outline-secondary badge-pill ml-2">1.1.6</span></a>
+                <a class="nav-link" id="classes-settings" data-toggle="tab" href="#classes-set" role="tab" aria-selected="false">Classes</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="feedback-settings" data-toggle="tab" href="#feedback-set" role="tab" aria-selected="false"><i class="fas fa-bullhorn"></i></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="about-settings" data-toggle="tab" href="#about-set" role="tab" aria-selected="false">About<span class="badge badge-outline-secondary badge-pill ml-2">1.2</span></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-danger border-danger border-bottom-0" id="danger-settings" data-toggle="tab" href="#danger-set" role="tab" aria-selected="false">Danger Zone</a>
@@ -221,7 +230,21 @@
                 <span class="text-muted mb-2 d-block">Click on a link's name to edit it.</span>
                 <ul class="list-group" id="edit-links"></ul>
               </div>
+              
+              <!-- Classes (in Todo) Settings -->
+              <div class="tab-pane fade" id="classes-set" role="tabpanel">
+                <h5 class="display-5">Add or Remove a Class</h5>
+                <ul class="list-group" id="edit-classes"></ul>
+              </div>
 
+              <!-- feedback -->
+              <div class="tab-pane fade text-center" id="feedback-set" role="tabpanel">
+                <h3 class="mb-4">Feedback</h3>
+                <h6>Opening an issue on GitHub ensures we can track it in the most efficient way possible.</h6>
+                <h6 class="display-6 mb-4"><i class="fas fa-exclamation"></i> <a href="https://github.com/andrewward2001/WayTab/issues">Browse issues</a></h6>
+                <h6>Don't have a GitHub account?</h6>
+                <h6><i class="fas fa-edit"></i> <a href="https://goo.gl/forms/cuEftjPGOl5G3chk2">Use the Google Form.</a></h6>
+              </div>
               <!-- About -->
               <div class="tab-pane fade text-center" id="about-set" role="tabpanel">
                 <div class="mx-auto">
@@ -233,9 +256,6 @@
                 <h6 class="display-6 mb-4">and <a href="https://github.com/waytab/WayTab/graphs/contributors">these</a> awesome contributors</h6>
                 <h6 class="display-6"><i class="fab fa-github"></i> <a href="https://github.com/waytab">GitHub Org</a></h6>
                 <h6 class="display-6"><i class="fab fa-github"></i> <a href="https://github.com/waytab/WayTab" data-toggle="tooltip" data-placement="bottom" title="Browse the code and contribute">GitHub Code Repository</a></h6>
-                <h6 class="display-6 mb-3"><i class="fas fa-exclamation"></i> <a href="https://github.com/andrewward2001/WayTab/issues">Browse issues</a></h6>
-                <h6>Don't have a GitHub account?</h6>
-                <h6><i class="fas fa-edit"></i> <a href="https://goo.gl/forms/cuEftjPGOl5G3chk2">Use the Google Form.</a></h6>
               </div>
 
               <!-- Danger Zone -->

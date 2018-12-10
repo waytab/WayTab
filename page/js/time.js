@@ -1,6 +1,8 @@
-let sched
+var sched
+var isSpecial = false
 let block
 let bell2
+let letter
 chrome.storage.sync.get( ['bell2'], function({bell2}) {
   if(bell2) {
     $('#bell-2-check').prop('checked', true)
@@ -8,13 +10,50 @@ chrome.storage.sync.get( ['bell2'], function({bell2}) {
     $('#bell-2-check').prop('checked', false)
   }
 })
-$.getJSON('js/json/config.json', (data) => { sched = data.bell_schedule, displayTime() })
+
+$.ajax({
+  async: false,
+  url: `https://cors-anywhere.herokuapp.com/http://manage.waytab.org/modules/schedule/?timestamp=${moment().subtract(1, 'days').unix()}`,
+  success: function (data) {
+    console.log(data)
+    if(data.name !== undefined && Math.abs(moment(data.date).diff(moment(), 'd')) < 1) {
+      sched = data.schedule
+      isSpecial = true
+      displayTime()
+    }else {
+      $.getJSON('js/json/config.json', (data) => {
+        sched = data.bell_schedule
+        isSpecial = false
+        displayTime()
+      }).fail( (err) => {
+        console.log(err)
+      })
+    }
+  }
+})
 
 hoverController()
 bellTwoController()
 
 $(document).ready( function() {
+  console.log(sched)
   updateBlock()
+  daySelectController()
+  if(getTodaySchedule() != 4) {
+    chrome.storage.sync.get('day', function({day}) {
+      let data = day // parse response
+      let dateComp = moment().format('L').split('/') // create date array
+      let currDate = dateComp[2] + '-' + dateComp[0] + '-' + dateComp[1] // build moment-compatible string
+      let dayDiff = moment(currDate).diff(moment(data[1]), 'days') // calculate difference in days
+      let currCol = letterToCol(data[0]) // get 'current' col number
+      let correctCol = currCol + dayDiff
+      if(correctCol > 7) {
+        correctCol = correctCol % 7 - 1
+      }
+      let correctLetter = colToLetter(correctCol) // get 'correct' (shifted) letter
+      letter = correctLetter
+    })
+  }
 })
 
 setInterval( () => {
@@ -30,14 +69,19 @@ function updateBlock() {
 
 function displayTime() {
   try {
-    $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${block.name}`)
+    if(getTodaySchedule() != 4 && letter !== undefined) {
+      $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${letter} Day | ${block.name}`)
+    }else {
+      $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${block.name}`)
+    }
   } catch(e) {
   }
 }
 
 function barController() {
+  let periodLength = moment(block.end,'hmm').diff(moment(block.start,'hmm'), 'minutes')
   let elapsed = moment().diff(moment(block.end, 'hmm')) / 1000 / 60
-  let percentElapsed = 100 - (-1 * elapsed / block.length) * 100
+  let percentElapsed = 100 - (-1 * elapsed / periodLength) * 100
 
   $('#time-bar-elapsed').css('width', percentElapsed + '%')
   $('#percent-container').text('Ends at ' + moment(block.end, 'hmm').format('h:mm a') + ' | ' + parseInt(percentElapsed) + '% elapsed')
@@ -80,7 +124,11 @@ function hoverController() {
 }
 
 function getCurrentBlock() {
-  return sched[getTodaySchedule()][getSoonestIndex(getTodaySchedule())]
+  if(!isSpecial) {
+    return sched[getTodaySchedule()][getSoonestIndex(getTodaySchedule())]
+  }else {
+    return sched[getSoonestIndex(null)]
+  }
 }
 
 function highlightBlock() {
@@ -88,13 +136,30 @@ function highlightBlock() {
     let actualBlock = parseInt(block.name.substring(block.name.length - 1))
     if(actualBlock <= 6) {
       $('.now').removeClass('now')
-      $('#schedule-body').children().each( function() {
-        if($(this).attr('data-per') == actualBlock) {
-          $(this).children().addClass('now')
-        }
-      })
+      if(letter !== undefined) {
+        let table = $('#schedule-body')[0]
+        let cell = table.rows[actualBlock-1].cells[letterToCol(letter)]
+        let child = $(cell)
+        $(child).addClass('now')
+      }else {
+        $('#schedule-body').children().each( function() {
+          if($(this).attr('data-per') == actualBlock) {
+            $(this).children().addClass('now')
+          }
+        })
+      }
     }
   }
+}
+
+function daySelectController() {
+  $(document).on('click', '.daySelect', function() {
+    let dateComp = moment().format('L').split('/')
+    let formattedDate = dateComp[2] + '-' + dateComp[0] + '-' + dateComp[1]
+    console.log(formattedDate)
+    chrome.storage.sync.set( {'day': [$(this).attr('data-day'), formattedDate]} )
+    letter = $(this).attr('data-day')
+  })
 }
 
 function getTodaySchedule() {
@@ -114,8 +179,77 @@ function getTodaySchedule() {
   }
 }
 
+function letterToCol(day) {
+  switch(day) {
+    case 'A':
+      return 0
+      break
+    case 'B':
+      return 1
+      break
+    case 'C':
+      return 2
+      break
+    case 'D':
+      return 3
+      break
+    case 'E':
+      return 4
+      break
+    case 'F':
+      return 5
+      break
+    case 'G':
+      return 6
+      break
+    case 'H':
+      return 7
+      break
+    default:
+      return -1
+      break
+  }
+}
+
+function colToLetter(col) {
+  switch(col) {
+    case 0:
+      return 'A'
+      break
+    case 1:
+      return 'B'
+      break
+    case 2:
+      return 'C'
+      break
+    case 3:
+      return 'D'
+      break
+    case 4:
+      return 'E'
+      break
+    case 5:
+      return 'F'
+      break
+    case 6:
+      return 'G'
+      break
+    case 7:
+      return 'H'
+      break
+    default:
+      return 'Z'
+      break
+  }
+}
+
 function getSoonestIndex(todaySchedule) {
-  let bell = sched[todaySchedule]
+  let bell
+  if(!isSpecial) {
+    bell = sched[todaySchedule]
+  }else {
+    bell = sched
+  }
   let currentMin = Number.MAX_SAFE_INTEGER
   let ret = 0
   for(i = 0; i < bell.length; i++) {

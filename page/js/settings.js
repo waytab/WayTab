@@ -40,10 +40,20 @@ function hardResetWaytab() {
       chrome.storage.sync.set({
         title: 'WayTab',
         font: 'default',
-        enableWspn: true
+        enableWspn: true,
+        background: './img/school.jpg'
       }, () => {
         location.reload()
       })
     })
   })
 }
+
+$('#feedback').tooltip({
+  placement: 'top',
+  title: 'Feedback'
+})
+
+$(document).on('click', '#feedback', () => {
+  $('#feedback-settings').tab('show')
+})

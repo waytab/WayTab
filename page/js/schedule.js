@@ -27,14 +27,14 @@ export default class Schedule {
       <table class="table table-bordered mb-0" id="schedule-table">
         <thead>
           <tr>
-            <th scope="col">A</th>
-            <th scope="col">B</th>
-            <th scope="col">C</th>
-            <th scope="col">D</th>
-            <th scope="col">E</th>
-            <th scope="col">F</th>
-            <th scope="col">G</th>
-            <th scope="col">H</th>
+            <th scope="col" class="daySelect" data-day="A">A</th>
+            <th scope="col" class="daySelect" data-day="B">B</th>
+            <th scope="col" class="daySelect" data-day="C">C</th>
+            <th scope="col" class="daySelect" data-day="D">D</th>
+            <th scope="col" class="daySelect" data-day="E">E</th>
+            <th scope="col" class="daySelect" data-day="F">F</th>
+            <th scope="col" class="daySelect" data-day="G">G</th>
+            <th scope="col" class="daySelect" data-day="H">H</th>
           </tr>
         </thead>
         <tbody id="schedule-body"></tbody>

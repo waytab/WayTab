@@ -24,7 +24,6 @@ $.ajax({
         let link = $(this).find('link').text()
         let bod = $('<div></div>').append($(this).find('description').text())
         let desc = $(this).find($('p')).first().text()
-        console.log(desc)
         let img = $(bod).find('img').attr('src')
         let auth = $($(this)[0].getElementsByTagNameNS('http://purl.org/dc/elements/1.1/', 'creator')[0]).text()
         articles.push([title, link, img, auth]);
