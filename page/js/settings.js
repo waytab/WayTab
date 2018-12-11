@@ -41,7 +41,7 @@ function hardResetWaytab() {
         title: 'WayTab',
         font: 'default',
         enableWspn: true,
-        setup: false
+        setup: false,
         background: './img/school.jpg'
       }, () => {
         location.reload()
