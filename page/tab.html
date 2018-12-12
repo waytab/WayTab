@@ -6,15 +6,18 @@
 
     <title>WayTab</title>
 
+    <!-- Important JS Libraries -->
     <script src="js/libraries/jquery-3.3.1.min.js"></script>
     <script src="js/libraries/moment.js"></script>
 
+    <!-- CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/webfonts/all.css" /> <!-- Font Awesome -->
 
   </head>
   <body>
+
     <!-- Time Display -->
     <div class="row">
       <div id="time-bar-total">
@@ -22,6 +25,7 @@
         <span id="time-container">Loading...</span>
       </div>
     </div>
+
     <!-- Displays Period Percentage -->
     <div id="percent-container"></div>
 
@@ -54,7 +58,6 @@
     <div class="row mb-4 mt-4" id="link-container"></div>
 
     <div class="row">
-
       <!-- Schedule -->
       <div class="col-md-6">
         <div class="card" id="schedule">
@@ -83,7 +86,6 @@
           <div id="taskList"></div>
         </div>
       </div>
-
     </div>
 
     <!-- Toggle Settings -->
@@ -107,7 +109,6 @@
     <!-- Settings Modal -->
     <div class="modal fade" id="settings-pane" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-lg" role="document">
-
         <!-- Settings Header -->
         <div class="modal-content">
           <div class="modal-header pb-0" style="border: none; background-color: rgba(100,100,100,0.05);">
@@ -144,9 +145,9 @@
             </ul>
           </div>
 
+          <!-- Settings Body -->
           <div class="modal-body">
             <div class="tab-content" id="settingsTabsContent">
-
               <!-- General Settings -->
               <div class="tab-pane fade show active" id="general-set" role="tabpanel">
                 <div class="row">
@@ -289,7 +290,6 @@
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
 
@@ -297,7 +297,6 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" id="settings-close">Save</button>
           </div>
-
         </div>
       </div>
     </div>

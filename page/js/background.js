@@ -45,8 +45,6 @@ export default class Background {
     })
 
     $(document).on('change paste keyup', '#custom-background-input', () => {
-      
-
       let val = $('#custom-background-input').val()
       if(val.match(this.urlRegEx)) {
         $(document.body).css('background-image', `url("${val}")`)
