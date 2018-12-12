@@ -152,22 +152,25 @@ export default class Links {
 
   editLink() {
     $(document).on('click', '.link-edit', (e) => {
-      $(e.target)
-        .text('')
-        .append(
-          $('<input>')
-            .addClass('form-control')
-            .attr('placeholder', 'Name')
-            .val($(`#link${$(e.target).data('edit')} a img`).attr('alt')),
-          $('<input>')
-            .addClass('form-control')
-            .attr('placeholder', 'URL')
-            .val($(`#link${$(e.target).data('edit')} a`).attr('href')),
-          $('<input>')
-            .addClass('form-control')
-            .attr('placeholder', 'Image URL')
-            .val($(`#link${$(e.target).data('edit')} a img`).attr('src'))
-        )
+      if(!($(e.target).attr('data-editing'))){
+        $(e.target)
+          .attr('data-editing', 'true')
+          .text('')
+          .append(
+            $('<input>')
+              .addClass('form-control')
+              .attr('placeholder', 'Name')
+              .val($(`#link${$(e.target).data('edit')} a img`).attr('alt')),
+            $('<input>')
+              .addClass('form-control')
+              .attr('placeholder', 'URL')
+              .val($(`#link${$(e.target).data('edit')} a`).attr('href')),
+            $('<input>')
+              .addClass('form-control')
+              .attr('placeholder', 'Image URL')
+              .val($(`#link${$(e.target).data('edit')} a img`).attr('src'))
+          )
+      }
     })
 
     $(document).on('click', '#settings-close', (e) => {
