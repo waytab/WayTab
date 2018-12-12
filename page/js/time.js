@@ -3,6 +3,7 @@ var isSpecial = false
 let block
 let bell2
 let letter
+
 chrome.storage.sync.get( ['bell2'], function({bell2}) {
   if(bell2) {
     $('#bell-2-check').prop('checked', true)
