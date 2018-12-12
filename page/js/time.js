@@ -11,24 +11,22 @@ chrome.storage.sync.get( ['bell2'], function({bell2}) {
   }
 })
 
-$.ajax({
-  async: false,
-  url: `https://cors-anywhere.herokuapp.com/http://manage.waytab.org/modules/schedule/?timestamp=${moment().subtract(1, 'days').unix()}`,
-  success: function (data) {
-    console.log(data)
-    if(data.name !== undefined && Math.abs(moment(data.date).diff(moment(), 'd')) < 1) {
-      sched = data.schedule
-      isSpecial = true
+$.getJSON(`http://manage.waytab.org/modules/schedule/?timestamp=${moment().subtract(1, 'days').unix()}`, (data) => {
+  console.log(data)
+  if (data.name !== undefined && Math.abs(moment(data.date).diff(moment(), 'd')) < 1) {
+    sched = data.schedule
+    isSpecial = true
+    displayTime()
+    updateBlock()
+  } else {
+    $.getJSON('js/json/config.json', (data) => {
+      sched = data.bell_schedule
+      isSpecial = false
       displayTime()
-    }else {
-      $.getJSON('js/json/config.json', (data) => {
-        sched = data.bell_schedule
-        isSpecial = false
-        displayTime()
-      }).fail( (err) => {
-        console.log(err)
-      })
-    }
+      updateBlock()
+    }).fail((err) => {
+      console.log(err)
+    })
   }
 })
 
@@ -37,7 +35,6 @@ bellTwoController()
 
 $(document).ready( function() {
   console.log(sched)
-  updateBlock()
   daySelectController()
   if(getTodaySchedule() != 4) {
     chrome.storage.sync.get('day', function({day}) {
