@@ -1,30 +1,26 @@
 var sched
-var isSpecial = false
 let block
-let bell2
 let letter
-
-chrome.storage.sync.get( ['bell2'], function({bell2}) {
-  if(bell2) {
-    $('#bell-2-check').prop('checked', true)
-  } else {
-    $('#bell-2-check').prop('checked', false)
-  }
-})
 
 $.getJSON(`http://manage.waytab.org/modules/schedule/?timestamp=${moment().subtract(1, 'days').unix()}`, (data) => {
   console.log(data)
   if (data.name !== undefined && Math.abs(moment(data.date).diff(moment(), 'd')) < 1) {
     sched = data.schedule
-    isSpecial = true
     displayTime()
     updateBlock()
   } else {
     $.getJSON('js/json/config.json', (data) => {
-      sched = data.bell_schedule
-      isSpecial = false
-      displayTime()
-      updateBlock()
+      chrome.storage.sync.get( ['bell2'], function({bell2}) {
+        if(bell2) {
+          $('#bell-2-check').prop('checked', true)
+          setTodaySchedule(data, true)
+        } else {
+          $('#bell-2-check').prop('checked', false)
+          setTodaySchedule(data, false)
+        }
+        displayTime()
+        updateBlock()
+      })
     }).fail((err) => {
       console.log(err)
     })
@@ -37,21 +33,7 @@ bellTwoController()
 $(document).ready( function() {
   console.log(sched)
   daySelectController()
-  if(getTodaySchedule() != 4) {
-    chrome.storage.sync.get('day', function({day}) {
-      let data = day // parse response
-      let dateComp = moment().format('L').split('/') // create date array
-      let currDate = dateComp[2] + '-' + dateComp[0] + '-' + dateComp[1] // build moment-compatible string
-      let dayDiff = moment(currDate).diff(moment(data[1]), 'days') // calculate difference in days
-      let currCol = letterToCol(data[0]) // get 'current' col number
-      let correctCol = currCol + dayDiff
-      if(correctCol > 7) {
-        correctCol = correctCol % 7 - 1
-      }
-      let correctLetter = colToLetter(correctCol) // get 'correct' (shifted) letter
-      letter = correctLetter
-    })
-  }
+  cycleDay()
 })
 
 setInterval( () => {
@@ -66,13 +48,33 @@ function updateBlock() {
 }
 
 function displayTime() {
+  let dayNum = moment().format('e')
   try {
-    if(getTodaySchedule() != 4 && letter !== undefined) {
+    if((dayNum !== '0' || dayNum !== '6') && letter !== undefined) {
       $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${letter} Day | ${block.name}`)
     }else {
       $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${block.name}`)
     }
   } catch(e) {
+  }
+}
+
+function cycleDay() {
+  let dayNum = moment().format('e')
+  if(dayNum !== '0' || dayNum !== '6') {
+    chrome.storage.sync.get('day', function({day}) {
+      let data = day // parse response
+      let dateComp = moment().format('L').split('/') // create date array
+      let currDate = dateComp[2] + '-' + dateComp[0] + '-' + dateComp[1] // build moment-compatible string
+      let dayDiff = moment(currDate).diff(moment(data[1]), 'days') // calculate difference in days
+      let currCol = letterToCol(data[0]) // get 'current' col number
+      let correctCol = currCol + dayDiff
+      if(correctCol > 7) {
+        correctCol = correctCol % 7 - 1
+      }
+      let correctLetter = colToLetter(correctCol) // get 'correct' (shifted) letter
+      letter = correctLetter
+    })
   }
 }
 
@@ -89,15 +91,11 @@ function barController() {
 function bellTwoController() {
   $('#bell-2-check').change( function() {
     if(this.checked) {
-      bell2 = true
       chrome.storage.sync.set( {'bell2': true}, function() {
       })
-      block = sched['2'][getSoonestIndex('2')]
     } else {
-      bell2 = false
       chrome.storage.sync.set( {'bell2': false}, function() {
       })
-      block = getCurrentBlock()
     }
   })
 }
@@ -122,11 +120,7 @@ function hoverController() {
 }
 
 function getCurrentBlock() {
-  if(!isSpecial) {
-    return sched[getTodaySchedule()][getSoonestIndex(getTodaySchedule())]
-  }else {
-    return sched[getSoonestIndex(null)]
-  }
+  return sched[getSoonestIndex()]
 }
 
 function highlightBlock() {
@@ -160,21 +154,26 @@ function daySelectController() {
   })
 }
 
-function getTodaySchedule() {
-  switch(moment().format('e')) {
-    case '0':
-      return 4
-      break
-    case '3':
-      return 3
-      break
-    case '6':
-      return 4
-      break
-    default:
-      return 1
-      break
+function setTodaySchedule(sched_data, bell2toggle) {
+  if(bell2toggle) {
+    sched = sched_data.bell_2
+  }else {
+    switch(moment().format('e')) {
+      case '0':
+        sched = sched_data.bell_4
+        break
+      case '3':
+        sched = sched_data.bell_3
+        break
+      case '6':
+        sched = sched_data.bell_4
+        break
+      default:
+        sched = sched_data.bell_1
+        break
+    }
   }
+  console.log(sched)
 }
 
 function letterToCol(day) {
@@ -241,13 +240,8 @@ function colToLetter(col) {
   }
 }
 
-function getSoonestIndex(todaySchedule) {
-  let bell
-  if(!isSpecial) {
-    bell = sched[todaySchedule]
-  }else {
-    bell = sched
-  }
+function getSoonestIndex() {
+  let bell = sched
   let currentMin = Number.MAX_SAFE_INTEGER
   let ret = 0
   for(i = 0; i < bell.length; i++) {
