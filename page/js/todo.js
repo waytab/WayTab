@@ -192,9 +192,9 @@ function tooltipBuilder(date, delta) {
   } else if (delta == 1) {
     dueString = `Due tomorrow`
   } else if (delta >= 2 && delta < 7) {
-    dueString = `Due on ${moment().add(delta, 'days').format('dddd')}`
+    dueString = `Due on ${moment().add(delta, 'days').format('dddd')} (${moment().add(delta, 'days').format('M/D')})`
   } else if (delta >= 7 && moment().add(delta, 'days').isBefore(moment().add(1, 'month').startOf('month'))) {
-    dueString = `Due on the ${moment().add(delta, 'days').format('Do')}`
+    dueString = `Due on the ${moment().add(delta, 'days').format('Do')} (${moment().add(delta, 'days').format('M/D')})`
   } else {
     dueString = `Due on ${moment().add(delta, 'days').format('MMM Do')}`
   }
