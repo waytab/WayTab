@@ -1,0 +1,15 @@
+{
+    "version":"1.2.2",
+    "changes": [
+        {
+            "header": "Introducing the Changelog",
+            "content": "Now you can track the changes that we make to WayTab",
+            "type": "Enhancement"
+        },
+        {
+            "header": "Letter Day Integration",
+            "content": "lorem ipsum",
+            "type": "Enhancement"
+        }
+    ]
+}
