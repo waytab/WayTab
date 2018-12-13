@@ -27,11 +27,9 @@ $.getJSON(`http://manage.waytab.org/modules/schedule/?timestamp=${moment().subtr
   }
 })
 
-hoverController()
-bellTwoController()
-
 $(document).ready( function() {
-  console.log(sched)
+  hoverController()
+  bellTwoController()
   daySelectController()
   cycleDay()
 })
@@ -59,6 +57,48 @@ function displayTime() {
   }
 }
 
+function setTodaySchedule(sched_data, bell2toggle) {
+  if(bell2toggle) {
+    sched = sched_data.bell_2
+  }else {
+    switch(moment().format('e')) {
+      case '0':
+        sched = sched_data.bell_4
+        break
+      case '3':
+        sched = sched_data.bell_3
+        break
+      case '6':
+        sched = sched_data.bell_4
+        break
+      default:
+        sched = sched_data.bell_1
+        break
+    }
+  }
+}
+
+function highlightBlock() {
+  if(block.name.includes('Block')) {
+    let actualBlock = parseInt(block.name.substring(block.name.length - 1))
+    if(actualBlock <= 6) {
+      $('.now').removeClass('now')
+      if(letter !== undefined) {
+        let table = $('#schedule-body')[0]
+        let cell = table.rows[actualBlock-1].cells[letterToCol(letter)]
+        let child = $(cell)
+        $(child).addClass('now')
+      }else {
+        $('#schedule-body').children().each( function() {
+          if($(this).attr('data-per') == actualBlock) {
+            $(this).children().addClass('now')
+          }
+        })
+      }
+    }
+  }
+}
+
 function cycleDay() {
   let dayNum = moment().format('e')
   if(dayNum !== '0' || dayNum !== '6') {
@@ -76,6 +116,34 @@ function cycleDay() {
       letter = correctLetter
     })
   }
+}
+
+function getCurrentBlock() {
+  return sched[getSoonestIndex()]
+}
+
+function getSoonestIndex() {
+  let bell = sched
+  let currentMin = Number.MAX_SAFE_INTEGER
+  let ret = 0
+  for(i = 0; i < bell.length; i++) {
+    let diff = moment().diff(moment(bell[i].start, 'hmm'))
+    if(diff > 0 && diff <= currentMin) {
+      ret = i
+      currentMin = diff
+    }
+  }
+  return ret
+}
+
+function daySelectController() {
+  $(document).on('click', '.daySelect', function() {
+    let dateComp = moment().format('L').split('/')
+    let formattedDate = dateComp[2] + '-' + dateComp[0] + '-' + dateComp[1]
+    console.log(formattedDate)
+    chrome.storage.sync.set( {'day': [$(this).attr('data-day'), formattedDate]} )
+    letter = $(this).attr('data-day')
+  })
 }
 
 function barController() {
@@ -110,70 +178,12 @@ function hoverController() {
     percentContainer.style.display = 'none';
   }
 
-
   percentContainer.onmouseover = function() {
     percentContainer.style.display = 'block';
   }
   percentContainer.onmouseout = function() {
     percentContainer.style.display = 'none';
   }
-}
-
-function getCurrentBlock() {
-  return sched[getSoonestIndex()]
-}
-
-function highlightBlock() {
-  if(block.name.includes('Block')) {
-    let actualBlock = parseInt(block.name.substring(block.name.length - 1))
-    if(actualBlock <= 6) {
-      $('.now').removeClass('now')
-      if(letter !== undefined) {
-        let table = $('#schedule-body')[0]
-        let cell = table.rows[actualBlock-1].cells[letterToCol(letter)]
-        let child = $(cell)
-        $(child).addClass('now')
-      }else {
-        $('#schedule-body').children().each( function() {
-          if($(this).attr('data-per') == actualBlock) {
-            $(this).children().addClass('now')
-          }
-        })
-      }
-    }
-  }
-}
-
-function daySelectController() {
-  $(document).on('click', '.daySelect', function() {
-    let dateComp = moment().format('L').split('/')
-    let formattedDate = dateComp[2] + '-' + dateComp[0] + '-' + dateComp[1]
-    console.log(formattedDate)
-    chrome.storage.sync.set( {'day': [$(this).attr('data-day'), formattedDate]} )
-    letter = $(this).attr('data-day')
-  })
-}
-
-function setTodaySchedule(sched_data, bell2toggle) {
-  if(bell2toggle) {
-    sched = sched_data.bell_2
-  }else {
-    switch(moment().format('e')) {
-      case '0':
-        sched = sched_data.bell_4
-        break
-      case '3':
-        sched = sched_data.bell_3
-        break
-      case '6':
-        sched = sched_data.bell_4
-        break
-      default:
-        sched = sched_data.bell_1
-        break
-    }
-  }
-  console.log(sched)
 }
 
 function letterToCol(day) {
@@ -238,18 +248,4 @@ function colToLetter(col) {
       return 'Z'
       break
   }
-}
-
-function getSoonestIndex() {
-  let bell = sched
-  let currentMin = Number.MAX_SAFE_INTEGER
-  let ret = 0
-  for(i = 0; i < bell.length; i++) {
-    let diff = moment().diff(moment(bell[i].start, 'hmm'))
-    if(diff > 0 && diff <= currentMin) {
-      ret = i
-      currentMin = diff
-    }
-  }
-  return ret
 }
