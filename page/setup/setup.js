@@ -277,7 +277,9 @@ function savePrefs() {
 
   console.log(saveArray);
   chrome.storage.sync.set(saveArray, () => {
-    document.location.pathname = '/page/tab.html'
+    if (classes.length == 0) {
+      chrome.storage.sync.remove(['schedule'], () => { document.location.pathname = '/page/tab.html' })
+    }
   })
 }
 
@@ -325,6 +327,6 @@ function getClassesArray(schedule) {
   for (let i = 0; i < classes.length; i++) {
     classes[i] = classes[i].replace(/[|&;$%@"<>()+,]/g, '')
   }
-  
+
   return classes
 }
