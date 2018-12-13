@@ -3,6 +3,12 @@ let changelogText
 $.getJSON('js/json/changelog.json', (data) => {
     changelogText = data
     loadChangeLog()
+    chrome.storage.sync.get(['startChangeLog'], function({startChangeLog}) {
+        if(startChangeLog !== undefined && startChangeLog) {
+            $('#changelog').modal('show')
+        }
+        chrome.storage.sync.set({startChangeLog: false}, function() {})
+    })
 })
 
 function loadChangeLog() {
