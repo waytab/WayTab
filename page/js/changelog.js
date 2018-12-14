@@ -25,6 +25,7 @@ function loadChangeLog() {
                 )
             )
             .append($('<small></small>')
+                .css('color', 'orange')
                 .text(currentChange.type)
             )
             .append($('<hr />'))
