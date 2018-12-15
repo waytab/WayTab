@@ -1,11 +1,7 @@
 {
   "name": "WayTab",
   "description": "Change your new tab page to be more productive",
-<<<<<<< HEAD
   "version": "2.0",
-=======
-  "version": "1.2.2",
->>>>>>> master
   "author": ["Andy Wang", "Andrew Ward"],
   "permissions": ["activeTab", "storage"],
   "background": {

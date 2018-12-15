@@ -1,17 +1,6 @@
 var sched
 let block
 let letter
-<<<<<<< HEAD
-
-chrome.storage.sync.get( ['bell2'], function({bell2}) {
-  if(bell2) {
-    $('#bell-2-check').prop('checked', true)
-  } else {
-    $('#bell-2-check').prop('checked', false)
-  }
-})
-=======
->>>>>>> master
 
 $.getJSON(`http://manage.waytab.org/modules/schedule/?timestamp=${moment().subtract(1, 'days').unix()}`, (data) => {
   console.log(data)
