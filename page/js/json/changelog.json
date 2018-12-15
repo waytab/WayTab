@@ -8,7 +8,7 @@
         },
         {
             "header": "Letter Day Integration",
-            "content": "You can click the letters on the schedule card to manually assign a letter day. It will automagically cycle by itself (ignoring holidays but not weekends).",
+            "content": "You can click the letters in the schedule heading to manually assign a letter day. It will automagically cycle by itself (accounting for weekends, but not holidays).",
             "type": "Enhancement"
         },
         {
