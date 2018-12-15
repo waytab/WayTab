@@ -30,6 +30,13 @@ $(document).ready(function() { // we need to wait for the full document to be lo
       document.location.pathname = '/page/setup/setup.html'
     }
   })
+
+  chrome.storage.sync.getBytesInUse(null, (r) => {
+    $('#usage').text(Math.round(r/10)/100 + ' KB on sync')
+  })
+  chrome.storage.local.getBytesInUse(null, (r) => {
+    $('#usage-local').text(Math.round(r / 10) / 100 + ' KB on local')
+  })
 })
 
 $(document).on('click', '#settings-close', function() { // we need to save the new font style when the modal is closed
