@@ -1,5 +1,8 @@
 export default class Schedule {
   constructor() {
+    this.loadClasses()
+    this.addClass()
+    this.removeClass()
     chrome.storage.sync.get(['schedule'], (result) => {
       if(Object.keys(result).length === 0 && result.constructor === Object) {
         $('#schedule-table').remove()
@@ -91,6 +94,112 @@ export default class Schedule {
         $(`[data-period=${period}]`).each(function() {
           $(this).val(input.val())
         })
+      }
+    })
+  }
+
+  loadClasses() {
+    $('#edit-classes').empty()
+    chrome.storage.sync.get(['classes'], function({classes}) {
+      console.log(classes)
+      if (typeof classes !== 'undefined') {
+        for (let i = 0; i < classes.length; i++) {
+          let obj = classes[i]
+          $('#edit-classes')
+            .append($('<li></li>')
+              .addClass('list-group-item d-inline-flex')
+              .append(
+                $('<a></a>')
+                  .attr({
+                    role: 'button',
+                    tabindex: 0
+                  })
+                  .popover({
+                    trigger: 'focus',
+                    html: true,
+                    title: 'Confirm',
+                    content: `<button class="btn btn-danger delete-class" data-num="${i}">Delete</button>`
+                  })
+                  .css({ 'margin-left': 6, 'margin-right': 22, color: 'black', 'text-decoration': 'none', cursor: 'pointer' })
+                  .html('&times;'),
+                $('<div></div>').text(obj)
+              )
+            )
+        }
+        $('#edit-classes')
+          .append($('<li></li>')
+            .addClass('list-group-item')
+            .css('cursor', 'pointer')
+            .attr('id', 'addClass')
+            .html('<span class="font-weight-bold"><span style="margin-left: 6px; margin-right: 22px;">&plus;</span>Add Custom Class...</span>')
+          )
+      }
+    })
+  }
+  
+  removeClass() {
+    $(document).on('click', '.delete-class', (e) => {
+      let target = $(e.target)
+      let targetLink = target.data('num')
+      chrome.storage.sync.get(['classes'], ({classes}) => {
+        classes.splice(targetLink, 1)
+        chrome.storage.sync.set({classes}, () => { this.loadClasses(classes) })
+      })
+    })
+  }
+  
+  addClass() {
+    let isOpen = false
+    $(document).on('click', '#addClass', function() {
+      if(!isOpen) {
+        $(this).html('')
+        $(this).append(
+          $('<div></div>')
+            .addClass('row mb-1')
+            .append(
+              $('<label></label>').addClass('col').text('Class Name'),
+              $('<input>')
+                .addClass('form-control col-10')
+                .attr({ type: 'text', id: 'class-name', placeholder: 'Name' })
+            ),
+            $('<div></div>')
+              .addClass('row mb-1')
+              .append(
+                $('<div></div>').addClass('col'),
+                $('<button></button>')
+                  .addClass('btn btn-primary btn-block mb-3 col-10')
+                  .attr({ type: 'button', id: 'submit-class-info' })
+                  .text('Add')
+              )
+          )
+        isOpen = true
+      }
+    })
+  
+    $(document).on('click', '#submit-class-info', () => {
+      let name = $('#class-name').val()
+  
+      classesArray = []
+      if(name.length > 0) {
+        let classesLoad = this.loadClasses
+        chrome.storage.sync.get(['classes'], function({classes}) {
+          isOpen = false
+          if(typeof classes != 'undefined') {
+            classesArray.push(...classes)
+          }
+          classesArray.push(name)
+          chrome.storage.sync.set({classes: classesArray}, () => { classesLoad(classes) })
+        })
+      } else {
+        $('#submit-class-info')
+          .addClass('btn-danger')
+          .text('Class name cannot be empty')
+  
+        setTimeout(() => {
+          $('#submit-class-info')
+            .removeClass('btn-danger')
+            .text('Add')
+        }, 1000)
       }
     })
   }
