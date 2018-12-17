@@ -1,30 +1,30 @@
 {
-    "version":"1.2.2",
-    "changes": [
-        {
-            "header": "Introducing the Changelog",
-            "content": "Now you can track the changes that we make to WayTab. Click on the clipboard button at the bottom right to open this modal at any time.",
-            "type": "Enhancement"
-        },
-        {
-            "header": "Letter Day Integration",
-            "content": "You can click the letters in the schedule heading to manually assign a letter day. It will automagically cycle by itself (accounting for weekends, but not holidays).",
-            "type": "Enhancement"
-        },
-        {
-            "header": "Custom Classes",
-            "content": "Have a club that assigns work but can't use WayTab to keep track of it? Fear not. You can add custom classes through the settings modal to keep track of ALL your work, not just from classes.",
-            "type": "Enhancement"
-        },
-        {
-            "header": "Sending Feedback",
-            "content": "You can click on the megaphone at the bottom right to send feedback directly to us via GitHub or Google Forms. We value all responses and use it to track bugs that might've made it past our quality control department.",
-            "type": "Tip"
-        },
-        {
-            "header": "Settings",
-            "content": "A lot of critical functions can be found in the settings! There, you can personalize WayTab, add/remove bookmarks, and hard-reset certain features. Make sure you know that it exists!",
-            "type": "Tip"
-        }
-    ]
+  "version":"1.2.2",
+  "changes": [
+    {
+      "header": "Introducing the Changelog",
+      "content": "Now you can track the changes that we make to WayTab. Click on the clipboard button at the bottom right to open this modal at any time.",
+      "type": "Enhancement"
+    },
+    {
+      "header": "Letter Day Integration",
+      "content": "You can click the letters in the schedule heading to manually assign a letter day. It will automagically cycle by itself (accounting for weekends, but not holidays).",
+      "type": "Enhancement"
+    },
+    {
+      "header": "Custom Classes",
+      "content": "Have a club that assigns work but can't use WayTab to keep track of it? Fear not. You can add custom classes through the settings modal to keep track of ALL your work, not just from classes.",
+      "type": "Enhancement"
+    },
+    {
+      "header": "Sending Feedback",
+      "content": "You can click on the megaphone at the bottom right to send feedback directly to us via GitHub or Google Forms. We value all responses and use it to track bugs that might've made it past our quality control department.",
+      "type": "Tip"
+    },
+    {
+      "header": "Settings",
+      "content": "A lot of critical functions can be found in the settings! There, you can personalize WayTab, add/remove bookmarks, and hard-reset certain features. Make sure you know that it exists!",
+      "type": "Tip"
+    }
+  ]
 }
