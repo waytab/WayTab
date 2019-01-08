@@ -313,7 +313,7 @@ a.text-dark {
 #sched-container .overflow-box {
   width: 100%;
   height: 100vh;
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
 #wspn-container .wspn-title,
@@ -418,6 +418,12 @@ div.card-img-top {
 
 a.input-group-text:hover {
   text-decoration: none;
+}
+
+#schedule-table tr,
+#schedule-table td,
+#schedule-table th {
+  border: 2px solid black;
 }
 
 #schedule-table {

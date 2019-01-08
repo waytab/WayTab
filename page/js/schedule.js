@@ -18,7 +18,7 @@ export default class Schedule {
             $(`#${sel}`).val(result.schedule[i][j])
           }
         }
-        $('#schedule .card-title').append('<a href="#create-schedule" data-toggle="modal" class="btn btn-primary btn-sm float-right">Edit</a>')
+        $('#sched-title').append('<a href="#create-schedule" data-toggle="modal" class="btn btn-primary ml-5">Edit</a>')
         $('#create-schedule .modal-title').text('Edit Schedule')
         this.scheduleEditor()
       }
