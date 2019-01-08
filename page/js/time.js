@@ -93,7 +93,7 @@ function highlightBlock() {
         let cell = table.rows[actualBlock-1].cells[letterToCol(letter)]
         let child = $(cell)
         $(child).addClass('now')
-        blockText = $(child).text()
+        blockText = $(child).text().length > 0 ? $(child).text() : "Free"
       }else {
         $('#schedule-body').children().each( function() {
           if($(this).attr('data-per') == actualBlock) {
@@ -103,7 +103,7 @@ function highlightBlock() {
         })
       }
     }else {
-      blockText = ""
+      blcokText = ""
     }
   }else {
     blockText = ""
