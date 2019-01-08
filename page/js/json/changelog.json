@@ -5,6 +5,11 @@
       "header": "Letter Day Changes",
       "content": "The entire column is now clickable to simplify changing the letter day. For those who did not read last update's changelog, we have added a helpful tag next to the schedule heading to remind you of the new feature.",
       "type": "Enhancement"
+    },
+    {
+      "header": "Visual Update",
+      "content": "Cleaner",
+      "type": "Enhancement"
     }
   ]
 }
