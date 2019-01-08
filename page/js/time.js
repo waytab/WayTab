@@ -1,6 +1,7 @@
 var sched
 let block
 let letter
+let blockText
 
 $.getJSON(`http://manage.waytab.org/modules/schedule/?timestamp=${moment().subtract(1, 'days').unix()}`, (data) => {
   console.log(data)
@@ -49,7 +50,11 @@ function displayTime() {
   let dayNum = moment().format('e')
   try {
     if((dayNum !== '0' || dayNum !== '6') && letter !== undefined) {
-      $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${letter} Day | ${block.name}`)
+      if(blockText.length > 0 && blockText !== undefined) {
+        $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${letter} Day | ${blockText}`)
+      }else {
+        $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${letter} Day | ${block.name}`)
+      }
     }else {
       $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${block.name}`)
     }
@@ -88,14 +93,20 @@ function highlightBlock() {
         let cell = table.rows[actualBlock-1].cells[letterToCol(letter)]
         let child = $(cell)
         $(child).addClass('now')
+        blockText = $(child).text()
       }else {
         $('#schedule-body').children().each( function() {
           if($(this).attr('data-per') == actualBlock) {
             $(this).children().addClass('now')
+            blockText = ""
           }
         })
       }
+    }else {
+      blockText = ""
     }
+  }else {
+    blockText = ""
   }
 }
 
