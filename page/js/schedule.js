@@ -3,6 +3,7 @@ export default class Schedule {
     this.loadClasses()
     this.addClass()
     this.removeClass()
+    this.controlFlow()
     chrome.storage.sync.get(['schedule'], (result) => {
       if(Object.keys(result).length === 0 && result.constructor === Object) {
         $('#schedule-table').remove()
@@ -48,7 +49,7 @@ export default class Schedule {
       $('#schedule-body').append(`<tr data-per="${i+1}"></tr>`)
       for(let j = 0; j < schedule[i].length; j++) {
         let currLetter = dayArr[j]
-        $(`[data-per=${i+1}]`).append(`<td class="daySelect" data-day="${currLetter}">${schedule[i][j]}</td>`)
+        $(`[data-per=${i+1}]`).append(`<td class="daySelect text-center" data-day="${currLetter}">${schedule[i][j]}</td>`)
       }
     }
   }
@@ -203,6 +204,17 @@ export default class Schedule {
             .text('Add')
         }, 1000)
       }
+    })
+  }
+
+  controlFlow() {
+    $(document).on('click', '#show-sched', () => {
+      $('#sched-container').css('width', '100%')
+    })
+
+    $(document).on('click', '#close-sched', (e) => {
+      e.preventDefault()
+      $('#sched-container').css('width', '0px')
     })
   }
 }

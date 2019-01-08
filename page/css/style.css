@@ -283,7 +283,7 @@ a.text-dark {
   height: 100%;
   width: 0;
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   top: 0;
   left: 0;
   overflow-x: hidden;
@@ -293,19 +293,39 @@ a.text-dark {
   box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.75);
 }
 
+#sched-container {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  transition: 350ms ease-out;
+}
+
 #wspn-container .overflow-box {
   width: 332px;
   height: 100vh;
   overflow-y: auto;
 }
 
-#wspn-container .wspn-title {
+#sched-container .overflow-box {
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+#wspn-container .wspn-title,
+#sched-container .wspn-title {
   font-size: 36px;
   margin: 1rem;
 }
 
 #wspn-container #close-wspn,
-#wspn-container #close-wspn svg {
+#wspn-container #close-wspn svg,
+#sched-container #close-sched,
+#sched-container #close-sched svg {
   width: 24px;
   height: 24px;
 }
@@ -317,8 +337,19 @@ a.text-dark {
   margin-top: -3px;
 }
 
+#sched-container #close-sched {
+  color: #f00;
+  float: right;
+  margin-right: 3px;
+  margin-top: -3px;
+}
+
 #wspn-container #close-wspn:hover {
   color: #dc3545;
+}
+
+#sched-container #close-sched:hover {
+  color: #000;
 }
 
 #rss-feed .card .card-title {
@@ -387,4 +418,13 @@ div.card-img-top {
 
 a.input-group-text:hover {
   text-decoration: none;
+}
+
+#schedule-table {
+  height: 80%;
+  font-size: 20px;
+}
+
+.daySelect {
+  text-align: center;
 }

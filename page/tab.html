@@ -50,19 +50,36 @@
       </div>
     </div>
 
+    <!-- Schedule -->
+    <button type="button" class="btn btn-primary position-absolute float-right mt-5 mr-3 action-button fab-button" id="show-sched"><i class="far fa-newspaper mr-2"></i>Schedule</button>
+    <div class="bg-light" id="sched-container">
+      <div class="overflow-box">
+          <span class="d-block text-light wspn-title font-roboto-slab">
+            <span style="text-decoration: none; color: #000;">Schedule<small style="font-size:12px">&nbsp;&nbsp;&nbsp;Click on a clumn to select a letter day</small></span>
+            <a href="" id="close-sched" class="d-inline-block ml-auto">
+              <svg viewbox="0 0 10 10">
+                <g fill="none" fill-rule="evenodd">
+                  <g stroke="currentColor" stroke-linecap="square">
+                    <path d="M0.5,0.5 L9,9" />
+                    <path d="M0.5,0.5 L9,9" transform="matrix(-1 0 0 1 9.5 0)" />
+                  </g>
+                  <polygon points="0 0 10 0 10 10 0 10" />
+                </g>
+              </svg>
+            </a>
+          </span>
+
+          <div id="schedule" style="height:100%">
+          </div>
+      </div>
+    </div>
+
     <!-- Links -->
     <div class="row mb-4 mt-4" id="link-container"></div>
 
     <div class="row">
 
-      <!-- Schedule -->
-      <div class="col-md-6">
-        <div class="card" id="schedule">
-          <div class="card-body">
-            <h3 class="card-title mb-0"><span>Schedule</span><small style="font-size:12px;">&nbsp;&nbsp;&nbsp;Click on a column to select a letter day</small></h3>
-          </div>
-        </div>
-      </div>
+      <div class="col-md-3"></div>
 
       <!-- Todo List -->
       <div class="col-md-6">
@@ -76,13 +93,12 @@
             <select class="custom-select" id="addTaskClass">
               <option selected>Class...(default to misc)</option>
             </select>
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button" id="addTask">Add</button>
-            </div>
           </div>
           <div id="taskList"></div>
         </div>
       </div>
+      
+      <div class="col-md-3"></div>
 
     </div>
 
