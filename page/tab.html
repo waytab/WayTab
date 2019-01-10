@@ -93,217 +93,291 @@
       <div class="fab-action">
         <div class="fab-action-collapsable">
           <ul>
-            <li class="btn btn-danger b-none fab-action-item"><i class="fas fa-exclamation-circle"></i>Danger Zone</li>
-            <li class="btn fab-action-item"><i class="fas fa-info"></i>About</li>
-            <li class="btn fab-action-item"><i class="fas fa-bullhorn"></i>Feedback</li>
-            <li class="btn fab-action-item"><i class="fas fa-school"></i>Classes</li>
-            <li class="btn fab-action-item"><i class="fas fa-link"></i>Links</li>
-            <li class="btn fab-action-item"><i class="fas fa-palette"></i>Personalize</li>
-            <li class="btn fab-action-item" data-toggle="modal" data-target="#settings-pane"><i class="fas fa-cog"></i>General</li>
+            <li class="btn btn-danger b-none fab-action-item" data-toggle="modal" data-target="#dangerZoneModal"><i class="fas fa-exclamation-circle"></i>Danger Zone</li>
+            <li class="btn fab-action-item" data-toggle="modal" data-target="#aboutModal"><i class="fas fa-info"></i>About<span class="badge badge-outline-secondary badge-pill ml-2" style="letter-spacing: 1px;">2.0</span></li>
+            <li class="btn fab-action-item" data-toggle="modal" data-target="#feedbackModal"><i class="fas fa-bullhorn"></i>Feedback</li>
+            <li class="btn fab-action-item" data-toggle="modal" data-target="#classesModal"><i class="fas fa-school"></i>Classes</li>
+            <li class="btn fab-action-item" data-toggle="modal" data-target="#linksModal"><i class="fas fa-link"></i>Links</li>
+            <li class="btn fab-action-item" data-toggle="modal" data-target="#personalizeModal"><i class="fas fa-palette"></i>Personalize</li>
+            <li class="btn fab-action-item" data-toggle="modal" data-target="#generalModal"><i class="fas fa-cog"></i>General</li>
           </ul>
         </div>
         <button type="button" class="btn fab-action-item primary" id="activate-settings"><i class="fas fa-cog mr-md-2"></i><span>Settings</span></button>
       </div>
     </div>
 
-    <!-- Settings Modal -->
-    <div class="modal fade" id="settings-pane" tabindex="-1" role="dialog">
+    <!-- General Settings -->
+    <div class="modal fade" id="generalModal" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-lg" role="document">
-        <!-- Settings Header -->
         <div class="modal-content">
-          <div class="modal-header pb-0" style="border: none; background-color: rgba(100,100,100,0.05);">
-            <h5 class="modal-title" id="settings-title">Settings</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="tooltip" data-placement="left" title="Changes won't be saved">
+          <div class="modal-header">
+            <h5 class="modal-title" id="settings-title">General Settings</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="tooltip"
+              data-placement="left" title="Changes won't be saved">
               <span aria-hidden="true"> &times; </span>
             </button><br />
           </div>
-
-          <!-- Settings Tabs -->
-          <div class="modal-header pb-0 px-0" style="border: none; background-color: rgba(100,100,100,0.05);">
-            <ul class="nav nav-tabs w-100 px-3" id="settingsTabs" role="tablist">
-              <li class="nav-item">
-                <a class="nav-link active" id="general-settings" data-toggle="tab" href="#general-set" role="tab" aria-selected="true">General</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" id="personal-settings" data-toggle="tab" href="#personal-set" role="tab" aria-selected="true">Personalize</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" id="links-settings" data-toggle="tab" href="#links-set" role="tab" aria-selected="false">Links</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" id="classes-settings" data-toggle="tab" href="#classes-set" role="tab" aria-selected="false">Classes</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" id="feedback-settings" data-toggle="tab" href="#feedback-set" role="tab" aria-selected="false"><i class="fas fa-bullhorn"></i></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" id="about-settings" data-toggle="tab" href="#about-set" role="tab" aria-selected="false">About<span class="badge badge-outline-secondary badge-pill ml-2">2.0</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-danger border-danger border-bottom-0" id="danger-settings" data-toggle="tab" href="#danger-set" role="tab" aria-selected="false">Danger Zone</a>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Settings Body -->
+    
           <div class="modal-body">
-            <div class="tab-content" id="settingsTabsContent">
-              <!-- General Settings -->
-              <div class="tab-pane fade show active" id="general-set" role="tabpanel">
-                <div class="row">
-                  <div class="col">Schedule Rotation</div>
-                  <div class="col-10">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" id="bell-2-check">
-                      <label class="custom-control-label" for="bell-2-check">Bell 2</label>
-                    </div>
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col">Default Due Date</div>
-                  <div class="col-10">
-                    <select class="form-control" id="todo-default">
-                      <option id="todo-tomorrow" selected>Tomorrow</option>
-                      <option id="todo-today">Today</option>
-                      <option id="todo-week" value="Week">In a Week</option>
-                    </select>
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col">Storage Usage</div>
-                  <div class="col-10">
-                    <span id="usage"></span><br>
-                    <span id="usage-local"></span>
-                  </div>
+            <div class="row">
+              <div class="col">Schedule Rotation</div>
+              <div class="col-10">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="bell-2-check">
+                  <label class="custom-control-label" for="bell-2-check">Bell 2</label>
                 </div>
               </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col">Default Due Date</div>
+              <div class="col-10">
+                <select class="form-control" id="todo-default">
+                  <option id="todo-tomorrow" selected>Tomorrow</option>
+                  <option id="todo-today">Today</option>
+                  <option id="todo-week" value="Week">In a Week</option>
+                </select>
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col">Storage Usage</div>
+              <div class="col-10">
+                <span id="usage"></span><br>
+                <span id="usage-local"></span>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="settings-close">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-              <!-- Personalization Settings -->
-              <div class="tab-pane fade" id="personal-set" role="tabpanel">
-                <div class="row mb-3">
-                  <label class="col">Title</label>
-                  <div class="col-sm-10">
-                    <input class="form-control" type="text" id="title-input" placeholder="Example" />
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <label class="col">Background</label>
-                  <div class="col-sm-10">
-                    <select class="form-control" id="select-background">
-                      <option>School</option>
-                      <option>Commons</option>
-                      <option>Logo</option>
-                      <option>Classroom</option>
-                      <option>Library</option>
-                      <option>Patio</option>
-                      <option>Custom...</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="row mb-3" id="custom-background" style="display: none">
-                  <label class="col">Custom Background</label>
-                  <div class="col-sm-10">
-                    <div class="input-group">
-                      <input type="text" placeholder="Image URL, RGB, RGBA, or color hex" class="form-control" id="custom-background-input">
-                      <div class="input-group-append">
-                        <a href="https://waytab.org/color-help.html" class="input-group-text"><i class="far fa-question-circle"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col">Font</div>
-                  <div class="col-10">
-                    <select class="form-control" id="announcementsPositionSel">
-                      <option class="font-sans-serif" value="default">Default (Sans-serif)</option>
-                      <option class="font-montserrat" value="montserrat">Montserrat</option>
-                      <option class="font-poppins" value="poppins">Poppins</option>
-                      <option class="font-raleway" value="raleway">Raleway</option>
-                      <option class="font-roboto" value="roboto">Roboto</option>
-                      <option class="font-rubik" value="rubik">Rubik</option>
-                      <option class="font-ubuntu" value="ubuntu">Ubuntu</option>
-                      <option class="font-chakra-petch" value="chakra-petch">Chakra Petch</option>
-                      <option class="font-bai-jamjuree" value="bai-jamjuree">Bai Jamjuree</option>
-                      <option class="font-fahkwang" value="fahkwang">Fahkwang</option>
-                      <option class="font-pacifico" value="pacifico">Pacifico</option>
-                      <option class="font-text-me-one" value="text-me-one">Text Me One </option>
-                    </select>
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col"></div>
-                  <div class="col-10">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" id="wspn-check">
-                      <label class="custom-control-label" for="wspn-check">WSPN</label>
-                    </div>
-                  </div>
-                </div>
+    <!-- Personalization Settings -->
+    <div class="modal fade" id="personalizeModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="settings-title">Personalization Settings</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="tooltip"
+              data-placement="left" title="Changes won't be saved">
+              <span aria-hidden="true"> &times; </span>
+            </button><br />
+          </div>
+    
+          <div class="modal-body">
+            <div class="row mb-3">
+              <label class="col">Title</label>
+              <div class="col-sm-10">
+                <input class="form-control" type="text" id="title-input" placeholder="Example" />
               </div>
-
-              <!-- Link Settings -->
-              <div class="tab-pane fade" id="links-set" role="tabpanel">
-                <h5 class="display-5">Add, Edit, or Remove a Link</h5>
-                <span class="text-muted mb-2 d-block">Click on a link's name to edit it.</span>
-                <ul class="list-group" id="edit-links"></ul>
+            </div>
+            <div class="row mb-3">
+              <label class="col">Background</label>
+              <div class="col-sm-10">
+                <select class="form-control" id="select-background">
+                  <option>School</option>
+                  <option>Commons</option>
+                  <option>Logo</option>
+                  <option>Classroom</option>
+                  <option>Library</option>
+                  <option>Patio</option>
+                  <option>Custom...</option>
+                </select>
               </div>
-
-              <!-- Classes (in Todo) Settings -->
-              <div class="tab-pane fade" id="classes-set" role="tabpanel">
-                <h5 class="display-5">Add or Remove a Class</h5>
-                <ul class="list-group" id="edit-classes"></ul>
-              </div>
-
-              <!-- feedback -->
-              <div class="tab-pane fade text-center" id="feedback-set" role="tabpanel">
-                <h3 class="mb-4">Feedback</h3>
-                <h6>Opening an issue on GitHub ensures we can track it in the most efficient way possible.</h6>
-                <h6 class="display-6 mb-4"><i class="fas fa-exclamation"></i> <a href="https://github.com/andrewward2001/WayTab/issues">Browse issues</a></h6>
-                <h6>Don't have a GitHub account?</h6>
-                <h6><i class="fas fa-edit"></i> <a href="https://goo.gl/forms/cuEftjPGOl5G3chk2">Use the Google Form.</a></h6>
-              </div>
-              <!-- About -->
-              <div class="tab-pane fade text-center" id="about-set" role="tabpanel">
-                <div class="mx-auto">
-                  <img src="../res/icon128.png" />
-                </div>
-                <h3 class="display-4"><a class="text-dark" href="https://waytab.org">WayTab</a><a class="text-muted h3 ml-2" href="https://github.com/waytab/WayTab/releases/tag/v2.0">2.0</a></h3>
-                <br />
-                <h5 class="display-5"><i class="fas fa-code"></i> with <i class="fas fa-heart"></i> by Andrew Ward and Andy Wang</h5>
-                <h6 class="display-6 mb-4">and <a href="https://github.com/waytab/WayTab/graphs/contributors">these</a> awesome contributors</h6>
-                <h6 class="display-6"><i class="fab fa-github"></i> <a href="https://github.com/waytab">GitHub Org</a></h6>
-                <h6 class="display-6"><i class="fab fa-github"></i> <a href="https://github.com/waytab/WayTab" data-toggle="tooltip" data-placement="bottom" title="Browse the code and contribute">GitHub Code Repository</a></h6>
-              </div>
-
-              <!-- Danger Zone -->
-              <div class="tab-pane fade" id="danger-set" role="tabpanel">
-                <div class="row" style="border-radius: 4px;">
-                  <div class="col">
-                    <span class="text-danger">Proceed with Caution</span>
-                  </div>
-                  <div class="col-10" id="danger-zone">
-                    <div class="input-group mb-2">
-                      <a role="button" title="Are you sure?" data-toggle="popover" data-trigger="focus" data-html="true" data-content="<button class='btn btn-danger' id='force-reset-tasks'>Confirm</button>"> <button class="btn btn-outline-danger mr-2" data-toggle="tooltip" data-placement="top" title="Your tasks will be printed in the chrome console"> Force Reset Tasks </button> </a>
-                    </div>
-                    <div class="input-group">
-                      <button role="button" title="Are you sure?" data-toggle="popover" data-trigger="focus" data-html="true" data-content="<button class='btn btn-danger' id='force-reset-schedule'>Confirm</button>" class="btn btn-outline-danger mr-2 mb-2">Force Reset Schedule</button>
-                    </div>
-                    <div class="input-group">
-                      <button role="button" title="Are you sure?" data-toggle="popover" data-html="true" data-content="<button class='btn btn-danger' id='force-reset-waytab'>Confirm</button>" class="btn btn-outline-danger mr-2">Force Reset WayTab</button>
-                    </div>
+            </div>
+            <div class="row mb-3" id="custom-background" style="display: none">
+              <label class="col">Custom Background</label>
+              <div class="col-sm-10">
+                <div class="input-group">
+                  <input type="text" placeholder="Image URL, RGB, RGBA, or color hex" class="form-control" id="custom-background-input">
+                  <div class="input-group-append">
+                    <a href="https://waytab.org/color-help.html" class="input-group-text"><i class="far fa-question-circle"></i></a>
                   </div>
                 </div>
               </div>
             </div>
+            <hr />
+            <div class="row">
+              <div class="col">Font</div>
+              <div class="col-10">
+                <select class="form-control" id="announcementsPositionSel">
+                  <option class="font-sans-serif" value="default">Default (Sans-serif)</option>
+                  <option class="font-montserrat" value="montserrat">Montserrat</option>
+                  <option class="font-poppins" value="poppins">Poppins</option>
+                  <option class="font-raleway" value="raleway">Raleway</option>
+                  <option class="font-roboto" value="roboto">Roboto</option>
+                  <option class="font-rubik" value="rubik">Rubik</option>
+                  <option class="font-ubuntu" value="ubuntu">Ubuntu</option>
+                  <option class="font-chakra-petch" value="chakra-petch">Chakra Petch</option>
+                  <option class="font-bai-jamjuree" value="bai-jamjuree">Bai Jamjuree</option>
+                  <option class="font-fahkwang" value="fahkwang">Fahkwang</option>
+                  <option class="font-pacifico" value="pacifico">Pacifico</option>
+                  <option class="font-text-me-one" value="text-me-one">Text Me One </option>
+                </select>
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col"></div>
+              <div class="col-10">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="wspn-check">
+                  <label class="custom-control-label" for="wspn-check">WSPN</label>
+                </div>
+              </div>
+            </div>
           </div>
-
-          <!-- Save+Quit Modal -->
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" id="settings-close">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Links Settings -->
+    <div class="modal fade" id="linksModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="settings-title">Edit Links</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="tooltip"
+              data-placement="left" title="Changes won't be saved">
+              <span aria-hidden="true"> &times; </span>
+            </button><br />
+          </div>
+    
+          <div class="modal-body">
+            <div id="links-set">
+              <h5 class="display-5">Add, Edit, or Remove a Link</h5>
+              <span class="text-muted mb-2 d-block">Click on a link's name to edit it.</span>
+              <ul class="list-group" id="edit-links"></ul>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="settings-close">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Classes Settings -->
+    <div class="modal fade" id="classesModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="settings-title">Edit Classes</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="tooltip"
+              data-placement="left" title="Changes won't be saved">
+              <span aria-hidden="true"> &times; </span>
+            </button><br />
+          </div>
+    
+          <div class="modal-body">
+            <div id="classes-set">
+              <h5 class="display-5">Add or Remove a Class</h5>
+              <ul class="list-group" id="edit-classes"></ul>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="settings-close">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feedback -->
+    <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="settings-title">WayTab Feedback</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true"> &times; </span>
+            </button><br />
+          </div>
+    
+          <div class="modal-body text-center">
+            <h3 class="mb-4">Feedback</h3>
+            <h6>Opening an issue on GitHub ensures we can track it in the most efficient way possible.</h6>
+            <h6 class="display-6 mb-4"><i class="fas fa-exclamation"></i> <a href="https://github.com/andrewward2001/WayTab/issues">Browse issues</a></h6>
+            <h6>Don't have a GitHub account?</h6>
+            <h6><i class="fas fa-edit"></i> <a href="https://goo.gl/forms/cuEftjPGOl5G3chk2">Use the Google Form.</a></h6>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- About -->
+    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="settings-title">About WayTab</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true"> &times; </span>
+            </button><br />
+          </div>
+    
+          <div class="modal-body text-center">
+            <div class="mx-auto">
+              <img src="../res/icon128.png" />
+            </div>
+            <h3 class="display-4"><a class="text-dark" href="https://waytab.org">WayTab</a><a class="text-muted h3 ml-2" href="https://github.com/waytab/WayTab/releases/tag/v2.0">2.0</a></h3>
+            <br />
+            <h5 class="display-5"><i class="fas fa-code"></i> with <i class="fas fa-heart"></i> by Andrew Ward and Andy Wang</h5>
+            <h6 class="display-6 mb-4">and <a href="https://github.com/waytab/WayTab/graphs/contributors">these</a> awesome contributors</h6>
+            <h6 class="display-6"><i class="fab fa-github"></i> <a href="https://github.com/waytab">GitHub Org</a></h6>
+            <h6 class="display-6"><i class="fab fa-github"></i> <a href="https://github.com/waytab/WayTab" data-toggle="tooltip" data-placement="bottom" title="Browse the code and contribute">GitHub Code Repository</a></h6>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Danger Zone -->
+    <div class="modal fade" id="dangerZoneModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="border-color: #dc3545;">
+          <div class="modal-header bg-danger">
+            <h5 class="modal-title text-white" id="settings-title">Danger Zone</h5>
+            <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true"> &times; </span>
+            </button><br />
+          </div>
+    
+          <div class="modal-body">
+            <div class="row" style="border-radius: 4px;">
+              <div class="col">
+                <span class="text-danger">Proceed with Caution</span>
+              </div>
+              <div class="col-10" id="danger-zone">
+                <div class="input-group mb-2">
+                  <a role="button" title="Are you sure?" data-toggle="popover" data-trigger="focus" data-html="true" data-content="<button class='btn btn-danger' id='force-reset-tasks'>Confirm</button>">
+                    <button class="btn btn-outline-danger mr-2" data-toggle="tooltip" data-placement="top" title="Your tasks will be printed in the chrome console">
+                      Force Reset Tasks </button> </a>
+                </div>
+                <div class="input-group">
+                  <button role="button" title="Are you sure?" data-toggle="popover" data-trigger="focus" data-html="true"
+                    data-content="<button class='btn btn-danger' id='force-reset-schedule'>Confirm</button>" class="btn btn-outline-danger mr-2 mb-2">Force
+                    Reset Schedule</button>
+                </div>
+                <div class="input-group">
+                  <button role="button" title="Are you sure?" data-toggle="popover" data-html="true" data-content="<button class='btn btn-danger' id='force-reset-waytab'>Confirm</button>"
+                    class="btn btn-outline-danger mr-2">Force Reset WayTab</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
