@@ -195,7 +195,7 @@ export default class Schedule {
     $(document).on('click', '#submit-class-info', () => {
       let name = $('#class-name').val()
   
-      classesArray = []
+      let classesArray = []
       if(name.length > 0) {
         let classesLoad = this.loadClasses
         chrome.storage.sync.get(['classes'], function({classes}) {
