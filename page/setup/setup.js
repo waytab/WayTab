@@ -272,7 +272,8 @@ function savePrefs() {
     enableWspn,
     links,
     schedule,
-    classes
+    classes,
+    elapseForm: $('#time-elapsed').val()
   }
 
   console.log(saveArray);
