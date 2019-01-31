@@ -531,7 +531,8 @@ a.input-group-text:hover {
 }
 
 .modal-content,
-.modal-header {
+.modal-header,
+.modal-footer {
   border: none;
 }
 

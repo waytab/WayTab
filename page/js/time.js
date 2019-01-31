@@ -114,12 +114,20 @@ function cycleDay() {
         let dateComp = moment().format('L').split('/') // create date array
         let currDate = dateComp[2] + '-' + dateComp[0] + '-' + dateComp[1] // build moment-compatible string
         let dayDiff = moment(currDate).diff(moment(data[1]), 'days') // calculate difference in days
+        let i = 0;
+        while(i < dayDiff) {
+          if (moment().add(i, 'd').day(0) || moment().add(i, 'd').day(6)) {
+            dayDiff--
+            i--
+          }
+          i++
+        }
         let currCol = letterToCol(data[0]) // get 'current' col number
         let correctCol = currCol + dayDiff
         if(correctCol > 7) {
           if(correctCol % 7 == 0) {
             correctCol = 0
-          }else {
+          } else {
             correctCol = correctCol % 7 - 1
           }
         }
