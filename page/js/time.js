@@ -46,9 +46,9 @@ function updateBlock() {
 }
 
 function displayTime() {
-  let dayNum = moment().format('e')
+  let dayNum = parseInt(moment().format('e'))
   try {
-    if((dayNum !== '0' || dayNum !== '6') && letter !== undefined) {
+    if((dayNum !== 0 || dayNum !== 6) && letter !== undefined) {
       $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${letter} Day | ${block.name}`)
     }else {
       $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${block.name}`)
@@ -100,8 +100,8 @@ function highlightBlock() {
 }
 
 function cycleDay() {
-  let dayNum = moment().format('e')
-  if(dayNum !== '0' || dayNum !== '6') {
+  let dayNum = parseInt(moment().format('e'))
+  if(dayNum !== 0 || dayNum !== 6) {
     chrome.storage.sync.get('day', function({day: data}) {
       try {
         let dateComp = moment().format('L').split('/') // create date array
@@ -110,7 +110,11 @@ function cycleDay() {
         let currCol = letterToCol(data[0]) // get 'current' col number
         let correctCol = currCol + dayDiff
         if(correctCol > 7) {
-          correctCol = correctCol % 7 - 1
+          if(correctCol % 7 == 0) {
+            correctCol = 0
+          }else {
+            correctCol = correctCol % 7 - 1
+          }
         }
         let correctLetter = colToLetter(correctCol) // get 'correct' (shifted) letter
         letter = correctLetter
@@ -118,7 +122,7 @@ function cycleDay() {
         if (e.message.indexOf('TypeError: Cannot read property \'1\' of undefined')) {
           console.log('The following is a non-error and is probably linked to you not having a schedule filled in.')
           console.log(e)
-        } else console.warn(e);
+        } else console.warn(e)
       }
     })
   }
