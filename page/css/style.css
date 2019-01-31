@@ -98,6 +98,10 @@ body {
   background-color: #cc9012;
 }
 
+.btn {
+  border-radius: .5rem;
+}
+
 .fab-area {
   position: fixed;
   right: 0;
@@ -195,7 +199,7 @@ body {
 }
 
 .fab-action.shown {
-  border-radius: 5px;
+  border-radius: .5rem;
   animation: fab-action-anim;
   animation-duration: 250ms;
 }
@@ -218,7 +222,7 @@ body {
     border-radius: 23px;
   }
   to {
-    border-radius: 5px;
+    border-radius: .5rem;
   }
 }
 
@@ -459,7 +463,8 @@ a.text-dark {
 
 .tooltip .tooltip-inner {
   background-color: #303030;
-  padding: 4px 8px;
+  padding: 4px 10px;
+  border-radius: .5rem;
   animation-name: fadein;
   animation-duration: 500ms;
   animation-timing-function: ease-out;
@@ -541,4 +546,15 @@ a.input-group-text:hover {
   border-radius: 12.5px;
   background-color: rgba(234, 166, 21, 0.1);
   padding: .25rem .75rem;
+}
+
+.card {
+  border-radius: .5rem;
+  border: none;
+  -webkit-box-shadow: 0px 1px 35px 0px rgba(0,0,0,.2);
+  box-shadow: 0px 1px 35px 0px rgba(0,0,0,.2);
+}
+
+.card:not(.card-body) {
+  padding: 1px;
 }
