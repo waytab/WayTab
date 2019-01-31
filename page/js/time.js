@@ -1,6 +1,7 @@
 var sched
 let block
 let letter
+let form
 
 $.getJSON(`http://manage.waytab.org/modules/schedule/?timestamp=${moment().subtract(1, 'days').unix()}`, (data) => {
   console.log(data)
@@ -27,11 +28,23 @@ $.getJSON(`http://manage.waytab.org/modules/schedule/?timestamp=${moment().subtr
   }
 })
 
+chrome.storage.sync.get(['elapseForm'], function({elapseForm}) {
+  form = elapseForm
+  if(form === 'Percentage') {
+    $('#elapse-percent').prop('selected', true)
+    $('#elapse-raw').prop('selected', false)
+  }else if(form === 'Time') {
+    $('#elapse-percent').prop('selected', false)
+    $('#elapse-raw').prop('selected', true)
+  }
+})
+
 $(document).ready( function() {
   hoverController()
   bellTwoController()
   daySelectController()
   cycleDay()
+  setElapsedForm()
 })
 
 setInterval( () => {
@@ -55,6 +68,12 @@ function displayTime() {
     }
   } catch(e) {
   }
+}
+
+function setElapsedForm() {
+  $('#settings-close').click( function() {
+    chrome.storage.sync.set({'elapseForm': $('#elapse-default').val()})
+  })
 }
 
 function setTodaySchedule(sched_data, bell2toggle) {
@@ -162,7 +181,11 @@ function barController() {
   let percentElapsed = 100 - (-1 * elapsed / periodLength) * 100
 
   $('#time-bar-elapsed').css('width', percentElapsed + '%')
-  $('#percent-container').text('Ends at ' + moment(block.end, 'hmm').format('h:mm a') + ' | ' + parseInt(percentElapsed) + '% elapsed')
+  if(form === 'Percentage') {
+    $('#percent-container').text('Ends at ' + moment(block.end, 'hmm').format('h:mm a') + ' | ' + parseInt(percentElapsed) + '% elapsed')
+  }else if(form === 'Time') {
+    $('#percent-container').text('Ends at ' + moment(block.end, 'hmm').format('h:mm a') + ' | ' + parseInt(-1 * elapsed) + ' minutes left')
+  }
   $('#time-container').css('color', percentElapsed <= 50 ? 'black' : 'white')
 }
 
