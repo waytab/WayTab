@@ -56,6 +56,7 @@ setInterval( () => {
 function updateBlock() {
   block = getCurrentBlock()
   highlightBlock()
+  removeLetterHint()
 }
 
 function displayTime() {
@@ -222,6 +223,10 @@ function hoverController() {
   percentContainer.onmouseout = function() {
     percentContainer.style.display = 'none';
   }
+}
+
+function removeLetterHint() {
+  if(letter !== undefined) $('#letter-hint').remove()
 }
 
 function letterToCol(day) {
