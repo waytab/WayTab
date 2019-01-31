@@ -179,9 +179,9 @@ function barController() {
   let percentElapsed = 100 - (-1 * elapsed / periodLength) * 100
 
   $('#time-bar-elapsed').css('width', percentElapsed + '%')
-  $('#percent-container').text('Ends at ' + moment(block.end, 'hmm').format('h:mm a') + ' | ' + parseInt(percentElapsed) + '% elapsed')
+  $('#percent-container').text(`Ends at ${moment(block.end, 'hmm').format('h:mm a')} | ${Math.floor(percentElapsed)}% elapsed`)
   if (elapsedFormat === 'Time') {
-    $('#percent-container').text('Ends at ' + moment(block.end, 'hmm').format('h:mm a') + ' | ' + parseInt(-1 * elapsed + 1) + ' minutes left')
+    $('#percent-container').text(`Ends at ${moment(block.end, 'hmm').format('h:mm a')} | ${elapsed > -60 ? Math.floor(-1 * elapsed + 1) + ' minutes' : Math.floor(-1 * elapsed / 60) + ':' + Math.ceil(-1 * elapsed % 60)} left`)
   }
   $('#time-container').css('color', percentElapsed <= 50 ? 'black' : 'white')
 }
