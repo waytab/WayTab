@@ -28,7 +28,7 @@ export default class Schedule {
   loadSchedule(schedule) {
     $('#schedule-table').remove()
     $('#schedule').append(`
-      <table class="table table-bordered mb-0" id="schedule-table">
+      <table class="table table-bordered mb-0" id="schedule-table" style="table-layout:fixed; width:100%; word-wrap:break-word;">
         <thead>
           <tr>
             <th scope="col" class="daySelect" data-day="A">A</th>
