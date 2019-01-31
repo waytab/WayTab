@@ -30,7 +30,7 @@ $.getJSON(`http://manage.waytab.org/modules/schedule/?timestamp=${moment().subtr
 
 chrome.storage.sync.get(['elapseForm'], function({elapseForm}) {
   elapsedFormat = elapseForm
-  $('#time-elapsed').val(elapsedFormat)
+  $('#time-elapsed').val(elapseForm)
 })
 
 $(document).ready( function() {
