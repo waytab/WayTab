@@ -30,12 +30,7 @@ $.getJSON(`http://manage.waytab.org/modules/schedule/?timestamp=${moment().subtr
 
 chrome.storage.sync.get(['elapseForm'], function({elapseForm}) {
   elapsedFormat = elapseForm
-    $('#elapse-percent').prop('selected', true)
-    $('#elapse-raw').prop('selected', false)
-  if (elapsedFormat === 'Time') {
-    $('#elapse-percent').prop('selected', false)
-    $('#elapse-raw').prop('selected', true)
-  }
+  $('#time-elapsed').val(elapsedFormat)
 })
 
 $(document).ready( function() {
@@ -71,8 +66,8 @@ function displayTime() {
 }
 
 function setElapsedFormat() {
-  $('#settings-close').click( function() {
-    chrome.storage.sync.set({'elapseForm': $('#elapse-default').val()})
+  $(document).on('click', '#settings-close', function() {
+    chrome.storage.sync.set({ 'elapseForm': $('#time-elapsed').val() })
   })
 }
 
