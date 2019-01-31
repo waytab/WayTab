@@ -30,10 +30,9 @@ $.getJSON(`http://manage.waytab.org/modules/schedule/?timestamp=${moment().subtr
 
 chrome.storage.sync.get(['elapseForm'], function({elapseForm}) {
   form = elapseForm
-  if(form === 'Percentage') {
     $('#elapse-percent').prop('selected', true)
     $('#elapse-raw').prop('selected', false)
-  }else if(form === 'Time') {
+  if(form === 'Time') {
     $('#elapse-percent').prop('selected', false)
     $('#elapse-raw').prop('selected', true)
   }
@@ -140,7 +139,7 @@ function cycleDay() {
         letter = correctLetter
       } catch (e) {
         if (e.message.indexOf('TypeError: Cannot read property \'1\' of undefined')) {
-          console.log('The following is a non-error and is probably linked to you not having a schedule filled in.')
+          console.log('The following is a non-error and is probably linked to there not being a selected day on the schedule.')
           console.log(e)
         } else console.warn(e)
       }
@@ -187,9 +186,8 @@ function barController() {
   let percentElapsed = 100 - (-1 * elapsed / periodLength) * 100
 
   $('#time-bar-elapsed').css('width', percentElapsed + '%')
-  if(form === 'Percentage') {
-    $('#percent-container').text('Ends at ' + moment(block.end, 'hmm').format('h:mm a') + ' | ' + parseInt(percentElapsed) + '% elapsed')
-  }else if(form === 'Time') {
+  $('#percent-container').text('Ends at ' + moment(block.end, 'hmm').format('h:mm a') + ' | ' + parseInt(percentElapsed) + '% elapsed')
+  if(form === 'Time') {
     $('#percent-container').text('Ends at ' + moment(block.end, 'hmm').format('h:mm a') + ' | ' + parseInt(-1 * elapsed + 1) + ' minutes left')
   }
   $('#time-container').css('color', percentElapsed <= 50 ? 'black' : 'white')
