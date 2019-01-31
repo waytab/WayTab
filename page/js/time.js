@@ -190,7 +190,7 @@ function barController() {
   if(form === 'Percentage') {
     $('#percent-container').text('Ends at ' + moment(block.end, 'hmm').format('h:mm a') + ' | ' + parseInt(percentElapsed) + '% elapsed')
   }else if(form === 'Time') {
-    $('#percent-container').text('Ends at ' + moment(block.end, 'hmm').format('h:mm a') + ' | ' + parseInt(-1 * elapsed) + ' minutes left')
+    $('#percent-container').text('Ends at ' + moment(block.end, 'hmm').format('h:mm a') + ' | ' + parseInt(-1 * elapsed + 1) + ' minutes left')
   }
   $('#time-container').css('color', percentElapsed <= 50 ? 'black' : 'white')
 }
