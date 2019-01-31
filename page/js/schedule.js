@@ -30,14 +30,14 @@ export default class Schedule {
       <table class="table table-bordered mb-0" id="schedule-table">
         <thead>
           <tr>
-            <th scope="col" class="daySelect A" data-day="A">A</th>
-            <th scope="col" class="daySelect B" data-day="B">B</th>
-            <th scope="col" class="daySelect C" data-day="C">C</th>
-            <th scope="col" class="daySelect D" data-day="D">D</th>
-            <th scope="col" class="daySelect E" data-day="E">E</th>
-            <th scope="col" class="daySelect F" data-day="F">F</th>
-            <th scope="col" class="daySelect G" data-day="G">G</th>
-            <th scope="col" class="daySelect H" data-day="H">H</th>
+            <th scope="col" class="daySelect" data-day="A">A</th>
+            <th scope="col" class="daySelect" data-day="B">B</th>
+            <th scope="col" class="daySelect" data-day="C">C</th>
+            <th scope="col" class="daySelect" data-day="D">D</th>
+            <th scope="col" class="daySelect" data-day="E">E</th>
+            <th scope="col" class="daySelect" data-day="F">F</th>
+            <th scope="col" class="daySelect" data-day="G">G</th>
+            <th scope="col" class="daySelect" data-day="H">H</th>
           </tr>
         </thead>
         <tbody id="schedule-body"></tbody>

@@ -103,16 +103,9 @@ function highlightBlock() {
     if(actualBlock <= 6) {
       $('.now').removeClass('now')
       if(letter !== undefined) {
-        let table = $('#schedule-body')[0]
-        let cell = table.rows[actualBlock-1].cells[letterToCol(letter)]
-        let child = $(cell)
-        $(child).addClass('now')
-      }else {
-        $('#schedule-body').children().each( function() {
-          if($(this).attr('data-per') == actualBlock) {
-            $(this).children().addClass('now')
-          }
-        })
+        $(`[data-per="${actualBlock}"] > [data-day="${letter}"]`).addClass('now')
+      } else {
+        $(`[data-per="${actualBlock}"]`).addClass('now')
       }
     }
   }
@@ -173,10 +166,10 @@ function daySelectController() {
     chrome.storage.sync.set( {'day': [$(this).attr('data-day'), formattedDate]} )
     letter = $(this).attr('data-day')
     /* Fancy selection confirmation stuff */
-    $(`.${letter}`).toggleClass('now')
+    $(`[data-day="${letter}"]`).toggleClass('now')
     setTimeout(() => {
-      $(`.${letter}`).toggleClass('now')
-    }, 1000)
+      $(`[data-day="${letter}"]`).toggleClass('now')
+    }, 500)
   })
 }
 
