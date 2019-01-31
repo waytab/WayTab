@@ -32,4 +32,9 @@ function loadChangeLog() {
       )
     )
   }
+  
+  $('#changelog-body').append($('<p></p>')
+    .html(`Not all changes are listed here. See the PR <a href="https://github.com/waytab/WayTab/releases/tag/v${chrome.runtime.getManifest().version}">here</a> for the entire changelog.`)
+    .addClass('mb-0 mt-3 font-italic')
+  )
 }
