@@ -65,6 +65,7 @@ $(document).ready(() => {
 
 function loadTasks() {
   let lastTask
+  $('#taskDue').val(formatDate())
   chrome.storage.sync.get(['tasks'], function(result) {
     if(Object.keys(result).length === 0 && result.constructor === Object) {
       console.log('No tasks found')
@@ -72,7 +73,6 @@ function loadTasks() {
       tasks = result.tasks
       $('#taskList').empty()
       $('#newTask').val('')
-      $('#taskDue').val(formatDate())
       $('#addTaskClass').empty().append(`<option selected>Class...(default to misc)</option>`)
       for (let key in tasks) {
         if(tasks.hasOwnProperty(key)) {
