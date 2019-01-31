@@ -172,6 +172,11 @@ function daySelectController() {
     console.log(formattedDate)
     chrome.storage.sync.set( {'day': [$(this).attr('data-day'), formattedDate]} )
     letter = $(this).attr('data-day')
+    /* Fancy selection confirmation stuff */
+    $(`.${letter}`).toggleClass('now')
+    setTimeout(() => {
+      $(`.${letter}`).toggleClass('now')
+    }, 1000)
   })
 }
 
