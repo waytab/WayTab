@@ -212,7 +212,7 @@ function hoverController() {
 }
 
 function removeLetterHint() {
-  if(letter !== undefined) $('#letter-hint').remove()
+  if(letter === undefined && $('#schedule-body').length !== 0) $('#letter-hint').removeClass('d-none')
 }
 
 function letterToCol(day) {
