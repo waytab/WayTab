@@ -202,7 +202,7 @@ body {
 
 .fab-action.shown ul {
   display: block;
-  height: 343px;
+  height: 392px;
   animation: fab-action-height;
   animation-duration: 250ms;
 }
@@ -227,7 +227,7 @@ body {
     height: 0;
   }
   to {
-    height: 343px;
+    height: 392px;
   }
 }
 
