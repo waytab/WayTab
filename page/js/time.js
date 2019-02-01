@@ -2,6 +2,7 @@ var sched
 let block
 let letter
 let elapsedFormat
+let display
 
 $.getJSON(`http://manage.waytab.org/modules/schedule/?timestamp=${moment().subtract(1, 'days').unix()}`, (data) => {
   console.log(data)
@@ -57,9 +58,9 @@ function displayTime() {
   let dayNum = parseInt(moment().format('e'))
   try {
     if((dayNum !== 0 || dayNum !== 6) && letter !== undefined) {
-      $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${letter} Day | ${block.name}`)
+      $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${letter} Day | ${display}`)
     }else {
-      $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${block.name}`)
+      $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${display}`)
     }
   } catch(e) {
   }
@@ -93,12 +94,18 @@ function setTodaySchedule(sched_data, bell2toggle) {
 }
 
 function highlightBlock() {
+  display = block.name
   if(block.name.includes('Block')) {
     let actualBlock = parseInt(block.name.substring(block.name.length - 1))
     if(actualBlock <= 6) {
       $('.now').removeClass('now')
       if(letter !== undefined) {
-        $(`[data-per="${actualBlock}"] > [data-day="${letter}"]`).addClass('now')
+        let child = $(`[data-per="${actualBlock}"] > [data-day="${letter}"]`)
+        child.addClass('now')
+        /* Set block name */
+        let temp = child.text()
+        if(temp.length <= 0) temp = 'Free'
+        display = display.replace('Block ' + actualBlock, temp)
       } else {
         $(`[data-per="${actualBlock}"]`).addClass('now')
       }
