@@ -57,7 +57,7 @@ function updateBlock() {
 function displayTime() {
   let dayNum = parseInt(moment().format('e'))
   try {
-    if((dayNum !== 0 || dayNum !== 6) && letter !== undefined) {
+    if((dayNum !== 0 && dayNum !== 6) && letter !== undefined) {
       $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${letter} Day | ${display}`)
     }else {
       $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${display}`)
