@@ -115,7 +115,7 @@ function highlightBlock() {
 
 function cycleDay() {
   let dayNum = parseInt(moment().format('e'))
-  if(dayNum !== 0 || dayNum !== 6) {
+  if(dayNum !== 0 && dayNum !== 6) {
     chrome.storage.sync.get('day', function({day: data}) {
       try {
         let dateComp = moment().format('L').split('/') // create date array
