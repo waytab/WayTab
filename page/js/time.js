@@ -95,10 +95,10 @@ function setTodaySchedule(sched_data, bell2toggle) {
 
 function highlightBlock() {
   display = block.name
+  $('.now').removeClass('now')
   if(block.name.includes('Block')) {
     let actualBlock = parseInt(block.name.substring(block.name.length - 1))
     if(actualBlock <= 6) {
-      $('.now').removeClass('now')
       if(letter !== undefined) {
         let child = $(`[data-per="${actualBlock}"] > [data-day="${letter}"]`)
         child.addClass('now')
@@ -111,7 +111,6 @@ function highlightBlock() {
       }
     }
   }else {
-    $('.now').removeClass('now')
     $(`th[data-day="${letter}"]`).addClass('now')
   }
 }
