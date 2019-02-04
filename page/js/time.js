@@ -110,6 +110,9 @@ function highlightBlock() {
         $(`[data-per="${actualBlock}"]`).addClass('now')
       }
     }
+  }else {
+    $('.now').removeClass('now')
+    $(`th[data-day="${letter}"]`).addClass('now')
   }
 }
 
