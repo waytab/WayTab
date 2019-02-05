@@ -3,6 +3,7 @@ export default class Schedule {
     this.loadClasses()
     this.addClass()
     this.removeClass()
+    $(document).on('letter-loaded', (e, letter) => {})
     chrome.storage.sync.get(['schedule'], (result) => {
       if(Object.keys(result).length === 0 && result.constructor === Object) {
         $('#schedule-table').remove()
@@ -22,6 +23,8 @@ export default class Schedule {
         this.scheduleEditor()
       }
     })
+
+    
   }
 
   loadSchedule(schedule) {

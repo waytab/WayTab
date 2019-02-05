@@ -62,6 +62,7 @@ function displayTime() {
     }else {
       $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${display} | Monday will be a ${letter} day`)
     }
+    
   } catch(e) {
   }
 }
@@ -142,6 +143,7 @@ function cycleDay() {
         }
         let correctLetter = colToLetter(correctCol) // get 'correct' (shifted) letter
         letter = correctLetter
+        $(document).trigger('letter-loaded', [correctLetter])
       } catch (e) {
         if (e.message.indexOf('TypeError: Cannot read property \'1\' of undefined')) {
           console.log('The following is a non-error and is probably linked to there not being a selected day on the schedule.')
