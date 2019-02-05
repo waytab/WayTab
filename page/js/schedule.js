@@ -28,23 +28,21 @@ export default class Schedule {
   }
 
   loadSchedule(schedule) {
-    $('#schedule-table').remove()
-    $('#schedule').append(`
-      <table class="table table-bordered mb-0" id="schedule-table">
-        <thead>
-          <tr>
-            <th scope="col" class="daySelect" data-day="A">A</th>
-            <th scope="col" class="daySelect" data-day="B">B</th>
-            <th scope="col" class="daySelect" data-day="C">C</th>
-            <th scope="col" class="daySelect" data-day="D">D</th>
-            <th scope="col" class="daySelect" data-day="E">E</th>
-            <th scope="col" class="daySelect" data-day="F">F</th>
-            <th scope="col" class="daySelect" data-day="G">G</th>
-            <th scope="col" class="daySelect" data-day="H">H</th>
-          </tr>
-        </thead>
-        <tbody id="schedule-body"></tbody>
-      </table>
+    $('#schedule-table').empty()
+    $('#schedule-table').append(`
+      <thead>
+        <tr>
+          <th scope="col" class="daySelect" data-day="A">A</th>
+          <th scope="col" class="daySelect" data-day="B">B</th>
+          <th scope="col" class="daySelect" data-day="C">C</th>
+          <th scope="col" class="daySelect" data-day="D">D</th>
+          <th scope="col" class="daySelect" data-day="E">E</th>
+          <th scope="col" class="daySelect" data-day="F">F</th>
+          <th scope="col" class="daySelect" data-day="G">G</th>
+          <th scope="col" class="daySelect" data-day="H">H</th>
+        </tr>
+      </thead>
+      <tbody id="schedule-body"></tbody>
     `)
     let dayArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
     for(let i = 0; i < schedule.length; i++) {
