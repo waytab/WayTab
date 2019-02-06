@@ -3,7 +3,8 @@ export default class Schedule {
     this.loadClasses()
     this.addClass()
     this.removeClass()
-    $(document).on('letter-loaded', (e, letter) => {})
+    this.dayArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+    $(document).on('letter-loaded', (e, letter) => {this.displayNeueView(letter)})
     chrome.storage.sync.get(['schedule'], (result) => {
       if(Object.keys(result).length === 0 && result.constructor === Object) {
         $('#schedule-table').remove()
@@ -11,6 +12,7 @@ export default class Schedule {
         this.scheduleEditor()
       } else {
         this.loadSchedule(result.schedule)
+        this.schedule = result.schedule
         let letterDays = 'ABCDEFGH'
         for(let i = 0; i < result.schedule.length; i++) {
           for(let j = 0; j < letterDays.length; j++) {
@@ -44,11 +46,11 @@ export default class Schedule {
       </thead>
       <tbody id="schedule-body"></tbody>
     `)
-    let dayArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+    
     for(let i = 0; i < schedule.length; i++) {
       $('#schedule-body').append(`<tr data-per="${i+1}"></tr>`)
       for(let j = 0; j < schedule[i].length; j++) {
-        let currLetter = dayArr[j]
+        let currLetter = this.dayArr[j]
         $(`[data-per=${i+1}]`).append(`<td class="daySelect ${currLetter}" data-day="${currLetter}">${schedule[i][j]}</td>`)
       }
     }
@@ -223,15 +225,39 @@ export default class Schedule {
     })
   }
 
-  scheduleAssembler_classRow(name) {
-    return $('<div></div>')
-      .addClass('row mt-2')
-      .append($('<div></div>').addClass('col-5').append($('<h3></h3>').text(name)))
-      .append($('<div></div>').addClass('col').attr('id', `sched-${name.replace(' ', '_')}-tasks`))
+  cycleScheduleView() {
+    $('#schedule-table, #schedule-neue').toggleClass('d-none')
   }
+
+  displayNeueView(letter) {
+    $('#schedule-neue').append(this.scheduleAssembler_heading(letter))
+
+    let letterIndex = this.dayArr.indexOf(letter)
+    let classesListed = []
+    for(let i = 0; i < 6; i++) {
+      if(this.schedule[i][letterIndex] !== '') {
+        $('#schedule-neue').append(this.scheduleAssembler_classRow(this.schedule[i][letterIndex], (classesListed.indexOf(this.schedule[i][letterIndex]) === -1)))
+        classesListed.push(this.schedule[i][letterIndex])
+      }
+    }
+
+    $('#schedule-table').addClass('d-none')
+    $('#schedule-neue').removeClass('d-none')
+  }
+
   scheduleAssembler_heading(letter) {
     return $('<h4></h4>')
       .addClass('mt-4')
-      .html(`${letter} Day <small><a href="#" id="schedule-grid-toggle>See grid</a></small>`)
+      .html(`${letter} Day `)
+      .append($('<small></small>')
+        .append($('<a></a>').attr({href: '#', id: 'schedule-grid-toggle'}).text('View grid'))
+      )
+  }
+
+  scheduleAssembler_classRow(name, displayTasks) {
+    return $('<div></div>')
+      .addClass('row mt-2')
+      .append($('<div></div>').addClass('col-5').append($('<h3></h3>').text(name)))
+      .append($('<div></div>').addClass('col').attr('id', `${displayTasks ? `sched-${name.replace(' ', '_')}-tasks` : ''}`))
   }
 }
