@@ -248,7 +248,7 @@ export default class Schedule {
 
   scheduleAssembler_heading(letter) {
     return $('<h4></h4>')
-      .addClass('mt-4')
+      .addClass('mb-4')
       .html(`${letter} Day `)
       .append($('<small></small>')
         .append($('<a></a>').attr({href: '#', id: 'schedule-grid-toggle'}).text('View grid'))
