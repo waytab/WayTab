@@ -26,7 +26,10 @@ export default class Schedule {
       }
     })
 
-    
+    $(document).on('click', '#schedule-grid-toggle', (e) => {
+      this.cycleScheduleView()
+      $(e.target).text($(e.target).text() == 'View grid' ? 'View day' : 'View grid')
+    })
   }
 
   loadSchedule(schedule) {
@@ -230,6 +233,7 @@ export default class Schedule {
   }
 
   displayNeueView(letter) {
+    $('#schedule-grid-toggle').removeClass('d-none')
     $('#schedule-neue').append(this.scheduleAssembler_heading(letter))
 
     let letterIndex = this.dayArr.indexOf(letter)
@@ -250,9 +254,6 @@ export default class Schedule {
     return $('<h4></h4>')
       .addClass('mb-4')
       .html(`${letter} Day `)
-      .append($('<small></small>')
-        .append($('<a></a>').attr({href: '#', id: 'schedule-grid-toggle'}).text('View grid'))
-      )
   }
 
   scheduleAssembler_classRow(name, displayTasks) {
