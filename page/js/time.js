@@ -144,6 +144,7 @@ function cycleDay() {
         let correctLetter = colToLetter(correctCol) // get 'correct' (shifted) letter
         letter = correctLetter
         $(document).trigger('letter-loaded', [correctLetter])
+        $('#letter-hint').addClass('d-none')
       } catch (e) {
         if (e.message.indexOf('TypeError: Cannot read property \'1\' of undefined')) {
           console.log('The following is a non-error and is probably linked to there not being a selected day on the schedule.')
