@@ -67,7 +67,7 @@ function loadTasks() {
   let lastTask
   $('#taskDue').val(formatDate())
   let scheduleGrid = true
-  let classesDisplayed
+  let classesDisplayed = []
   $(document).on('schedule-loaded', (e, list) => {scheduleGrid = false, classesDisplayed = list})
   chrome.storage.sync.get(['tasks', 'scheduleView'], function(result) {
     if(Object.keys(result).length === 0 && result.constructor === Object) {
@@ -80,12 +80,12 @@ function loadTasks() {
       for (let key in tasks) {
         if(tasks.hasOwnProperty(key)) {
           if(tasks[key].length != 0) {
-            if(scheduleGrid || classesDisplayed.indexOf(key) === -1 || key === 'Miscellaneous') $('#taskList').append($('<h5></h5>').text(key))
+            if(result.scheduleView == 'grid' || classesDisplayed.indexOf(key) === -1 || key === 'Miscellaneous') $('#taskList').append($('<h5></h5>').text(key))
             tasks[key].sort((a, b) => -1 * (new Date(b[1]) - new Date(a[1])))
             for (let i = 0; i < tasks[key].length; i++) {
               $('#newTaskSelectionGroup').addClass('mb-3')
 
-              if(scheduleGrid || classesDisplayed.indexOf(key) === -1 || key === 'Miscellaneous') {
+              if(result.scheduleView == 'grid' || classesDisplayed.indexOf(key) === -1 || key === 'Miscellaneous') {
                 $('#taskList').append(taskAssembler(key, i, false))
               } else {
                 $(`#sched-${key.replace(' ', '_')}-tasks`).append(taskAssembler(key, i, true))
@@ -116,7 +116,7 @@ function loadTasks() {
       $('[data-del]').on('change paste keyup', function() {
         let button = $(this)
         let target = button.data('del')
-        let index;
+        let index
         if (!(typeof $(`#${target} label`).attr('data-has-date') !== typeof undefined && $(`#${target} label`).attr('data-has-date') !== false)) {
           index = getIndexOfArray(tasks[button.data('class').replace('_', ' ')], [$(`#${target} label`).text(), ''])
         } else {
@@ -129,7 +129,8 @@ function loadTasks() {
           tasks[button.data('class').replace('_', ' ')].splice(index, 1)
           chrome.storage.sync.set({tasks: tasks}, function() {
             $('#undo-task-delete').remove()
-            if(scheduleGrid) $('#todo .card-title').append(`<a href="" data-toggle="modal" class="btn btn-primary btn-sm float-right" id="undo-task-delete" data-task="${lastTask}">Undo</a>`)
+            if(result.scheduleView == 'grid') $('#todo .card-title').append(`<a href="" data-toggle="modal" class="btn btn-primary btn-sm float-right" id="undo-task-delete" data-task="${lastTask}">Undo</a>`)
+            button.parent().remove()
             loadTasks()
           })
         }
