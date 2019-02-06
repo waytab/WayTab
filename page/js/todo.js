@@ -129,7 +129,7 @@ function loadTasks() {
           tasks[button.data('class').replace('_', ' ')].splice(index, 1)
           chrome.storage.sync.set({tasks: tasks}, function() {
             $('#undo-task-delete').remove()
-            $('#todo .card-title').append(`<a href="" data-toggle="modal" class="btn btn-primary btn-sm float-right" id="undo-task-delete" data-task="${lastTask}">Undo</a>`)
+            if(scheduleGrid) $('#todo .card-title').append(`<a href="" data-toggle="modal" class="btn btn-primary btn-sm float-right" id="undo-task-delete" data-task="${lastTask}">Undo</a>`)
             loadTasks()
           })
         }
