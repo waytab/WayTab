@@ -243,6 +243,7 @@ export default class Schedule {
 
     $('#schedule-table').addClass('d-none')
     $('#schedule-neue').removeClass('d-none')
+    $(document).trigger('schedule-loaded')
   }
 
   scheduleAssembler_heading(letter) {
