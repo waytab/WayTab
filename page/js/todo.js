@@ -66,6 +66,9 @@ $(document).ready(() => {
 function loadTasks() {
   let lastTask
   $('#taskDue').val(formatDate())
+  let scheduleGrid = true
+  let classesDisplayed
+  $(document).on('schedule-loaded', (e, list) => {scheduleGrid = false, classesDisplayed = list})
   chrome.storage.sync.get(['tasks', 'scheduleView'], function(result) {
     if(Object.keys(result).length === 0 && result.constructor === Object) {
       console.log('No tasks found')
@@ -77,14 +80,16 @@ function loadTasks() {
       for (let key in tasks) {
         if(tasks.hasOwnProperty(key)) {
           if(tasks[key].length != 0) {
-            $('#taskList').append($('<h5></h5>').text(key))
+            if(scheduleGrid || classesDisplayed.indexOf(key) === -1 || key === 'Miscellaneous') $('#taskList').append($('<h5></h5>').text(key))
             tasks[key].sort((a, b) => -1 * (new Date(b[1]) - new Date(a[1])))
             for (let i = 0; i < tasks[key].length; i++) {
               $('#newTaskSelectionGroup').addClass('mb-3')
-              $('#taskList')
-                .append(taskAssembler(key, i, false))
 
-              $(`#sched-${key.replace(' ', '_')}-tasks`).append(taskAssembler(key, i, true))
+              if(scheduleGrid || classesDisplayed.indexOf(key) === -1 || key === 'Miscellaneous') {
+                $('#taskList').append(taskAssembler(key, i, false))
+              } else {
+                $(`#sched-${key.replace(' ', '_')}-tasks`).append(taskAssembler(key, i, true))
+              }
               let dueDate = new Date(tasks[key][i][1] + 'T00:00:00')
               let dueDeltaDay = Math.floor((dueDate - new Date)/(1000*60*60*24)+1)
               if(tasks[key][i][1] == '') {
