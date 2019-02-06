@@ -222,4 +222,16 @@ export default class Schedule {
       }
     })
   }
+
+  scheduleAssembler_classRow(name) {
+    return $('<div></div>')
+      .addClass('row mt-2')
+      .append($('<div></div>').addClass('col-5').append($('<h3></h3>').text(name)))
+      .append($('<div></div>').addClass('col').attr('id', `sched-${name.replace(' ', '_')}-tasks`))
+  }
+  scheduleAssembler_heading(letter) {
+    return $('<h4></h4>')
+      .addClass('mt-4')
+      .html(`${letter} Day <small><a href="#" id="schedule-grid-toggle>See grid</a></small>`)
+  }
 }

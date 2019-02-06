@@ -287,10 +287,6 @@ body {
   border-radius: 50%;
 }
 
-.row {
-  padding: 0 15px;
-}
-
 .card-title > :not(a) {
   font-family: 'Roboto Slab';
 }
@@ -558,4 +554,8 @@ a.input-group-text:hover {
 
 .card:not(.card-body) {
   padding: 1px;
+}
+
+.custom-checkbox.lead .custom-control-label::before {
+  top: .35rem;
 }
