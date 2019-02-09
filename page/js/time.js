@@ -116,40 +116,28 @@ function highlightBlock() {
 }
 
 function cycleDay() {
-  let dayNum = parseInt(moment().format('e'))
-  if(dayNum !== 0 && dayNum !== 6) {
-    chrome.storage.sync.get('day', function({day: data}) {
-      try {
-        let dateComp = moment().format('L').split('/') // create date array
-        let currDate = dateComp[2] + '-' + dateComp[0] + '-' + dateComp[1] // build moment-compatible string
-        let dayDiff = moment(currDate).diff(moment(data[1]), 'days') // calculate difference in days
-        let i = 0;
-        while(i < dayDiff) {
-          if (moment().add(i, 'd').day(0) || moment().add(i, 'd').day(6)) {
-            dayDiff--
-            i--
-          }
-          i++
-        }
-        let currCol = letterToCol(data[0]) // get 'current' col number
-        let correctCol = currCol + dayDiff
-        if(correctCol > 7) {
-          if(correctCol % 7 == 0) {
-            correctCol = 0
-          } else {
-            correctCol = correctCol % 7 - 1
-          }
-        }
-        let correctLetter = colToLetter(correctCol) // get 'correct' (shifted) letter
-        letter = correctLetter
-      } catch (e) {
-        if (e.message.indexOf('TypeError: Cannot read property \'1\' of undefined')) {
-          console.log('The following is a non-error and is probably linked to there not being a selected day on the schedule.')
-          console.log(e)
-        } else console.warn(e)
+  let dayNum = moment().format('d')
+  let potentialDays = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'A']
+  chrome.storage.sync.get('day', function({day: data}) {
+    try {
+      let dateComp = moment().format('L').split('/') // create date array
+      let currDate = dateComp[2] + '-' + dateComp[0] + '-' + dateComp[1] // build moment-compatible string
+      let dayDiff = moment(currDate).diff(moment(data[1]), 'days') // calculate difference in days
+      if(dayDiff > 0 && dayNum > 1) {
+        let nextDay = 1 + potentialDays.findIndex( function(element) {
+          return element == data[0]
+        })
+        letter = colToLetter(nextDay)
+      }else {
+        letter = data[0]
       }
-    })
-  }
+    } catch (e) {
+      if (e.message.indexOf('TypeError: Cannot read property \'1\' of undefined')) {
+        console.log('The following is a non-error and is probably linked to there not being a selected day on the schedule.')
+        console.log(e)
+      } else console.warn(e)
+    }
+  })
 }
 
 function getCurrentBlock() {
@@ -174,9 +162,9 @@ function daySelectController() {
   $(document).on('click', '.daySelect', function() {
     let dateComp = moment().format('L').split('/')
     let formattedDate = dateComp[2] + '-' + dateComp[0] + '-' + dateComp[1]
-    console.log(formattedDate)
-    chrome.storage.sync.set( {'day': [$(this).attr('data-day'), formattedDate]} )
-    letter = $(this).attr('data-day')
+    let newDay = $(this).attr('data-day')
+    chrome.storage.sync.set( {'day': [newDay, formattedDate]} )
+    letter = newDay
     /* Fancy selection confirmation stuff */
     $(`[data-day="${letter}"]`).toggleClass('now')
     setTimeout(() => {
