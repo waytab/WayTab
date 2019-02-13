@@ -239,10 +239,8 @@ export default class Schedule {
     let letterIndex = this.dayArr.indexOf(letter)
     let classesListed = []
     for(let i = 0; i < 6; i++) {
-      if(this.schedule[i][letterIndex] !== '') {
-        $('#schedule-neue').append(this.scheduleAssembler_classRow(this.schedule[i][letterIndex], (classesListed.indexOf(this.schedule[i][letterIndex]) === -1)))
-        classesListed.push(this.schedule[i][letterIndex])
-      }
+      $('#schedule-neue').append(this.scheduleAssembler_classRow(this.schedule[i][letterIndex], (classesListed.indexOf(this.schedule[i][letterIndex]) === -1)))
+      classesListed.push(this.schedule[i][letterIndex])
     }
 
     $('#schedule-table').addClass('d-none')
@@ -259,7 +257,7 @@ export default class Schedule {
   scheduleAssembler_classRow(name, displayTasks) {
     return $('<div></div>')
       .addClass('row mt-2')
-      .append($('<div></div>').addClass('col-5').append($('<h3></h3>').text(name)))
+      .append($('<div></div>').addClass('col-5').append(name !== '' ? $('<h3></h3>').text(name) : $('<h3></h3>').addClass('small').text('Free')))
       .append($('<div></div>').addClass('col').attr('id', `${displayTasks ? `sched-${name.replace(' ', '_')}-tasks` : ''}`))
   }
 }
