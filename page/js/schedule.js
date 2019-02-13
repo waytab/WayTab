@@ -257,7 +257,7 @@ export default class Schedule {
   scheduleAssembler_classRow(name, displayTasks) {
     return $('<div></div>')
       .addClass('row mt-2')
-      .append($('<div></div>').addClass('col-5').append(name !== '' ? $('<h3></h3>').text(name) : $('<h6></h6>').text('Free')))
+      .append($('<div></div>').addClass('col-5').append((name === '' || name === 'Free') ? $('<h6></h6>').text('Free') : $('<h3></h3>').text(name)))
       .append($('<div></div>').addClass('col').attr('id', `${displayTasks ? `sched-${name.replace(' ', '_')}-tasks` : ''}`))
   }
 }
