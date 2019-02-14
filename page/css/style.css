@@ -689,6 +689,7 @@ body.dark .modal-content,
 body.dark .popover-header,
 body.dark .popover-body,
 body.dark select,
+body.dark select:focus,
 body.dark #close-wspn,
 body.dark #wspn-container,
 body.dark #wspn-link {
