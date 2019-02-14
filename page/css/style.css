@@ -677,6 +677,7 @@ a.input-group-text:hover {
 }
 
 body.dark .card,
+body.dark .close,
 body.dark .display-4 a,
 body.dark .fab-action,
 body.dark .fab-action .fab-action-item:not(.btn-danger):not(.primary),
@@ -706,4 +707,12 @@ body.dark select {
 
 body.dark .fab-action .fab-action-item:not(.btn-danger):not(.primary):hover {
   background-color: #23272b;
+}
+
+body.dark .close {
+  text-shadow: 0px 1px 0 #23272b;
+}
+
+body.dark .close:hover {
+  color: white !important;
 }
