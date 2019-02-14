@@ -286,6 +286,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 2px;
   line-height: 2;
+  z-index: 98;
 }
 
 #activate-settings .fas {
@@ -441,6 +442,18 @@ a.text-dark {
 #show-wspn {
   top: 0;
   left: 0;
+}
+
+#wspn-clickaway,
+#settings-clickaway {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 2;
+}
+
+#wspn-clickaway {
+  z-index: 99;
 }
 
 #wspn-container {

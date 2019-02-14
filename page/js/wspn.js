@@ -52,11 +52,13 @@ $(document).ready(() => {
 
 function controlFlow() {
   $(document).on('click', '#show-wspn', () => {
+    $('body').prepend($('<div></div>').attr({id: 'wspn-clickaway'}))
     $('#wspn-container').css('width', '332px');
   })
 
-  $(document).on('click', '#close-wspn', (e) => {
+  $(document).on('click', '#close-wspn, #wspn-clickaway', (e) => {
     e.preventDefault()
+    $('#wspn-clickaway').remove()
     $('#wspn-container').css('width', '0px');
   })
 }

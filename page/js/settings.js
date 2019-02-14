@@ -1,8 +1,7 @@
 let opened = false
 let startWidth
 setTimeout(() => { startWidth = $('.fab-action').outerWidth(), $('.fab-action').css('width', startWidth + 'px') }, 100) // we need the font to load before we grab the button's width
-$(document).on('click', '#activate-settings', (e) => {
-  console.log(startWidth)
+$(document).on('click', '#activate-settings, #settings-clickaway', (e) => {
   //animate
   $('.fab-action').toggleClass('shown')
 
@@ -20,6 +19,7 @@ $(document).on('click', '#activate-settings', (e) => {
     }, 250)
 
     $('#activate-settings span').text('Close')
+    $('body').prepend($('<div></div>').attr({ id: 'settings-clickaway' }))
 
     opened = true
   } else {
@@ -28,6 +28,7 @@ $(document).on('click', '#activate-settings', (e) => {
     }, 250)
 
     $('#activate-settings span').text('Settings')
+    $('#settings-clickaway').remove()
 
     opened = false
   }
