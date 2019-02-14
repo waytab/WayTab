@@ -111,10 +111,23 @@ function highlightBlock() {
         $(`[data-per="${actualBlock}"]`).addClass('now')
       }
     }
-  }else {
+  } else {
     $(`th[data-day="${letter}"]`).addClass('now')
   }
 }
+
+let neueBlockSet = false
+const highlightBlockNeue = () => {
+  if (block !== undefined && neueBlockSet !== true && block.name.includes('Block')) {
+    let blockNum = parseInt(block.name.substring(block.name.length - 1))
+    $(`#schedule-neue>div:nth-of-type(${blockNum})`).addClass('now-neue')
+    neueBlockSet = true
+  }
+}
+
+$(document).on('schedule-loaded', () => {
+  setInterval(highlightBlockNeue, 1000)
+})
 
 function cycleDay() {
   let dayNum = parseInt(moment().format('e'))
