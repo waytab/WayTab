@@ -521,7 +521,7 @@ a.text-dark {
 .tooltip .tooltip-inner {
   background-color: #303030;
   padding: 4px 10px;
-  border-radius: .5rem;
+  border-radius: .25rem;
   animation-name: fadein;
   animation-duration: 500ms;
   animation-timing-function: ease-out;
