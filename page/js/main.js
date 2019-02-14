@@ -31,6 +31,13 @@ $(document).ready(function() { // we need to wait for the full document to be lo
     }
   })
 
+  chrome.storage.sync.get(['dark'], ({dark}) => {
+    if(dark) {
+      $('body').addClass('dark')
+      $('#dark-check').prop('checked', true)
+    }
+  })
+
   chrome.storage.sync.getBytesInUse(null, (r) => {
     $('#usage').text(Math.round(r/10)/100 + ' KB on sync')
   })
@@ -40,5 +47,8 @@ $(document).ready(function() { // we need to wait for the full document to be lo
 })
 
 $(document).on('click', '#settings-close', function() { // we need to save the new font style when the modal is closed
-  chrome.storage.sync.set({font: $('#announcementsPositionSel').val()}, function() { location.reload() })
+  chrome.storage.sync.set({
+    font: $('#announcementsPositionSel').val(),
+    dark: $('#dark-check').prop('checked')
+  }, function() { location.reload() })
 })

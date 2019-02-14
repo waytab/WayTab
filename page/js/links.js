@@ -35,6 +35,7 @@ export default class Links {
           .append(
             $('<a></a>')
               .attr({
+                class: 'list-delete',
                 role: 'button',
                 title: 'Confirm',
                 'data-toggle': 'popover',
@@ -43,7 +44,6 @@ export default class Links {
                 'data-content': `<button class="btn btn-danger delete-link" data-num="${i}">Delete</button>`,
                 tabindex: 0
               })
-              .css({ 'margin-left': 6, 'margin-right': 22, color: 'black', 'text-decoration': 'none', cursor: 'pointer' })
               .html('&times;'),
             $('<img />')
               .attr({

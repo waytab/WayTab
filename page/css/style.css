@@ -480,6 +480,7 @@ a.text-dark {
   -webkit-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.75);
   box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.75);
+  background-color: #fff;
 }
 
 #wspn-container .overflow-box {
@@ -511,8 +512,8 @@ a.text-dark {
   height: 24px;
 }
 
-#wspn-container #close-wspn {
-  color: #fff;
+#close-wspn {
+  color: #212121;
   float: right;
   margin-right: 3px;
   margin-top: -3px;
@@ -520,6 +521,10 @@ a.text-dark {
 
 #wspn-container #close-wspn:hover {
   color: #dc3545;
+}
+
+#wspn-link {
+  color: #212121;
 }
 
 #rss-feed .card .card-title {
@@ -625,10 +630,6 @@ a.input-group-text:hover {
   box-shadow: 0px 1px 35px 0px rgba(0,0,0,.2);
 }
 
-.card:not(.card-body) {
-  padding: 1px;
-}
-
 #linksDropdown {
   margin: 0 1rem;
   width: calc(100vw - 2rem);
@@ -657,4 +658,52 @@ a.input-group-text:hover {
 #schedule-table-div {
   width: 100%;
   overflow-x: auto;
+}
+
+.list-delete {
+  margin-left: 6px;
+  margin-right: 22px;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.list-delete:hover {
+  text-decoration: none;
+}
+
+.display-4 a {
+  color: #343a40;
+}
+
+body.dark .card,
+body.dark .display-4 a,
+body.dark .fab-action,
+body.dark .fab-action .fab-action-item:not(.btn-danger):not(.primary),
+body.dark input,
+body.dark input:focus,
+body.dark .list-delete,
+body.dark .list-group-item,
+body.dark .modal-content,
+body.dark .popover-header,
+body.dark .popover-body,
+body.dark select,
+body.dark #close-wspn,
+body.dark #wspn-container,
+body.dark #wspn-link {
+  background-color: #343a40;
+  color: #fff;
+}
+
+body.dark input,
+body.dark .popover-header,
+body.dark .table-bordered,
+body.dark .table-bordered td,
+body.dark .table-bordered th,
+body.dark select {
+  border-color: #404951;
+}
+
+body.dark .fab-action .fab-action-item:not(.btn-danger):not(.primary):hover {
+  background-color: #23272b;
 }

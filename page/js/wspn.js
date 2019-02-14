@@ -5,7 +5,7 @@ chrome.storage.sync.get( ['enableWspn'], function(res) {
   if(res.enableWspn) {
     $('#wspn-check').prop('checked', true)
     $('#show-wspn').show()
-  }else {
+  } else {
     $('#wspn-check').prop('checked', false)
     $('#show-wspn').hide()
   }
@@ -73,7 +73,7 @@ function displayArticles() {
 
 function createNewsDiv(title, link, img, auth) {
   let newsdiv = $('<div></div>')
-    .attr('class', 'card mb-3 mx-3 bg-dark')
+    .attr('class', 'card mb-3 mx-3')
 
   if (img != undefined) {
     newsdiv.append(`<div class="card-img-top" style="background-image: url(${img}); height: 10rem;"></div>`)
@@ -82,7 +82,7 @@ function createNewsDiv(title, link, img, auth) {
   newsdiv.append($('<div></div>')
     .toggleClass('card-body')
     .append($('<h5></h5>')
-      .toggleClass('card-title text-light')
+      .toggleClass('card-title')
       .text(title)
     )
     .append($('<h6></h6>')
