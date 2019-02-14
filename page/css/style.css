@@ -575,3 +575,8 @@ a.input-group-text:hover {
 .custom-checkbox.lead .custom-control-label::before {
   top: .35rem;
 }
+
+#schedule-table-div {
+  width: 100%;
+  overflow-x: auto;
+}

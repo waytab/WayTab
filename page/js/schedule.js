@@ -229,7 +229,7 @@ export default class Schedule {
   }
 
   cycleScheduleView() {
-    $('#schedule-table, #schedule-neue').toggleClass('d-none')
+    $('#schedule-table-div, #schedule-neue').toggleClass('d-none')
   }
 
   displayNeueView(letter) {
@@ -243,7 +243,7 @@ export default class Schedule {
       classesListed.push(this.schedule[i][letterIndex])
     }
 
-    $('#schedule-table').addClass('d-none')
+    $('#schedule-table-div').addClass('d-none')
     $('#schedule-neue').removeClass('d-none')
     $(document).trigger('schedule-loaded', [classesListed])
   }
