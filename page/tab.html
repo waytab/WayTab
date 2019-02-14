@@ -55,7 +55,14 @@
     </div>
 
     <!-- Links -->
-    <div class="row mb-4 mt-4" id="link-container"></div>
+    <div class="row mb-4 mt-4 d-none d-lg-flex" id="link-container"></div>
+    <div class="dropdown d-lg-none my-4">
+      <button class="btn btn-light btn-block dropdown-toggle" type="button" id="linksDropdown" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">
+        Links
+      </button>
+      <div class="dropdown-menu" aria-labelledby="linksDropdown">
+      </div>
+    </div>
 
     <div class="row">
       <!-- Schedule -->
@@ -69,7 +76,7 @@
 
       <!-- Todo List -->
       <div class="col-md-6">
-        <div class="card card-body" id="todo" style="margin-right: 1rem; margin-bottom: 1rem">
+        <div class="card card-body" id="todo" style="margin-bottom: 1rem">
           <h3 class="card-title mb-2"><span>To Do</span></h3>
           <div class="input-group row mx-0 px-0">
             <input type="text" class="form-control col-md-8" id="newTask" placeholder="New Task...">

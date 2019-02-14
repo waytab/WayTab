@@ -616,3 +616,24 @@ a.input-group-text:hover {
 .card:not(.card-body) {
   padding: 1px;
 }
+
+#linksDropdown {
+  margin: 0 1rem;
+  width: calc(100vw - 2rem);
+  font-size: 1.25rem;
+}
+
+[aria-labelledby="linksDropdown"] {
+  width: calc(100vw - 2rem);
+  -webkit-box-shadow: 0px 1px 35px 0px rgba(0,0,0,.2);
+  box-shadow: 0px 1px 35px 0px rgba(0,0,0,.2);
+}
+
+[aria-labelledby="linksDropdown"] .dropdown-item {
+  font-size: 1.25rem;
+}
+
+[aria-labelledby="linksDropdown"] .dropdown-item .link-edit-icon {
+  margin-top: -.25rem;
+  height: 1.25rem;
+}

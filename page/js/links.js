@@ -57,6 +57,17 @@ export default class Links {
               .text(obj[i].name)
           )
         )
+
+      $('[aria-labelledby="linksDropdown"]').append(
+        $('<a></a>').attr({class: 'dropdown-item', href: obj[i].actual_link}).append(
+          $('<img />')
+            .attr({
+              src: obj[i].image_link,
+              class: 'link-edit-icon'
+            }),
+          obj[i].name
+        )
+      )
     }
 
     $('#edit-links')
