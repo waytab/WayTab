@@ -196,7 +196,7 @@ function barController() {
   $('#time-bar-elapsed').css('width', percentElapsed + '%')
   $('#percent-container').text(`Ends at ${moment(block.end, 'hmm').format('h:mm a')} | ${Math.floor(percentElapsed)}% elapsed`)
   if (elapsedFormat === 'Time') {
-    $('#percent-container').text(`Ends at ${moment(block.end, 'hmm').format('h:mm a')} | ${elapsed > -60 ? Math.floor(-1 * elapsed + 1) + ' minutes' : Math.floor(-1 * elapsed / 60) + ':' + Math.ceil(-1 * elapsed % 60)} left`)
+    $('#percent-container').text(`Ends at ${moment(block.end, 'hmm').format('h:mm a')} | ${elapsed > -60 ? Math.floor(-1 * elapsed + 1) + ' minutes' : Math.floor(-1 * elapsed / 60) + ':' + Math.ceil(-1 * elapsed % 60 +1).toString().padStart(2, '0')} left`)
   }
   $('#time-container').css('color', percentElapsed <= 50 ? 'black' : 'white')
 }
