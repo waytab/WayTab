@@ -62,6 +62,7 @@ function displayTime() {
     }else {
       $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${display} | Monday will be a ${letter} day`)
     }
+    
   } catch(e) {
   }
 }
@@ -110,10 +111,23 @@ function highlightBlock() {
         $(`[data-per="${actualBlock}"]`).addClass('now')
       }
     }
-  }else {
+  } else {
     $(`th[data-day="${letter}"]`).addClass('now')
   }
 }
+
+let neueBlockSet = false
+const highlightBlockNeue = () => {
+  if (block !== undefined && neueBlockSet !== true && block.name.includes('Block')) {
+    let blockNum = parseInt(block.name.substring(block.name.length - 1))
+    $(`#schedule-neue>div:nth-of-type(${blockNum})`).addClass('now-neue')
+    neueBlockSet = true
+  }
+}
+
+$(document).on('schedule-loaded', () => {
+  setInterval(highlightBlockNeue, 1000)
+})
 
 function cycleDay() {
   let dayNum = moment().format('d')
@@ -130,6 +144,7 @@ function cycleDay() {
         letter = colToLetter(nextDay)
       }else {
         letter = data[0]
+        $(document).trigger('letter-loaded', [data[0]])
       }
     } catch (e) {
       if (e.message.indexOf('TypeError: Cannot read property \'1\' of undefined')) {
