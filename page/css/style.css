@@ -468,6 +468,18 @@ a.text-dark {
   margin: 1rem;
 }
 
+#wspn-container .card-link:not(.text-muted) {
+  padding: .5rem 1rem .5rem 0;
+  border-radius: .25rem;
+  transition: background-color 200ms, box-shadow 200ms, padding 300ms;
+}
+
+#wspn-container .card-link:not(.text-muted):hover {
+  background-color: rgba(234, 166, 21, 0.1);
+  box-shadow: 0px 0px 6px -1px rgba(234, 166, 21, 0.1);
+  padding: .5rem 1rem;
+}
+
 #wspn-container #close-wspn,
 #wspn-container #close-wspn svg {
   width: 24px;
