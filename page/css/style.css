@@ -717,3 +717,7 @@ body.dark .close {
 body.dark .close:hover {
   color: white !important;
 }
+
+body.transparency .card {
+  opacity: .85;
+}

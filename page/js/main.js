@@ -38,6 +38,13 @@ $(document).ready(function() { // we need to wait for the full document to be lo
     }
   })
 
+  chrome.storage.sync.get(['transparent'], ({transparent}) => {
+    if(transparent) {
+      $('body').addClass('transparency')
+      $('#transparent-check').prop('checked', true)
+    }
+  })
+
   chrome.storage.sync.getBytesInUse(null, (r) => {
     $('#usage').text(Math.round(r/10)/100 + ' KB on sync')
   })
@@ -49,6 +56,7 @@ $(document).ready(function() { // we need to wait for the full document to be lo
 $(document).on('click', '#settings-close', function() { // we need to save the new font style when the modal is closed
   chrome.storage.sync.set({
     font: $('#announcementsPositionSel').val(),
-    dark: $('#dark-check').prop('checked')
+    dark: $('#dark-check').prop('checked'),
+    transparent: $('#transparent-check').prop('checked')
   }, function() { location.reload() })
 })
