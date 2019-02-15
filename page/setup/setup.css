@@ -50,6 +50,8 @@ body {
 }
 
 .modal-content {
+  border: none;
+  border-radius: .5rem;
   -webkit-box-shadow: 0px 0px 50px 15px rgba(0, 0, 0, .15);
   -moz-box-shadow: 0px 0px 50px 15px rgba(0, 0, 0, .15);
   box-shadow: 0px 0px 50px 15px rgba(0, 0, 0, .15);
@@ -85,4 +87,58 @@ input.period-control:focus {
 @keyframes loader_spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.btn:focus {
+  box-shadow: none;
+}
+
+.btn-primary:hover:not(.no-shadow) {
+  box-shadow: 0px 0px 6px -1px rgb(0, 112, 232);
+}
+
+.btn-secondary:hover:not(.no-shadow) {
+  box-shadow: 0px 0px 6px -1px rgb(105, 114, 122);
+}
+
+.btn-success:hover:not(.no-shadow) {
+  box-shadow: 0px 0px 6px -1px rgb(40, 167, 69);
+}
+
+.btn-danger:hover:not(.no-shadow) {
+  box-shadow: 0px 0px 6px -1px rgb(216, 50, 66);
+}
+
+.btn-warning:hover:not(.no-shadow) {
+  box-shadow: 0px 0px 6px -1px rgb(244, 184, 5);
+}
+
+.btn-info:hover:not(.no-shadow) {
+  box-shadow: 0px 0px 6px -1px rgb(20, 139, 158);
+}
+
+.btn-light:hover:not(.no-shadow) {
+  box-shadow: 0px 0px 6px -1px rgb(240, 243, 245);
+}
+
+.btn-dark:hover:not(.no-shadow) {
+  box-shadow: 0px 0px 6px -1px rgb(49, 55, 60);
+}
+
+.btn-link:hover:not(.no-shadow) {
+  background-color: rgba(0, 101, 211, 0.2);
+}
+
+body.dark input,
+body.dark input:focus,
+body.dark .modal-content,
+body.dark select,
+body.dark select:focus {
+  background-color: #343a40;
+  color: #fff;
+}
+
+body.dark input,
+body.dark select {
+  border-color: #404951;
 }
