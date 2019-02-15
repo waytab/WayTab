@@ -107,7 +107,7 @@ $(document).on('click', '#skip', (e) => {
   //#endregion
   //#region fonts
   $(document).on('change', '#fontSelect', (e) => {
-    $('body').attr('class', '')
+    $('body').attr('class', 'modal-open')
     $('body').addClass(`font-${e.currentTarget.value}`)
   })
   //#endregion
@@ -280,6 +280,8 @@ function savePrefs() {
   chrome.storage.sync.set(saveArray, () => {
     if (classes.length == 0) {
       chrome.storage.sync.remove(['schedule'], () => { document.location.pathname = '/page/tab.html' })
+    } else {
+      document.location.pathname = '/page/tab.html'
     }
   })
 }

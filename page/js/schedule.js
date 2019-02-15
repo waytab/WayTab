@@ -4,7 +4,7 @@ export default class Schedule {
     this.addClass()
     this.removeClass()
     this.dayArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
-    $(document).on('letter-loaded', (e, letter) => {this.displayNeueView(letter)})
+    $(document).on('letter-loaded', (e, letter) => {this.cycleScheduleView(), this.displayNeueView(letter), console.log('object');})
     chrome.storage.sync.get(['schedule'], (result) => {
       if(Object.keys(result).length === 0 && result.constructor === Object) {
         $('#schedule-table').remove()
@@ -229,6 +229,7 @@ export default class Schedule {
   }
 
   cycleScheduleView() {
+    console.log('fuck');
     $('#schedule-table-div, #schedule-neue').toggleClass('d-none')
   }
 
@@ -257,7 +258,7 @@ export default class Schedule {
   scheduleAssembler_classRow(name, displayTasks) {
     return $('<div></div>')
       .addClass('row mt-2')
-      .append($('<div></div>').addClass('col-5').append((name === '' || name === 'Free') ? $('<h6></h6>').text('Free') : $('<h3></h3>').text(name)))
+      .append($('<div></div>').addClass('col-5').append($('<h3></h3>').text(name === '' ? 'Free' : name).addClass(name === '' || name === 'Free' ? 'text-primary' : '')))
       .append($('<div></div>').addClass('col').attr('id', `${displayTasks ? `sched-${name.replace(' ', '_')}-tasks` : ''}`))
   }
 }

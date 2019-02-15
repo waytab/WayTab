@@ -60,7 +60,7 @@ function displayTime() {
     if((dayNum !== 0 && dayNum !== 6) && letter !== undefined) {
       $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${letter} Day | ${display}`)
     }else {
-      $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${display} | Monday will be a ${letter} day`)
+      $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${display}`)
     }
     
   } catch(e) {
@@ -144,7 +144,10 @@ function cycleDay() {
         letter = colToLetter(nextDay)
       }else {
         letter = data[0]
-        $(document).trigger('letter-loaded', [data[0]])
+        if (data.length) {
+          console.log('object')
+          $(document).trigger('letter-loaded', [data[0]])
+        }
       }
     } catch (e) {
       if (e.message.indexOf('TypeError: Cannot read property \'1\' of undefined')) {
