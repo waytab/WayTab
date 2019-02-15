@@ -229,7 +229,6 @@ export default class Schedule {
   }
 
   cycleScheduleView() {
-    console.log('fuck');
     $('#schedule-table-div, #schedule-neue').toggleClass('d-none')
   }
 
