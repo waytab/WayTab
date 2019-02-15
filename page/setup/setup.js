@@ -106,9 +106,19 @@ $(document).on('click', '#skip', (e) => {
   })
   //#endregion
   //#region fonts
+  let prevFont
   $(document).on('change', '#fontSelect', (e) => {
-    $('body').attr('class', 'modal-open')
+    if(prevFont !== undefined) {
+      $('body').removeClass('font-' + prevFont)
+    }
+    prevFont = e.currentTarget.value
     $('body').addClass(`font-${e.currentTarget.value}`)
+  })
+  //#endregion
+
+  //#region dark mode
+  $(document).on('change', '#dark-check', (e) => {
+    $('body').toggleClass(`dark`)
   })
   //#endregion
 
@@ -125,11 +135,11 @@ $(function () {
           .append(
             $('<a></a>')
               .attr({
+                class: 'list-delete',
                 role: 'button',
                 title: 'Confirm',
                 tabindex: 0
               })
-              .css({ 'margin-left': 6, 'margin-right': 22, color: 'black', 'text-decoration': 'none', cursor: 'pointer' })
               .html('&times;')
               .popover({
                 trigger: 'focus',
@@ -273,7 +283,9 @@ function savePrefs() {
     links,
     schedule,
     classes,
-    elapseForm: $('#time-elapsed').val()
+    elapseForm: $('#time-elapsed').val(),
+    dark: $('#dark-check').prop('checked'),
+    transparent: $('#transparent-check').prop('checked')
   }
 
   console.log(saveArray);

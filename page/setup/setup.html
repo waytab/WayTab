@@ -19,11 +19,11 @@
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
-          <div class="modal-header border-bottom-0" style="background-color: rgba(100,100,100,0.05);">
+          <div class="modal-header border-bottom-0">
             <h5 class="modal-title" id="setupModalTitle">WayTab Setup</h5>
           </div>
           <div id="setup-content">
-            <div class="modal-header p-0 border-bottom-0" style="background-color: rgba(100,100,100,0.05);">
+            <div class="modal-header p-0 border-bottom-0">
               <ul class="nav nav-tabs w-100 px-3" id="setupTabs" role="tablist">
                 <li class="nav-item">
                   <a class="nav-link active" id="welcome-tab" data-toggle="tab" href="#welcome" role="tab" aria-controls="home" aria-selected="true">Welcome</a>
@@ -117,6 +117,14 @@
                       <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="wspn-check" checked>
                         <label class="custom-control-label" for="wspn-check">Show WSPN Button</label>
+                      </div>
+                      <div class="custom-control custom-checkbox mt-3">
+                        <input type="checkbox" class="custom-control-input" id="dark-check">
+                        <label class="custom-control-label" for="dark-check">Dark mode</label>
+                      </div>
+                      <div class="custom-control custom-checkbox mt-3">
+                        <input type="checkbox" class="custom-control-input" id="transparent-check">
+                        <label class="custom-control-label" for="transparent-check">Make cards slightly transparent</label>
                       </div>
                     </div>
                   </div>
@@ -214,7 +222,7 @@
               </div>
             </div>
           </div>
-          <div id="setup-complete" class="d-none pt-3" style="border-top: 1px solid #e9ecef;">
+          <div id="setup-complete" class="d-none pt-3">
             <h4 class="display-4 text-center">Setup Complete</h4>
             <p class="text-center lead">Saving...</p>
             <div class="loader mx-auto" id="wspn-loader"></div>
