@@ -4,7 +4,11 @@ export default class Schedule {
     this.addClass()
     this.removeClass()
     this.dayArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
-    $(document).on('letter-loaded', (e, letter) => {this.cycleScheduleView(), this.displayNeueView(letter), console.log('object');})
+    $(document).on('letter-loaded', (e, letter) => {
+      this.cycleScheduleView()
+      this.displayNeueView(letter)
+      console.log('object');
+    })
     chrome.storage.sync.get(['schedule'], (result) => {
       if(Object.keys(result).length === 0 && result.constructor === Object) {
         $('#schedule-table').remove()

@@ -5,7 +5,6 @@ let elapsedFormat
 let display
 
 $.getJSON(`http://manage.waytab.org/modules/schedule/?timestamp=${moment().subtract(1, 'days').unix()}`, (data) => {
-  console.log(data)
   if (data.name !== undefined && Math.abs(moment(data.date).diff(moment(), 'd')) < 1) {
     sched = data.schedule
     displayTime()
@@ -138,16 +137,14 @@ function cycleDay() {
       let currDate = dateComp[2] + '-' + dateComp[0] + '-' + dateComp[1] // build moment-compatible string
       let dayDiff = moment(currDate).diff(moment(data[1]), 'days') // calculate difference in days
       if(dayDiff > 0 && dayNum > 1) {
-        let nextDay = 1 + potentialDays.findIndex( function(element) {
-          return element == data[0]
-        })
+        let nextDay = 1 + potentialDays.findIndex(element => element == data[0])
         letter = colToLetter(nextDay)
       }else {
         letter = data[0]
-        if (data.length) {
-          console.log('object')
-          $(document).trigger('letter-loaded', [data[0]])
-        }
+      }
+
+      if(letter !== undefined) {
+        $(document).trigger('letter-loaded', letter)
       }
     } catch (e) {
       if (e.message.indexOf('TypeError: Cannot read property \'1\' of undefined')) {
