@@ -720,4 +720,9 @@ body.dark .close:hover {
 
 body.transparency .card {
   opacity: .85;
+  transition: opacity 200ms;
+}
+
+body.transparency .card:hover {
+  opacity: 1;
 }
