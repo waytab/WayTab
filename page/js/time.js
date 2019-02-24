@@ -139,6 +139,7 @@ function cycleDay() {
       if(dayDiff > 0 && dayNum > 1) {
         let nextDay = 1 + potentialDays.findIndex(element => element == data[0])
         letter = colToLetter(nextDay)
+        chrome.storage.sync.set( {'day': [letter, currDate]})
       }else {
         letter = data[0]
       }
@@ -292,6 +293,9 @@ function colToLetter(col) {
       break
     case 7:
       return 'H'
+      break
+    case 8:
+      return 'A'
       break
     default:
       return 'Z'
