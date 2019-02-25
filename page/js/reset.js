@@ -41,19 +41,12 @@ function hardResetWaytab() {
         title: 'WayTab',
         font: 'default',
         enableWspn: true,
-        background: './img/school.jpg'
+        setup: false,
+        background: './img/school.jpg',
+        elapseForm: 'Time'
       }, () => {
         location.reload()
       })
     })
   })
 }
-
-$('#feedback').tooltip({
-  placement: 'top',
-  title: 'Feedback'
-})
-
-$(document).on('click', '#feedback', () => {
-  $('#feedback-settings').tab('show')
-})

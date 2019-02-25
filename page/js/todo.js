@@ -65,38 +65,31 @@ $(document).ready(() => {
 
 function loadTasks() {
   let lastTask
-  chrome.storage.sync.get(['tasks'], function(result) {
+  $('#taskDue').val(formatDate())
+  let scheduleGrid = true
+  let classesDisplayed = []
+  $(document).on('schedule-loaded', (e, list) => {scheduleGrid = false, classesDisplayed = list})
+  chrome.storage.sync.get(['tasks', 'scheduleView'], function(result) {
     if(Object.keys(result).length === 0 && result.constructor === Object) {
       console.log('No tasks found')
     } else {
       tasks = result.tasks
       $('#taskList').empty()
       $('#newTask').val('')
-      $('#taskDue').val(formatDate())
       $('#addTaskClass').empty().append(`<option selected>Class...(default to misc)</option>`)
       for (let key in tasks) {
         if(tasks.hasOwnProperty(key)) {
           if(tasks[key].length != 0) {
-            $('#taskList').append($('<h5></h5>').text(key))
+            if(result.scheduleView == 'grid' || classesDisplayed.indexOf(key) === -1 || key === 'Miscellaneous') $('#taskList').append($('<h5></h5>').text(key))
             tasks[key].sort((a, b) => -1 * (new Date(b[1]) - new Date(a[1])))
             for (let i = 0; i < tasks[key].length; i++) {
               $('#newTaskSelectionGroup').addClass('mb-3')
-              $('#taskList')
-                .append($('<div></div>')
-                  .addClass('custom-control custom-checkbox mb-2')
-                  .attr('id', `${key.replace(' ', '_') + i}`)
-                  .append($('<input>')
-                    .attr('type', 'checkbox')
-                    .addClass('custom-control-input')
-                    .attr('data-del', `${key.replace(' ', '_') + i}`)
-                    .attr('data-class', `${key.replace(' ', '_')}`)
-                    .attr('id', `check${key.replace(' ', '_') + i}`),
-                     $('<label></label>')
-                    .addClass('custom-control-label')
-                    .attr('id', `label${key.replace(' ', '_') + i}`)
-                    .attr('for', `check${key.replace(' ', '_') + i}`)
-                  )
-                )
+
+              if(result.scheduleView == 'grid' || classesDisplayed.indexOf(key) === -1 || key === 'Miscellaneous') {
+                $('#taskList').append(taskAssembler(key, i, false))
+              } else {
+                $(`#sched-${key.replace(' ', '_')}-tasks`).append(taskAssembler(key, i, true))
+              }
               let dueDate = new Date(tasks[key][i][1] + 'T00:00:00')
               let dueDeltaDay = Math.floor((dueDate - new Date)/(1000*60*60*24)+1)
               if(tasks[key][i][1] == '') {
@@ -123,7 +116,7 @@ function loadTasks() {
       $('[data-del]').on('change paste keyup', function() {
         let button = $(this)
         let target = button.data('del')
-        let index;
+        let index
         if (!(typeof $(`#${target} label`).attr('data-has-date') !== typeof undefined && $(`#${target} label`).attr('data-has-date') !== false)) {
           index = getIndexOfArray(tasks[button.data('class').replace('_', ' ')], [$(`#${target} label`).text(), ''])
         } else {
@@ -136,7 +129,8 @@ function loadTasks() {
           tasks[button.data('class').replace('_', ' ')].splice(index, 1)
           chrome.storage.sync.set({tasks: tasks}, function() {
             $('#undo-task-delete').remove()
-            $('#todo .card-title').append(`<a href="" data-toggle="modal" class="btn btn-primary btn-sm float-right" id="undo-task-delete" data-task="${lastTask}">Undo</a>`)
+            if(result.scheduleView == 'grid') $('#todo .card-title').append(`<a href="" data-toggle="modal" class="btn btn-primary btn-sm float-right" id="undo-task-delete" data-task="${lastTask}">Undo</a>`)
+            button.parent().remove()
             loadTasks()
           })
         }
@@ -191,12 +185,15 @@ function tooltipBuilder(date, delta) {
     dueString = `Due today`
   } else if (delta == 1) {
     dueString = `Due tomorrow`
-  } else if (delta >= 2 && delta <= 14) {
-    dueString = `Due in ${delta} days`
-  } else if (delta > 14) {
-    dueString = `Due on ${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
+  } else if (delta >= 2 && delta < 7) {
+    dueString = `Due on ${moment().add(delta, 'days').format('dddd')} (${moment().add(delta, 'days').format('M/D')})`
+  } else if (delta >= 7 && moment().add(delta, 'days').isBefore(moment().add(1, 'month').startOf('month'))) {
+    dueString = `Due on the ${moment().add(delta, 'days').format('Do')} (${moment().add(delta, 'days').format('M/D')})`
+  } else {
+    dueString = `Due on ${moment().add(delta, 'days').format('MMM Do')}`
   }
-    return {
+
+  return {
     title: dueString,
     placement: 'right',
     template: `<div class="tooltip ${delta <= 0 ? 'warning' : ''}" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>`
@@ -224,4 +221,21 @@ function formatDate() {
   }
   let dateComps = date.format('L').split('/')
   return dateComps[2] + '-' + dateComps[0] + '-' + dateComps[1]
+}
+
+const taskAssembler = (key, i, lead) => {
+  return $('<div></div>')
+    .addClass('custom-control custom-checkbox ' + (lead ? 'lead' : 'mb-2'))
+    .attr('id', `${key.replace(' ', '_') + i}`)
+    .append($('<input>')
+      .attr('type', 'checkbox')
+      .addClass('custom-control-input')
+      .attr('data-del', `${key.replace(' ', '_') + i}`)
+      .attr('data-class', `${key.replace(' ', '_')}`)
+      .attr('id', `check${key.replace(' ', '_') + i}`),
+      $('<label></label>')
+      .addClass('custom-control-label')
+      .attr('id', `label${key.replace(' ', '_') + i}`)
+      .attr('for', `check${key.replace(' ', '_') + i}`)
+    )
 }

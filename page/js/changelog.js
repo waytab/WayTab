@@ -26,9 +26,15 @@ function loadChangeLog() {
         )
       )
       .append($('<small></small>')
-        .css('color', 'orange')
+        .css('color', '#eaa615')
+        .addClass('changelog-type')
         .text(currentChange.type)
       )
     )
   }
+  
+  $('#changelog-body').append($('<p></p>')
+    .html(`Not all changes are listed here. See the PR <a href="https://github.com/waytab/WayTab/releases/tag/v${chrome.runtime.getManifest().version}">here</a> for the entire changelog.`)
+    .addClass('mb-0 mt-3 font-italic')
+  )
 }

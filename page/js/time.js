@@ -1,9 +1,10 @@
 var sched
 let block
 let letter
+let elapsedFormat
+let display
 
 $.getJSON(`http://manage.waytab.org/modules/schedule/?timestamp=${moment().subtract(1, 'days').unix()}`, (data) => {
-  console.log(data)
   if (data.name !== undefined && Math.abs(moment(data.date).diff(moment(), 'd')) < 1) {
     sched = data.schedule
     displayTime()
@@ -27,11 +28,17 @@ $.getJSON(`http://manage.waytab.org/modules/schedule/?timestamp=${moment().subtr
   }
 })
 
+chrome.storage.sync.get(['elapseForm'], function({elapseForm}) {
+  elapsedFormat = elapseForm
+  $('#time-elapsed').val(elapseForm)
+})
+
 $(document).ready( function() {
   hoverController()
   bellTwoController()
   daySelectController()
   cycleDay()
+  setElapsedFormat()
 })
 
 setInterval( () => {
@@ -43,18 +50,26 @@ setInterval( () => {
 function updateBlock() {
   block = getCurrentBlock()
   highlightBlock()
+  removeLetterHint()
 }
 
 function displayTime() {
-  let dayNum = moment().format('e')
+  let dayNum = parseInt(moment().format('e'))
   try {
-    if((dayNum !== '0' || dayNum !== '6') && letter !== undefined) {
-      $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${letter} Day | ${block.name}`)
+    if((dayNum !== 0 && dayNum !== 6) && letter !== undefined) {
+      $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${letter} Day | ${display}`)
     }else {
-      $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${block.name}`)
+      $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${display}`)
     }
+    
   } catch(e) {
   }
+}
+
+function setElapsedFormat() {
+  $(document).on('click', '#settings-close', function() {
+    chrome.storage.sync.set({ 'elapseForm': $('#time-elapsed').val() })
+  })
 }
 
 function setTodaySchedule(sched_data, bell2toggle) {
@@ -79,43 +94,71 @@ function setTodaySchedule(sched_data, bell2toggle) {
 }
 
 function highlightBlock() {
+  display = block.name
+  $('.now').removeClass('now')
   if(block.name.includes('Block')) {
     let actualBlock = parseInt(block.name.substring(block.name.length - 1))
     if(actualBlock <= 6) {
-      $('.now').removeClass('now')
       if(letter !== undefined) {
-        let table = $('#schedule-body')[0]
-        let cell = table.rows[actualBlock-1].cells[letterToCol(letter)]
-        let child = $(cell)
-        $(child).addClass('now')
-      }else {
-        $('#schedule-body').children().each( function() {
-          if($(this).attr('data-per') == actualBlock) {
-            $(this).children().addClass('now')
-          }
-        })
+        let child = $(`[data-per="${actualBlock}"] > [data-day="${letter}"]`)
+        child.addClass('now')
+        /* Set block name */
+        let temp = child.text()
+        if(temp.length <= 0) temp = 'Free'
+        display = display.replace('Block ' + actualBlock, temp)
+      } else {
+        $(`[data-per="${actualBlock}"]`).addClass('now')
       }
     }
+  } else {
+    $(`th[data-day="${letter}"]`).addClass('now')
   }
 }
 
+let neueBlockSet = false
+const highlightBlockNeue = () => {
+  if (block !== undefined && neueBlockSet !== true && block.name.includes('Block')) {
+    let blockNum = parseInt(block.name.substring(block.name.length - 1))
+    $(`#schedule-neue>div:nth-of-type(${blockNum})`).addClass('now-neue')
+    neueBlockSet = true
+  }
+}
+
+$(document).on('schedule-loaded', () => {
+  setInterval(highlightBlockNeue, 1000)
+})
+
 function cycleDay() {
-  let dayNum = moment().format('e')
-  if(dayNum !== '0' || dayNum !== '6') {
-    chrome.storage.sync.get('day', function({day}) {
-      let data = day // parse response
+  let dayNum = moment().format('d')
+  let potentialDays = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'A']
+  chrome.storage.sync.get('day', function({day: data}) {
+    try {
       let dateComp = moment().format('L').split('/') // create date array
       let currDate = dateComp[2] + '-' + dateComp[0] + '-' + dateComp[1] // build moment-compatible string
       let dayDiff = moment(currDate).diff(moment(data[1]), 'days') // calculate difference in days
-      let currCol = letterToCol(data[0]) // get 'current' col number
-      let correctCol = currCol + dayDiff
-      if(correctCol > 7) {
-        correctCol = correctCol % 7 - 1
+      if(dayDiff > 0 && dayNum > 1) {
+        let nextDay = 1 + potentialDays.findIndex(element => element == data[0])
+        letter = colToLetter(nextDay)
+        chrome.storage.sync.set( {'day': [letter, currDate]})
+      }else {
+        letter = data[0]
       }
-      let correctLetter = colToLetter(correctCol) // get 'correct' (shifted) letter
-      letter = correctLetter
-    })
-  }
+
+      if(letter !== undefined) {
+        chrome.storage.sync.get(['neue_schedule'], ({neue_schedule}) => {
+          if(neue_schedule) {
+            $('#neue-schedule-check').prop('checked', true)
+            $(document).trigger('letter-loaded', letter)
+          }
+        })
+      }
+    } catch (e) {
+      if (e.message.indexOf('TypeError: Cannot read property \'1\' of undefined')) {
+        console.log('The following is a non-error and is probably linked to there not being a selected day on the schedule.')
+        console.log(e)
+      } else console.warn(e)
+    }
+  })
 }
 
 function getCurrentBlock() {
@@ -140,9 +183,14 @@ function daySelectController() {
   $(document).on('click', '.daySelect', function() {
     let dateComp = moment().format('L').split('/')
     let formattedDate = dateComp[2] + '-' + dateComp[0] + '-' + dateComp[1]
-    console.log(formattedDate)
-    chrome.storage.sync.set( {'day': [$(this).attr('data-day'), formattedDate]} )
-    letter = $(this).attr('data-day')
+    let newDay = $(this).attr('data-day')
+    chrome.storage.sync.set( {'day': [newDay, formattedDate]} )
+    letter = newDay
+    /* Fancy selection confirmation stuff */
+    $(`[data-day="${letter}"]`).toggleClass('now')
+    setTimeout(() => {
+      $(`[data-day="${letter}"]`).toggleClass('now')
+    }, 500)
   })
 }
 
@@ -152,7 +200,10 @@ function barController() {
   let percentElapsed = 100 - (-1 * elapsed / periodLength) * 100
 
   $('#time-bar-elapsed').css('width', percentElapsed + '%')
-  $('#percent-container').text('Ends at ' + moment(block.end, 'hmm').format('h:mm a') + ' | ' + parseInt(percentElapsed) + '% elapsed')
+  $('#percent-container').text(`Ends at ${moment(block.end, 'hmm').format('h:mm a')} | ${Math.floor(percentElapsed)}% elapsed`)
+  if (elapsedFormat === 'Time') {
+    $('#percent-container').text(`Ends at ${moment(block.end, 'hmm').format('h:mm a')} | ${elapsed > -60 ? Math.floor(-1 * elapsed + 1) + ' minutes' : Math.floor(-1 * elapsed / 60) + ':' + Math.ceil(-1 * elapsed % 60 +1).toString().padStart(2, '0')} left`)
+  }
   $('#time-container').css('color', percentElapsed <= 50 ? 'black' : 'white')
 }
 
@@ -184,6 +235,10 @@ function hoverController() {
   percentContainer.onmouseout = function() {
     percentContainer.style.display = 'none';
   }
+}
+
+function removeLetterHint() {
+  if(letter === undefined && $('#schedule-body').length !== 0) $('#letter-hint').removeClass('d-none')
 }
 
 function letterToCol(day) {
@@ -243,6 +298,9 @@ function colToLetter(col) {
       break
     case 7:
       return 'H'
+      break
+    case 8:
+      return 'A'
       break
     default:
       return 'Z'

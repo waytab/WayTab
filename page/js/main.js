@@ -24,8 +24,40 @@ $(document).ready(function() { // we need to wait for the full document to be lo
       $('#announcementsPositionSel').val(font) // we set the settings drop-down to the selected style. not required but a nice touch
     }
   })
+
+  chrome.storage.sync.get(['setup'], ({setup}) => {
+    if(!setup) {
+      document.location.pathname = '/page/setup/setup.html'
+    }
+  })
+
+  chrome.storage.sync.get(['dark'], ({dark}) => {
+    if(dark) {
+      $('body').addClass('dark')
+      $('#dark-check').prop('checked', true)
+    }
+  })
+
+  chrome.storage.sync.get(['transparent'], ({transparent}) => {
+    if(transparent) {
+      $('body').addClass('transparency')
+      $('#transparent-check').prop('checked', true)
+    }
+  })
+
+  chrome.storage.sync.getBytesInUse(null, (r) => {
+    $('#usage').text(Math.round(r/10)/100 + ' KB on sync')
+  })
+  chrome.storage.local.getBytesInUse(null, (r) => {
+    $('#usage-local').text(Math.round(r / 10) / 100 + ' KB on local')
+  })
 })
 
 $(document).on('click', '#settings-close', function() { // we need to save the new font style when the modal is closed
-  chrome.storage.sync.set({font: $('#announcementsPositionSel').val()}, function() { location.reload() })
+  chrome.storage.sync.set({
+    font: $('#announcementsPositionSel').val(),
+    dark: $('#dark-check').prop('checked'),
+    transparent: $('#transparent-check').prop('checked'),
+    neue_schedule: $('#neue-schedule-check').prop('checked')
+  }, function() { location.reload() })
 })

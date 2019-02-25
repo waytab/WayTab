@@ -19,11 +19,9 @@ export default class Links {
   }
 
   loadLinks(obj) {
-    console.log(obj)
     $('#link-container').empty()
     $('#edit-links').empty()
     for(let i = 0; i < obj.length; i++) {
-      console.log(obj[i].name)
       $('#link-container').append($('<div></div>').addClass('col-1').attr('id', `link${i}`).tooltip({
                                                                                               'placement': 'bottom',
                                                                                               'title': obj[i].name
@@ -37,6 +35,7 @@ export default class Links {
           .append(
             $('<a></a>')
               .attr({
+                class: 'list-delete',
                 role: 'button',
                 title: 'Confirm',
                 'data-toggle': 'popover',
@@ -45,8 +44,12 @@ export default class Links {
                 'data-content': `<button class="btn btn-danger delete-link" data-num="${i}">Delete</button>`,
                 tabindex: 0
               })
-              .css({ 'margin-left': 6, 'margin-right': 22, color: 'black', 'text-decoration': 'none', cursor: 'pointer' })
               .html('&times;'),
+            $('<img />')
+              .attr({
+                src: obj[i].image_link,
+                class: 'link-edit-icon'
+              }),
             $('<div></div>')
               .addClass('link-edit w-100')
               .css('cursor', 'pointer')
@@ -54,6 +57,17 @@ export default class Links {
               .text(obj[i].name)
           )
         )
+
+      $('[aria-labelledby="linksDropdown"]').append(
+        $('<a></a>').attr({class: 'dropdown-item', href: obj[i].actual_link}).append(
+          $('<img />')
+            .attr({
+              src: obj[i].image_link,
+              class: 'link-edit-icon'
+            }),
+          obj[i].name
+        )
+      )
     }
 
     $('#edit-links')

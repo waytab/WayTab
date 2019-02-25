@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+@import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700');
+
+body {
+  height: 100vh;
+  width: 100vw;
+  background-color: gray;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow-y: auto;
+}
+
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
+}
+
+.font-raleway {
+  font-family: 'Raleway', sans-serif;
+}
+
+.font-roboto {
+  font-family: 'Roboto', sans-serif;
+}
+
+.font-roboto-slab {
+  font-family: 'Roboto Slab', sans-serif;
+}
+
+.font-rubik {
+  font-family: 'Rubik', sans-serif;
+}
+
+.font-ubuntu {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.nav-link.disabled {
+  cursor: default;
+}
+
+.modal-content,
+.modal-header,
+.modal-footer,
+.nav-tabs,
+.nav-tabs .nav-link.active {
+  border: none;
+}
+
+.modal-content {
+  border-radius: .5rem;
+  -webkit-box-shadow: 0px 0px 50px 15px rgba(0, 0, 0, .15);
+  -moz-box-shadow: 0px 0px 50px 15px rgba(0, 0, 0, .15);
+  box-shadow: 0px 0px 50px 15px rgba(0, 0, 0, .15);
+  padding-bottom: 71px;
+}
+
+.modal-header {
+  background-color: rgba(100, 100, 100, 0.05);
+}
+
+.modal-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.nav-link,
+.nav-link:hover {
+  border: none !important;
+}
+
+.nav-tabs {
+  margin-bottom: -1px;
+}
+
+input.period-control,
+input.period-control:focus {
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.now {
+  background-color: rgba(0,123,255,0.2) !important;
+}
+
+.loader {
+  border: 5px solid transparent;
+  border-top: 5px solid #007bff;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin: 3rem 0rem;
+  animation: loader_spin 1s linear infinite;
+}
+
+@keyframes loader_spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.btn:focus {
+  box-shadow: none;
+}
+
+.btn-primary:hover:not(.no-shadow) {
+  box-shadow: 0px 0px 6px -1px rgb(0, 112, 232);
+}
+
+.btn-secondary:hover:not(.no-shadow) {
+  box-shadow: 0px 0px 6px -1px rgb(105, 114, 122);
+}
+
+.btn-success:hover:not(.no-shadow) {
+  box-shadow: 0px 0px 6px -1px rgb(40, 167, 69);
+}
+
+.btn-danger:hover:not(.no-shadow) {
+  box-shadow: 0px 0px 6px -1px rgb(216, 50, 66);
+}
+
+.btn-warning:hover:not(.no-shadow) {
+  box-shadow: 0px 0px 6px -1px rgb(244, 184, 5);
+}
+
+.btn-info:hover:not(.no-shadow) {
+  box-shadow: 0px 0px 6px -1px rgb(20, 139, 158);
+}
+
+.btn-light:hover:not(.no-shadow) {
+  box-shadow: 0px 0px 6px -1px rgb(240, 243, 245);
+}
+
+.btn-dark:hover:not(.no-shadow) {
+  box-shadow: 0px 0px 6px -1px rgb(49, 55, 60);
+}
+
+.btn-link:hover:not(.no-shadow) {
+  background-color: rgba(0, 101, 211, 0.2);
+}
+
+.list-delete {
+  margin-left: 6px;
+  margin-right: 22px;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.list-delete:hover {
+  text-decoration: none;
+}
+
+body.dark input,
+body.dark input:focus,
+body.dark .list-delete,
+body.dark .list-group-item,
+body.dark .modal-content,
+body.dark .nav-tabs .nav-link.active,
+body.dark .popover-header,
+body.dark .popover-body,
+body.dark select,
+body.dark select:focus {
+  background-color: #343a40;
+  color: #fff;
+}
+
+body.dark input,
+body.dark .popover-header,
+body.dark .table-bordered,
+body.dark .table-bordered td,
+body.dark .table-bordered th,
+body.dark select {
+  border-color: #404951;
+}
+
+body.dark .modal-header {
+  background-color: rgba(0, 0, 0, 0.1);
+}

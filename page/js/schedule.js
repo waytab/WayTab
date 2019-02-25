@@ -3,6 +3,12 @@ export default class Schedule {
     this.loadClasses()
     this.addClass()
     this.removeClass()
+    this.dayArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+    $(document).on('letter-loaded', (e, letter) => {
+      this.cycleScheduleView()
+      this.displayNeueView(letter)
+      console.log('object');
+    })
     chrome.storage.sync.get(['schedule'], (result) => {
       if(Object.keys(result).length === 0 && result.constructor === Object) {
         $('#schedule-table').remove()
@@ -10,6 +16,7 @@ export default class Schedule {
         this.scheduleEditor()
       } else {
         this.loadSchedule(result.schedule)
+        this.schedule = result.schedule
         let letterDays = 'ABCDEFGH'
         for(let i = 0; i < result.schedule.length; i++) {
           for(let j = 0; j < letterDays.length; j++) {
@@ -22,33 +29,36 @@ export default class Schedule {
         this.scheduleEditor()
       }
     })
+
+    $(document).on('click', '#schedule-grid-toggle', (e) => {
+      this.cycleScheduleView()
+      $(e.target).text($(e.target).text() == 'View grid' ? 'View day' : 'View grid')
+    })
   }
 
   loadSchedule(schedule) {
-    $('#schedule-table').remove()
-    $('#schedule').append(`
-      <table class="table table-bordered mb-0" id="schedule-table">
-        <thead>
-          <tr>
-            <th scope="col" class="daySelect" data-day="A">A</th>
-            <th scope="col" class="daySelect" data-day="B">B</th>
-            <th scope="col" class="daySelect" data-day="C">C</th>
-            <th scope="col" class="daySelect" data-day="D">D</th>
-            <th scope="col" class="daySelect" data-day="E">E</th>
-            <th scope="col" class="daySelect" data-day="F">F</th>
-            <th scope="col" class="daySelect" data-day="G">G</th>
-            <th scope="col" class="daySelect" data-day="H">H</th>
-          </tr>
-        </thead>
-        <tbody id="schedule-body"></tbody>
-      </table>
+    $('#schedule-table').empty()
+    $('#schedule-table').append(`
+      <thead>
+        <tr>
+          <th scope="col" class="daySelect" data-day="A">A</th>
+          <th scope="col" class="daySelect" data-day="B">B</th>
+          <th scope="col" class="daySelect" data-day="C">C</th>
+          <th scope="col" class="daySelect" data-day="D">D</th>
+          <th scope="col" class="daySelect" data-day="E">E</th>
+          <th scope="col" class="daySelect" data-day="F">F</th>
+          <th scope="col" class="daySelect" data-day="G">G</th>
+          <th scope="col" class="daySelect" data-day="H">H</th>
+        </tr>
+      </thead>
+      <tbody id="schedule-body"></tbody>
     `)
-    let dayArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+    
     for(let i = 0; i < schedule.length; i++) {
       $('#schedule-body').append(`<tr data-per="${i+1}"></tr>`)
       for(let j = 0; j < schedule[i].length; j++) {
-        let currLetter = dayArr[j]
-        $(`[data-per=${i+1}]`).append(`<td class="daySelect" data-day="${currLetter}">${schedule[i][j]}</td>`)
+        let currLetter = this.dayArr[j]
+        $(`[data-per=${i+1}]`).append(`<td class="daySelect ${currLetter}" data-day="${currLetter}">${schedule[i][j]}</td>`)
       }
     }
   }
@@ -95,6 +105,22 @@ export default class Schedule {
         let period = input.data('period')
         $(`[data-period=${period}]`).each(function() {
           $(this).val(input.val())
+        })
+      }
+    })
+    $(document).on('focus', '.form-control[data-period]', function () {
+      if ($('#customCheck1').is(':checked')) {
+        let period = $(this).data('period')
+        $(`[data-period=${period}]`).each(function () {
+          $(this).addClass('now')
+        })
+      }
+    })
+    $(document).on('focusout', '.form-control[data-period]', function () {
+      if ($('#customCheck1').is(':checked')) {
+        let period = $(this).data('period')
+        $(`[data-period=${period}]`).each(function () {
+          $(this).removeClass('now')
         })
       }
     })
@@ -181,7 +207,7 @@ export default class Schedule {
     $(document).on('click', '#submit-class-info', () => {
       let name = $('#class-name').val()
   
-      classesArray = []
+      let classesArray = []
       if(name.length > 0) {
         let classesLoad = this.loadClasses
         chrome.storage.sync.get(['classes'], function({classes}) {
@@ -204,5 +230,38 @@ export default class Schedule {
         }, 1000)
       }
     })
+  }
+
+  cycleScheduleView() {
+    $('#schedule-table-div, #schedule-neue').toggleClass('d-none')
+  }
+
+  displayNeueView(letter) {
+    $('#schedule-grid-toggle').removeClass('d-none')
+    $('#schedule-neue').append(this.scheduleAssembler_heading(letter))
+
+    let letterIndex = this.dayArr.indexOf(letter)
+    let classesListed = []
+    for(let i = 0; i < 6; i++) {
+      $('#schedule-neue').append(this.scheduleAssembler_classRow(this.schedule[i][letterIndex], (classesListed.indexOf(this.schedule[i][letterIndex]) === -1)))
+      classesListed.push(this.schedule[i][letterIndex])
+    }
+
+    $('#schedule-table-div').addClass('d-none')
+    $('#schedule-neue').removeClass('d-none')
+    $(document).trigger('schedule-loaded', [classesListed])
+  }
+
+  scheduleAssembler_heading(letter) {
+    return $('<h4></h4>')
+      .addClass('mb-4')
+      .html(`${letter} Day `)
+  }
+
+  scheduleAssembler_classRow(name, displayTasks) {
+    return $('<div></div>')
+      .addClass('row mt-2')
+      .append($('<div></div>').addClass('col-5').append($('<h3></h3>').text(name === '' ? 'Free' : name).addClass(name === '' || name === 'Free' ? 'text-primary' : '')))
+      .append($('<div></div>').addClass('col').attr('id', `${displayTasks ? `sched-${name.replace(' ', '_')}-tasks` : ''}`))
   }
 }
