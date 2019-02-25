@@ -145,7 +145,12 @@ function cycleDay() {
       }
 
       if(letter !== undefined) {
-        $(document).trigger('letter-loaded', letter)
+        chrome.storage.sync.get(['neue_schedule'], ({neue_schedule}) => {
+          if(neue_schedule) {
+            $('#neue-schedule-check').prop('checked', true)
+            $(document).trigger('letter-loaded', letter)
+          }
+        })
       }
     } catch (e) {
       if (e.message.indexOf('TypeError: Cannot read property \'1\' of undefined')) {

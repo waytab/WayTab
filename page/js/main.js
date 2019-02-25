@@ -57,6 +57,7 @@ $(document).on('click', '#settings-close', function() { // we need to save the n
   chrome.storage.sync.set({
     font: $('#announcementsPositionSel').val(),
     dark: $('#dark-check').prop('checked'),
-    transparent: $('#transparent-check').prop('checked')
+    transparent: $('#transparent-check').prop('checked'),
+    neue_schedule: $('#neue-schedule-check').prop('checked')
   }, function() { location.reload() })
 })
