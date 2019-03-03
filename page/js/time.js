@@ -48,8 +48,9 @@ setInterval( () => {
 }, 1000)
 
 function updateBlock() {
+  let dayNum = parseInt(moment().format('e'))
   block = getCurrentBlock()
-  highlightBlock()
+  if(dayNum !== 0 && dayNum !== 6) highlightBlock()
   removeLetterHint()
 }
 
@@ -59,7 +60,7 @@ function displayTime() {
     if((dayNum !== 0 && dayNum !== 6) && letter !== undefined) {
       $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${letter} Day | ${display}`)
     }else {
-      $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${display}`)
+      $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | Monday: ${letter} Day`)
     }
     
   } catch(e) {
