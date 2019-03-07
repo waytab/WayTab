@@ -1,39 +1,14 @@
 {
-  "version":"2.0",
+  "version":"2.0.2",
   "changes": [
     {
-      "header": "Setup",
-      "content": "WayTab now features a guided setup process for a hassle free install.",
-      "type": "Enhancement"
+      "header": "Schedule",
+      "content": "Fixed bug where classes wouldn't load when trying to add a task.",
+      "type": "Bug Fix"
     },
     {
-      "header": "Settings Menu Redesigned",
-      "content": "We've redesigned the settings menu (and button). Now, when you click the settings button, you'll see a menu animate open. Simply click on one of the categories and the relevent settings will be presented to you.",
-      "type": "Design"
-    },
-    {
-      "header": "Easier Schedule Editing",
-      "content": "When editing your schedule, the blocks of the same period will get a light blue background.",
-      "type": "Enhancement"
-    },
-    {
-      "header": "Icons when Editing Links",
-      "content": "The links settings menu now displays icons next to your links.",
-      "type": "Enhancement"
-    },
-    {
-      "header": "Change how WayTab Tells You How Long is Left",
-      "content": "WayTab now includes a setting to change between showing percent elapsed or time left in the current period.",
-      "type": "Personalization"
-    },
-    {
-      "header": "Minor Design Changes",
-      "content": "WayTab 2.0 includes a number of small design changes to cards, buttons, and modals. All of these now have shadows. Cards and modals have received rounder corners. Modal headers and footers no longer have borders. Links to WSPN articles have been animated.",
-      "type": "Design"
-    },
-    {
-      "header": "Weekends No Longer Break the Schedule",
-      "content": "WayTab used to think weekends were school days. So when you came back on Monday, the selected letter day would be 2 days ahead of what it should've been. We taught WayTab how weekends work, so it no longer does that.",
+      "header": "Schedule",
+      "content": "Prevent blocks from being highlighed on weekends",
       "type": "Bug Fix"
     }
   ]
