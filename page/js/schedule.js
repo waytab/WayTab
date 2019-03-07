@@ -54,7 +54,7 @@ export default class Schedule {
       <tbody id="schedule-body"></tbody>
     `)
     
-    let newDayArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+    const newDayArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
     for(let i = 0; i < schedule.length; i++) {
       $('#schedule-body').append(`<tr data-per="${i+1}"></tr>`)
       for(let j = 0; j < schedule[i].length; j++) {
@@ -97,7 +97,7 @@ export default class Schedule {
           console.log('Class list saved!')
         })
       })
-      //location.reload();
+      location.reload();
     })
 
     $(document).on('change paste keyup', '.period-control', function() {
