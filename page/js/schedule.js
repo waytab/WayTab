@@ -54,10 +54,11 @@ export default class Schedule {
       <tbody id="schedule-body"></tbody>
     `)
     
+    const newDayArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
     for(let i = 0; i < schedule.length; i++) {
       $('#schedule-body').append(`<tr data-per="${i+1}"></tr>`)
       for(let j = 0; j < schedule[i].length; j++) {
-        let currLetter = this.dayArr[j]
+        let currLetter = newDayArr[j]
         $(`[data-per=${i+1}]`).append(`<td class="daySelect ${currLetter}" data-day="${currLetter}">${schedule[i][j]}</td>`)
       }
     }
@@ -65,7 +66,7 @@ export default class Schedule {
 
   scheduleEditor() {
     let loadFunc = this.loadSchedule;
-    $(document).on('click', '#new-schedule-save', function() {
+    $(document).on('click', '#new-schedule-save', () => {
       let schedule = []
       chrome.storage.sync.set({schedule: []}, console.log('Schedule Cleared')) // make sure we start with a clean sync to prevent double schedules
       chrome.storage.sync.set({classes: []}, console.log('Class list cleared'))
@@ -80,7 +81,7 @@ export default class Schedule {
         })
         schedule.push(rowArr)
       })
-      chrome.storage.sync.set({schedule: schedule}, function() {
+      chrome.storage.sync.set({schedule}, () => {
         $('#new-schedule-save').toggleClass('btn-success').text('Schedule Saved!')
         window.setTimeout(function() {
           $('#create-schedule').modal('hide')

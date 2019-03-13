@@ -73,7 +73,7 @@ function displayArticles() {
 
 function createNewsDiv(title, link, img, auth) {
   let newsdiv = $('<div></div>')
-    .attr('class', 'card mb-3 mx-3')
+    .attr('class', 'card mx-3')
 
   if (img != undefined) {
     newsdiv.append(`<div class="card-img-top" style="background-image: url(${img}); height: 10rem;"></div>`)
