@@ -1,5 +1,6 @@
 let tasks = {}
 let todoDefault
+let classesDisplayed = []
 
 chrome.storage.sync.get(['todoDate'], function({todoDate}) {
   todoDefault = todoDate
@@ -39,7 +40,7 @@ $(document).ready(() => {
     } else {
       tasks[classSelector.val() == 'Class...(default to misc)' ? 'Miscellaneous' : classSelector.val()].push([task.val(), date.val()])
       chrome.storage.sync.set({tasks: tasks}, () => {
-        loadTasks()
+        mLoadTasks(classesDisplayed)
       })
     }
   })
@@ -66,9 +67,33 @@ $(document).ready(() => {
 function loadTasks() {
   let lastTask
   $('#taskDue').val(formatDate())
-  let scheduleGrid = true
-  let classesDisplayed = []
-  $(document).on('schedule-loaded', (e, list) => {scheduleGrid = false, classesDisplayed = list})
+  $(document).on('schedule-loaded', (e, neue, list) => {
+    classesDisplayed = list
+    mLoadTasks(classesDisplayed)
+
+    chrome.storage.sync.get(['classes'], function(result) {
+      if(Object.keys(result).length === 0 && result.constructor === Object) {
+        console.log('Classes not found')
+      } else {
+        console.log('Class list found')
+        console.log(result.classes)
+        let classes = result.classes
+        for(let i = 0; i < classes.length; i++) {
+          $('#addTaskClass').append($('<option></option>').attr('value', classes[i]).html(classes[i]))
+          if(tasks[classes[i]] == undefined) {
+            tasks[classes[i]] = []
+          }
+        }
+      }
+      $('#addTaskClass').append($('<option></option>').attr('value', 'Miscellaneous').html('Miscellaneous'))
+      if(tasks['Miscellaneous'] == undefined) {
+        tasks['Miscellaneous'] = []
+      }
+    })
+  })
+}
+
+function mLoadTasks(classesList) {
   chrome.storage.sync.get(['tasks', 'scheduleView'], function(result) {
     if(Object.keys(result).length === 0 && result.constructor === Object) {
       console.log('No tasks found')
@@ -76,7 +101,7 @@ function loadTasks() {
       tasks = result.tasks
       $('#taskList').empty()
       $('#newTask').val('')
-      $('#addTaskClass').empty().append(`<option selected>Class...(default to misc)</option>`)
+      $(`[id^=sched-][id$=-tasks]`).empty()
       for (let key in tasks) {
         if(tasks.hasOwnProperty(key)) {
           if(tasks[key].length != 0) {
@@ -135,26 +160,6 @@ function loadTasks() {
           })
         }
       })
-    }
-  })
-
-  chrome.storage.sync.get(['classes'], function(result) {
-    if(Object.keys(result).length === 0 && result.constructor === Object) {
-      console.log('Classes not found')
-    } else {
-      console.log('Class list found')
-      console.log(result.classes)
-      let classes = result.classes
-      for(let i = 0; i < classes.length; i++) {
-        $('#addTaskClass').append($('<option></option>').attr('value', classes[i]).html(classes[i]))
-        if(tasks[classes[i]] == undefined) {
-          tasks[classes[i]] = []
-        }
-      }
-    }
-    $('#addTaskClass').append($('<option></option>').attr('value', 'Miscellaneous').html('Miscellaneous'))
-    if(tasks['Miscellaneous'] == undefined) {
-      tasks['Miscellaneous'] = []
     }
   })
 }
