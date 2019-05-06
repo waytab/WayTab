@@ -7,7 +7,6 @@ export default class Schedule {
     $(document).on('letter-loaded', (e, letter) => {
       this.cycleScheduleView()
       this.displayNeueView(letter)
-      console.log('object');
     })
     chrome.storage.sync.get(['schedule'], (result) => {
       if(Object.keys(result).length === 0 && result.constructor === Object) {
@@ -60,6 +59,7 @@ export default class Schedule {
       for(let j = 0; j < schedule[i].length; j++) {
         let currLetter = newDayArr[j]
         $(`[data-per=${i+1}]`).append(`<td class="daySelect ${currLetter}" data-day="${currLetter}">${schedule[i][j]}</td>`)
+        $(document).trigger('schedule-loaded', [false, []])
       }
     }
   }
@@ -250,7 +250,7 @@ export default class Schedule {
 
     $('#schedule-table-div').addClass('d-none')
     $('#schedule-neue').removeClass('d-none')
-    $(document).trigger('schedule-loaded', [classesListed])
+    $(document).trigger('schedule-loaded', [true, classesListed])
   }
 
   scheduleAssembler_heading(letter) {
