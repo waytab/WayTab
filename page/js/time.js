@@ -4,28 +4,20 @@ let letter
 let elapsedFormat
 let display
 
-$.getJSON(`http://manage.waytab.org/modules/schedule/?timestamp=${moment().subtract(1, 'days').unix()}`, (data) => {
-  if (data.name !== undefined && Math.abs(moment(data.date).diff(moment(), 'd')) < 1) {
-    sched = data.schedule
+$.getJSON('js/json/config.json', (data) => {
+  chrome.storage.sync.get( ['bell2'], function({bell2}) {
+    if(bell2) {
+      $('#bell-2-check').prop('checked', true)
+      setTodaySchedule(data, true)
+    } else {
+      $('#bell-2-check').prop('checked', false)
+      setTodaySchedule(data, false)
+    }
     displayTime()
     updateBlock()
-  } else {
-    $.getJSON('js/json/config.json', (data) => {
-      chrome.storage.sync.get( ['bell2'], function({bell2}) {
-        if(bell2) {
-          $('#bell-2-check').prop('checked', true)
-          setTodaySchedule(data, true)
-        } else {
-          $('#bell-2-check').prop('checked', false)
-          setTodaySchedule(data, false)
-        }
-        displayTime()
-        updateBlock()
-      })
-    }).fail((err) => {
-      console.log(err)
-    })
-  }
+  })
+}).fail((err) => {
+  console.log(err)
 })
 
 chrome.storage.sync.get(['elapseForm'], function({elapseForm}) {
