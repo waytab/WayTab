@@ -1,15 +1,10 @@
 {
-  "version":"2.0.2",
+  "version":"2.0.4",
   "changes": [
     {
       "header": "Schedule",
-      "content": "Fixed bug where classes wouldn't load when trying to add a task.",
-      "type": "Bug Fix"
-    },
-    {
-      "header": "Schedule",
-      "content": "Prevent blocks from being highlighed on weekends",
-      "type": "Bug Fix"
+      "content": "Fixed schedule editor and block times to reflect the new schedule.",
+      "type": "Fix"
     }
   ]
 }

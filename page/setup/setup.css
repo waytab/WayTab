@@ -84,6 +84,10 @@ body {
   margin-bottom: -1px;
 }
 
+input.form-control::placeholder {
+  color: #bbb;
+}
+
 input.period-control,
 input.period-control:focus {
   border-color: #007bff;

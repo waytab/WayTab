@@ -324,6 +324,10 @@ body {
   font-family: 'Roboto Slab';
 }
 
+#new-schedule-body input.form-control::placeholder {
+  color: #bbb;
+}
+
 input.period-control,
 input.period-control:focus {
   border-color: #007bff;

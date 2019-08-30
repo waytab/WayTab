@@ -51,7 +51,11 @@ function displayTime() {
   try {
     if((dayNum !== 0 && dayNum !== 6) && letter !== undefined) {
       $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${letter} Day | ${display}`)
-    }else {
+    } else if((dayNum !== 0 && dayNum !== 6) && letter == undefined) {
+      $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | ${display}`)
+    } else if(letter == undefined) {
+      $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')}`)
+    } else {
       $('#time-container').html(`<span id="time-display">${moment().format('h:mm:ss')}</span>${moment().format('a')} | Monday: ${letter} Day`)
     }
     
@@ -163,7 +167,7 @@ function getSoonestIndex() {
   let currentMin = Number.MAX_SAFE_INTEGER
   let ret = 0
   for(i = 0; i < bell.length; i++) {
-    let diff = moment().diff(moment(bell[i].start, 'hmm'))
+    let diff = moment().subtract(8, 'hours').diff(moment(bell[i].start, 'hmm'))
     if(diff > 0 && diff <= currentMin) {
       ret = i
       currentMin = diff
