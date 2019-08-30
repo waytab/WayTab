@@ -167,7 +167,7 @@ function getSoonestIndex() {
   let currentMin = Number.MAX_SAFE_INTEGER
   let ret = 0
   for(i = 0; i < bell.length; i++) {
-    let diff = moment().subtract(8, 'hours').diff(moment(bell[i].start, 'hmm'))
+    let diff = moment().diff(moment(bell[i].start, 'hmm'))
     if(diff > 0 && diff <= currentMin) {
       ret = i
       currentMin = diff
