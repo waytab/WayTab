@@ -25,6 +25,18 @@ body {
   overflow-x: hidden;
 }
 
+::-webkit-scrollbar {
+  width: .4rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(0,0,0,0.15);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.25);
+}
+
 .font-sans-serif {
   font-family: sans-serif;
 }
@@ -98,36 +110,44 @@ body {
   background-color: #cc9012;
 }
 
+.btn {
+  border-radius: .5rem;
+}
+
+.btn-sm {
+  border-radius: .3rem;
+}
+
 .btn-primary:hover:not(.no-shadow) {
-  box-shadow: 0px 0px 6px -1px rgb(0, 112, 232);
+  box-shadow: 0px 0px 10px -1px rgb(0, 112, 232);
 }
 
 .btn-secondary:hover:not(.no-shadow) {
-  box-shadow: 0px 0px 6px -1px rgb(105, 114, 122);
+  box-shadow: 0px 0px 10px -1px rgb(105, 114, 122);
 }
 
 .btn-success:hover:not(.no-shadow) {
-  box-shadow: 0px 0px 6px -1px rgb(40, 167, 69);
+  box-shadow: 0px 0px 10px -1px rgb(40, 167, 69);
 }
 
 .btn-danger:hover:not(.no-shadow) {
-  box-shadow: 0px 0px 6px -1px rgb(216, 50, 66);
+  box-shadow: 0px 0px 10px -1px rgb(216, 50, 66);
 }
 
 .btn-warning:hover:not(.no-shadow) {
-  box-shadow: 0px 0px 6px -1px rgb(244, 184, 5);
+  box-shadow: 0px 0px 10px -1px rgb(244, 184, 5);
 }
 
 .btn-info:hover:not(.no-shadow) {
-  box-shadow: 0px 0px 6px -1px rgb(20, 139, 158);
+  box-shadow: 0px 0px 10px -1px rgb(20, 139, 158);
 }
 
 .btn-light:hover:not(.no-shadow) {
-  box-shadow: 0px 0px 6px -1px rgb(240, 243, 245);
+  box-shadow: 0px 0px 10px -1px rgb(240, 243, 245);
 }
 
 .btn-dark:hover:not(.no-shadow) {
-  box-shadow: 0px 0px 6px -1px rgb(49, 55, 60);
+  box-shadow: 0px 0px 10px -1px rgb(49, 55, 60);
 }
 
 .btn-link:hover:not(.no-shadow) {
@@ -138,7 +158,7 @@ body {
   position: fixed;
   right: 0;
   bottom: 0;
-  margin: 2rem;
+  margin: calc(2rem + 12.5px) 2rem;
   z-index: 3;
 }
 
@@ -287,6 +307,7 @@ body {
   letter-spacing: 2px;
   line-height: 2;
   z-index: 98;
+  box-shadow: none;
 }
 
 #activate-settings .fas {
@@ -499,6 +520,7 @@ a.text-dark {
 }
 
 #wspn-container .card-link:not(.text-muted) {
+  display: inline-block;
   padding: .5rem 1rem .5rem 0;
   border-radius: .25rem;
   transition: background-color 200ms, box-shadow 200ms, padding 300ms;
@@ -626,11 +648,20 @@ a.input-group-text:hover {
   border: none;
 }
 
+.modal-title {
+  font-size: 1.75rem;
+  margin: .5rem 0rem;
+}
+
 .modal-content {
   border-radius: .5rem;
   -webkit-box-shadow: 0px 0px 3.2rem -.5rem rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 0px 3.2rem -.5rem rgba(0,0,0,0.75);
   box-shadow: 0px 0px 3.2rem -.5rem rgba(0,0,0,0.75);
+}
+
+.modal-body hr {
+  margin: 1rem -1rem;
 }
 
 .changelog-type {
@@ -642,8 +673,8 @@ a.input-group-text:hover {
 .card {
   border-radius: .5rem;
   border: none;
-  -webkit-box-shadow: 0px 1px 35px 0px rgba(0,0,0,.2);
-  box-shadow: 0px 1px 35px 0px rgba(0,0,0,.2);
+  -webkit-box-shadow: 0px 1px 15px 0px rgba(0,0,0,.3);
+  box-shadow: 0px 1px 15px 0px rgba(0,0,0,.3);
 }
 
 #linksDropdown {
@@ -741,4 +772,8 @@ body.transparency .card {
 
 body.transparency .card:hover {
   opacity: 1;
+}
+
+[data-toggle="popover"]:focus {
+  outline: none;
 }
