@@ -31,6 +31,17 @@ $.ajax({
     })
 
     displayArticles();
+  },
+  error: (xml) => {
+    console.warn(`Failed to load WSPN feed! Status: ${xml.status}: ${xml.statusText}`)
+    $('#wspn-loader').remove()
+    $('#rss-feed').append(
+      $('<p>Failed to load WSPN Feed</p>')
+        .attr('id', 'rss-fail')
+        .addClass(['lead', 'text-center', 'text-danger', 'align-middle', 'mt-5'])
+        .append('<br/>')
+        .append($(`<span>${xml.status}: ${xml.statusText}</span>`).addClass('h6'))
+    )
   }
 })
 
