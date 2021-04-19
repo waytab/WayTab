@@ -1,4 +1,4 @@
-let wspnrss = 'http://waylandstudentpress.com/feed/'
+let wspnrss = 'waylandstudentpress.com/feed/'
 let articles = []
 
 chrome.storage.sync.get( ['enableWspn'], function(res) {
