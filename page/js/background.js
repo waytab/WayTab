@@ -8,62 +8,73 @@ export default class Background {
     this.hexRegEx = new RegExp(/#[\da-f]/i) // hex regex
 
     chrome.storage.sync.get(['background'], ({background}) => {
+      console.log(background)
       if(background == undefined) {
-        $(document.body).css('background-image', 'url("./img/school.jpg")')
+        // if we haven't specifically set the background, we'll fallback to the default
+        document.querySelector('body').style.backgroundImage = 'url("./img/school.jpg")'
       } else if(background.match(this.urlRegEx)) {
-        $(document.body).css('background-image', 'url(\"'+background+'\")')
-        $('#time-bar-total').css('opacity', .8)
+        // okay, so we've set the background to some URL. great. so show us the background, thx
+        document.querySelector('body').style.backgroundImage = `url("${background}")`
+        document.querySelector('body').style.opacity = 0.8
         if(!background.indexOf('./img/')) {
           let sel = background.split('/')
           let name = sel[2].substring(0, sel[2].length-4)
           name = name.substring(0,1).toUpperCase() + name.substring(1)
-          $('#select-background').val(name)
+          document.querySelector('#select-background').value = name
         } else { // it's a custom url
-          $('#select-background').val('Custom...')
-          $('#custom-background').css('display', 'flex')
-          $('#custom-background-input').val(background)
+          document.querySelector('#select-background').value = 'Custom...'
+          document.querySelector('#custom-background').style.display = 'flex'
+          document.querySelector('#custom-background-input').value = background
         }
-      } else { // we know it's a custom, non-image, background
-        $('#select-background').val('Custom...')
-        $('#custom-background').css('display', 'flex')
-        $('#custom-background-input').val(background)
+      } else { // we know it's a custom, non-image background
+        document.querySelector('#select-background').value = 'Custom...'
+        document.querySelector('#custom-background').style.display = 'flex'
+        document.querySelector('#custom-background-input').value = background
         if (this.rgbRegEx.test(background) || this.rgbaRegEx.test(background) || this.hexRegEx.test(background)) {
-          $(document.body).css('background-color', background)
+          document.querySelector('body').style.backgroundColor = background
         }
       }
     })
 
-    $(document).on('change', '#select-background', () => {
-      let sel = $('#select-background').val()
-      if(sel != 'Custom...') {
-        let href = './img/' + sel.toLowerCase()+'.jpg'
-        $(document.body).css('background-image', `url("${href}")`)
-        $('#custom-background').css('display', 'none')
-      } else {
-        $('#custom-background').css('display', 'flex')
+    document.addEventListener('change', e => {
+      if(e.target.id == '#select-background') {
+        let sel = document.querySelector('#select-background').value
+        if(sel != 'Custom...') {
+          let href = './img/' + sel.toLowerCase() + '.jpg'
+          document.querySelector('body').setAttribute('style', `background-image: url(${href})`)
+          document.querySelector('#custom-background').style.display = 'none'
+        } else {
+          document.querySelector('#custom-background').style.display = 'flex'
+        }
       }
     })
 
-    $(document).on('change paste keyup', '#custom-background-input', () => {
-      let val = $('#custom-background-input').val()
-      if(val.match(this.urlRegEx)) {
-        $(document.body).css('background-image', `url("${val}")`)
-      } else if (this.rgbRegEx.test(val) || this.rgbaRegEx.test(val) || this.hexRegEx.test(val)) {
-        $(document.body).attr('style', `background-color: ${val}`)
-      } else {
-        console.log('not a valid color');
+    document.addEventListener('change paste keyup', e => {
+      if(e.target.id == '#custom-background-input') {
+        let val = e.target.value
+        if(val.match(this.urlRegEx)) {
+          document.querySelector('body').style.backgroundImage = `url(${val})`
+        } else if (this.rgbRegEx.test(val) || this.rgbaRegEx.test(val) || this.hexRegEx.test(val)) {
+          document.querySelector('body').style.backgroundColor = val
+        } else {
+          console.warn('background.js (60): User did not input a valid color!')
+        }
       }
     })
 
-    $(document).on('click', '#settings-close', () => {
-      let sel = $('#select-background').val()
-      let bgVal;
-      if (sel != 'Custom...') {
-        bgVal = './img/' + sel.toLowerCase()+'.jpg'
-      } else {
-        bgVal = $('#custom-background-input').val()
+    document.addEventListener('click', e => {
+      if(e.target.id == '#settings-close') {
+        let sel = document.querySelector('#select-background').value
+        let bgVal
+
+        if(sel != 'Custom...') {
+          bgVal = './img/' + sel.toLowerCase() + '.jpg'
+        } else {
+          bgVal = document.querySelector('#custom-background-input').value
+        }
+
+        chrome.storage.sync.set({background: bgVal}, res => {})
       }
-      chrome.storage.sync.set({background: bgVal}, function(response) {})
     })
   }
 }
