@@ -28,7 +28,7 @@ function loadChangeLog(changelog) {
     thisChangeContent.textContent = element.content
 
     let thisChangeType = document.createElement('small')
-    thisChangeType.setAttribute('css', 'color: #eea615')
+    thisChangeType.setAttribute('style', 'color: #eea615')
     thisChangeType.className = 'changelog-type'
     thisChangeType.textContent = element.type
 
