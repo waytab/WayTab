@@ -10,10 +10,16 @@ let links = new Links()
 let schedule = new Schedule()
 let title = new Title()
 
+// https://getbootstrap.com/docs/5.1/components/tooltips/
 // enable tooltips and popovers
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-  $('[data-toggle="popover"]').popover()
+// ik it's kinda ugly. thanks, obama
+let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+let tooltipList = tooltipTriggerList.map((tooltipTriggerEl) => {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+let popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+let popoverList = popoverTriggerList.map((popoverTriggerEl) => {
+  return new bootstrap.Popover(popoverTriggerEl)
 })
 
 // this part is commented to display a general flow of how settings are loaded.
