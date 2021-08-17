@@ -188,6 +188,7 @@ body {
   overflow: hidden;
   margin-left: 1rem;
   margin-bottom: calc(-1rem - 3px);
+  width: 160px;
   z-index: 100;
 }
 
@@ -252,6 +253,7 @@ body {
 
 .fab-action.shown {
   border-radius: .5rem;
+  width: 200px;
   animation: fab-action-anim;
   animation-duration: 250ms;
 }
@@ -269,12 +271,18 @@ body {
   animation-duration: 400ms;
 }
 
+.fab-action.shown .fab-action-item .fas {
+  animation: fab-action-icon 250ms linear;
+}
+
 @keyframes fab-action-anim {
   from {
     border-radius: 23px;
+    width: 160px;
   }
   to {
     border-radius: .5rem;
+    width: 200px;
   }
 }
 
@@ -299,6 +307,15 @@ body {
   100% {
     opacity: 1;
     transform: translateY(0px);
+  }
+}
+
+@keyframes fab-action-icon {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
   }
 }
 
