@@ -15,7 +15,7 @@ export default class Background {
       } else if(background.match(this.urlRegEx)) {
         // okay, so we've set the background to some URL. great. so show us the background, thx
         document.querySelector('body').style.backgroundImage = `url("${background}")`
-        document.querySelector('body').style.opacity = 0.8
+        document.querySelector('#time-bar-total').style.opacity = 0.8
         if(!background.indexOf('./img/')) {
           let sel = background.split('/')
           let name = sel[2].substring(0, sel[2].length-4)
