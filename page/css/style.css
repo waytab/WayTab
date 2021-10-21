@@ -429,8 +429,6 @@ div.now-neue::before {
 #time-display {
   display: inline-block;
   margin-right: 2px;
-  text-align: right;
-  width: 70px;
 }
 
 #newTask {

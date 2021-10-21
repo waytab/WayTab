@@ -278,6 +278,7 @@ function savePrefs() {
     setup: true, //since setup has been completed
     title,
     background: background == "Custom..." ? customBackground : `./img/${background}.jpg`,
+    bell2: false,
     font,
     enableWspn,
     links,

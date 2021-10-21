@@ -2,12 +2,14 @@
 import Background from './background.js'
 import Links from './links.js'
 import Schedule from './schedule.js'
+import Time from './time.js'
 import Title from './title.js'
 
 // ...and so should these
 let background = new Background()
-let links = new Links()
-let schedule = new Schedule()
+//let links = new Links()
+//let schedule = new Schedule()
+let time = new Time()
 let title = new Title()
 
 // https://getbootstrap.com/docs/5.1/components/tooltips/
